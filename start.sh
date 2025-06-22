@@ -1,9 +1,18 @@
 #!/bin/bash
+
 echo "🚀 Installing uv..."
 curl -Ls https://astral.sh/uv/install.sh | bash
 
-echo "📦 Installing project dependencies..."
-~/.cargo/bin/uv pip install --system
+export PATH="$HOME/.local/bin:$PATH"
 
-echo "🔥 Starting FastAPI app using uv config..."
-~/.cargo/bin/uv run fastapi dev
+echo "📦 Installing backend dependencies..."
+uv pip install --system
+
+echo "🌐 Building frontend..."
+cd frontend
+npm install
+npm run build
+cd ..
+
+echo "🔥 Starting FastAPI dev server using uv..."
+uv run fastapi dev

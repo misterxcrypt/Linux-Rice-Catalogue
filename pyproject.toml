@@ -5,9 +5,16 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "fastapi[standard]>=0.115.13",
     "flax>=0.10.6",
     "praw>=7.8.1",
+    "pymongo>=4.13.2",
     "python-dotenv>=1.1.0",
     "torch>=2.7.1",
     "transformers>=4.52.4",
 ]
+
+[tool.fastapi]
+app-dir = "backend/app"     
+module  = "main"            
+factory = "app"             

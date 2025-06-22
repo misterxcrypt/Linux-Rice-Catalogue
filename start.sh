@@ -3,16 +3,19 @@
 echo "🚀 Installing uv..."
 curl -Ls https://astral.sh/uv/install.sh | bash
 
+# Ensure the newly installed uv is in PATH
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "📦 Installing backend dependencies..."
-uv pip install --system
+cd backend
+uv pip install --system --project .
 
 echo "🌐 Building frontend..."
-cd frontend
+cd ../frontend
 npm install
 npm run build
 cd ..
 
-echo "🔥 Starting FastAPI dev server using uv..."
+echo "🔥 Starting FastAPI app using uv..."
+cd backend
 uv run fastapi dev

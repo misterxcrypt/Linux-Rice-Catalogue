@@ -7,11 +7,10 @@ curl -Ls https://astral.sh/uv/install.sh | bash
 export PATH="$HOME/.local/bin:$PATH"
 
 echo "📦 Installing backend dependencies..."
-cd backend
-uv pip install --system --project .
+uv sync
 
 echo "🌐 Building frontend..."
-cd ../frontend
+cd frontend
 npm install
 npm run build
 cd ..

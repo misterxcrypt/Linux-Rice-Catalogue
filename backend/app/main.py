@@ -31,28 +31,30 @@ from app.routes import public, admin
 
 app = FastAPI(title="Linux Rice Catalogue API")
 
-# Allow frontend hosted on Render or GitHub Pages
+# CORS configuration (adjust origins in production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can restrict this to your frontend URL in prod
+    allow_origins=["*"],  # e.g., ["https://your-frontend.onrender.com"]
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include API routes
+# Include your API routes
 app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
 app.include_router(public.router, prefix="/api/public")
 
-# ─── Serve Frontend ─────────────────────────────────────
-frontend_path = os.path.join(os.path.dirname(__file__), "../../frontend/dist")
+# ───── Serve Frontend (from frontend/dist) ─────
+frontend_dist = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../frontend/dist"))
 
-if os.path.exists(frontend_path):
-    app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
+if os.path.exists(frontend_dist):
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="static")
 
-    @app.get("/", include_in_schema=False)
-    async def serve_index():
-        return FileResponse(os.path.join(frontend_path, "index.html"))
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str):
+        index_file = os.path.join(frontend_dist, "index.html")
+        return FileResponse(index_file)
 else:
     @app.get("/", include_in_schema=False)
     def root():
-        return {"message": "Frontend not found. API working fine."}
+        return {"message": "API is live, but frontend not found."}

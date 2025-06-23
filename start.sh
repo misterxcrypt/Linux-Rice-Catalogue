@@ -17,4 +17,4 @@ cd ..
 
 echo "🔥 Starting FastAPI app using uv..."
 cd backend
-uv run fastapi dev
+uvicorn app.main:app --host 0.0.0.0 --port 10000

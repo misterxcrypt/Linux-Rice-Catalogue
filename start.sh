@@ -12,7 +12,7 @@ uv sync
 echo "🌐 Building frontend..."
 cd frontend
 npm install
-npm run build
+npm run dev
 cd ..
 
 echo "🔥 Starting FastAPI app using uv..."

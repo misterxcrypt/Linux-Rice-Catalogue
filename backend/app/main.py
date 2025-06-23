@@ -35,7 +35,10 @@ app = FastAPI(title="Linux Rice Catalogue API")
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In prod, restrict to frontend domain
+    allow_origins = [
+    "https://linux-rice-catalogue.onrender.com",
+    "http://localhost:3000",
+],  # In prod, restrict to frontend domain
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

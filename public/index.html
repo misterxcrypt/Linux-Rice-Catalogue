@@ -249,10 +249,18 @@
             };
             
             const createRiceCard = (rice, originalIndex) => {
+                // Map DB fields to expected frontend fields
+                const user = rice.author || '';
+                const wm = (rice.environment && rice.environment.name) || '';
+                const distro = rice.distro || '';
+                const theme = rice.theme || '';
+                const url = rice.dotfiles || '';
+                const images = rice.screenshots || [];
+                const tags = rice.tags || [];
                 const card = document.createElement('div');
                 card.className = `rice-card group relative rounded-2xl overflow-hidden cursor-pointer flex bg-[#111116] border border-[var(--border-color)]`;
                 card.dataset.index = originalIndex;
-                card.innerHTML = `<div class="card-image w-full h-full"><img src="${rice.images[0]}" alt="${rice.user}'s ${rice.wm} rice" loading="lazy" class="w-full h-full object-cover"></div><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 class="text-xl font-bold text-white">${rice.user}</h3><p class="font-mono text-sm text-white/70 truncate">${rice.distro || 'Linux'} + ${rice.wm}</p></div>`;
+                card.innerHTML = `<div class="card-image w-full h-full"><img src="${images[0] || ''}" alt="${user}'s ${wm} rice" loading="lazy" class="w-full h-full object-cover"></div><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 class="text-xl font-bold text-white">${user}</h3><p class="font-mono text-sm text-white/70 truncate">${distro} + ${wm}</p></div>`;
                 card.addEventListener('click', () => showLightbox(originalIndex));
                 return card;
             };
@@ -295,25 +303,34 @@
             
             // LIGHTBOX (Logic remains largely the same)
             const showLightbox = async (index) => {
-                state.currentLightboxRice = ricesData[index];
+                // Map DB fields to expected frontend fields for lightbox
+                const rice = ricesData[index];
+                state.currentLightboxRice = {
+                    user: rice.author || '',
+                    wm: (rice.environment && rice.environment.name) || '',
+                    distro: rice.distro || '',
+                    theme: rice.theme || '',
+                    url: rice.dotfiles || '',
+                    images: rice.screenshots || [],
+                    tags: rice.tags || []
+                };
                 state.currentImageIndex = 0;
                 const imgEl = el.lightbox.querySelector('#lightbox-image');
-                imgEl.src = state.currentLightboxRice.images[0];
-                await new Promise(resolve => { imgEl.onload = resolve; imgEl.onerror = resolve; }); // Resolve on error too
+                imgEl.src = state.currentLightboxRice.images[0] || '';
+                await new Promise(resolve => { imgEl.onload = resolve; imgEl.onerror = resolve; });
                 try {
-                    if (imgEl.complete && imgEl.naturalHeight !== 0) { // Check if image loaded
+                    if (imgEl.complete && imgEl.naturalHeight !== 0) {
                         const dominantColor = el.colorThief.getColor(imgEl);
                         const rgb = `rgb(${dominantColor.join(',')})`;
                         const isDark = (dominantColor[0] * 0.299 + dominantColor[1] * 0.587 + dominantColor[2] * 0.114) < 128;
                         el.lightboxContent.style.setProperty('--modal-accent', rgb);
                         el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', isDark ? '#fff' : '#000');
                     } else {
-                         el.lightboxContent.style.setProperty('--modal-accent', 'var(--accent-color)'); // Fallback
-                         el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', '#fff');
+                        el.lightboxContent.style.setProperty('--modal-accent', 'var(--accent-color)');
+                        el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', '#fff');
                     }
-                } catch(e) { 
-                    console.warn("ColorThief error or image not loaded for ColorThief:", e);
-                    el.lightboxContent.style.setProperty('--modal-accent', 'var(--accent-color)'); // Fallback
+                } catch(e) {
+                    el.lightboxContent.style.setProperty('--modal-accent', 'var(--accent-color)');
                     el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', '#fff');
                 }
                 updateLightboxContent();
@@ -333,7 +350,7 @@
                 el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-2 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a><button class="glass-panel p-2 rounded-lg text-sm hover:bg-white/10" disabled>Copy Snippet</button></div>`;
                 el.lightbox.querySelector('#lightbox-tags').innerHTML = (rice.tags || []).map(tag => `<span class="px-2 py-0.5 glass-panel rounded-full text-xs font-mono">${tag}</span>`).join('');
                 el.lightbox.querySelector('#lightbox-reactions').innerHTML = '💜🔁👀🔧'.split('').map(e => `<button class="px-3 py-1 glass-panel rounded-full text-lg hover:bg-white/10">${e}</button>`).join('');
-                el.lightbox.querySelector('#lightbox-image').src = rice.images[state.currentImageIndex];
+                el.lightbox.querySelector('#lightbox-image').src = rice.images[state.currentImageIndex] || '';
                 setContent('#lightbox-counter', `${state.currentImageIndex + 1} / ${rice.images.length}`);
             };
             

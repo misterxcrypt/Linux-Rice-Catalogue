@@ -1,0 +1,17 @@
+/* /static/styles.css */
+/* Add custom styles here if needed */ 
+
+.rice-item {
+  background: #222;
+  color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.screenshots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+} 

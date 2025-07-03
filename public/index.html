@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Rices - The Meta-Rice Experience</title>
+    
+    <!-- Scripts & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/colorthief@2.3.2/dist/color-thief.umd.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #0A0A0F;
+            --panel-bg: rgba(22, 22, 30, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-color: #5D5FEF;
+            --accent-glow: rgba(93, 95, 239, 0.4);
+            transition: --accent-color 0.5s ease, --accent-glow 0.5s ease;
+        }
+
+        @property --accent-color { syntax: '<color>'; initial-value: #5D5FEF; inherits: true; }
+        @property --accent-glow { syntax: '<color>'; initial-value: rgba(93, 95, 239, 0.4); inherits: true; }
+
+        body {
+            background-color: var(--bg-color);
+            color: #E0E0E0;
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0),
+                radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 45%);
+            background-size: 30px 30px, 100% 100%;
+            background-repeat: repeat, no-repeat;
+            transition: background-position 1s ease-out;
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-color);
+        }
+
+        .grid-masonry { column-count: 1; column-gap: 1.5rem; }
+        @media (min-width: 640px) { .grid-masonry { column-count: 2; } } /* sm */
+        @media (min-width: 1024px) { .grid-masonry { column-count: 3; } } /* lg */
+        @media (min-width: 1536px) { .grid-masonry { column-count: 4; } } /* 2xl */
+        .grid-masonry .rice-card { break-inside: avoid; margin-bottom: 1.5rem; }
+
+        .grid-bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .grid-bento .rice-card:nth-child(7n+1) { grid-column: span 2; grid-row: span 2; }
+        .grid-bento .rice-card:nth-child(7n+4) { grid-column: span 1; grid-row: span 2; }
+        @media (max-width: 1024px) {
+            .grid-bento { grid-template-columns: repeat(2, 1fr); }
+            .grid-bento .rice-card { grid-column: span 1 !important; grid-row: span 1 !important; }
+            .grid-bento .rice-card:nth-child(5n+1) { grid-column: span 2 !important; }
+        }
+         @media (max-width: 639px) { /* xs */
+            .grid-bento { grid-template-columns: repeat(1, 1fr); }
+            .grid-bento .rice-card { grid-column: span 1 !important; grid-row: span 1 !important; }
+        }
+
+
+        .grid-feed { display: flex; flex-direction: column; gap: 2rem; max-width: 800px; margin: 0 auto; }
+        
+        .rice-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .rice-card:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--accent-glow), 0 0 0 1px var(--accent-color); z-index: 10; }
+
+        .control-btn.active { background-color: var(--accent-color); color: white; font-weight: 600; }
+        .lightbox-content, .submission-modal-content, .mood-switcher-panel { border: 1px solid var(--accent-color); box-shadow: 0 10px 50px var(--accent-glow); animation: slideUp 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        
+        @keyframes slideUp { from { transform: translateY(30px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+        #space-travel-overlay { background: radial-gradient(ellipse at 50% 50%, #1a2a6c, #0a0a0f); }
+        .star { position: absolute; background-color: white; border-radius: 50%; animation: moveStar 10s linear infinite; }
+        @keyframes moveStar { from { transform: translateY(110vh) scale(1); } to { transform: translateY(-10vh) scale(0.1); } }
+        #animated-rice-card { animation: floatInSpace 5s ease-in-out forwards; }
+        @keyframes floatInSpace { 
+            0% { transform: translateY(120vh) scale(0.5); opacity: 0; }
+            20% { transform: translateY(40vh) scale(1); opacity: 1; }
+            80% { transform: translateY(38vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-300">
+
+    <!-- MAIN UI -->
+    <div class="p-4 md:p-6 lg:p-8">
+        <header class="mb-6 space-y-4">
+             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                 <div class="flex items-center gap-3">
+                    <img src="https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/logo.webp" alt="Awesome Rices logo" class="w-10 h-10">
+                    <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Awesome Rices</h1>
+                 </div>
+                 <div class="flex items-center gap-2">
+                    <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
+                        <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10 active"><span class="material-icons-outlined">grid_view</span></button>
+                        <button title="Bento View" data-view="bento" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">dashboard</span></button>
+                        <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">view_agenda</span></button>
+                    </div>
+                    <button id="submit-rice-btn" class="p-2.5 bg-[var(--accent-color)] text-white rounded-lg ml-2 hover:opacity-90"><span class="material-icons-outlined">add_circle</span></button>
+                 </div>
+             </div>
+        </header>
+
+        <!-- Filter Controls -->
+        <div id="filter-controls" class="mb-8 p-4 glass-panel rounded-xl">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                <div class="font-mono text-sm uppercase text-gray-400">Filter By:</div>
+                <div id="filter-type-toggle" class="flex gap-1 glass-panel p-1 rounded-lg">
+                    <button data-filter-type="wm" class="control-btn px-4 py-1.5 text-sm rounded-md active">WM</button>
+                    <button data-filter-type="distro" class="control-btn px-4 py-1.5 text-sm rounded-md">Distro</button>
+                </div>
+            </div>
+            <div id="filter-pills-container" class="flex flex-wrap gap-2 justify-center">
+                <!-- Filter pills injected here -->
+            </div>
+        </div>
+        
+        <div id="rice-gallery" class="grid-masonry"></div>
+    </div>
+
+    <!-- MODALS AND OVERLAYS (Same as before) -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60 lightbox">
+        <div class="w-full max-w-6xl h-[90vh] flex flex-col md:flex-row glass-panel rounded-2xl overflow-hidden lightbox-content">
+             <div class="relative w-full md:w-2/3 lg:w-3/4 bg-black/40 flex items-center justify-center">
+                <img id="lightbox-image" src="" class="max-w-full max-h-full object-contain" crossOrigin="anonymous">
+                <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/40 rounded-full hover:bg-black/60"><span class="material-icons-outlined">arrow_back</span></button>
+                <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/40 rounded-full hover:bg-black/60"><span class="material-icons-outlined">arrow_forward</span></button>
+                <div id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-3 py-1 rounded-full text-sm font-mono"></div>
+             </div>
+            <div id="lightbox-details-panel" class="w-full md:w-1/3 lg:w-1/4 p-6 flex flex-col space-y-4 overflow-y-auto">
+                 <div>
+                    <h2 id="lightbox-user" class="text-3xl font-bold text-white break-words"></h2>
+                    <p class="font-mono text-lg" style="color: var(--modal-accent, #fff)" id="lightbox-wm-distro-theme"></p>
+                 </div>
+                 <div class="space-y-3 font-mono text-sm border-t border-b py-4 border-[var(--border-color)]" id="lightbox-metadata"></div>
+                 <div class="space-y-2" id="lightbox-dotfiles"></div>
+                 <div class="space-y-2"><h3 class="font-mono text-sm uppercase text-gray-400">Tags</h3><div id="lightbox-tags" class="flex flex-wrap gap-2"></div></div>
+                 <div class="flex-grow"></div>
+                 <div class="space-y-2"><h3 class="font-mono text-sm uppercase text-gray-400">Reactions</h3><div class="flex gap-2" id="lightbox-reactions"></div></div>
+             </div>
+             <button id="lightbox-close" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80 z-20"><span class="material-icons-outlined">close</span></button>
+        </div>
+    </div>
+    <div id="submission-modal" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60">
+        <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
+            <form id="submission-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
+                <h2 class="text-2xl font-bold text-white">Submit Your Rice</h2>
+                <div><label class="font-mono text-sm">Author</label><input type="text" placeholder="e.g., crunchghost" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Title*</label><input required type="text" placeholder="e.g., Catppuccin Dreams" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">WM/DE*</label><input required type="text" placeholder="Hyprland" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Distro*</label><input required type="text" placeholder="Arch Linux" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Screenshot URL*</label><input required type="url" placeholder="https://..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Dotfiles URL*</label><input required type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
+            </form>
+            <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
+                <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
+                <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 class="text-xl font-bold">Your Name</h3><p class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
+            </div>
+             <button id="submission-close-btn" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80"><span class="material-icons-outlined">close</span></button>
+        </div>
+    </div>
+    <div id="space-travel-overlay" class="fixed inset-0 z-50 hidden items-center justify-center overflow-hidden">
+        <div id="animated-rice-card" class="absolute w-full max-w-xl p-4">
+             <div class="rice-card rounded-2xl overflow-hidden border-2" style="border-color:var(--accent-color); box-shadow: 0 0 50px var(--accent-glow)"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"></div>
+        </div>
+        <p class="absolute bottom-1/4 font-mono text-lg text-white/70 text-center px-4">Your rice has entered the galaxy.<br>Awaiting admin approval before it shines in the archive.</p>
+    </div>
+    <div id="mood-switcher-container" class="fixed bottom-4 right-4 z-40">
+        <div id="mood-switcher-panel" class="absolute bottom-14 right-0 grid grid-cols-4 gap-3 p-3 rounded-2xl glass-panel hidden"></div>
+        <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
+    </div>
+
+    <script>
+        let ricesData = [];
+
+        async function loadRicesData() {
+            try {
+                const res = await fetch('/api/getRices');
+                ricesData = await res.json();
+            } catch (e) {
+                console.error('Failed to fetch rices:', e);
+                ricesData = [];
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const el = {
+                gallery: document.getElementById('rice-gallery'),
+                filterPillsContainer: document.getElementById('filter-pills-container'),
+                filterTypeToggle: document.getElementById('filter-type-toggle'),
+                lightbox: document.getElementById('lightbox'),
+                lightboxContent: document.getElementById('lightbox').querySelector('.lightbox-content'),
+                colorThief: new ColorThief(),
+                submissionModal: document.getElementById('submission-modal'),
+                spaceTravelOverlay: document.getElementById('space-travel-overlay'),
+                moodSwitcher: { btn: document.getElementById('mood-switcher-btn'), panel: document.getElementById('mood-switcher-panel'),},
+            };
+            
+            let state = {
+                viewMode: 'masonry',
+                activeFilterType: 'wm', // 'wm' or 'distro'
+                activeFilterValue: 'All',
+                currentLightboxRice: null,
+                currentImageIndex: 0,
+            };
+            
+            const moodThemes = [ { name: 'Arc', color: '#5D5FEF', glow: 'rgba(93, 95, 239, 0.4)' }, { name: 'Pastel Pink', color: '#F48FB1', glow: 'rgba(244, 143, 177, 0.5)' }, { name: 'Terminal Green', color: '#4CAF50', glow: 'rgba(76, 175, 80, 0.4)' }, { name: 'Solarized', color: '#268BD2', glow: 'rgba(38, 139, 210, 0.4)' }, { name: 'Gruvbox', color: '#D65D0E', glow: 'rgba(214, 93, 14, 0.4)' }, { name: 'Dracula', color: '#BD93F9', glow: 'rgba(189, 147, 249, 0.4)' }, { name: 'Nord', color: '#88C0D0', glow: 'rgba(136, 192, 208, 0.4)' }, { name: 'Void', color: '#9E9E9E', glow: 'rgba(158, 158, 158, 0.3)' }, ];
+            
+            const render = () => {
+                renderFilters();
+                renderGallery();
+            };
+
+            const renderGallery = () => {
+                let dataToRender = ricesData;
+                if (state.activeFilterValue !== 'All') {
+                    dataToRender = ricesData.filter(r => r[state.activeFilterType] === state.activeFilterValue);
+                }
+                
+                el.gallery.innerHTML = '';
+                el.gallery.className = `grid-${state.viewMode}`;
+                dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
+                initScrollObserver();
+            };
+            
+            const renderFilters = () => {
+                const filterKey = state.activeFilterType;
+                const uniqueValues = ['All', ...new Set(ricesData.map(r => r[filterKey]).sort())];
+                
+                el.filterPillsContainer.innerHTML = uniqueValues.map(value => 
+                    `<button data-filter-value="${value}" class="control-btn px-3 py-1.5 rounded-lg text-sm transition-colors hover:bg-white/10 ${value === state.activeFilterValue ? 'active' : ''}">${value}</button>`
+                ).join('');
+
+                el.filterPillsContainer.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        state.activeFilterValue = btn.dataset.filterValue;
+                        render();
+                    });
+                });
+            };
+            
+            const createRiceCard = (rice, originalIndex) => {
+                const card = document.createElement('div');
+                card.className = `rice-card group relative rounded-2xl overflow-hidden cursor-pointer flex bg-[#111116] border border-[var(--border-color)]`;
+                card.dataset.index = originalIndex;
+                card.innerHTML = `<div class="card-image w-full h-full"><img src="${rice.images[0]}" alt="${rice.user}'s ${rice.wm} rice" loading="lazy" class="w-full h-full object-cover"></div><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 class="text-xl font-bold text-white">${rice.user}</h3><p class="font-mono text-sm text-white/70 truncate">${rice.distro || 'Linux'} + ${rice.wm}</p></div>`;
+                card.addEventListener('click', () => showLightbox(originalIndex));
+                return card;
+            };
+
+            const initScrollObserver = () => {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const rice = ricesData[parseInt(entry.target.dataset.index)];
+                            const themeName = rice.theme || 'Arc'; // Fallback to Arc if no theme
+                            const theme = moodThemes.find(t => t.name.toLowerCase() === themeName.toLowerCase()) || moodThemes.find(t => t.name === 'Arc');
+                            document.documentElement.style.setProperty('--accent-color', theme.color);
+                            document.documentElement.style.setProperty('--accent-glow', theme.glow);
+                        }
+                    });
+                }, { rootMargin: '-40% 0px -40% 0px' });
+                el.gallery.querySelectorAll('.rice-card').forEach(card => observer.observe(card));
+            };
+            
+            const handleViewToggle = (e) => {
+                const btn = e.target.closest('button');
+                if (btn) {
+                    state.viewMode = btn.dataset.view;
+                    document.querySelector('.view-toggle .active').classList.remove('active');
+                    btn.classList.add('active');
+                    renderGallery();
+                }
+            };
+
+            el.filterTypeToggle.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (btn && !btn.classList.contains('active')) {
+                    el.filterTypeToggle.querySelector('.active').classList.remove('active');
+                    btn.classList.add('active');
+                    state.activeFilterType = btn.dataset.filterType;
+                    state.activeFilterValue = 'All'; // Reset filter value when type changes
+                    render();
+                }
+            });
+            
+            // LIGHTBOX (Logic remains largely the same)
+            const showLightbox = async (index) => {
+                state.currentLightboxRice = ricesData[index];
+                state.currentImageIndex = 0;
+                const imgEl = el.lightbox.querySelector('#lightbox-image');
+                imgEl.src = state.currentLightboxRice.images[0];
+                await new Promise(resolve => { imgEl.onload = resolve; imgEl.onerror = resolve; }); // Resolve on error too
+                try {
+                    if (imgEl.complete && imgEl.naturalHeight !== 0) { // Check if image loaded
+                        const dominantColor = el.colorThief.getColor(imgEl);
+                        const rgb = `rgb(${dominantColor.join(',')})`;
+                        const isDark = (dominantColor[0] * 0.299 + dominantColor[1] * 0.587 + dominantColor[2] * 0.114) < 128;
+                        el.lightboxContent.style.setProperty('--modal-accent', rgb);
+                        el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', isDark ? '#fff' : '#000');
+                    } else {
+                         el.lightboxContent.style.setProperty('--modal-accent', 'var(--accent-color)'); // Fallback
+                         el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', '#fff');
+                    }
+                } catch(e) { 
+                    console.warn("ColorThief error or image not loaded for ColorThief:", e);
+                    el.lightboxContent.style.setProperty('--modal-accent', 'var(--accent-color)'); // Fallback
+                    el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', '#fff');
+                }
+                updateLightboxContent();
+                el.lightbox.classList.replace('hidden', 'grid');
+            };
+            const hideLightbox = () => el.lightbox.classList.replace('grid', 'hidden');
+            const changeLightboxImage = (dir) => {
+                state.currentImageIndex = (state.currentImageIndex + dir + state.currentLightboxRice.images.length) % state.currentLightboxRice.images.length;
+                updateLightboxContent();
+            };
+            const updateLightboxContent = () => {
+                const rice = state.currentLightboxRice;
+                const setContent = (id, text) => el.lightbox.querySelector(id).textContent = text;
+                setContent('#lightbox-user', rice.user);
+                setContent('#lightbox-wm-distro-theme', `${rice.wm} / ${rice.distro} / ${rice.theme}`);
+                el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme}</div>`;
+                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-2 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a><button class="glass-panel p-2 rounded-lg text-sm hover:bg-white/10" disabled>Copy Snippet</button></div>`;
+                el.lightbox.querySelector('#lightbox-tags').innerHTML = (rice.tags || []).map(tag => `<span class="px-2 py-0.5 glass-panel rounded-full text-xs font-mono">${tag}</span>`).join('');
+                el.lightbox.querySelector('#lightbox-reactions').innerHTML = '💜🔁👀🔧'.split('').map(e => `<button class="px-3 py-1 glass-panel rounded-full text-lg hover:bg-white/10">${e}</button>`).join('');
+                el.lightbox.querySelector('#lightbox-image').src = rice.images[state.currentImageIndex];
+                setContent('#lightbox-counter', `${state.currentImageIndex + 1} / ${rice.images.length}`);
+            };
+            
+            // SUBMISSION & ANIMATION (Logic remains the same)
+            const showSubmissionModal = () => el.submissionModal.classList.replace('hidden', 'grid');
+            const hideSubmissionModal = () => el.submissionModal.classList.replace('grid', 'hidden');
+            const handleSubmission = (e) => {
+                e.preventDefault();
+                hideSubmissionModal();
+                el.spaceTravelOverlay.querySelector('.star-container')?.remove();
+                const starContainer = document.createElement('div');
+                starContainer.className = 'star-container absolute inset-0';
+                for (let i = 0; i < 50; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    const size = Math.random() * 2 + 1;
+                    star.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; top: ${Math.random()* -50}vh; animation-delay: ${Math.random()*10}s; animation-duration: ${Math.random()*5+5}s`;
+                    starContainer.appendChild(star);
+                }
+                el.spaceTravelOverlay.prepend(starContainer);
+                el.spaceTravelOverlay.classList.remove('hidden');
+                setTimeout(() => el.spaceTravelOverlay.classList.add('hidden'), 5000);
+            };
+
+            // MOOD SWITCHER (Logic remains the same)
+            const applyTheme = (theme) => {
+                document.documentElement.style.setProperty('--accent-color', theme.color);
+                document.documentElement.style.setProperty('--accent-glow', theme.glow);
+                el.moodSwitcher.btn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
+                localStorage.setItem('rice-gallery-theme', theme.name);
+            };
+            const initMoodSwitcher = () => {
+                moodThemes.forEach(theme => {
+                    const btn = document.createElement('button');
+                    btn.className = 'w-10 h-10 rounded-full transition-transform hover:scale-110';
+                    btn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
+                    btn.title = theme.name;
+                    btn.addEventListener('click', () => applyTheme(theme));
+                    el.moodSwitcher.panel.appendChild(btn);
+                });
+                const savedTheme = localStorage.getItem('rice-gallery-theme');
+                if (savedTheme) applyTheme(moodThemes.find(t => t.name === savedTheme) || moodThemes[0]);
+                el.moodSwitcher.btn.addEventListener('click', () => el.moodSwitcher.panel.classList.toggle('hidden'));
+            };
+
+            // ATTACH LISTENERS
+            document.querySelector('.view-toggle').addEventListener('click', handleViewToggle);
+            el.lightbox.querySelector('#lightbox-close').addEventListener('click', hideLightbox);
+            el.lightbox.querySelector('#lightbox-prev').addEventListener('click', () => changeLightboxImage(-1));
+            el.lightbox.querySelector('#lightbox-next').addEventListener('click', () => changeLightboxImage(1));
+            document.getElementById('submit-rice-btn').addEventListener('click', showSubmissionModal);
+            document.getElementById('submission-close-btn').addEventListener('click', hideSubmissionModal);
+            document.getElementById('submission-form').addEventListener('submit', handleSubmission);
+
+            // INITIALIZE
+            await loadRicesData();
+            initMoodSwitcher();
+            render(); // Initial render
+        });
+    </script>
+</body>
+</html>

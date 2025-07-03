@@ -24,3 +24,4 @@ pnpm-lock.yaml
 *.sublime*
 
 doc.txt
+.vercel

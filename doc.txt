@@ -1,5 +1,0 @@
-r/unixporn
-r/arch
-r/LinuxPorn
-r/linuxmint
-r/hyprland

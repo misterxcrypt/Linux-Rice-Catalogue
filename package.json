@@ -1,0 +1,14 @@
+{
+  "name": "rice-gallery",
+  "version": "1.0.0",
+  "description": "A simple gallery for Linux rices with MongoDB Atlas and serverless functions.",
+  "main": "index.js",
+  "scripts": {
+    "dev:vercel": "vercel dev",
+    "dev:netlify": "netlify dev",
+    "build": "echo 'No build step required'"
+  },
+  "dependencies": {
+    "mongodb": "^5.7.0"
+  }
+} 

@@ -1,0 +1,905 @@
+[
+  {
+    "_id": "68570ebc6d70f4df72f0e7c8",
+    "source_key": "github:0xtux/nixos-config",
+    "dotfiles": "https://github.com/0xTux/nixos-config",
+    "distro": "Nixos",
+    "theme": null
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7c9",
+    "source_key": "github:alljavi/tartarus-dotfiles",
+    "dotfiles": "https://github.com/AllJavi/tartarus-dotfiles",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7cb",
+    "source_key": "github:amitabha37377/awful-dots",
+    "dotfiles": "https://github.com/Amitabha37377/Awful-DOTS",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7cc",
+    "source_key": "github:chadcat7/crystal",
+    "dotfiles": "https://github.com/chadcat7/crystal",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7cd",
+    "source_key": "github:cmrcrabs/dotfiles",
+    "dotfiles": "https://github.com/CmrCrabs/dotfiles",
+    "distro": "Arch",
+    "theme": "Nord"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7ce",
+    "source_key": "github:d-solis/dotfiles",
+    "dotfiles": "https://github.com/d-solis/dotfiles/tree/awesome",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7cf",
+    "source_key": "github:elenapan/dotfiles",
+    "dotfiles": "https://github.com/elenapan/dotfiles",
+    "distro": "Arch",
+    "theme": "Materia"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d0",
+    "source_key": "github:frapdotbmp/dotfiles",
+    "dotfiles": "https://github.com/frapdotbmp/dotfiles",
+    "distro": "Debian",
+    "theme": null
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d1",
+    "source_key": "github:gabrielfrimodig/dotfiles",
+    "dotfiles": "https://github.com/gabrielfrimodig/dotfiles",
+    "distro": "Ubuntu",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d2",
+    "source_key": "github:honamduong/.dotfiles",
+    "dotfiles": "https://github.com/HoNamDuong/.dotfiles",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d3",
+    "source_key": "github:madhur/dotfiles",
+    "dotfiles": "https://github.com/madhur/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d4",
+    "source_key": "github:manas140/dotfiles",
+    "dotfiles": "https://github.com/Manas140/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d5",
+    "source_key": "github:meledojames/awesome-setup",
+    "dotfiles": "https://github.com/MeledoJames/awesome-setup",
+    "distro": null,
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ebc6d70f4df72f0e7d6",
+    "source_key": "github:pablonoya/awesomewm-configuration",
+    "dotfiles": "https://github.com/pablonoya/awesomewm-configuration",
+    "distro": "Arch",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7d7",
+    "source_key": "github:passivelemon/lemonix",
+    "dotfiles": "https://github.com/PassiveLemon/lemonix",
+    "distro": "Nixos",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7d8",
+    "source_key": "github:rifsxd/oh-my-awesomewm-dots",
+    "dotfiles": "https://github.com/rifsxd/oh-my-awesomewm-dots",
+    "distro": null,
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7d9",
+    "source_key": "github:rklyz/myrice",
+    "dotfiles": "https://github.com/rklyz/MyRice",
+    "distro": "Arch",
+    "theme": "Materia"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7da",
+    "source_key": "github:rxyhn/yoru",
+    "dotfiles": "https://github.com/rxyhn/yoru",
+    "distro": "Arch",
+    "theme": "Nord"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7db",
+    "source_key": "github:saimoomedits/dotfiles",
+    "dotfiles": "https://github.com/saimoomedits/dotfiles",
+    "distro": "Arch",
+    "theme": "Materia"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7dc",
+    "source_key": "github:savecoders/dotfiles",
+    "dotfiles": "https://github.com/Savecoders/dotfiles",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7dd",
+    "source_key": "github:spaxly/espresso",
+    "dotfiles": "https://github.com/Spaxly/espresso",
+    "distro": "Nixos",
+    "theme": null
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7de",
+    "source_key": "github:stardust-kyun/dotfiles",
+    "dotfiles": "https://github.com/Stardust-kyun/dotfiles",
+    "distro": "Debian",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7df",
+    "source_key": "github:torchedsammy/dotfiles",
+    "dotfiles": "https://github.com/TorchedSammy/dotfiles",
+    "distro": null,
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e0",
+    "source_key": "github:vulekhanh/dotfiles",
+    "dotfiles": "https://github.com/vulekhanh/dotfiles",
+    "distro": null,
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e1",
+    "source_key": "github:adilhyz/dotfiles-v1",
+    "dotfiles": "https://github.com/adilhyz/dotfiles-v1",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e3",
+    "source_key": "github:erennedirlo/gruvbox-dotfiles",
+    "dotfiles": "https://github.com/Erennedirlo/gruvbox-dotfiles",
+    "distro": "Void linux",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e4",
+    "source_key": "github:gh0stzk/dotfiles",
+    "dotfiles": "https://github.com/gh0stzk/dotfiles",
+    "distro": "Arch",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e5",
+    "source_key": "github:gwynsav/messydots",
+    "dotfiles": "https://github.com/Gwynsav/messydots",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e6",
+    "source_key": "github:hlissner/dotfiles",
+    "dotfiles": "https://github.com/hlissner/dotfiles",
+    "distro": "Nixos",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebd6d70f4df72f0e7e7",
+    "source_key": "github:jakeginesin/dotfiles",
+    "dotfiles": "https://github.com/JakeGinesin/dotfiles",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7e8",
+    "source_key": "github:justleoo/dotfiles",
+    "dotfiles": "https://github.com/justleoo/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7e9",
+    "source_key": "github:kabinspace/dotfiles",
+    "dotfiles": "https://github.com/kabinspace/dotfiles",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7ea",
+    "source_key": "github:narmis-e/bspwm-catppuccin",
+    "dotfiles": "https://github.com/Narmis-E/bspwm-catppuccin",
+    "distro": "Arch",
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7eb",
+    "source_key": "github:onlyvip/dopedots",
+    "dotfiles": "https://github.com/onlyvip/dopedots",
+    "distro": "Debian",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7ec",
+    "source_key": "github:probe2k/bspwm_rice",
+    "dotfiles": "https://github.com/probe2k/bspwm_rice",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7ed",
+    "source_key": "github:rklyz/.files",
+    "dotfiles": "https://github.com/rklyz/.files",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7ee",
+    "source_key": "github:sophed/dotfiles",
+    "dotfiles": "https://github.com/Sophed/dotfiles",
+    "distro": null,
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7ef",
+    "source_key": "github:sudo-harun/dotfiles",
+    "dotfiles": "https://github.com/sudo-harun/dotfiles/tree/main",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7f0",
+    "source_key": "github:valb-mig/.dotfiles",
+    "dotfiles": "https://github.com/valb-mig/.dotfiles",
+    "distro": null,
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7f1",
+    "source_key": "github:imxade/dotbin",
+    "dotfiles": "https://github.com/imxade/dotbin",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7f2",
+    "source_key": "github:weirdchupacabra/void-dotfiles",
+    "dotfiles": "https://github.com/Weirdchupacabra/void-dotfiles",
+    "distro": "Void linux",
+    "theme": null
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7f3",
+    "source_key": "github:zodddev/dotfiles",
+    "dotfiles": "https://github.com/zoddDev/dotfiles",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebe6d70f4df72f0e7f4",
+    "source_key": "github:spreadiesinspace/cinnamon-dotfiles",
+    "dotfiles": "https://github.com/SpreadiesInSpace/cinnamon-dotfiles/tree/main",
+    "distro": "Debian",
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7f7",
+    "source_key": "github:juacq97/dotfiles",
+    "dotfiles": "https://github.com/juacq97/dotfiles",
+    "distro": "Arch",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7f8",
+    "source_key": "github:nxb1t/dwm-dots",
+    "dotfiles": "https://github.com/nxb1t/dwm-dots",
+    "distro": "Debian",
+    "theme": null
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7f9",
+    "source_key": "github:raihanadf/dotfiles",
+    "dotfiles": "https://github.com/raihanadf/dotfiles",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7fa",
+    "source_key": "github:seeingangelz/dotfiles",
+    "dotfiles": "https://github.com/seeingangelz/dotfiles",
+    "distro": "Arch",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7fb",
+    "source_key": "github:1amsimp1e/dots",
+    "dotfiles": "https://github.com/1amSimp1e/dots",
+    "distro": "Tails",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7fc",
+    "source_key": "github:avivarma/dotfiles",
+    "dotfiles": "https://github.com/AviVarma/Dotfiles",
+    "distro": "Fedora",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7fd",
+    "source_key": "github:comiclyy/dotfiles",
+    "dotfiles": "https://github.com/Comiclyy/dotfiles/tree/dotfiles-gnome",
+    "distro": "Debian",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7fe",
+    "source_key": "github:gabrieltenma/dotfiles-gnm",
+    "dotfiles": "https://github.com/GabrielTenma/dotfiles-gnm",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e7ff",
+    "source_key": "github:neuronsooup/gnome-topbar-le-dots",
+    "dotfiles": "https://github.com/NeuronSooup/Gnome-topbar-le-dots",
+    "distro": null,
+    "theme": "Rose pine"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e800",
+    "source_key": "github:slashedzer0/nobara-dotfiles",
+    "dotfiles": "https://github.com/slashedzer0/nobara-dotfiles",
+    "distro": null,
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e801",
+    "source_key": "github:nuxshed/dotfiles",
+    "dotfiles": "https://github.com/nuxshed/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e802",
+    "source_key": "github:scourii/.dotfiles",
+    "dotfiles": "https://github.com/scourii/.dotfiles/tree/main",
+    "distro": null,
+    "theme": "Nord"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e803",
+    "source_key": "github:ad1822/hyprdots",
+    "dotfiles": "https://github.com/ad1822/hyprdots",
+    "distro": null,
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e804",
+    "source_key": "github:adiksondev/hyprvalley",
+    "dotfiles": "https://github.com/AdiKsOnDev/HyprValley",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e805",
+    "source_key": "github:cafreo/hyprland-intergalactic",
+    "dotfiles": "https://github.com/cafreo/hyprland-intergalactic",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e806",
+    "source_key": "github:command-z-z/arch-dotfiles",
+    "dotfiles": "https://github.com/command-z-z/Arch-dotfiles",
+    "distro": "Arch",
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ebf6d70f4df72f0e807",
+    "source_key": "github:conrad-mo/hyprland-dot",
+    "dotfiles": "https://github.com/conrad-mo/hyprland-dot",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e808",
+    "source_key": "github:dankdezpair/hypr.files-v2",
+    "dotfiles": "https://github.com/dankdezpair/hypr.files-V2",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e809",
+    "source_key": "github:debuggyo/dots",
+    "dotfiles": "https://github.com/debuggyo/dots",
+    "distro": null,
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e80a",
+    "source_key": "github:dragoshr1234/hyprland-rotaru",
+    "dotfiles": "https://github.com/dragoshr1234/hyprland-rotaru",
+    "distro": "Arch",
+    "theme": "Materia"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e80b",
+    "source_key": "github:end-4/dots-hyprland",
+    "dotfiles": "https://github.com/end-4/dots-hyprland/",
+    "distro": "Arch",
+    "theme": "Materia"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e80c",
+    "source_key": "github:heinzdev/hyprland-dotfiles",
+    "dotfiles": "https://github.com/HeinzDev/Hyprland-dotfiles",
+    "distro": "Nixos",
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e80d",
+    "source_key": "github:justinlime/dotfiles",
+    "dotfiles": "https://github.com/justinlime/dotfiles",
+    "distro": "Nixos",
+    "theme": null
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e80e",
+    "source_key": "github:knightfall01/hyprland-i3",
+    "dotfiles": "https://github.com/Knightfall01/Hyprland-i3/tree/master",
+    "distro": "Arch",
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e80f",
+    "source_key": "github:mathisp75/summer-day-and-night",
+    "dotfiles": "https://github.com/MathisP75/summer-day-and-night",
+    "distro": null,
+    "theme": "Everforest"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e810",
+    "source_key": "github:themaxmur/nixos-configuration",
+    "dotfiles": "https://github.com/TheMaxMur/NixOS-Configuration",
+    "distro": "Nixos",
+    "theme": "Nord"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e811",
+    "source_key": "github:maxtaran2010/hyprland-rice",
+    "dotfiles": "https://github.com/maxtaran2010/hyprland-rice",
+    "distro": null,
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e812",
+    "source_key": "github:narmis-e/hyprland-dots",
+    "dotfiles": "https://github.com/Narmis-E/hyprland-dots",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e813",
+    "source_key": "github:ozwaldorf/dotfiles",
+    "dotfiles": "https://github.com/ozwaldorf/dotfiles",
+    "distro": "Nixos",
+    "theme": null
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e814",
+    "source_key": "github:prasanthrangan/hyprdots",
+    "dotfiles": "https://github.com/prasanthrangan/hyprdots",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e815",
+    "source_key": "github:qxb3/gruvbox.hypr",
+    "dotfiles": "https://github.com/qxb3/gruvbox.hypr",
+    "distro": "Tails",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e816",
+    "source_key": "github:shub39/dotfiles",
+    "dotfiles": "https://github.com/shub39/dotfiles",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e817",
+    "source_key": "github:spagett1/dotfiles",
+    "dotfiles": "https://github.com/Spagett1/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e818",
+    "source_key": "github:stetsed/.dotfiles",
+    "dotfiles": "https://github.com/Stetsed/.dotfiles",
+    "distro": "Arch",
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e819",
+    "source_key": "github:yorubae/wayland-dotfiles",
+    "dotfiles": "https://github.com/Yorubae/wayland-dotfiles",
+    "distro": "Debian",
+    "theme": null
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e81a",
+    "source_key": "github:lonewolf4713/aeronix-dotfiles",
+    "dotfiles": "https://github.com/LoneWolf4713/aeronix-dotfiles",
+    "distro": "Arch",
+    "theme": "Adwaita"
+  },
+  {
+    "_id": "68570ec06d70f4df72f0e81b",
+    "source_key": "github:lonewolf4713/seraphic.dotfiles",
+    "dotfiles": "https://github.com/LoneWolf4713/seraphic.dotfiles",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e81c",
+    "source_key": "github:lonewolf4713/blue-monday.dots",
+    "dotfiles": "https://github.com/LoneWolf4713/blue-monday.dots",
+    "distro": "Cachyos",
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e81d",
+    "source_key": "github:lonewolf4713/auspicious-dots",
+    "dotfiles": "https://github.com/LoneWolf4713/auspicious-dots",
+    "distro": "Cachyos",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e81e",
+    "source_key": "github:b1337xyz/config",
+    "dotfiles": "https://github.com/b1337xyz/config/tree/xp",
+    "distro": "Arch",
+    "theme": "Paper"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e81f",
+    "source_key": "github:bibjaw/final_rice",
+    "dotfiles": "https://github.com/BIBJAW/Final_Rice",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e820",
+    "source_key": "github:bibjaw99/workstation",
+    "dotfiles": "https://github.com/bibjaw99/workstation",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e821",
+    "source_key": "github:blxckmage/dotfiles",
+    "dotfiles": "https://github.com/Blxckmage/dotfiles",
+    "distro": "Linux mint",
+    "theme": null
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e822",
+    "source_key": "github:bryant-the-coder/dotfiles",
+    "dotfiles": "https://github.com/bryant-the-coder/dotfiles",
+    "distro": null,
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e823",
+    "source_key": "github:fathulfahmy/dotfiles-linux",
+    "dotfiles": "https://github.com/fathulfahmy/dotfiles-linux/",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e824",
+    "source_key": "github:sommaa/mantis",
+    "dotfiles": "https://github.com/sommaa/Mantis",
+    "distro": "Ubuntu",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e825",
+    "source_key": "github:sunobb/dot",
+    "dotfiles": "https://github.com/SunoBB/dot",
+    "distro": null,
+    "theme": "Tokyo night"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e826",
+    "source_key": "github:tkk13909/dotfiles",
+    "dotfiles": "https://github.com/TKK13909/dotfiles",
+    "distro": "Arch",
+    "theme": "Tokyo night"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e827",
+    "source_key": "github:vallen217/dotfiles",
+    "dotfiles": "https://github.com/Vallen217/dotfiles",
+    "distro": "Arch",
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e828",
+    "source_key": "github:zemmsoares/.dotfiles",
+    "dotfiles": "https://github.com/zemmsoares/.dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e829",
+    "source_key": "github:complexplatform/kde-dotfiles",
+    "dotfiles": "https://github.com/ComplexPlatform/KDE-dotfiles",
+    "distro": "Arch",
+    "theme": "Materia"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e82a",
+    "source_key": "github:almqv/dotfiles",
+    "dotfiles": "https://github.com/almqv/dotfiles",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e82b",
+    "source_key": "github:thewisker/shikai",
+    "dotfiles": "https://github.com/TheWisker/Shikai",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e82d",
+    "source_key": "github:narmis-e/openbox-everforest",
+    "dotfiles": "https://github.com/Narmis-E/openbox-everforest",
+    "distro": null,
+    "theme": "Everforest"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e82e",
+    "source_key": "github:owl4ce/dotfiles",
+    "dotfiles": "https://github.com/owl4ce/dotfiles/tree/ng",
+    "distro": "Debian",
+    "theme": "Nord"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e82f",
+    "source_key": "github:barbaross93/nebula",
+    "dotfiles": "https://github.com/Barbaross93/Nebula",
+    "distro": "Arch",
+    "theme": "Nord"
+  },
+  {
+    "_id": "68570ec16d70f4df72f0e830",
+    "source_key": "github:darkkal44/cozytile",
+    "dotfiles": "https://github.com/Darkkal44/Cozytile",
+    "distro": "Debian",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e831",
+    "source_key": "github:fluffy-bean/dots",
+    "dotfiles": "https://github.com/Fluffy-Bean/dots",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e832",
+    "source_key": "github:gibranlp/qarslp",
+    "dotfiles": "https://github.com/gibranlp/QARSlp",
+    "distro": "Arch",
+    "theme": "Pop"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e833",
+    "source_key": "github:hamza12700/dotfiles",
+    "dotfiles": "https://github.com/Hamza12700/DotFiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e834",
+    "source_key": "github:shayanaqvi/dotfilets",
+    "dotfiles": "https://github.com/shayanaqvi/dotfilets",
+    "distro": null,
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e835",
+    "source_key": "github:thecode-breaker/riverwm",
+    "dotfiles": "https://github.com/theCode-Breaker/riverwm",
+    "distro": null,
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e836",
+    "source_key": "github:eoli3n/dotfiles",
+    "dotfiles": "https://github.com/eoli3n/dotfiles",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e837",
+    "source_key": "github:hifinerd/lugia-sway-dots",
+    "dotfiles": "https://github.com/hifinerd/lugia-sway-dots",
+    "distro": null,
+    "theme": "Ant"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e838",
+    "source_key": "github:ricarch97/nixos-config",
+    "dotfiles": "https://github.com/RicArch97/nixos-config",
+    "distro": "Arch",
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e839",
+    "source_key": "github:viperml/dotfiles",
+    "dotfiles": "https://github.com/viperML/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e83a",
+    "source_key": "github:lonewolf4713/new-wave",
+    "dotfiles": "https://github.com/LoneWolf4713/new-wave",
+    "distro": "Fedora",
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e83b",
+    "source_key": "github:icy-thought/snowflake",
+    "dotfiles": "https://github.com/Icy-Thought/snowflake",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e83c",
+    "source_key": "github:command-z-z/dotfiles",
+    "dotfiles": "https://github.com/command-z-z/dotfiles",
+    "distro": "Tails",
+    "theme": "Catppuccin"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e83d",
+    "source_key": "github:felixkratz/dotfiles",
+    "dotfiles": "https://github.com/FelixKratz/dotfiles",
+    "distro": null,
+    "theme": null
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e83e",
+    "source_key": "github:tcmmichaelb139/.dotfiles",
+    "dotfiles": "https://github.com/tcmmichaelb139/.dotfiles",
+    "distro": "Arch",
+    "theme": "Tokyo night"
+  },
+  {
+    "_id": "68570ec26d70f4df72f0e83f",
+    "source_key": "github:zhongxilu/dotfiles",
+    "dotfiles": "https://github.com/ZhongXiLu/dotfiles",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "68572f318fa814d7f4b17386",
+    "source_key": "reddit:1lgwhfx",
+    "dotfiles": "https://github.com/Almighty42/Nordic-Arch-Dotfiles",
+    "distro": "Arch",
+    "theme": "Nord"
+  },
+  {
+    "_id": "6868e18b50c558fb07cf882e",
+    "source_key": "github:alphatechnolog/dotfiles/tree/awesomewm",
+    "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/awesomewm",
+    "distro": "Debian",
+    "theme": "Pop"
+  },
+  {
+    "_id": "6868e18b50c558fb07cf8832",
+    "source_key": "github:d-solis/dotfiles/tree/awesome",
+    "dotfiles": "https://github.com/d-solis/dotfiles/tree/awesome",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "6868e18c50c558fb07cf8846",
+    "source_key": "github:alphatechnolog/dotfiles/tree/bspwm",
+    "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/bspwm",
+    "distro": "Void linux",
+    "theme": "Ant"
+  },
+  {
+    "_id": "6868e18c50c558fb07cf8853",
+    "source_key": "github:sudo-harun/dotfiles/tree/main",
+    "dotfiles": "https://github.com/sudo-harun/dotfiles/tree/main",
+    "distro": "Arch",
+    "theme": "Gruvbox"
+  },
+  {
+    "_id": "6868e18d50c558fb07cf8858",
+    "source_key": "github:spreadiesinspace/cinnamon-dotfiles/tree/main",
+    "dotfiles": "https://github.com/SpreadiesInSpace/cinnamon-dotfiles/tree/main",
+    "distro": "Debian",
+    "theme": "Paper"
+  },
+  {
+    "_id": "6868e18d50c558fb07cf8859",
+    "source_key": "github:alphatechnolog/dotfiles/tree/dkwm",
+    "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/dkwm",
+    "distro": "Debian",
+    "theme": "Ant"
+  },
+  {
+    "_id": "6868e18d50c558fb07cf885a",
+    "source_key": "github:alphatechnolog/dotfiles/tree/dwm",
+    "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/dwm",
+    "distro": "Void linux",
+    "theme": "Materia"
+  },
+  {
+    "_id": "6868e18d50c558fb07cf8861",
+    "source_key": "github:comiclyy/dotfiles/tree/dotfiles-gnome",
+    "dotfiles": "https://github.com/Comiclyy/dotfiles/tree/dotfiles-gnome",
+    "distro": "Debian",
+    "theme": "Pop"
+  },
+  {
+    "_id": "6868e18d50c558fb07cf8866",
+    "source_key": "github:scourii/.dotfiles/tree/main",
+    "dotfiles": "https://github.com/scourii/.dotfiles/tree/main",
+    "distro": null,
+    "theme": "Nord"
+  },
+  {
+    "_id": "6868e18d50c558fb07cf8873",
+    "source_key": "github:knightfall01/hyprland-i3/tree/master",
+    "dotfiles": "https://github.com/Knightfall01/Hyprland-i3/tree/master",
+    "distro": "Arch",
+    "theme": "Paper"
+  },
+  {
+    "_id": "6868e18e50c558fb07cf8883",
+    "source_key": "github:b1337xyz/config/tree/xp",
+    "dotfiles": "https://github.com/b1337xyz/config/tree/xp",
+    "distro": "Arch",
+    "theme": "Paper"
+  },
+  {
+    "_id": "6868e18e50c558fb07cf8891",
+    "source_key": "github:alphatechnolog/dotfiles/tree/openbox",
+    "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/openbox",
+    "distro": "Arch",
+    "theme": "Ant"
+  },
+  {
+    "_id": "6868e18e50c558fb07cf8893",
+    "source_key": "github:owl4ce/dotfiles/tree/ng",
+    "dotfiles": "https://github.com/owl4ce/dotfiles/tree/ng",
+    "distro": "Debian",
+    "theme": "Nord"
+  }
+]

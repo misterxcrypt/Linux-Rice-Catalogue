@@ -8,7 +8,12 @@ module.exports = async (req, res) => {
   }
   try {
     const db = await getDb();
-    const rices = await db.collection('rice').find({}).toArray();
+    const rices = await db.collection('rice').find({
+      $or: [
+        { status: 'approved' },
+        { status: { $exists: false } }
+      ]
+    }).toArray();
     return res.status(200).json(rices);
   } catch (err) {
     return res.status(500).json({ error: 'Failed to fetch rices' });

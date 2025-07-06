@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Gallery Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0A0A0F;
+            --panel-bg: rgba(22, 22, 30, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-color: #5D5FEF;
+            --accent-glow: rgba(93, 95, 239, 0.4);
+            transition: --accent-color 0.5s ease, --accent-glow 0.5s ease;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: #E0E0E0;
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0),
+                radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 45%);
+            background-size: 30px 30px, 100% 100%;
+            background-repeat: repeat, no-repeat;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-color);
+        }
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-gray-300">
+    <div class="p-4 md:p-6 lg:p-8">
+        <header class="mb-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+              <img src="https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/logo.webp" alt="Awesome Rices logo" class="w-10 h-10">
+              <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Admin Dashboard</h1>
+            </div>
+          
+            <div class="flex items-center gap-3">
+              <a href="/" class="glass-panel px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/10">
+                Back to Gallery
+              </a>
+              <button
+                id="logout-btn"
+                title="Logout"
+                class="glass-panel bg-[var(--accent-color)] px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/10"
+              >
+                <span class="material-icons-outlined text-lg text-gray-300">logout</span>
+              </button>
+            </div>
+        </header>          
+        <div class="mb-8 flex gap-4">
+            <button id="tab-submissions" class="tab-btn px-6 py-2 rounded-lg font-semibold active">Submissions</button>
+            <button id="tab-stats" class="tab-btn px-6 py-2 rounded-lg font-semibold">Stats</button>
+        </div>
+        <!-- Submissions Section -->
+        <section id="submissions-section" class="glass-panel rounded-xl p-6">
+            <h2 class="text-2xl font-bold mb-4">Pending Submissions</h2>
+            <div id="pending-list" class="space-y-4">
+                <!-- Pending rices will be listed here -->
+                <div class="text-gray-400">No pending submissions (placeholder)</div>
+            </div>
+        </section>
+        <!-- Stats Section -->
+        <section id="stats-section" class="glass-panel rounded-xl p-6 hidden">
+            <h2 class="text-2xl font-bold mb-4">Stats</h2>
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <div class="space-y-2">
+                    <div>Total Rices: <span id="stat-total" class="font-bold">0</span></div>
+                    <div>Unique WMs: <span id="stat-wms" class="font-bold">0</span></div>
+                    <div>Unique Themes: <span id="stat-themes" class="font-bold">0</span></div>
+                </div>
+                <div class="flex-1">
+                    <div class="flex justify-end items-center mb-4">
+                      <button id="toggle-chart-type" class="text-sm px-4 py-2 font-mono rounded border border-[var(--border-color)] hover:bg-white/10">
+                        🎛️ View: WM
+                      </button>
+                    </div>
+                  
+                    <!-- 👇 Add max-w and aspect control to the canvas wrapper -->
+                    <div class="w-full max-w-md mx-auto">
+                      <canvas id="stats-pie" width="500" height="500"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // document.getElementById('toggle-chart-type').addEventListener('click', () => {
+        //     currentChartType = currentChartType === 'wms' ? 'themes' : 'wms';
+        //     renderStats(window.latestStats); // assumes you cache the stats
+        // });
+        // Tab switching logic
+        const tabSubmissions = document.getElementById('tab-submissions');
+        const tabStats = document.getElementById('tab-stats');
+        const submissionsSection = document.getElementById('submissions-section');
+        const statsSection = document.getElementById('stats-section');
+        tabSubmissions.addEventListener('click', () => {
+            tabSubmissions.classList.add('active');
+            tabStats.classList.remove('active');
+            submissionsSection.classList.remove('hidden');
+            statsSection.classList.add('hidden');
+        });
+        tabStats.addEventListener('click', () => {
+            tabStats.classList.add('active');
+            tabSubmissions.classList.remove('active');
+            statsSection.classList.remove('hidden');
+            submissionsSection.classList.add('hidden');
+        });
+
+        // --- Admin API Integration ---
+        const token = localStorage.getItem('adminToken');
+        if (!token) {
+            alert('Not authorized. Please login.');
+            window.location.href = '/';
+        }
+        // ✅ Function to send status updates to backend
+        async function updateRiceStatus(id, status) {
+            try {
+            const res = await fetch('/api/updateStatus', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id, status })
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(result.error || 'Failed to update status');
+            }
+
+            return result;
+            } catch (error) {
+            console.error(`❌ Error updating status for ${id}:`, error);
+            alert(`❌ Failed to update status: ${error.message}`);
+            }
+        }
+        // Fetch and render pending rices
+        async function fetchPendingRices() {
+            const res = await fetch('/api/getPendingRices', {
+                headers: { 'Authorization': token }
+            });
+            if (res.status === 401) {
+                alert('Session expired. Please login again.');
+                localStorage.removeItem('adminToken');
+                window.location.href = '/';
+                return;
+            }
+            const rices = await res.json();
+            renderPendingRices(rices);
+        }
+        function renderPendingRices(rices) {
+            const list = document.getElementById('pending-list');
+            if (!rices.length) {
+                list.innerHTML = '<div class="text-gray-400">No pending submissions.</div>';
+                return;
+            }
+            list.innerHTML = '';
+            rices.forEach(rice => {
+                const div = document.createElement('div');
+                div.className = 'glass-panel p-4 rounded-lg flex flex-col md:flex-row md:items-center gap-4';
+                div.innerHTML = `
+                    <div class="flex-1">
+                        <div class="font-bold text-lg text-white">${rice.author || ''}</div>
+                        <div class="font-mono text-sm text-gray-400">${(rice.environment && rice.environment.name) || ''} ${rice.distro ? '· ' + rice.distro : ''}</div>
+                        <div class="mt-2"><a href="${rice.dotfiles || '#'}" target="_blank" class="text-blue-400 underline">Dotfiles</a></div>
+                        <div class="flex gap-2 mt-2">${(rice.screenshots || []).slice(0,2).map(url => `<img src="${url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
+                        <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            // Attach approve/reject handlers
+            list.querySelectorAll('.approve-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                btn.disabled = true;
+                btn.textContent = 'Approving...';
+                await updateRiceStatus(btn.dataset.id, 'approved');
+                fetchPendingRices();
+            });
+            });
+
+            list.querySelectorAll('.reject-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                btn.disabled = true;
+                btn.textContent = 'Rejecting...';
+                await updateRiceStatus(btn.dataset.id, 'rejected');
+                fetchPendingRices();
+            });
+            });
+        }
+
+        // async function updateRiceStatus(id, status) {
+        //     await fetch('/api/updateRice', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': token
+        //         },
+        //         body: JSON.stringify({ _id: id, status })
+        //     });
+        // }
+
+        // Fetch and render stats
+        // async function fetchStats() {
+        //     const res = await fetch('/api/stats', {
+        //         headers: { 'Authorization': token }
+        //     });
+        //     if (res.status === 401) {
+        //         alert('Session expired. Please login again.');
+        //         localStorage.removeItem('adminToken');
+        //         window.location.href = '/';
+        //         return;
+        //     }
+        //     const stats = await res.json();
+        //     renderStats(stats);
+        // }
+        // function renderStats(stats) {
+        //     document.getElementById('stat-total').textContent = stats.total;
+        //     document.getElementById('stat-wms').textContent = Object.keys(stats.wms).length;
+        //     document.getElementById('stat-themes').textContent = Object.keys(stats.themes).length;
+        //     // Pie chart for WMs
+        //     const ctx = document.getElementById('stats-pie').getContext('2d');
+        //     if (window.statsPieChart) window.statsPieChart.destroy();
+        //     window.statsPieChart = new Chart(ctx, {
+        //         type: 'pie',
+        //         data: {
+        //             labels: Object.keys(stats.wms),
+        //             datasets: [{
+        //                 data: Object.values(stats.wms),
+        //                 backgroundColor: [
+        //                     '#5D5FEF', '#F48FB1', '#4CAF50', '#268BD2', '#D65D0E', '#BD93F9', '#88C0D0', '#9E9E9E', '#FFD700', '#FF6347'
+        //                 ]
+        //             }]
+        //         },
+        //         options: {
+        //             plugins: {
+        //                 legend: { labels: { color: '#fff', font: { family: 'Inter' } } }
+        //             }
+        //         }
+        //     });
+        // }
+        document.addEventListener('DOMContentLoaded', () => {
+        let currentChartType = 'wms'; // 'wms' or 'themes'
+        const token = localStorage.getItem('adminToken');
+        window.latestStats = null;
+
+        // Attach toggle button click
+        const toggleBtn = document.getElementById('toggle-chart-type');
+        toggleBtn.addEventListener('click', () => {
+            console.log('✅ Toggle clicked. Current type:', currentChartType);
+            currentChartType = currentChartType === 'wms' ? 'themes' : 'wms';
+            renderStats(window.latestStats);
+        });
+
+        // Fetch stats from backend
+        async function fetchStats() {
+            const res = await fetch('/api/stats', {
+            headers: { 'Authorization': token }
+            });
+            if (res.status === 401) {
+            alert('Session expired. Please login again.');
+            localStorage.removeItem('adminToken');
+            window.location.href = '/';
+            return;
+            }
+            const stats = await res.json();
+            window.latestStats = stats;
+            renderStats(stats);
+        }
+
+        // Render pie chart
+        function renderStats(stats) {
+            document.getElementById('stat-total').textContent = stats.total;
+            document.getElementById('stat-wms').textContent = Object.keys(stats.wms).length;
+            document.getElementById('stat-themes').textContent = Object.keys(stats.themes).length;
+
+            const ctx = document.getElementById('stats-pie').getContext('2d');
+            if (window.statsPieChart) window.statsPieChart.destroy();
+
+            const dataSource = currentChartType === 'wms' ? stats.wms : stats.themes;
+
+            // Update button label
+            toggleBtn.textContent = currentChartType === 'wms' ? '🎛️ View: WM' : '🎨 View: Themes';
+
+            const darkColors = [
+            '#8ec07c', '#fabd2f', '#83a598', '#d3869b', '#fe8019',
+            '#b8bb26', '#fb4934', '#928374', '#458588', '#cc241d'
+            ];
+
+            window.statsPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(dataSource),
+                datasets: [{
+                data: Object.values(dataSource),
+                backgroundColor: darkColors,
+                borderColor: '#222',
+                borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                legend: {
+                    labels: {
+                    color: '#cfcfcf',
+                    font: { family: 'JetBrains Mono', size: 14 },
+                    padding: 16
+                    },
+                    position: 'bottom'
+                },
+                tooltip: {
+                    backgroundColor: '#1f1f1f',
+                    titleColor: '#ffffff',
+                    bodyColor: '#dddddd',
+                    titleFont: { family: 'JetBrains Mono', size: 14 },
+                    bodyFont: { family: 'JetBrains Mono', size: 12 }
+                }
+                }
+            }
+            });
+        }
+
+        // Initial load
+        fetchStats();
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            window.location.href = '/';
+        });
+        // On page load
+        fetchPendingRices();
+    </script>
+</body>
+</html> 

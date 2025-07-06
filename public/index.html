@@ -98,6 +98,9 @@
                     <img src="https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/logo.webp" alt="Awesome Rices logo" class="w-10 h-10">
                     <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Rice Gallery</h1>
                  </div>
+                 <div class="w-full md:w-[500px] p-2 rounded-md bg-white/5 border border-[var(--border-color)] font-mono text-sm">
+                    <input id="search-input" type="text" placeholder="🔍 Search rices (author, WM, distro, theme)" class="w-full p-2 rounded-md bg-white/5 border border-[var(--border-color)] font-mono text-sm" />
+                 </div>
                  <div class="flex items-center gap-2">
                     <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
                         <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10 active"><span class="material-icons-outlined">grid_view</span></button>
@@ -105,6 +108,11 @@
                         <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">view_agenda</span></button>
                     </div>
                     <button id="submit-rice-btn" class="p-2.5 bg-[var(--accent-color)] text-white rounded-lg ml-2 hover:opacity-90"><span class="material-icons-outlined">add_circle</span></button>
+                    <button id="login-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10">Login</button>
+                    <button id="admin-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10" style="display:none">Admin</button>
+                    <button id="logout-btn" class="p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-white font-semibold hover:bg-white/10" style="display:none">
+                        <span class="material-icons-outlined text-gray-300">logout</span>
+                    </button>
                  </div>
              </div>
         </header>
@@ -155,9 +163,30 @@
                 <h2 class="text-2xl font-bold text-white">Submit Your Rice</h2>
                 <div><label class="font-mono text-sm">Author</label><input type="text" placeholder="e.g., crunchghost" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
                 <div><label class="font-mono text-sm">Title*</label><input required type="text" placeholder="e.g., Catppuccin Dreams" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
-                <div><label class="font-mono text-sm">WM/DE*</label><input required type="text" placeholder="Hyprland" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <!-- Dropdown to choose WM or DE -->
+                <div>
+                <label class="font-mono text-sm">Type*</label>
+                <select id="wmde-type" required onchange="updateLabelAndPlaceholder()" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
+                    <option value="WM">WM (Window Manager)</option>
+                    <option value="DE">DE (Desktop Environment)</option>
+                </select>
+                </div>
+
+                <!-- Input field whose label/placeholder change based on selection -->
+                <div>
+                <label id="wmde-label" class="font-mono text-sm">Name of WM*</label>
+                <input id="wmde-name" required type="text" placeholder="e.g., Hyprland" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
+                </div>
                 <div><label class="font-mono text-sm">Distro*</label><input required type="text" placeholder="Arch Linux" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
-                <div><label class="font-mono text-sm">Screenshot URL*</label><input required type="url" placeholder="https://..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div id="screenshot-fields" class="space-y-2">
+                <label class="font-mono text-sm block">Screenshot URLs*</label>
+                <div class="screenshot-entry">
+                    <input required type="url" name="screenshot" placeholder="https://..." class="w-full p-2 rounded-md bg-white/5 border border-[var(--border-color)]" />
+                </div>
+                </div>
+                <button type="button" onclick="addScreenshotField()" class="text-sm text-[var(--accent-color)] font-mono underline">
+                + Add another screenshot
+                </button>
                 <div><label class="font-mono text-sm">Dotfiles URL*</label><input required type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
             </form>
@@ -179,13 +208,49 @@
         <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
     </div>
 
+    <!-- Add Login Modal -->
+    <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+      <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
+        <h2 class="text-2xl font-bold mb-4 text-white">Admin Login</h2>
+        <form id="login-form" class="w-full flex flex-col gap-4">
+          <input type="password" id="admin-password" placeholder="Admin Password" required class="w-full p-3 rounded-lg bg-white/5 border border-[var(--border-color)] text-white" />
+          <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Login</button>
+        </form>
+        <button id="login-close-btn" class="mt-4 text-gray-400 hover:text-white">Cancel</button>
+      </div>
+    </div>
+
+    <script>
+    function updateLabelAndPlaceholder() {
+        const type = document.getElementById('wmde-type').value;
+        const label = document.getElementById('wmde-label');
+        const input = document.getElementById('wmde-name');
+
+        if (type === 'WM') {
+        label.textContent = 'Name of WM*';
+        input.placeholder = 'e.g., Hyprland, i3, bspwm';
+        } else {
+        label.textContent = 'Name of DE*';
+        input.placeholder = 'e.g., GNOME, KDE, XFCE';
+        }
+    }
+
+    // Initialize once on page load
+    updateLabelAndPlaceholder();
+    </script>
+
     <script>
         let ricesData = [];
 
         async function loadRicesData() {
             try {
                 const res = await fetch('/api/getRices');
-                ricesData = await res.json();
+                const data = await res.json();
+                // Flatten wm for filtering
+                ricesData = data.map(rice => ({
+                    ...rice,
+                    wm: (rice.environment && rice.environment.name) || ''
+                }));
             } catch (e) {
                 console.error('Failed to fetch rices:', e);
                 ricesData = [];
@@ -220,7 +285,7 @@
                 renderGallery();
             };
 
-            const renderGallery = () => {
+            /* const renderGallery = () => {
                 let dataToRender = ricesData;
                 if (state.activeFilterValue !== 'All') {
                     dataToRender = ricesData.filter(r => r[state.activeFilterType] === state.activeFilterValue);
@@ -230,7 +295,34 @@
                 el.gallery.className = `grid-${state.viewMode}`;
                 dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
                 initScrollObserver();
+            }; */
+            const renderGallery = () => {
+                const query = document.getElementById('search-input')?.value.toLowerCase() || "";
+                let dataToRender = ricesData;
+
+                if (state.activeFilterValue !== 'All') {
+                    dataToRender = dataToRender.filter(r => r[state.activeFilterType] === state.activeFilterValue);
+                }
+
+                if (query) {
+                    dataToRender = dataToRender.filter(r => {
+                        const values = [
+                            r.author || '',
+                            r.wm || '',
+                            r.distro || '',
+                            r.theme || ''
+                        ].join(' ').toLowerCase();
+                        return values.includes(query);
+                    });
+                }
+
+                el.gallery.innerHTML = '';
+                el.gallery.className = `grid-${state.viewMode}`;
+                dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
+                initScrollObserver();
             };
+
+            document.getElementById('search-input').addEventListener('input', renderGallery);
             
             const renderFilters = () => {
                 const filterKey = state.activeFilterType;
@@ -405,11 +497,140 @@
             document.getElementById('submission-close-btn').addEventListener('click', hideSubmissionModal);
             document.getElementById('submission-form').addEventListener('submit', handleSubmission);
 
+            // --- Admin Login Logic ---
+            function showLoginModal() {
+              document.getElementById('login-modal').classList.replace('hidden', 'flex');
+            }
+            function hideLoginModal() {
+              document.getElementById('login-modal').classList.replace('flex', 'hidden');
+            }
+            function showLogoutBtn() {
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('admin-btn').style.display = '';
+                document.getElementById('logout-btn').style.display = '';
+            }
+            function showLoginBtn() {
+                document.getElementById('login-btn').style.display = '';
+                document.getElementById('admin-btn').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'none';
+            }
+            async function handleLogin(e) {
+              e.preventDefault();
+              const password = document.getElementById('admin-password').value;
+              const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+              });
+              if (res.ok) {
+                const { token } = await res.json();
+                localStorage.setItem('adminToken', token);
+                window.location.href = '/admin.html';
+              } else {
+                alert('Login failed');
+              }
+            }
+            function handleLogout() {
+              localStorage.removeItem('adminToken');
+              showLoginBtn();
+            }
+            function handleAdmin() {
+                window.location.href = '/admin.html';
+            }   
+            function checkLogin() {
+              const token = localStorage.getItem('adminToken');
+              if (token) showLogoutBtn();
+              else showLoginBtn();
+            }
+            document.getElementById('login-btn').addEventListener('click', showLoginModal);
+            document.getElementById('login-close-btn').addEventListener('click', hideLoginModal);
+            document.getElementById('login-form').addEventListener('submit', handleLogin);
+            document.getElementById('admin-btn').addEventListener('click', handleAdmin);
+            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            checkLogin();
+
             // INITIALIZE
             await loadRicesData();
             initMoodSwitcher();
             render(); // Initial render
         });
+    </script>
+    <script>
+    function addScreenshotField() {
+        const container = document.getElementById('screenshot-fields');
+        const newField = document.createElement('div');
+        newField.classList.add('screenshot-entry');
+        newField.innerHTML = `
+            <input required type="url" name="screenshot" placeholder="https://..." class="w-full p-2 rounded-md bg-white/5 border border-[var(--border-color)]" />
+        `;
+        container.appendChild(newField);
+    }
+
+    function updateLabelAndPlaceholder() {
+        const type = document.getElementById('wmde-type').value;
+        const label = document.getElementById('wmde-label');
+        const input = document.getElementById('wmde-name');
+
+        if (type === 'WM') {
+        label.textContent = 'Name of WM*';
+        input.placeholder = 'e.g., Hyprland, i3, bspwm';
+        } else {
+        label.textContent = 'Name of DE*';
+        input.placeholder = 'e.g., GNOME, KDE, XFCE';
+        }
+    }
+
+    // Auto-set on load
+    updateLabelAndPlaceholder();
+
+    // --- Submit Handler ---
+    document.getElementById('submission-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const author = form.querySelector('input[placeholder*="crunchghost"]').value;
+        const title = form.querySelector('input[placeholder*="Catppuccin"]').value;
+        const type = document.getElementById('wmde-type').value;
+        const wmName = document.getElementById('wmde-name').value;
+        const distro = form.querySelector('input[placeholder="Arch Linux"]').value;
+        const screenshots = Array.from(form.querySelectorAll('input[name="screenshot"]'))
+            .map(input => input.value.trim())
+            .filter(url => url !== "");
+        const dotfiles = form.querySelector('input[placeholder^="https://github.com"]').value;
+
+        const riceData = {
+        author,
+        title,
+        distro,
+        dotfiles,
+        screenshots,
+        environment: {
+            type: type,
+            name: wmName
+        }
+        };
+
+        try {
+        const res = await fetch('/api/submitRice', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(riceData)
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+            alert('🚀 Rice submitted successfully! Awaiting approval.');
+            form.reset();
+            updateLabelAndPlaceholder(); // Reset label after form clears
+        } else {
+            throw new Error(result.error || 'Failed to submit');
+        }
+        } catch (err) {
+        console.error('❌ Submission error:', err);
+        alert('❌ Submission failed. Check console for details.');
+        }
+    });
     </script>
 </body>
 </html>

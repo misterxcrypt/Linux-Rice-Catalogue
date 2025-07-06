@@ -180,7 +180,7 @@
                         <div class="font-bold text-lg text-white">${rice.author || ''}</div>
                         <div class="font-mono text-sm text-gray-400">${(rice.environment && rice.environment.name) || ''} ${rice.distro ? '· ' + rice.distro : ''}</div>
                         <div class="mt-2"><a href="${rice.dotfiles || '#'}" target="_blank" class="text-blue-400 underline">Dotfiles</a></div>
-                        <div class="flex gap-2 mt-2">${(rice.screenshots || []).slice(0,2).map(url => `<img src="${url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}</div>
+                        <div class="flex gap-2 mt-2">${(rice.images || []).slice(0,2).map(url => `<img src="${url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}</div>
                     </div>
                     <div class="flex gap-2">
                         <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>

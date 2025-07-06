@@ -150,7 +150,6 @@
                  </div>
                  <div class="space-y-3 font-mono text-sm border-t border-b py-4 border-[var(--border-color)]" id="lightbox-metadata"></div>
                  <div class="space-y-2" id="lightbox-dotfiles"></div>
-                 <div class="space-y-2"><h3 class="font-mono text-sm uppercase text-gray-400">Tags</h3><div id="lightbox-tags" class="flex flex-wrap gap-2"></div></div>
                  <div class="flex-grow"></div>
                  <div class="space-y-2"><h3 class="font-mono text-sm uppercase text-gray-400">Reactions</h3><div class="flex gap-2" id="lightbox-reactions"></div></div>
              </div>
@@ -347,8 +346,7 @@
                 const distro = rice.distro || '';
                 const theme = rice.theme || '';
                 const url = rice.dotfiles || '';
-                const images = rice.screenshots || [];
-                const tags = rice.tags || [];
+                const images = rice.images || [];
                 const card = document.createElement('div');
                 card.className = `rice-card group relative rounded-2xl overflow-hidden cursor-pointer flex bg-[#111116] border border-[var(--border-color)]`;
                 card.dataset.index = originalIndex;
@@ -403,8 +401,7 @@
                     distro: rice.distro || '',
                     theme: rice.theme || '',
                     url: rice.dotfiles || '',
-                    images: rice.screenshots || [],
-                    tags: rice.tags || []
+                    images: rice.images || [],
                 };
                 state.currentImageIndex = 0;
                 const imgEl = el.lightbox.querySelector('#lightbox-image');
@@ -437,10 +434,10 @@
                 const rice = state.currentLightboxRice;
                 const setContent = (id, text) => el.lightbox.querySelector(id).textContent = text;
                 setContent('#lightbox-user', rice.user);
-                setContent('#lightbox-wm-distro-theme', `${rice.wm} / ${rice.distro} / ${rice.theme}`);
-                el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme}</div>`;
-                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-2 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a><button class="glass-panel p-2 rounded-lg text-sm hover:bg-white/10" disabled>Copy Snippet</button></div>`;
-                el.lightbox.querySelector('#lightbox-tags').innerHTML = (rice.tags || []).map(tag => `<span class="px-2 py-0.5 glass-panel rounded-full text-xs font-mono">${tag}</span>`).join('');
+                setContent('#lightbox-wm-distro-theme', `${rice.wm || 'Unknown'} / ${rice.distro || 'Unknown'} / ${rice.theme || 'Unknown'}`);
+                el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div>`;
+                /* el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-2 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a><button class="glass-panel p-2 rounded-lg text-sm hover:bg-white/10" disabled>Copy Snippet</button></div>`; */
+                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-1 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a></div>`;
                 el.lightbox.querySelector('#lightbox-reactions').innerHTML = '💜🔁👀🔧'.split('').map(e => `<button class="px-3 py-1 glass-panel rounded-full text-lg hover:bg-white/10">${e}</button>`).join('');
                 el.lightbox.querySelector('#lightbox-image').src = rice.images[state.currentImageIndex] || '';
                 setContent('#lightbox-counter', `${state.currentImageIndex + 1} / ${rice.images.length}`);
@@ -593,7 +590,7 @@
         const type = document.getElementById('wmde-type').value;
         const wmName = document.getElementById('wmde-name').value;
         const distro = form.querySelector('input[placeholder="Arch Linux"]').value;
-        const screenshots = Array.from(form.querySelectorAll('input[name="screenshot"]'))
+        const images = Array.from(form.querySelectorAll('input[name="image"]'))
             .map(input => input.value.trim())
             .filter(url => url !== "");
         const dotfiles = form.querySelector('input[placeholder^="https://github.com"]').value;
@@ -603,7 +600,7 @@
         title,
         distro,
         dotfiles,
-        screenshots,
+        images,
         environment: {
             type: type,
             name: wmName

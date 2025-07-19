@@ -46,7 +46,7 @@
     <div class="p-4 md:p-6 lg:p-8">
         <header class="mb-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
-              <img src="https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/logo.webp" alt="Awesome Rices logo" class="w-10 h-10">
+            <!--  <img src="https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/logo.webp" alt="Awesome Rices logo" class="w-10 h-10"> -->
               <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Admin Dashboard</h1>
             </div>
           
@@ -177,15 +177,31 @@
                 div.className = 'glass-panel p-4 rounded-lg flex flex-col md:flex-row md:items-center gap-4';
                 div.innerHTML = `
                     <div class="flex-1">
-                        <div class="font-bold text-lg text-white">${rice.author || ''}</div>
-                        <div class="font-mono text-sm text-gray-400">${(rice.environment && rice.environment.name) || ''} ${rice.distro ? '· ' + rice.distro : ''}</div>
-                        <div class="mt-2"><a href="${rice.dotfiles || '#'}" target="_blank" class="text-blue-400 underline">Dotfiles</a></div>
-                        <div class="flex gap-2 mt-2">${(rice.images || []).slice(0,2).map(url => `<img src="${url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}</div>
+                    <div class="font-bold text-lg text-white">${rice.author || ''}</div>
+                    <div class="font-mono text-sm text-gray-400">
+                        ${(rice.environment && rice.environment.name) || ''} 
+                        ${rice.distro ? '· ' + rice.distro : ''}
                     </div>
-                    <div class="flex gap-2">
-                        <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
-                        <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
+
+                    ${rice.dotfiles ? `
+                        <div class="mt-2">
+                            <a href="${rice.dotfiles}" target="_blank" class="text-blue-400 underline">Dotfiles</a>
+                        </div>` : ''}
+
+                    ${rice.reddit_post ? `
+                        <div class="mt-1">
+                            <a href="${rice.reddit_post}" target="_blank" class="text-orange-400 underline">Reddit Post</a>
+                        </div>` : ''}
+
+                    <div class="flex gap-2 mt-2">
+                        ${(rice.images || []).slice(0, 2).map(url =>
+                            `<img src="${url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}
                     </div>
+                </div>
+                <div class="flex gap-2">
+                    <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
+                    <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
+                </div>
                 `;
                 list.appendChild(div);
             });

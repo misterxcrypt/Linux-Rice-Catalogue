@@ -46,6 +46,10 @@
             border: 1px solid var(--border-color);
         }
 
+        .reaction-btn.bg-white\/10 {
+            border: 1px solid var(--accent-color);
+        }
+
         .grid-masonry { column-count: 1; column-gap: 1.5rem; }
         @media (min-width: 640px) { .grid-masonry { column-count: 2; } } /* sm */
         @media (min-width: 1024px) { .grid-masonry { column-count: 3; } } /* lg */
@@ -80,11 +84,27 @@
         .star { position: absolute; background-color: white; border-radius: 50%; animation: moveStar 10s linear infinite; }
         @keyframes moveStar { from { transform: translateY(110vh) scale(1); } to { transform: translateY(-10vh) scale(0.1); } }
         #animated-rice-card { animation: floatInSpace 5s ease-in-out forwards; }
-        @keyframes floatInSpace { 
-            0% { transform: translateY(120vh) scale(0.5); opacity: 0; }
-            20% { transform: translateY(40vh) scale(1); opacity: 1; }
-            80% { transform: translateY(38vh) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        @keyframes floatInSpace {
+            0% {
+                transform: translateY(120vh) scale(0.5);
+                opacity: 0;
+            }
+            30% {
+                transform: translateY(0vh) scale(1);
+                opacity: 1;
+            }
+            60% {
+                transform: translateY(-5vh) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .animate-floatInSpace {
+        animation: floatInSpace 5s ease-in-out forwards;
         }
     </style>
 </head>
@@ -151,7 +171,12 @@
                  <div class="space-y-3 font-mono text-sm border-t border-b py-4 border-[var(--border-color)]" id="lightbox-metadata"></div>
                  <div class="space-y-2" id="lightbox-dotfiles"></div>
                  <div class="flex-grow"></div>
-                 <div class="space-y-2"><h3 class="font-mono text-sm uppercase text-gray-400">Reactions</h3><div class="flex gap-2" id="lightbox-reactions"></div></div>
+                 <!--
+                <div class="space-y-2">
+                    <h3 class="font-mono text-sm uppercase text-gray-400">Reactions</h3>
+                    <div class="flex gap-2" id="lightbox-reactions"></div>
+                </div>
+                -->
              </div>
              <button id="lightbox-close" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80 z-20"><span class="material-icons-outlined">close</span></button>
         </div>
@@ -160,8 +185,9 @@
         <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
             <form id="submission-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
                 <h2 class="text-2xl font-bold text-white">Submit Your Rice</h2>
-                <div><label class="font-mono text-sm">Author</label><input type="text" placeholder="e.g., crunchghost" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
-                <div><label class="font-mono text-sm">Title*</label><input required type="text" placeholder="e.g., Catppuccin Dreams" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Reddit Post</label><input type="text" placeholder="e.g., https://reddit.com" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Author*</label><input required type="text" placeholder="e.g., crunchghost" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Title</label><input type="text" placeholder="e.g., Catppuccin Dreams" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
                 <!-- Dropdown to choose WM or DE -->
                 <div>
                 <label class="font-mono text-sm">Type*</label>
@@ -176,17 +202,28 @@
                 <label id="wmde-label" class="font-mono text-sm">Name of WM*</label>
                 <input id="wmde-name" required type="text" placeholder="e.g., Hyprland" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
                 </div>
-                <div><label class="font-mono text-sm">Distro*</label><input required type="text" placeholder="Arch Linux" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Distro</label><input type="text" placeholder="Arch Linux" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                
+                <!--
                 <div id="screenshot-fields" class="space-y-2">
                 <label class="font-mono text-sm block">Screenshot URLs*</label>
-                <div class="screenshot-entry">
+                <div class="screenshot">
                     <input required type="url" name="screenshot" placeholder="https://..." class="w-full p-2 rounded-md bg-white/5 border border-[var(--border-color)]" />
                 </div>
                 </div>
                 <button type="button" onclick="addScreenshotField()" class="text-sm text-[var(--accent-color)] font-mono underline">
                 + Add another screenshot
                 </button>
-                <div><label class="font-mono text-sm">Dotfiles URL*</label><input required type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                -->
+
+                <div class="space-y-2" id="screenshot-upload-section">
+                <label class="block text-sm font-medium text-gray-300">Upload Screenshots <span class="text-red-500">*</span></label>
+                <input type="file" id="screenshot-input" accept='image/*' */ multiple class="hidden" /> 
+                <button type="button" id="upload-btn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white">📤 Select Images</button>
+                <div id="screenshot-preview" class="flex flex-wrap gap-3 mt-3"></div>
+                </div>
+
+                <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
             </form>
             <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
@@ -196,11 +233,16 @@
              <button id="submission-close-btn" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80"><span class="material-icons-outlined">close</span></button>
         </div>
     </div>
-    <div id="space-travel-overlay" class="fixed inset-0 z-50 hidden items-center justify-center overflow-hidden">
-        <div id="animated-rice-card" class="absolute w-full max-w-xl p-4">
-             <div class="rice-card rounded-2xl overflow-hidden border-2" style="border-color:var(--accent-color); box-shadow: 0 0 50px var(--accent-glow)"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"></div>
+    <div id="space-travel-overlay" class="fixed inset-0 z-50 hidden overflow-hidden flex items-center justify-center px-4" style="background: radial-gradient(ellipse at 50% 50%, #1a2a6c, #0a0a0f)">
+        <!-- Animated wrapper for both card and text -->
+        <div id="space-travel-ship" class="flex flex-col items-center space-y-6 text-center animate-floatInSpace w-full max-w-xl">
+            <div id="animated-rice-card" class="w-full p-4">
+            <div class="rice-card rounded-2xl overflow-hidden border-2" style="border-color:var(--accent-color); box-shadow: 0 0 50px var(--accent-glow)">
+                <img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png">
+            </div>
+            </div>
+            <p class="font-mono text-lg text-white/70">Your rice has entered the galaxy.<br>Awaiting admin approval before it shines in the archive.</p>
         </div>
-        <p class="absolute bottom-1/4 font-mono text-lg text-white/70 text-center px-4">Your rice has entered the galaxy.<br>Awaiting admin approval before it shines in the archive.</p>
     </div>
     <div id="mood-switcher-container" class="fixed bottom-4 right-4 z-40">
         <div id="mood-switcher-panel" class="absolute bottom-14 right-0 grid grid-cols-4 gap-3 p-3 rounded-2xl glass-panel hidden"></div>
@@ -220,6 +262,50 @@
     </div>
 
     <script>
+
+        window.selectedFiles = [];
+        const screenshotInput = document.getElementById('screenshot-input');
+        const uploadBtn = document.getElementById('upload-btn');
+        const previewContainer = document.getElementById('screenshot-preview');
+
+        uploadBtn.addEventListener('click', () => {
+        screenshotInput.click();
+        });
+
+        screenshotInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+
+        files.forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+
+            window.selectedFiles.push(file);
+
+            const reader = new FileReader();
+            reader.onload = () => {
+            const imgBox = document.createElement('div');
+            imgBox.className = "relative";
+
+            imgBox.innerHTML = `
+                <img src="${reader.result}" class="w-24 h-24 object-cover rounded" />
+                <button type="button" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs remove-btn">&times;</button>
+            `;
+
+            imgBox.querySelector('.remove-btn').addEventListener('click', () => {
+                const index = [...previewContainer.children].indexOf(imgBox);
+                window.selectedFiles.splice(index, 1);
+                imgBox.remove();
+            });
+
+            previewContainer.appendChild(imgBox);
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        screenshotInput.value = '';
+        });
+
+
     function updateLabelAndPlaceholder() {
         const type = document.getElementById('wmde-type').value;
         const label = document.getElementById('wmde-label');
@@ -346,11 +432,29 @@
                 const distro = rice.distro || '';
                 const theme = rice.theme || '';
                 const url = rice.dotfiles || '';
-                const images = rice.images || [];
+                let images = rice.images || [];
+                if (typeof images === 'string') images = [images];
+                const reactions = rice.reactions || { heart: 0, fire: 0, down: 0 };
                 const card = document.createElement('div');
                 card.className = `rice-card group relative rounded-2xl overflow-hidden cursor-pointer flex bg-[#111116] border border-[var(--border-color)]`;
                 card.dataset.index = originalIndex;
-                card.innerHTML = `<div class="card-image w-full h-full"><img src="${images[0] || ''}" alt="${user}'s ${wm} rice" loading="lazy" class="w-full h-full object-cover"></div><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 class="text-xl font-bold text-white">${user}</h3><p class="font-mono text-sm text-white/70 truncate">${distro} + ${wm}</p></div>`;
+                /* Commented the rection section */
+                card.innerHTML = `
+                    <div class="card-image w-full h-full">
+                        <img src="${images[0] || ''}" alt="${user}'s ${wm} rice" loading="lazy" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end">
+                        <h3 class="text-xl font-bold text-white">${user}</h3>
+                        <div class="flex justify-between items-center text-sm text-white/70">
+                            <p class="font-mono truncate">${distro} + ${wm}</p>
+                            <!-- <div class="flex gap-2 text-white/80 ml-4 shrink-0">
+                                <span title="Love">❤️ ${reactions.heart || 0}</span>
+                                <span title="Fire">🔥 ${reactions.fire || 0}</span>
+                                <span title="Downvote">⬇️ ${reactions.down || 0}</span>
+                            </div> -->
+                        </div>
+                    </div>
+                `;
                 card.addEventListener('click', () => showLightbox(originalIndex));
                 return card;
             };
@@ -395,13 +499,15 @@
             const showLightbox = async (index) => {
                 // Map DB fields to expected frontend fields for lightbox
                 const rice = ricesData[index];
+                let images = rice.images || [];
+                if (typeof images === 'string') images = [images];
                 state.currentLightboxRice = {
                     user: rice.author || '',
                     wm: (rice.environment && rice.environment.name) || '',
                     distro: rice.distro || '',
                     theme: rice.theme || '',
                     url: rice.dotfiles || '',
-                    images: rice.images || [],
+                    images,
                 };
                 state.currentImageIndex = 0;
                 const imgEl = el.lightbox.querySelector('#lightbox-image');
@@ -423,6 +529,30 @@
                     el.lightbox.querySelector('#lightbox-details-panel').style.setProperty('--modal-text', '#fff');
                 }
                 updateLightboxContent();
+                el.lightbox.querySelectorAll('.reaction-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation(); // Prevent lightbox from closing
+                        const button = e.currentTarget;
+                        const reaction = button.dataset.reaction;
+                        const id = button.dataset.id;
+
+                        // Save user's choice in localStorage
+                        localStorage.setItem(`reaction_${id}`, reaction);
+
+                        // Send to server
+                        try {
+                            const res = await fetch('/api/reactRice', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ _id: id, reaction })
+                            });
+                            if (!res.ok) throw new Error("Failed to send reaction");
+                            // Optionally, update UI or re-fetch rice data
+                        } catch (err) {
+                            console.error('Reaction error:', err);
+                        }
+                    });
+                });
                 el.lightbox.classList.replace('hidden', 'grid');
             };
             const hideLightbox = () => el.lightbox.classList.replace('grid', 'hidden');
@@ -436,9 +566,34 @@
                 setContent('#lightbox-user', rice.user);
                 setContent('#lightbox-wm-distro-theme', `${rice.wm || 'Unknown'} / ${rice.distro || 'Unknown'} / ${rice.theme || 'Unknown'}`);
                 el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div>`;
-                /* el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-2 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a><button class="glass-panel p-2 rounded-lg text-sm hover:bg-white/10" disabled>Copy Snippet</button></div>`; */
-                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3><div class="grid grid-cols-1 gap-2"><a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a></div>`;
-                el.lightbox.querySelector('#lightbox-reactions').innerHTML = '💜🔁👀🔧'.split('').map(e => `<button class="px-3 py-1 glass-panel rounded-full text-lg hover:bg-white/10">${e}</button>`).join('');
+                const dotfilesHTML = rice.url
+                    ? `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3>
+                        <div class="grid grid-cols-1 gap-2">
+                        <a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
+                        </div>`
+                    : `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3>
+                        <p class="text-white/60 text-sm italic">No dotfiles provided for this rice.</p>`;
+                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = dotfilesHTML;            
+                const reactions = [
+                    { key: 'heart', emoji: '❤️' },
+                    { key: 'fire', emoji: '🔥' },
+                    { key: 'down', emoji: '⬇️' }
+                ];
+                /* Get current reaction from localStorage */
+                const userReactionKey = `reaction_${rice._id}`;
+                const currentUserReaction = localStorage.getItem(userReactionKey);
+
+                /* el.lightbox.querySelector('#lightbox-reactions').innerHTML = reactions
+                .map(r => {
+                    const count = rice.reactions?.[r.key] || 0;
+                    const isActive = r.key === currentUserReaction;
+                    return `<button 
+                    class="reaction-btn px-3 py-1 glass-panel rounded-full text-lg hover:bg-white/10 ${isActive ? 'bg-white/10' : ''}"
+                    data-reaction="${r.key}"
+                    data-id="${rice._id}"
+                    >${r.emoji} ${count}</button>`;
+                })
+                .join(''); */
                 el.lightbox.querySelector('#lightbox-image').src = rice.images[state.currentImageIndex] || '';
                 setContent('#lightbox-counter', `${state.currentImageIndex + 1} / ${rice.images.length}`);
             };
@@ -459,6 +614,12 @@
                     star.style.cssText = `width:${size}px; height:${size}px; left:${Math.random()*100}%; top: ${Math.random()* -50}vh; animation-delay: ${Math.random()*10}s; animation-duration: ${Math.random()*5+5}s`;
                     starContainer.appendChild(star);
                 }
+
+                const ship = document.getElementById('space-travel-ship');
+                ship.classList.remove('animate-floatInSpace');
+                void ship.offsetWidth; // trigger reflow
+                ship.classList.add('animate-floatInSpace');
+                
                 el.spaceTravelOverlay.prepend(starContainer);
                 el.spaceTravelOverlay.classList.remove('hidden');
                 setTimeout(() => el.spaceTravelOverlay.classList.add('hidden'), 5000);
@@ -556,10 +717,21 @@
     function addScreenshotField() {
         const container = document.getElementById('screenshot-fields');
         const newField = document.createElement('div');
-        newField.classList.add('screenshot-entry');
+        /* newField.classList.add('screenshot'); */
+        newField.classList.add('relative', 'w-full');
+
         newField.innerHTML = `
-            <input required type="url" name="screenshot" placeholder="https://..." class="w-full p-2 rounded-md bg-white/5 border border-[var(--border-color)]" />
+            <input required type="url" name="screenshot"
+                placeholder="https://..." 
+                class="w-full p-2 pr-8 rounded-md bg-white/5 border border-[var(--border-color)]" />
+                <button type="button"
+                class="absolute right-2 top-1/2 -translate-y-1/2 text-white/70 hover:text-red-500"
+                title="Remove screenshot">✕</button>
         `;
+        // Add event listener for remove button
+        newField.querySelector('button').addEventListener('click', () => {
+            newField.remove();
+        });
         container.appendChild(newField);
     }
 
@@ -585,44 +757,77 @@
         e.preventDefault();
 
         const form = e.target;
+        const reddit_post = form.querySelector('input[placeholder*="https://reddit.com"]').value;
         const author = form.querySelector('input[placeholder*="crunchghost"]').value;
         const title = form.querySelector('input[placeholder*="Catppuccin"]').value;
         const type = document.getElementById('wmde-type').value;
         const wmName = document.getElementById('wmde-name').value;
         const distro = form.querySelector('input[placeholder="Arch Linux"]').value;
-        const images = Array.from(form.querySelectorAll('input[name="image"]'))
+        /* const images = Array.from(form.querySelectorAll('input[name="screenshot"]'))
             .map(input => input.value.trim())
-            .filter(url => url !== "");
+            .filter(url => url !== ""); */
+        const images = window.selectedFiles || [];
         const dotfiles = form.querySelector('input[placeholder^="https://github.com"]').value;
 
-        const riceData = {
+        /* const riceData = {
         author,
         title,
         distro,
         dotfiles,
         images,
+        reddit_post,
         environment: {
             type: type,
             name: wmName
         }
-        };
+        }; */
 
-        try {
-        const res = await fetch('/api/submitRice', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(riceData)
+        const formData = new FormData();
+        formData.append('author', author);
+        formData.append('title', title);
+        formData.append('distro', distro);
+        formData.append('dotfiles', dotfiles);
+        formData.append('reddit_post', reddit_post);
+        formData.append('type', type);
+        formData.append('wmName', wmName);
+
+        images.forEach((file, i) => {
+        formData.append('screenshots', file); // key should match your backend parser
         });
 
-        const result = await res.json();
+        try {
+            /* const res = await fetch('/api/submitRice', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(riceData)
+            }); */
 
-        if (res.ok) {
-            alert('🚀 Rice submitted successfully! Awaiting approval.');
-            form.reset();
-            updateLabelAndPlaceholder(); // Reset label after form clears
-        } else {
-            throw new Error(result.error || 'Failed to submit');
-        }
+            /* console.log(formData) */
+
+            const res = await fetch('/api/submitRice', {
+                method: 'POST',
+                body: formData
+            });
+
+            let result;
+            const contentType = res.headers.get('content-type') || '';
+
+            if (contentType.includes('application/json')) {
+                result = await res.json();
+            } else {
+                const text = await res.text();
+                throw new Error('Non-JSON response: ' + text);
+            }
+
+            if (res.ok) {
+                /* alert('🚀 Rice submitted successfully! Awaiting approval.'); */
+                form.reset();
+                updateLabelAndPlaceholder(); // Reset label after form clears
+                window.selectedFiles = [];
+                document.getElementById('screenshot-preview').innerHTML = '';
+            } else {
+                throw new Error(result.error || 'Failed to submit');
+            }
         } catch (err) {
         console.error('❌ Submission error:', err);
         alert('❌ Submission failed. Check console for details.');

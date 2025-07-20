@@ -27,7 +27,7 @@ distros = [
     "slax", "zenwalk", "porteus", "solus", "clear linux", "bodhi linux", "qubes os", "guix system",
     "bedrock linux", "reactos", "raspberry pi os", "steamos", "openwrt", "libreelec", "osmc", "ipfire", "garuda",
     "pfsense", "rescatux", "systemrescue", "linux from scratch", "tiny core linux", "puppy linux",
-    "damn small linux", "kolibrios", "popos", "kali", "tails"
+    "damn small linux", "kolibrios", "popos", "kali", "tails", "cinnamon ubuntu"
 ]
 themes = [
     "gruvbox", "nord", "dracula", "solarized dark", "solarized light", "monokai", "tokyo night",

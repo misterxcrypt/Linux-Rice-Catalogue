@@ -203,9 +203,17 @@
         <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
             <form id="submission-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
                 <h2 class="text-2xl font-bold text-white">Submit Your Rice</h2>
-                <div><label class="font-mono text-sm">Reddit Post</label><input type="text" placeholder="e.g., https://reddit.com" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div>
+                <label class="font-mono text-sm">Reddit Post</label>
+                <div class="flex items-center gap-2 mt-1">
+                    <input id="reddit-post-input" type="text" placeholder="e.g., https://reddit.com" class="flex-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
+                    <button id="scrape-reddit-btn" type="button" class="px-3 py-2 rounded-md text-sm font-mono bg-[var(--accent-color)] hover:opacity-90 transition">
+                    Populate
+                    </button>
+                </div>
+                </div>
                 <div><label class="font-mono text-sm">Author*</label><input required type="text" placeholder="e.g., crunchghost" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
-                <div><label class="font-mono text-sm">Title</label><input type="text" placeholder="e.g., Catppuccin Dreams" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Theme</label><input type="text" placeholder="e.g., Catppuccin (Leave it if no specific theme was used)" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
                 <!-- Dropdown to choose WM or DE -->
                 <div>
                 <label class="font-mono text-sm">Type*</label>
@@ -280,6 +288,66 @@
     </div>
 
     <script>
+    document.getElementById('scrape-reddit-btn').addEventListener('click', async () => {
+        const redditInput = document.getElementById('reddit-post-input');
+        const redditUrl = redditInput.value.trim();
+
+        if (!redditUrl || !redditUrl.includes('reddit.com')) {
+            alert('❌ Please enter a valid Reddit post URL');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/scrapeReddit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url: redditUrl })
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Failed to scrape');
+
+            // 🧠 Populate relevant fields
+            redditInput.value = data.reddit_post || redditUrl;
+
+            document.querySelector('input[placeholder*="crunchghost"]').value = data.author || '';
+            document.querySelector('input[placeholder*="Catppuccin"]').value = data.title || '';
+            document.getElementById('wmde-type').value = data.environment?.type || '';
+            document.getElementById('wmde-name').value = data.environment?.name || '';
+            document.querySelector('input[placeholder="Arch Linux"]').value = data.distro || '';
+            document.querySelector('input[placeholder^="https://github.com"]').value = data.dotfiles || '';
+
+            // Optional: set theme if your input handles it
+            if (data.theme) {
+                // Insert your own input logic if you have a theme field
+                const themeInput = document.querySelector('input[name="theme"]');
+                if (themeInput) themeInput.value = data.theme;
+            }
+
+            // 🖼️ Screenshot preview
+            /* if (Array.isArray(data.screenshots) && data.screenshots.length > 0) {
+                const previewContainer = document.getElementById('screenshot-preview');
+                previewContainer.innerHTML = data.screenshots
+                    .map(url => `<img src="${url}" class="w-24 h-16 object-cover rounded-md" />`)
+                    .join('');
+                
+                // 👇 Optional: if you don't want to use file upload in this case
+                window.selectedFiles = []; // Reset previous file state if needed
+            } */
+            if (Array.isArray(data.screenshots) && data.screenshots.length > 0) {
+                // Reset and store each as { url: ... }
+                window.selectedFiles = data.screenshots.map(url => ({ url }));
+                refreshPreview();
+            }
+            /* alert('✅ Populated data from Reddit!'); */
+        } catch (err) {
+            console.error('❌ Scrape failed:', err);
+            alert('❌ Failed to fetch data from Reddit. Check the URL or try again.');
+        }
+    });
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
         const lightbox = document.getElementById('lightbox');
         const lightboxContent = document.querySelector('.lightbox-content');
@@ -317,6 +385,11 @@
                 document.getElementById('lightbox-next-rice')?.click();
                 }
             }
+
+            if (e.key === 'Escape') {
+                document.getElementById('lightbox-close')?.click();
+            }
+
             }
         });
         });
@@ -324,48 +397,98 @@
 
     <script>
 
-        window.selectedFiles = [];
-        const screenshotInput = document.getElementById('screenshot-input');
-        const uploadBtn = document.getElementById('upload-btn');
-        const previewContainer = document.getElementById('screenshot-preview');
+    /* window.selectedFiles = [];
+    const screenshotInput = document.getElementById('screenshot-input');
+    const uploadBtn = document.getElementById('upload-btn');
+    const previewContainer = document.getElementById('screenshot-preview');
 
-        uploadBtn.addEventListener('click', () => {
-        screenshotInput.click();
+    uploadBtn.addEventListener('click', () => {
+    screenshotInput.click();
+    });
+
+    screenshotInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+
+    files.forEach(file => {
+        if (!file.type.startsWith('image/')) return;
+
+        window.selectedFiles.push(file);
+
+        const reader = new FileReader();
+        reader.onload = () => {
+        const imgBox = document.createElement('div');
+        imgBox.className = "relative";
+
+        imgBox.innerHTML = `
+            <img src="${reader.result}" class="w-24 h-24 object-cover rounded" />
+            <button type="button" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs remove-btn">&times;</button>
+        `;
+
+        imgBox.querySelector('.remove-btn').addEventListener('click', () => {
+            const index = [...previewContainer.children].indexOf(imgBox);
+            window.selectedFiles.splice(index, 1);
+            imgBox.remove();
         });
 
-        screenshotInput.addEventListener('change', (e) => {
-        const files = Array.from(e.target.files);
+        previewContainer.appendChild(imgBox);
+        };
 
+        reader.readAsDataURL(file);
+    });
+
+    screenshotInput.value = '';
+    }); */
+
+    window.selectedFiles = [];
+    const screenshotInput = document.getElementById('screenshot-input');
+    const uploadBtn = document.getElementById('upload-btn');
+    const previewContainer = document.getElementById('screenshot-preview');
+
+    uploadBtn.addEventListener('click', () => {
+        screenshotInput.click();
+    });
+
+    screenshotInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
         files.forEach(file => {
             if (!file.type.startsWith('image/')) return;
 
-            window.selectedFiles.push(file);
+            window.selectedFiles.push({ file });
 
             const reader = new FileReader();
             reader.onload = () => {
-            const imgBox = document.createElement('div');
-            imgBox.className = "relative";
-
-            imgBox.innerHTML = `
-                <img src="${reader.result}" class="w-24 h-24 object-cover rounded" />
-                <button type="button" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs remove-btn">&times;</button>
-            `;
-
-            imgBox.querySelector('.remove-btn').addEventListener('click', () => {
-                const index = [...previewContainer.children].indexOf(imgBox);
-                window.selectedFiles.splice(index, 1);
-                imgBox.remove();
-            });
-
-            previewContainer.appendChild(imgBox);
+                addPreviewImage(reader.result, window.selectedFiles.length - 1);
             };
-
             reader.readAsDataURL(file);
         });
 
         screenshotInput.value = '';
+    });
+
+    function addPreviewImage(src, index) {
+        const imgBox = document.createElement('div');
+        imgBox.className = "relative";
+
+        imgBox.innerHTML = `
+            <img src="${src}" class="w-24 h-24 object-cover rounded" />
+            <button type="button" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs remove-btn">&times;</button>
+        `;
+
+        imgBox.querySelector('.remove-btn').addEventListener('click', () => {
+            window.selectedFiles.splice(index, 1);
+            refreshPreview();
         });
 
+        previewContainer.appendChild(imgBox);
+    }
+
+    function refreshPreview() {
+        previewContainer.innerHTML = '';
+        window.selectedFiles.forEach((entry, i) => {
+            const src = entry.url || (entry.file ? URL.createObjectURL(entry.file) : '');
+            addPreviewImage(src, i);
+        });
+    }
 
     function updateLabelAndPlaceholder() {
         const type = document.getElementById('wmde-type').value;
@@ -379,6 +502,11 @@
         label.textContent = 'Name of DE*';
         input.placeholder = 'e.g., GNOME, KDE, XFCE';
         }
+    }
+
+    function getContrastTextColor([r, g, b]) {
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+        return luminance > 140 ? '#000' : '#fff';  // You can adjust the threshold
     }
 
     // Initialize once on page load
@@ -587,6 +715,9 @@
                 try {
                     if (imgEl.complete && imgEl.naturalHeight !== 0) {
                         const dominantColor = el.colorThief.getColor(imgEl);
+                        const textColor = getContrastTextColor(dominantColor);
+                        card.querySelector('h3').style.color = textColor;
+                        card.querySelector('p').style.color = textColor;
                         const rgb = `rgb(${dominantColor.join(',')})`;
                         const isDark = (dominantColor[0] * 0.299 + dominantColor[1] * 0.587 + dominantColor[2] * 0.114) < 128;
                         el.lightboxContent.style.setProperty('--modal-accent', rgb);
@@ -841,7 +972,7 @@
         const form = e.target;
         const reddit_post = form.querySelector('input[placeholder*="https://reddit.com"]').value;
         const author = form.querySelector('input[placeholder*="crunchghost"]').value;
-        const title = form.querySelector('input[placeholder*="Catppuccin"]').value;
+        const theme = form.querySelector('input[placeholder*="Catppuccin"]').value;
         const type = document.getElementById('wmde-type').value;
         const wmName = document.getElementById('wmde-name').value;
         const distro = form.querySelector('input[placeholder="Arch Linux"]').value;
@@ -866,16 +997,29 @@
 
         const formData = new FormData();
         formData.append('author', author);
-        formData.append('title', title);
+        formData.append('theme', theme);
         formData.append('distro', distro);
         formData.append('dotfiles', dotfiles);
         formData.append('reddit_post', reddit_post);
         formData.append('type', type);
         formData.append('wmName', wmName);
 
-        images.forEach((file, i) => {
-        formData.append('screenshots', file); // key should match your backend parser
+        /* if (images.every(img => img.file)) {
+        // All are File uploads */
+        images.forEach(img => {
+            if (img.file) {
+                formData.append('screenshots', img.file);  // key for files
+            } else if (img.url) {
+                formData.append('urls', img.url);  // key for URLs (repeating)
+            }
         });
+        /* } else if (images.every(img => img.url)) {
+        // All are image URLs (e.g. Reddit scrape)
+        formData.append('images', JSON.stringify(images.map(img => img.url)));
+        } else { */
+        /* alert('❌ Mixed file and URL uploads are not supported together. Please choose one method.'); */
+        /* return;
+        } */
 
         try {
             /* const res = await fetch('/api/submitRice', {

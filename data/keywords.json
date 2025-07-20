@@ -1,0 +1,31 @@
+{
+    "DISTRO": [
+        "debian", "arch", "arch linux", "rhel", "red hat enterprise linux", "slackware", "gentoo", "void linux",
+        "alpine linux", "nixos", "ubuntu", "kubuntu", "xubuntu", "lubuntu", "ubuntu mate", "ubuntu studio",
+        "ubuntu budgie", "linux mint", "pop!_os", "zorin os", "elementary os", "deepin", "kali linux", "tails",
+        "mx linux", "antix", "pureos", "parrot os", "manjaro", "endeavouros", "garuda linux", "arcolinux",
+        "artix linux", "rebornos", "cachyos", "archcraft", "blackarch", "archbang", "hyperbola", "fedora",
+        "centos stream", "rocky linux", "almalinux", "clearos", "calculate linux", "sabayon", "redcore linux", "centos",
+        "slax", "zenwalk", "porteus", "solus", "clear linux", "bodhi linux", "qubes os", "guix system",
+        "bedrock linux", "reactos", "raspberry pi os", "steamos", "openwrt", "libreelec", "osmc", "ipfire", "garuda",
+        "pfsense", "rescatux", "systemrescue", "linux from scratch", "tiny core linux", "puppy linux",
+        "damn small linux", "kolibrios", "popos", "kali", "tails", "cinnamon ubuntu", "nix"
+    ],
+    "THEME": [
+        "gruvbox", "nord", "dracula", "solarized dark", "solarized light", "monokai", "tokyo night",
+        "catppuccin", "one dark", "everforest", "material theme", "material dark", "adwaita",
+        "adwaita dark", "arc dark", "arc-darker", "layan", "sweet", "sweet dark", "colloid",
+        "flat remix", "flatery", "numix", "numix dark", "pop", "whitesur", "orchis", "mojave",
+        "matcha", "qogir", "canta", "yaru", "mcmojave", "zuki", "materia", "ant", "aritim dark",
+        "darkman", "cyberpunk", "dark forest", "ayu dark", "ayu light", "tokyonight night",
+        "tokyonight storm", "tokyonight moon", "tokyonight day", "base16", "palenight",
+        "oxocarbon", "zenburn", "paper", "vimix", "blue sky", "highcontrast", "hooli", "nightfox",
+        "doom one", "rose pine", "rose-pine", "rose pine moon", "rose pine dawn", "skeuomorph", "pastel dark",
+        "juno", "hacktober", "frost", "azenis", "obsidian", "carbonfox", "gruvbox material",
+        "neo-gruvbox", "spacegray", "iceberg", "aether", "tango", "darkside", "breeze", "breeze dark",
+        "menta", "mint-y", "mint-x", "kali-dark", "gogh themes"
+    ],
+    "WM": ["i3", "bspwm", "sway", "hyprland", "dwm", "openbox", "qtile", "awesome", "xmonad", "yabai", "herbstluftwm", "dkwm", "leftwm", "riverwm"],
+    "DE": ["gnome", "kde", "xfce", "lxde", "lxqt", "cinnamon", "mate", "budgie"]
+  }
+  

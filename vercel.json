@@ -1,7 +1,14 @@
 {
   "functions": {
     "api/**/*.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "excludeFiles": "public/img/**"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/img/:path*",
+      "destination": "/public/img/:path*"
+    }
+  ]
 }

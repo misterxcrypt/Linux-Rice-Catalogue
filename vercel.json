@@ -1,9 +1,7 @@
 {
   "functions": {
     "api/**/*.js": {
-      "excludeFiles": [
-        "data/img/**"
-      ]
+      "excludeFiles": "data/img/**"
     }
   }
 }

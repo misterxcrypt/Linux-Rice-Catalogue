@@ -1,13 +1,5 @@
 {
   "functions": {
-    "api/**/*.js": {
-      "excludeFiles": "public/img/**"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/img/:path*",
-      "destination": "/public/img/:path*"
-    }
-  ]
+    "api/**/*.js": {}
+  }
 }

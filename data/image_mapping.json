@@ -1,0 +1,842 @@
+{
+    "e42ac8cbe2104456a928e1a4d42d0f51.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://raw.githubusercontent.com/tuxdotrs/nix-config/refs/heads/main/assets/hyprland/desktop.png"
+    },
+    "d42659fafd964e15be24f82cb539f770.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://raw.githubusercontent.com/tuxdotrs/nix-config/refs/heads/main/assets/hyprland/tPanel.png"
+    },
+    "166ea2ec95e94f638b69626f3a3ba217.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://raw.githubusercontent.com/tuxdotrs/nix-config/refs/heads/main/assets/hyprland/workflow.png"
+    },
+    "ed455e721e4040d79d2f66871e8b7cae.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/1cdcc387-0f68-486c-a76c-a36ad2acb78d"
+    },
+    "63d450caf94544a0be075c6665cf6784.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/f3fc4da5-6c0d-4cda-934d-b68ca6494e02"
+    },
+    "c3a86e27133a45fa9778abba603ee9fb.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/f881c672-8d77-43ec-b637-df5004c7d11f"
+    },
+    "f017a3d9331c4625a60391380a7d3c3e.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/3339ecf8-3264-4179-a093-337c844592a6"
+    },
+    "04f50f6f0e68424391f4c0361db13ccb.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/6df15881-fc2b-41b1-af3b-124fe0599b94"
+    },
+    "171c5cbab07c4c9781011d2c31525a91.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/03be05bc-8ede-4d6e-a341-2761d89b7288"
+    },
+    "6e06e991084446f685dc9c3633320522.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/6f12173b-2480-404e-b01a-599115a886c0"
+    },
+    "e622da81e88a44ae86d5a830028d9cbe.svg": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://wakatime.com/badge/user/012e8da9-99fe-4600-891b-bd9d8dce73d9/project/312e6509-0e4f-47b7-b5de-54985b546702.svg"
+    },
+    "28268047c1c645a8a6bd64db8578f5ef.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a"
+    },
+    "deab315345c344bb959cbbc172ac2702.svg": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/awesome-rice-badge.svg"
+    },
+    "8f7589ea19b14c46897020393fb0d4e8.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://img.shields.io/github/repo-size/tuxdotrs/nix-config"
+    },
+    "3fc7a3ec39ee4f12926abbd95477272a.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://img.shields.io/github/commit-activity/m/tuxdotrs/nix-config"
+    },
+    "c1e73511ffd745d9b945499a904bf7fb.png": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://github.com/user-attachments/assets/fc28c35f-b87a-4931-ae7f-c231a11fd1a3"
+    },
+    "d408524ec4d94592805299f57485b228.jpeg": {
+        "repo": "https://github.com/0xTux/nixos-config",
+        "original_url": "https://user-images.githubusercontent.com/97862450/265550523-2f66a8b6-4347-40af-89c6-12db3a61cc7c.jpeg"
+    },
+    "23639be5bf534a2cae16763a3ec07d38.png": {
+        "repo": "https://github.com/rifsxd/oh-my-awesomewm-dots",
+        "original_url": "https://raw.githubusercontent.com/rifsxd/oh-my-awesomewm-dots/main/assets/default-preview.png"
+    },
+    "cdcfbd543a72474486e664f08f9ff734.png": {
+        "repo": "https://github.com/rifsxd/oh-my-awesomewm-dots",
+        "original_url": "https://raw.githubusercontent.com/rifsxd/oh-my-awesomewm-dots/main/assets/gtk3.png"
+    },
+    "25a07259af454a9ea8a6dde7b3e3fb7f.png": {
+        "repo": "https://github.com/rifsxd/oh-my-awesomewm-dots",
+        "original_url": "https://raw.githubusercontent.com/rifsxd/oh-my-awesomewm-dots/main/assets/mira.png"
+    },
+    "92ed3c92f01e4748944b66e08b67c2ef.png": {
+        "repo": "https://github.com/rifsxd/oh-my-awesomewm-dots",
+        "original_url": "https://raw.githubusercontent.com/rifsxd/oh-my-awesomewm-dots/main/assets/steamburn2.png"
+    },
+    "756e57aff647413e97c0e8fc111fa8ce.png": {
+        "repo": "https://github.com/Savecoders/dotfiles",
+        "original_url": "https://img.shields.io/github/stars/Savecoders/dotfiles?color=1D1F22&labelColor=FF9CAC&style=for-the-badge"
+    },
+    "39d9ad0382b44efeb0876657eb53742f.png?raw=true": {
+        "repo": "https://github.com/Spaxly/espresso",
+        "original_url": "https://github.com/ohxxm/espresso/blob/main/assets/desktop.png?raw=true"
+    },
+    "74eefeeb0fbf4c63bc78fef882fbc2d2.png": {
+        "repo": "https://github.com/Stardust-kyun/dotfiles",
+        "original_url": "https://api.star-history.com/svg?repos=Stardust-kyun/calla&type=Date"
+    },
+    "7c0e600bf4784004817476aee6e3ad4a.png": {
+        "repo": "https://github.com/adilhyz/dotfiles-v1",
+        "original_url": "https://raw.githubusercontent.com/adilhyz/dotfiles-v1/master/preview/bspwm.png"
+    },
+    "a34d368e0fab4231a418a7201f377722.gif": {
+        "repo": "https://github.com/adilhyz/dotfiles-v1",
+        "original_url": "https://raw.githubusercontent.com/adilhyz/dotfiles-v1/master/preview/z.gif"
+    },
+    "f31d424cbca34510af481bdc1f492d5c.png": {
+        "repo": "https://github.com/Erennedirlo/gruvbox-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Erennedirlo/gruvbox-dotfiles/main/screenshot/unixporn.png"
+    },
+    "4f025ebe63ba4f69aecf94d4080fcda8.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/0340846a-74d4-4a43-9430-142b0832738d"
+    },
+    "3477743f9ad743bc9beb65e83d84423e.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/b11b5c58-b9ec-446b-8980-4f77bebb3432"
+    },
+    "c51467dd05e842318fae4e4a6980f8a4.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/dbac8c47-f12c-4242-97d6-38ad1193f76b"
+    },
+    "3c0d43e609a6470491247b9626d20007.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/05107f74-e137-41c0-9132-31d9c4fa0bb4"
+    },
+    "7fc9f1d59d354be198e9eef3f8355f5d.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/c5680b39-9aba-41e5-a781-7f23f7f8e336"
+    },
+    "ab869421c18f49139df6b3a43d177df3.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/0893b0b6-1211-43cb-9923-f4e42af70f4b"
+    },
+    "3563b24d8817457da7ba6626f8f67c67.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/03546cb9-cf0d-42a2-b424-458c887e67c2"
+    },
+    "0cc30860777b44e4a954429ba79ed5e5.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/f7d1c404-c2e8-43c0-ad5e-6b052e3918c3"
+    },
+    "dc1aca8180284b539f27758df1044a32.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/889d2ccf-beff-402d-8804-6d82c5638860"
+    },
+    "b6f46666ff9e47199d7ef262ca4afef0.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/4af56dfa-f61f-4b45-8350-d064fe67663a"
+    },
+    "b9b826a66cfa4e9598343bee62ef9272.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/9a5d86e3-d58c-4b26-bb3e-86ec4974261a"
+    },
+    "c483af2ad2e04e59b69f3aeb01f7b4ec.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/835366c8-88c5-4daf-8260-5c822e27abc8"
+    },
+    "e1cd4b4ddc4f4ea880d74a216210ad32.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/c32f3cdb-7a5a-4372-b6f2-3f4a09f50868"
+    },
+    "12290bc995d141f1803c70d164f150a7.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/57ebcc98-73ea-4f76-bb2b-fe3f187be5e7"
+    },
+    "837b16c845174f499b2fcfd83ced1161.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/26361cd3-c3b4-48a2-a550-8df5cff120f5"
+    },
+    "d090c537b9b54184bdc8419f5c794768.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/16da6b0f-5a9e-4410-bb95-cb9fe696ce55"
+    },
+    "25b6b1a321a14b2f8a50db7b2a52c31e.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/2771e549-f7cc-44da-baf2-6c9fa299f0fb"
+    },
+    "5e34471e19ed42b89eb8791833070a83.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/07827cff-63b9-40db-b0ef-8c214a5d8ec3"
+    },
+    "9dc2ac1f434f4c70a920dd2ed2325333.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/5ffcff9e-0852-4d9f-83b5-4bce71e69f7c"
+    },
+    "2700055cfa36421d98bb077970192fcc.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/b96c49a1-57d1-43e5-bff0-cab2e6b4d101"
+    },
+    "7e7202a3ae444feaa98833d819343a15.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/a0871d4e-5b2b-4e64-ae79-617feec71cf1"
+    },
+    "64cf68c7ed054aa0a9002656423a88c8.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/2ac910c8-171f-47eb-8210-1469b6f75cc2"
+    },
+    "77edbbda384d4f0ba901568a3bd00665.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/2f09b915-f426-49c3-b9b6-07be4e781f5a"
+    },
+    "38d7ea9af8974873a77cc20e524d543c.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/82daebec-66a6-4716-8e78-b02fcec7e77c"
+    },
+    "e1014761e72a48a1922a82e3e0ddd6bc.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/dd5f7261-0631-4a91-b584-51ca8859c197"
+    },
+    "189187f1dc86452e810b204fde860bc1.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/a7f7c082-5ffd-4a6c-babf-7361764cec80"
+    },
+    "9ed9e34155f943d4b27926376eea1c7a.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/user-attachments/assets/a70a0ebb-9921-4d2d-88f3-5eabdc5d10f9"
+    },
+    "7513eb0638f648d691141929f8cf67ff.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://user-images.githubusercontent.com/67278339/221605474-21d65156-0cf7-485c-bd1a-40792c37817e.png"
+    },
+    "c16592310458497a8152492ea8ae1e65.gif": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://user-images.githubusercontent.com/67278339/280174054-8f56d12d-4efa-4024-99e1-4679591b45ca.gif"
+    },
+    "f67a8d58bdf24c158aa670a7c29b1586.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/6e4959b7-6d07-42c6-8ede-2f3c16094ad2"
+    },
+    "9e8bc6ea625f420d8c8b4c1b9c02f42f.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/5ae48d8d-ebcb-4fd5-9c80-78fc325a7a38"
+    },
+    "156fc60fbab448f2b16207dfb268c8f2.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/1bfd302f-0e3f-4973-975b-56c78d6140ee"
+    },
+    "39382e442bca46e09d382057953f73ab.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/5df45139-1d73-4f5f-8e8d-a417c86bfb96"
+    },
+    "d0d5f65547534987a0f342075a0624bc.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/f2a0002f-3370-4361-9301-08abadcad600"
+    },
+    "ff48ecb93dee4430ae91f6afcaf02d6d.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/616c2d93-fabf-41c2-9ab8-9c7b4d6a2e35"
+    },
+    "d1be9bc97119470e85af54d769e93ec7.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/a63e250d-c5d1-4360-afd7-cf64bf55a0fc"
+    },
+    "39154bf60ccf46fdb9349edeed268095.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/f9e85839-53c9-4e15-a800-8a2f7ca40691"
+    },
+    "f95f41ced79a4a3cb445db9e0967cef4.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/e14c6777-25f6-4621-a88b-4fda71dbcc7f"
+    },
+    "77f300dc291c47bd941ceadfc0f9299e.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/5455afdf-cc2f-4a8c-8fcd-526c59066d50"
+    },
+    "83766a28d71d4f84a64a82d620cf3cec.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/ff65caa8-6a15-4873-bf05-edf89ac0985d"
+    },
+    "29807052b6284a7c8792e0cff5c8ddac.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/22e37944-5aad-46bf-8934-3a57d1718ed2"
+    },
+    "ed55669d43bd4c47a78f5bfe3a0a5142.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/f296d6b4-9c8a-49ae-bf63-d82e5105f122"
+    },
+    "96302db32bab45c590b87e84e0d3af4f.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/d11d20c5-1edc-44c8-901b-a4103a139617"
+    },
+    "5963eb0115b548efaef765062563c7d5.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/2d55fcc6-1ea4-4d56-8c46-3a3fe10566fe"
+    },
+    "2101e4cf442c4b08bc1cc45bd03f5603.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/454d82b4-8f09-4768-bf51-6ce7818ad226"
+    },
+    "09addb9afab6481691e06c64fa9243ad.png": {
+        "repo": "https://github.com/gh0stzk/dotfiles",
+        "original_url": "https://github.com/gh0stzk/dotfiles/assets/67278339/cbb0a1cc-4e2d-46a2-a4f2-ee0be3d08b50"
+    },
+    "35a8ce1bfe764e9292b432dc23cc5cc5.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white": {
+        "repo": "https://github.com/hlissner/dotfiles",
+        "original_url": "https://img.shields.io/badge/Made_with-Doom_Emacs-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white"
+    },
+    "f3462e70b7c0478baf1042c60b4b870f.svg?style=flat-square&logo=NixOS&logoColor=white": {
+        "repo": "https://github.com/hlissner/dotfiles",
+        "original_url": "https://img.shields.io/badge/NixOS-24.05-blue.svg?style=flat-square&logo=NixOS&logoColor=white"
+    },
+    "0a5b87af26b54fd99113af90091f6fd3.png": {
+        "repo": "https://github.com/kabinspace/dotfiles",
+        "original_url": "https://img.shields.io/github/last-commit/kabinspace/dotfiles?style=for-the-badge&logo=github&color=a6da95&logoColor=D9E0EE&labelColor=302D41"
+    },
+    "0c436f7d93784b3a87a7d1ef83142c57.png": {
+        "repo": "https://github.com/kabinspace/dotfiles",
+        "original_url": "https://img.shields.io/github/repo-size/kabinspace/dotfiles?style=for-the-badge&logo=dropbox&color=7dc4e4&logoColor=D9E0EE&labelColor=302D41"
+    },
+    "4042fd27242f4ca59946ff348dd70380.png": {
+        "repo": "https://github.com/kabinspace/dotfiles",
+        "original_url": "https://img.shields.io/github/license/kabinspace/dotfiles?style=for-the-badge&logo=powerpages&color=cba6f7&logoColor=D9E0EE&labelColor=302D41"
+    },
+    "647bbba284ef414b872cfd6e956361d0.svg": {
+        "repo": "https://github.com/Narmis-E/bspwm-catppuccin",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/awesome-rice-badge.svg"
+    },
+    "d5d052b5da5c43a8a304e2a964599f5e.png": {
+        "repo": "https://github.com/Narmis-E/bspwm-catppuccin",
+        "original_url": "https://raw.githubusercontent.com/Narmis-E/bspwm-catppuccin/main/images/rice-complete.png"
+    },
+    "03560ba663e745acb37747b913bbc302.png": {
+        "repo": "https://github.com/probe2k/bspwm_rice",
+        "original_url": "https://i.redd.it/537zsfxm47h71.png"
+    },
+    "249f3980f0f948aa84a50760a9ef2db9.png": {
+        "repo": "https://github.com/Sophed/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Sophed/dotfiles/main/assets/float.png"
+    },
+    "70b238f927534f9c9e9773d038fa97fd.png": {
+        "repo": "https://github.com/Sophed/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Sophed/dotfiles/main/assets/tile.png"
+    },
+    "46b46e58bf164fc58c4a6ece0b1d99e0.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zoddDev/dotfiles/master/readme-resources/dotfiles_.png"
+    },
+    "069c16ffa098435a9b3b5da74de66c59.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zoddDev/dotfiles/master/readme-resources/themes_.png"
+    },
+    "ee6009b98377496ca24c94ad3eb79ab3.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/Horizon/blob/master/screenshot.png"
+    },
+    "06c91dd248f24a0e9e314df1e56d5bf4.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://www.reddit.com/r/unixporn/comments/kzd6zt/qtile_genome/"
+    },
+    "e61a1c087f414b4085c8cef9ecf1830f.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zoddDev/Nord/blob/master/screenshot.png"
+    },
+    "72c0d29877694fd798a7c427066b487e.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/Forest/blob/master/screenshot.png"
+    },
+    "673576a514f0480180d5e8677fa8d6a8.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/Doombox/blob/master/screenshot.png"
+    },
+    "c575e3d77e62479cb63a5b38dcec0858.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zoddDev/GruvboxMaterial/blob/main/screenshot.png"
+    },
+    "e9b8f475fdf148d38d05107f80ac1c23.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/PinkNord/blob/master/screenshot.png"
+    },
+    "d05fca2721074269ad2382733538d519.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/SolarizedDark/blob/master/screenshot.png"
+    },
+    "d0d4df36a5c14486b2f3935f2d38b0a0.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/PinkNordAlternative/blob/master/screenshot.png"
+    },
+    "669271df980b4122b9a9825c0f6523d6.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zodd18/Gruvbox/blob/master/screenshot.png"
+    },
+    "a287ea3970864062b5d3c58894d32a68.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zoddDev/Dracula/blob/main/screenshot_.png"
+    },
+    "82fa9367197642809589e0cfd903490a.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://github.com/zoddDev/Ayu/blob/master/screenshot.png"
+    },
+    "3592aa59d6b94ea695041964f0523fc6.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zoddDev/dotfiles/master/screenshots/theme-swap-showcase.png"
+    },
+    "054e742115014c9ea3d2c6223c9ecf92.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zoddDev/dotfiles/master/screenshots/theme-swap-showcase-2.png"
+    },
+    "3811c8f15ce7426ba39a153dc2b02538.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zoddDev/dotfiles/master/readme-resources/scripts_.png"
+    },
+    "34b5c5b7725c4f13873b6926f7fc964b.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://static.vecteezy.com/system/resources/previews/010/948/374/original/cute-food-character-funny-sushi-traditional-japanese-food-in-cartoon-kawaii-illustration-for-emoticon-symbol-icon-etc-png.png"
+    },
+    "d15f8467b1a540a4912191177c8fe131.png": {
+        "repo": "https://github.com/zoddDev/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zoddDev/dotfiles/master/screenshots/brush.png"
+    },
+    "94df1cf909344806ba1d64bf22d92a85.png": {
+        "repo": "https://github.com/NeuronSooup/Gnome-topbar-le-dots",
+        "original_url": "https://github.com/NeuronSooup/Gnome-topbar-le-dots/assets/97825131/bc21f274-34dd-4260-8b03-42f4461da8d1"
+    },
+    "d97e8360701e46e6a823a0954cecb8f2.png": {
+        "repo": "https://github.com/nuxshed/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/nuxshed/dotfiles/main/rice.png"
+    },
+    "709d7fe9dae74396928defb024939f1f.png": {
+        "repo": "https://github.com/AdiKsOnDev/HyprValley",
+        "original_url": "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/93be8d91-9f4b-416f-b622-d4719de4a926"
+    },
+    "7dab70cd571c460bb856b68a7a707f96.png": {
+        "repo": "https://github.com/AdiKsOnDev/HyprValley",
+        "original_url": "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/11d06e28-f7b3-4cf1-98e9-a233a3c2d0f7"
+    },
+    "495cf398c84d4ef89d7e2b1945e4d314.png": {
+        "repo": "https://github.com/AdiKsOnDev/HyprValley",
+        "original_url": "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/6c45a90d-fd4d-419e-98da-52aa73ac4f01"
+    },
+    "dc82af6a22a640bfbd0389672d22cc2d.png": {
+        "repo": "https://github.com/AdiKsOnDev/HyprValley",
+        "original_url": "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/84a2f0b1-a922-413f-b7c8-c03e56d83458"
+    },
+    "fdc3c608c8784d33bcefe4610c2a13db.png": {
+        "repo": "https://github.com/AdiKsOnDev/HyprValley",
+        "original_url": "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/3aedfd9a-dca5-4904-9995-2495103da22f"
+    },
+    "2fdbda296935466fa14684bcc471dac9.svg": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/awesome-rice-badge.svg"
+    },
+    "2835655198b74d638739ff9dbcdc25d3.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot1.png"
+    },
+    "1f0584e5d1554d8f850239329b4cdf57.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot2.png"
+    },
+    "25850c986f2c4ef991c8ccbd1249c2e5.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot3.png"
+    },
+    "740151cb615243399f44ec562e481220.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot4.png"
+    },
+    "c8387d2a91004109adc7eae1ed643b27.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot5.png"
+    },
+    "b2c6ff5e7bfc4a0eab9f7ab52d6938da.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot7.png"
+    },
+    "b96ae471cb024663bd7c2166fcfde484.png": {
+        "repo": "https://github.com/cafreo/hyprland-intergalactic",
+        "original_url": "https://raw.githubusercontent.com/cafreo/hyprland-intergalactic/main/screenshots/screenshot6.png"
+    },
+    "9c88eeaf270c4a98933b35b31bf1fb35.png": {
+        "repo": "https://github.com/command-z-z/Arch-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/command-z-z/Arch-dotfiles/main/asserts/img1.png"
+    },
+    "f39241bcd04848daac72b9052b0c0f4a.png": {
+        "repo": "https://github.com/command-z-z/Arch-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/command-z-z/Arch-dotfiles/main/asserts/img2.png"
+    },
+    "db6f9c8bfe3f418c9765cfa058c2de97.png": {
+        "repo": "https://github.com/command-z-z/Arch-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/command-z-z/Arch-dotfiles/main/asserts/img3.png"
+    },
+    "78f7447c7f364454a55bec3ab64fa23e.png": {
+        "repo": "https://github.com/command-z-z/Arch-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/command-z-z/Arch-dotfiles/main/asserts/Arch-dotfiles.png"
+    },
+    "43a14a6b547f4ef7b9c453f989fc0000.png": {
+        "repo": "https://github.com/MathisP75/summer-day-and-night",
+        "original_url": "https://raw.githubusercontent.com/MathisP75/summer-day-and-night/main/screenshots/day-night.png"
+    },
+    "f67a50aff87a474ba6220d31d1f10013.png": {
+        "repo": "https://github.com/MathisP75/summer-day-and-night",
+        "original_url": "https://raw.githubusercontent.com/MathisP75/summer-day-and-night/main/screenshots/summer-day.png"
+    },
+    "05f2ab790d1c4be5897b891dc1239912.png": {
+        "repo": "https://github.com/MathisP75/summer-day-and-night",
+        "original_url": "https://raw.githubusercontent.com/MathisP75/summer-day-and-night/main/screenshots/summer-night.png"
+    },
+    "ddb59b6acdc94f00978a4b79f404c5a5.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://img.shields.io/github/stars/TheMaxMur/NixOS-Configuration?label=Stars&color=F5A97F&labelColor=303446&style=flat&logo=starship&logoColor=F5A97F"
+    },
+    "4c50693439344f5fb8201571f407a920.svg?style=flat&logo=nixos&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://img.shields.io/badge/NixOS-unstable-blue.svg?style=flat&logo=nixos&logoColor=CAD3F5&colorA=24273A&colorB=8aadf4"
+    },
+    "41afce160b0c484daaff5c6fb2d730d6.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://img.shields.io/static/v1?label=Nix%20Flake&message=Check&style=flat&logo=nixos&colorA=24273A&colorB=9173ff&logoColor=CAD3F5"
+    },
+    "2dd05d137f2d4a5aa81380e7fcff971d.svg?style=flat&label=License&message=Unlicense&colorA=24273A&colorB=91d7e3&logo=unlicense&logoColor=91d7e3&": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://img.shields.io/static/v1.svg?style=flat&label=License&message=Unlicense&colorA=24273A&colorB=91d7e3&logo=unlicense&logoColor=91d7e3&"
+    },
+    "7434619d05734bbd9c1e5d8bc267f9c6.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/desktop0.png"
+    },
+    "053b129cd57d4fa183b61cfc2846d664.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/desktop1.png"
+    },
+    "f4ea2f0b8eaf42629f0411a65d60cf14.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/desktop2.png"
+    },
+    "d083dc1a4e3d4249a3256d4b9f795796.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/desktop3.png"
+    },
+    "aecd9f8c30844dedb487936a8a575b0c.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/sway/image0.png"
+    },
+    "b5af5ab1a30d4d0bba81a48909283818.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/sway/image1.png"
+    },
+    "6999ba7ad70f4693bd5fcb6e62a9e748.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/github/sway/image2.png"
+    },
+    "29e423fd70354dbd94cac99ce5b420e7.svg": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/network/main.svg"
+    },
+    "9cf77929106b4d90b3d742d76352ae1f.svg": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/network/network.svg"
+    },
+    "5ae4a1dcb5014cf9be2d10055a63c612.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-0.png"
+    },
+    "ba5f56a53b5841199a3ec012086889b7.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-1.png"
+    },
+    "24bb872aa59e488f8e4ed6f25fbc3a7a.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-2.png"
+    },
+    "1aaa49e88bdb4d598da8a4a96c2fc90a.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-3.png"
+    },
+    "95476148f957463dbf41dbe25890bee0.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-4.png"
+    },
+    "b87fcd9e0b0b486bbbc95f50167d776c.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-5.png"
+    },
+    "c532a94413764a2e8940d26d53d90cac.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/keyboard/layer-6.png"
+    },
+    "37d458827d324d3da4a4ebd29da45c8d.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://raw.githubusercontent.com/TheMaxMur/NixOS-Configuration/master/assets/nixos-logo.png"
+    },
+    "00ef8e754ae54975939875d4bb4e3f55.png": {
+        "repo": "https://github.com/TheMaxMur/NixOS-Configuration",
+        "original_url": "https://api.star-history.com/svg?repos=TheMaxMur/NixOS-Configuration&type=Date"
+    },
+    "7303b9999a2d4ee9a8681041c49c7f7c.png": {
+        "repo": "https://github.com/maxtaran2010/hyprland-rice",
+        "original_url": "https://raw.githubusercontent.com/maxtaran2010/hyprland-rice/main/2023-07-07-193611_hyprshot.png"
+    },
+    "b6cfebe7e95b45d8a9ef1bcb308d785e.png": {
+        "repo": "https://github.com/maxtaran2010/hyprland-rice",
+        "original_url": "https://raw.githubusercontent.com/maxtaran2010/hyprland-rice/main/2023-07-07-193628_hyprshot.png"
+    },
+    "3d1d0452ef4a496295672096d801602f.png": {
+        "repo": "https://github.com/maxtaran2010/hyprland-rice",
+        "original_url": "https://raw.githubusercontent.com/maxtaran2010/hyprland-rice/main/2023-07-07-193644_hyprshot.png"
+    },
+    "4249f8b9247e490981b5ac27e5124130.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://github.com/Narmis-E/hyprland-dots/assets/109248529/a9f880cf-5088-4a96-ab97-43310bede7ad"
+    },
+    "06cd2ead0d9848788bae58fa57640dd6.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://user-images.githubusercontent.com/109248529/230755089-6eb99aa0-2015-4ba4-b06c-8b60ab06b934.png"
+    },
+    "ea3dac92f605419592f02f2c1d70e46c.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://user-images.githubusercontent.com/109248529/230755110-108990ce-1a78-41e1-8455-370acffabd79.png"
+    },
+    "8748e6f12ff14ca081ee7c65c7e0e401.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://github.com/Narmis-E/hyprland-dots/blob/main/tokyonight/images/rice.png"
+    },
+    "d4c2b6fc2324466da9369555bd59f625.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://github.com/Narmis-E/hyprland-dots/blob/main/tokyonight/images/rice2.png"
+    },
+    "60e7a06200134853aa5ae4ed23465f5a.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://user-images.githubusercontent.com/109248529/221400035-32215c77-6bc4-4779-b318-4b7d46604a7e.png"
+    },
+    "8010e2cde5a844cd8506b8731459c2cb.svg": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/awesome-rice-badge.svg"
+    },
+    "1c32c1ab4fd941cfb10472f1e041143f.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://img.shields.io/github/last-commit/narmis-e/hyprland-dots?style=for-the-badge&color=F7768E&labelColor=201a19"
+    },
+    "aa5f40ac18f44a6f9e488d2c9385d986.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://img.shields.io/github/stars/narmis-e/hyprland-dots?style=for-the-badge&color=E0AF68&labelColor=1d1b16"
+    },
+    "0849ce45a91443c498bc0dae0c15ebec.png": {
+        "repo": "https://github.com/Narmis-E/hyprland-dots",
+        "original_url": "https://img.shields.io/github/repo-size/narmis-e/hyprland-dots?style=for-the-badge&color=6FB6E1&labelColor=1a1b1f"
+    },
+    "893433e6e71040ee8f1ca68d41bcdc2d.png": {
+        "repo": "https://github.com/Yorubae/wayland-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Yorubae/wayland-dotfiles/main/preview/ss4.png"
+    },
+    "b5673598f13342ae9f925d41f2040fe3.png": {
+        "repo": "https://github.com/Yorubae/wayland-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Yorubae/wayland-dotfiles/main/preview/ss3.png"
+    },
+    "8bac4b326d15454ab25eb1e917efb34d.png": {
+        "repo": "https://github.com/Yorubae/wayland-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Yorubae/wayland-dotfiles/main/preview/ss2.png"
+    },
+    "5179a4e47c234d7293f25c5cbfbb5465.png": {
+        "repo": "https://github.com/Yorubae/wayland-dotfiles",
+        "original_url": "https://raw.githubusercontent.com/Yorubae/wayland-dotfiles/main/preview/ss1.png"
+    },
+    "0e8429db90954743aeff7176e8aea1de.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/uiview.png"
+    },
+    "7086b71f06d0477abc1dd5182dd954ca.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/desktop.png"
+    },
+    "3232cc9b04194a96b8d2532a4da58118.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/terminal.png"
+    },
+    "757a66fdc3564152b664080dee2773aa.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/pcman.png"
+    },
+    "7e4ef980cd284f0d8937ab1ada19115a.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/vscode.png"
+    },
+    "0101c974827b4c22a47667078f79bc18.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/rofi.png"
+    },
+    "57cd7997ee2a48bbb57717b7ef6df717.png": {
+        "repo": "https://github.com/BIBJAW/Final_Rice",
+        "original_url": "https://github.com/BIBJAW/i3-gruvbox/blob/main/screenshots/Power.png"
+    },
+    "e2aeb5a51078474d8763848e055c0453.png?raw=true": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://github.com/bibjaw99/workstation-screenshots/blob/main/screenshots/sway.png?raw=true"
+    },
+    "e85ea9bd21fc4c8dacd04324c4b92b69.gif?raw=true": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://github.com/bibjaw99/workstation-screenshots/blob/main/screenshots/waybarSwitching.gif?raw=true"
+    },
+    "1a908f8fe2d84a18ba7649dc8409dfa3.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/rofi_1.png"
+    },
+    "7f52e45776ed41219915e562761ae978.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/neovim/1.png"
+    },
+    "5aa8989081dd4503a654ad4e535e91ef.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/neovim/2.png"
+    },
+    "39b6291f8d514aca850cc2d68636f482.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/neovim/3.png"
+    },
+    "595fbc270a194769b9ed938705e2f4e8.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/neovim/4.png"
+    },
+    "777d4db4305e4763b6b3f7fe68753c66.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/neovim/5.png"
+    },
+    "631cd6cc255f4664840388b8099a9ff2.png": {
+        "repo": "https://github.com/bibjaw99/workstation",
+        "original_url": "https://raw.githubusercontent.com/bibjaw99/workstation-screenshots/refs/heads/main/screenshots/neovim/6.png"
+    },
+    "6b89934d58194a70a253e336b4ab3e17.png": {
+        "repo": "https://github.com/Blxckmage/dotfiles",
+        "original_url": "https://github.com/Blxckmage/dotfiles/blob/main/.assets/showcase.png"
+    },
+    "38a7ce40662d4bd084626c502ca33bac.svg": {
+        "repo": "https://github.com/Blxckmage/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/awesome-rice-badge.svg"
+    },
+    "ad79c6fdacb54349877df2ab99bfb093.png": {
+        "repo": "https://github.com/TKK13909/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/TKK13909/dotfiles/main/screens/screen1.png"
+    },
+    "dfaa4b9a5d3145b4b81bf330350369ed.png": {
+        "repo": "https://github.com/TKK13909/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/TKK13909/dotfiles/main/screens/screen2.png"
+    },
+    "c01ff130c9c143efbd2c5ddfd4e7f65c.png": {
+        "repo": "https://github.com/TKK13909/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/TKK13909/dotfiles/main/screens/screen3.png"
+    },
+    "9244cd9d257a41acb445f6cc4e92e8bc.png": {
+        "repo": "https://github.com/TKK13909/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/TKK13909/dotfiles/main/screens/screen4.png"
+    },
+    "66673a2e6db8405d8abb0d97b0e13d7c.png": {
+        "repo": "https://github.com/TKK13909/dotfiles",
+        "original_url": "https://raw.githubusercontent.com/TKK13909/dotfiles/main/screens/screen5.png"
+    },
+    "1a0e8256b2bb45cd8d3921b779b7f55a.png?raw=true": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://github.com/Vallen217/dotfiles/blob/main/screenshots/wallpaper.png?raw=true"
+    },
+    "b1ea79298bf14ed1846f971542b6255c.png?raw=true": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://github.com/Vallen217/dotfiles/blob/main/screenshots/nvim_nvim.png?raw=true"
+    },
+    "94f1b141f538490c9aeeccf899660fa1.png?raw=true": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://github.com/Vallen217/dotfiles/blob/main/screenshots/desktop_spicetify.png?raw=true"
+    },
+    "07ba3174cb514642b193e7db57f029e7.png": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://img.shields.io/github/stars/Vallen217/dotfiles?color=87bff7&style=for-the-badge&logo=starship&labelColor=12121f"
+    },
+    "12b379d8316b4b41a2cf43e41088b968.png": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://img.shields.io/github/issues/Vallen217/dotfiles?color=bd4277&style=for-the-badge&logo=codecov&labelColor=12121f"
+    },
+    "211c3e1ce42e455a8002d0e325d06cf6.png": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://img.shields.io/github/forks/Vallen217/dotfiles?color=74d2b7&style=for-the-badge&logo=jfrog-bintray&labelColor=12121f"
+    },
+    "31a026b67e5548d8ad48b39784b59388.png": {
+        "repo": "https://github.com/Vallen217/dotfiles",
+        "original_url": "https://img.shields.io/github/license/Vallen217/dotfiles?color=aaecf8&style=for-the-badge&logo=jfrog-bintray&labelColor=12121f"
+    },
+    "77ec1ea752d841f786b2f176d77a19da.svg": {
+        "repo": "https://github.com/zemmsoares/.dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/awesome-rice-badge.svg"
+    },
+    "65e219feafde4b8db43306d2b07ea963.svg?logo=archlinux": {
+        "repo": "https://github.com/zemmsoares/.dotfiles",
+        "original_url": "https://custom-icon-badges.demolab.com/badge/Arch--1BADF6.svg?logo=archlinux"
+    },
+    "cea63c4f22384ed2b1fecf6e42d1be33.svg?logo=i3": {
+        "repo": "https://github.com/zemmsoares/.dotfiles",
+        "original_url": "https://custom-icon-badges.demolab.com/badge/i3wm--537A9E.svg?logo=i3"
+    },
+    "cc764fa4cf5c495abd81dec7b97f2513.png": {
+        "repo": "https://github.com/zemmsoares/.dotfiles",
+        "original_url": "https://raw.githubusercontent.com/zemmsoares/.dotfiles/master/screenshot.png"
+    },
+    "a8339d3b28c347e594359f14d341a8ec.png": {
+        "repo": "https://github.com/Barbaross93/Nebula",
+        "original_url": "https://raw.githubusercontent.com/Barbaross93/Nebula/main/Scrots/1650648471.png"
+    },
+    "dcaa390c1c754cd4b8666fb184719d3a.png": {
+        "repo": "https://github.com/Barbaross93/Nebula",
+        "original_url": "https://raw.githubusercontent.com/Barbaross93/Nebula/main/Scrots/1650648454.png"
+    },
+    "db7118e9abc346fcb21ec6cdc0df098c.png": {
+        "repo": "https://github.com/Darkkal44/Cozytile",
+        "original_url": "https://raw.githubusercontent.com/Darkkal44/Cozytile/main/Assets/preview.png"
+    },
+    "8f8f8d6196114530b1011399f4846568.png": {
+        "repo": "https://github.com/shayanaqvi/dotfilets",
+        "original_url": "https://raw.githubusercontent.com/shayanaqvi/dotfilets/main/screenshots/desktop.png"
+    },
+    "a3f17a9c77944a5fa544d023fd012bf2.png": {
+        "repo": "https://github.com/shayanaqvi/dotfilets",
+        "original_url": "https://raw.githubusercontent.com/shayanaqvi/dotfilets/main/screenshots/gtk.png"
+    },
+    "ebaa02c0dd6641d49b7bf51e46a1cc3c.png": {
+        "repo": "https://github.com/shayanaqvi/dotfilets",
+        "original_url": "https://raw.githubusercontent.com/shayanaqvi/dotfilets/main/screenshots/hx.png"
+    },
+    "3129307e2fa444d19d52ac3d75a52dbb.png": {
+        "repo": "https://github.com/shayanaqvi/dotfilets",
+        "original_url": "https://raw.githubusercontent.com/shayanaqvi/dotfilets/main/screenshots/kitty.png"
+    },
+    "68b007051c86480aa30e3f8bcb6160a0.svg?branch=master": {
+        "repo": "https://github.com/eoli3n/dotfiles",
+        "original_url": "https://travis-ci.org/eoli3n/dotfiles.svg?branch=master"
+    },
+    "e706dfcbe0b84c1db46d30f82f8e85f8.png": {
+        "repo": "https://github.com/eoli3n/dotfiles",
+        "original_url": "https://github.com/eoli3n/dotfiles/blob/master/screenshots/sway.png"
+    },
+    "e5e3699ed7714990a5cbb42beedf6643.png": {
+        "repo": "https://github.com/eoli3n/dotfiles",
+        "original_url": "https://github.com/eoli3n/dotfiles/blob/master/screenshots/irc.png"
+    },
+    "04d60281836a495c83fe911c86eb9936.png": {
+        "repo": "https://github.com/eoli3n/dotfiles",
+        "original_url": "https://github.com/eoli3n/dotfiles/blob/master/screenshots/ff.png"
+    },
+    "0ed9713b177f458aa85601c756e44275.png": {
+        "repo": "https://github.com/eoli3n/dotfiles",
+        "original_url": "https://github.com/eoli3n/dotfiles/blob/master/screenshots/gtk.png"
+    },
+    "08aca67a626a4e68a00cae43ba98b23e.png": {
+        "repo": "https://github.com/hifinerd/lugia-sway-dots",
+        "original_url": "https://raw.githubusercontent.com/hifinerd/lugia-sway-dots/main/lugiasway.png"
+    }
+}

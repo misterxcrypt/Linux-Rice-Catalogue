@@ -1,0 +1,3317 @@
+[{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7e6"
+  },
+  "author": "hlissner",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/hlissner/dotfiles",
+  "screenshots": [
+    "https://github.com/hlissner/dotfiles/raw/screenshots/alucard/fakebusy.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:hlissner/dotfiles",
+  "distro": "Nixos",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8a4ee8a6338f4758980652d25f3fa003.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e806"
+  },
+  "author": "command-z-z",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/command-z-z/Arch-dotfiles",
+  "screenshots": [
+    "https://github.com/command-z-z/Arch-dotfiles/raw/main/asserts/img1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:command-z-z/arch-dotfiles",
+  "distro": "Arch",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8e805a2ca67244b78d826f36ce882b2a.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e80d"
+  },
+  "author": "justinlime",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/justinlime/dotfiles",
+  "screenshots": [
+    "https://camo.githubusercontent.com/30ef249716ca269ff730a4f7ef30831805c5e00ba21ecb7353a5f22616b4ccb0/68747470733a2f2f696d6775722e636f6d2f4273576b58437a2e706e67",
+    "https://camo.githubusercontent.com/227dac379323b5047fb0a93063948d4ac0d61050e61291d8f4949bd467a90972/68747470733a2f2f696d6775722e636f6d2f463467475271612e706e67",
+    "https://camo.githubusercontent.com/0f6399845b1fc210a0d4ce6043866b50adb852ff635819cbdf8fc5b0f4d2a678/68747470733a2f2f696d6775722e636f6d2f454673624c7a652e706e67"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:justinlime/dotfiles",
+  "distro": "Nixos",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "ded4a60f942e40b39638fb8767fcc0b6.png",
+    "86ed266fd894420c9a9df68d5ec56e88.png",
+    "93ad3eb12c7342bd98a21211d8b9f5f7.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e826"
+  },
+  "author": "TKK13909",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/TKK13909/dotfiles",
+  "screenshots": [
+    "https://github.com/TKK13909/dotfiles/raw/main/screens/screen4.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:tkk13909/dotfiles",
+  "distro": "Arch",
+  "theme": "Tokyo night",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "f5d8ef7c02784011a393ebea4f7c05e1.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e828"
+  },
+  "author": "zemmsoares",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/zemmsoares/.dotfiles",
+  "screenshots": [
+    "https://github.com/zemmsoares/.dotfiles/raw/master/screenshot.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:zemmsoares/.dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "623c1f604d044f2bb95eca82cc097ac1.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e829"
+  },
+  "author": "ComplexPlatform",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/ComplexPlatform/KDE-dotfiles",
+  "screenshots": [
+    "https://raw.githubusercontent.com/ComplexPlatform/KDE-dotfiles/master/previews/neutral.png",
+    "https://raw.githubusercontent.com/ComplexPlatform/KDE-dotfiles/master/previews/cherryblossom.png",
+    "https://raw.githubusercontent.com/ComplexPlatform/KDE-dotfiles/master/previews/urban.png",
+    "https://raw.githubusercontent.com/ComplexPlatform/KDE-dotfiles/master/previews/flowers.png",
+    "https://raw.githubusercontent.com/ComplexPlatform/KDE-dotfiles/master/previews/coffee.png",
+    "https://raw.githubusercontent.com/ComplexPlatform/KDE-dotfiles/master/previews/foggy-mountain.png"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "KDE"
+  },
+  "source_key": "github:complexplatform/kde-dotfiles",
+  "distro": "Arch",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "33b1bb1561ea472abfd8cc569d4188a9.png",
+    "771ad88ff1bb40cf9dd2a6bfc9afb49f.png",
+    "612152e60c8c4a40bdd6baec002fbfec.png",
+    "90f971ce0f414b19bf35b817516e17d3.png",
+    "a30078bd5dd747b49031176e54626649.png",
+    "22acf745b676468d97cc9724e3b753be.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e838"
+  },
+  "author": "RicArch97",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/RicArch97/nixos-config",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/61013287/220374702-6bce9bd2-05cd-4023-8a66-d1c6beb18cb6.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Sway"
+  },
+  "source_key": "github:ricarch97/nixos-config",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "357330a53d0042e3bec64a26ed0669ee.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18e50c558fb07cf8893"
+  },
+  "author": "owl4ce",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/owl4ce/dotfiles/tree/ng",
+  "screenshots": [
+    "https://camo.githubusercontent.com/6a9038c0444e507eff2215bd91893e5c6dac79db987dd3500732586d42b3de3d/68747470733a2f2f692e696d6775722e636f6d2f377057673476522e6a7067"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Openbox"
+  },
+  "source_key": "github:owl4ce/dotfiles/tree/ng",
+  "distro": "Debian",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "d988d8125e7e4a89993fe94030a4e2c4.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7c9"
+  },
+  "author": "alljavi",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AllJavi/tartarus-dotfiles",
+  "screenshots": [
+    "https://github.com/AllJavi/tartarus-dotfiles/blob/master/Images/Screenshots/global_screenshot1.png?raw=true",
+    "https://github.com/AllJavi/tartarus-dotfiles/blob/master/Images/Screenshots/global_screenshot2.png?raw=true",
+    "https://github.com/AllJavi/tartarus-dotfiles/blob/master/Images/Screenshots/global_screenshot3.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:alljavi/tartarus-dotfiles",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8b452d960c7f4ba793658ea29e82fd6c.png",
+    "6f98445374054283a17118b2b3113b99.png",
+    "71f2409eff59464a9528e0c8b6170d08.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7db"
+  },
+  "author": "saimoomedits",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/saimoomedits/dotfiles",
+  "screenshots": [
+    "https://github.com/saimoomedits/dotfiles/blob/main/.github/assets/preview.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:saimoomedits/dotfiles",
+  "distro": "Arch",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "3116e4cc58094aeb8a9804b67ee5242f.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7e4"
+  },
+  "author": "gh0stzk",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/gh0stzk/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/67278339/221425420-4198afbb-fd7a-41a1-96f2-42c2c715f076.png",
+    "https://user-images.githubusercontent.com/67278339/221425550-05f6362b-0a4a-48c0-a87d-044cc38af8e6.png",
+    "https://user-images.githubusercontent.com/67278339/221425682-e5676155-1bbc-47a5-ba15-307513c44d06.png",
+    "https://user-images.githubusercontent.com/67278339/221425748-4a6ab441-886a-4400-b9df-5fef2a6cfb23.png",
+    "https://user-images.githubusercontent.com/67278339/221425853-ce5af1fe-f03d-48cc-a4d3-445adbe3e566.png",
+    "https://user-images.githubusercontent.com/67278339/221425915-55c6b711-9456-4b60-a1a2-8a986e45e2c4.png",
+    "https://user-images.githubusercontent.com/67278339/221425966-3e5e9db1-4e60-4b21-8c00-8235e7dde733.png",
+    "https://user-images.githubusercontent.com/67278339/221426007-81869495-d20f-4c55-b036-42ced5b4b5a1.png",
+    "https://user-images.githubusercontent.com/67278339/221426076-9aae13b0-0f1e-430a-b53a-80d0d9cfa2a4.png",
+    "https://user-images.githubusercontent.com/67278339/221426116-0c247a00-c870-4120-9b46-fbd4a1913af2.png",
+    "https://camo.githubusercontent.com/4b725b39731e725c5102a9985ffa522613f7fff5560cd8e6c13003abf158f1e5/68747470733a2f2f6769746875622d70726f64756374696f6e2d757365722d61737365742d3632313064662e73332e616d617a6f6e6177732e636f6d2f36373237383333392f3233393432393231332d32643364363261652d336337622d346337612d623530612d3633373531373134356337612e706e67",
+    "https://user-images.githubusercontent.com/67278339/221426218-49131fb7-e750-4bee-94a3-f26397760ec8.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:gh0stzk/dotfiles",
+  "distro": "Arch",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7eb"
+  },
+  "author": "onlyvip",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/onlyvip/dopedots",
+  "screenshots": [
+    "https://github.com/onlyvip/dopedots/raw/master/.screenshot/1.png",
+    "https://github.com/onlyvip/dopedots/raw/master/.screenshot/3.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:onlyvip/dopedots",
+  "distro": "Debian",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "154e88fdb0be49ca8e7dbccdf1e5f288.png",
+    "584c93d5044d48218347756afdf228b0.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7f3"
+  },
+  "author": "zoddDev",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/zoddDev/dotfiles",
+  "screenshots": [
+    "https://github.com/zodd18/Horizon/raw/master/screenshot.png",
+    "https://github.com/zoddDev/Nord/raw/master/screenshot.png",
+    "https://github.com/zodd18/Forest/raw/master/screenshot.png",
+    "https://github.com/zodd18/Doombox/raw/master/screenshot.png",
+    "https://github.com/zoddDev/GruvboxMaterial/raw/main/screenshot.png",
+    "https://github.com/zodd18/PinkNord/raw/master/screenshot.png",
+    "https://github.com/zodd18/SolarizedDark/raw/master/screenshot.png",
+    "https://github.com/zodd18/Gruvbox/raw/master/screenshot.png",
+    "https://github.com/zoddDev/Dracula/raw/main/screenshot_.png",
+    "https://github.com/zoddDev/Ayu/raw/master/screenshot.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:zodddev/dotfiles",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "1e4fc3eaf97e4612bd51cada82d537ae.png",
+    "96f46f1a8fe84b40b1c7d533f6b0e732.png",
+    "0a61d9cc80114f75ae278791e7d778cc.png",
+    "2ed3a1cf90db49e4b3bfbed58c2269f9.png",
+    "f6d19e6e51964d2cac0596c9054143fd.png",
+    "1f3c1b1aa7d24da0a0e7dd15b8d5cc13.png",
+    "f25de82d1b194da08b8840c62e334289.png",
+    "421bc38dc0224e8180d26683ebf4aada.png",
+    "d40a41afd45943d9a4fe3933a4e6234a.png",
+    "7c4562ef9709422ca4faf686f12a339b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7f7"
+  },
+  "author": "juacq97",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/juacq97/dotfiles",
+  "screenshots": [
+    "https://github.com/juacq97/dotfiles/raw/master/screenshot.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "dwm"
+  },
+  "source_key": "github:juacq97/dotfiles",
+  "distro": "Arch",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "e908b44373b44bb1b1653c6e4bff3b65.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7ff"
+  },
+  "author": "NeuronSooup",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/NeuronSooup/Gnome-topbar-le-dots",
+  "screenshots": [
+    "https://private-user-images.githubusercontent.com/97825131/239669533-bc21f274-34dd-4260-8b03-42f4461da8d1.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTE4MzYxOTgsIm5iZiI6MTc1MTgzNTg5OCwicGF0aCI6Ii85NzgyNTEzMS8yMzk2Njk1MzMtYmMyMWYyNzQtMzRkZC00MjYwLThiMDMtNDJmNDQ2MWRhOGQxLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA3MDYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNzA2VDIxMDQ1OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQwMDA1YmVkMjNhM2IxNGYxNjkxMWY1MGE2MzliNDU4MGNhMjc5NmU4NjljMmM4NWI4MmFlOTkxOGY3Y2JkOTkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.FDRh-E7IjnL_upX6kcWDJaKekT0AgsGycvhKuFPq314"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Gnome"
+  },
+  "source_key": "github:neuronsooup/gnome-topbar-le-dots",
+  "theme": "Rose pine",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e804"
+  },
+  "author": "AdiKsOnDev",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AdiKsOnDev/HyprValley",
+  "screenshots": [
+    "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/93be8d91-9f4b-416f-b622-d4719de4a926",
+    "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/11d06e28-f7b3-4cf1-98e9-a233a3c2d0f7",
+    "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/6c45a90d-fd4d-419e-98da-52aa73ac4f01",
+    "https://github.com/AdiKsOnDev/HyprValley/assets/80326762/84a2f0b1-a922-413f-b7c8-c03e56d83458"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:adiksondev/hyprvalley",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "fc408d51de6742e6abc66834d891433b.png",
+    "db798cc987a34355a3bcf36293fcc1b8.png",
+    "00ea2f5b760d484fbe3826493533201f.png",
+    "1092d858a9094bd99720e9f471c22190.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e817"
+  },
+  "author": "Spagett1",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Spagett1/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/77225642/240519760-99e2d1be-cc6d-42e6-a025-e39cbcf4ff3b.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:spagett1/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "85b59197b826426e99dce4d68757751c.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e82a"
+  },
+  "author": "almqv",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/almqv/dotfiles",
+  "screenshots": [
+    "https://github.com/almqv/dotfiles/raw/master/preview.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "LeftWM"
+  },
+  "source_key": "github:almqv/dotfiles",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "2710709fb7224015aa47bad7894c76b9.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e83a"
+  },
+  "author": "Lonewolf4713",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/LoneWolf4713/new-wave",
+  "screenshots": [
+    "https://i.imgur.com/UB5x5lC.png",
+    "https://i.imgur.com/J0c5YM7.png",
+    "https://i.imgur.com/49nAd8F.png",
+    "https://i.imgur.com/zcjtxwc.png",
+    "https://i.imgur.com/2foZqLw.png",
+    "https://i.imgur.com/f85Bu2Q.png",
+    "https://i.imgur.com/who8zXr.png",
+    "https://i.imgur.com/5AWo7aM.png",
+    "https://i.imgur.com/ZU5JLCj.jpg"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Sway"
+  },
+  "source_key": "github:lonewolf4713/new-wave",
+  "distro": "Fedora",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "6868e18d50c558fb07cf8859"
+  },
+  "author": "AlphaTechnolog",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/dkwm",
+  "screenshots": [
+    "https://github.com/AlphaTechnolog/dotfiles/raw/dkwm/.github/assets/banner.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "DkWM"
+  },
+  "source_key": "github:alphatechnolog/dotfiles/tree/dkwm",
+  "distro": "Debian",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "411840c2364a402e99bb4701ec648041.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7c8"
+  },
+  "author": "0xTux",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/0xTux/nixos-config",
+  "screenshots": [
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/poster.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/desktop.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/workflow.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/neovim.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/floating-term-neovim.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/lazygit.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/telescope.png",
+    "https://raw.githubusercontent.com/0xTux/nixos-config/main/assets/firefox.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:0xtux/nixos-config",
+  "distro": "Nixos",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7f0"
+  },
+  "author": "valb-mig",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/valb-mig/.dotfiles",
+  "screenshots": [
+    "https://github.com/valb-mig/.dotfiles/raw/main/.assets/dots.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:valb-mig/.dotfiles",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "97d8d1e87d0445b99fbee7a955bcfe93.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e801"
+  },
+  "author": "nuxshed",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/nuxshed/dotfiles",
+  "screenshots": [
+    "https://github.com/nuxshed/dotfiles/raw/main/rice.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Herbstluftwm"
+  },
+  "source_key": "github:nuxshed/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "eaa3fab09ab04e3ab575f3e9d57e520b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18d50c558fb07cf8858"
+  },
+  "author": "SpreadiesInSpace",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/SpreadiesInSpace/cinnamon-dotfiles/tree/main",
+  "screenshots": [
+    "https://github.com/SpreadiesInSpace/cinnamon-dotfiles/blob/main/screenshots/CinnamonGruvbox2024.png?raw=true"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Cinnamon"
+  },
+  "source_key": "github:spreadiesinspace/cinnamon-dotfiles/tree/main",
+  "distro": "Debian",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8a7852d50464409393fb40b28943643f.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18d50c558fb07cf8866"
+  },
+  "author": "scourii",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/scourii/.dotfiles/tree/main",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/64178604/119293177-dba58d00-bc1f-11eb-9f8c-33b4a0626d50.png",
+    "https://user-images.githubusercontent.com/64178604/119293263-0b549500-bc20-11eb-8a50-8f1fff58518d.png",
+    "https://user-images.githubusercontent.com/64178604/119293354-3f2fba80-bc20-11eb-865a-5ba0191b4fc2.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Herbstluftwm"
+  },
+  "source_key": "github:scourii/.dotfiles/tree/main",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "bc1b50a5d3494bbdb17795ebdf982586.png",
+    "dce9de6238a34173a5764735606153bd.png",
+    "c7c90a73635c4dc29271e496eaae3c3e.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d4"
+  },
+  "author": "Manas140",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Manas140/dotfiles",
+  "screenshots": [
+    "https://github.com/Manas140/dotfiles/raw/awedots/preview.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:manas140/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "a5d3028496394a17bce94ebddb6264ce.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7df"
+  },
+  "author": "TorchedSammy",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/TorchedSammy/dotfiles",
+  "screenshots": [
+    "https://raw.githubusercontent.com/sammy-ette/dotfiles/master/assets/lotus-wallpaper.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:torchedsammy/dotfiles",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7e7"
+  },
+  "author": "JakeGinesin",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/JakeGinesin/dotfiles",
+  "screenshots": [
+    "https://i.imgur.com/Pqk4HFX.png",
+    "https://i.imgur.com/0DLRaMi.jpg"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:jakeginesin/dotfiles",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e809"
+  },
+  "author": "debuggyo",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/debuggyo/dots",
+  "screenshots": [],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:debuggyo/dots",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": []
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e815"
+  },
+  "author": "qxb3",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/qxb3/gruvbox.hypr",
+  "screenshots": [
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/1.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/2.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/3.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/yume/repo/4.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/1.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/4.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/8.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/groove/repo/9.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/1.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png",
+    "https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:qxb3/gruvbox.hypr",
+  "distro": "Tails",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "46fd9e05318647f5b450d37a0788ed17.png",
+    "51d430ce5bfd4c639f3f448f3d99cc18.png",
+    "5a70a8bda9dc4c60b4e5e4298b80133c.png",
+    "a5d967685fcf45fdbfd0634090c6a0cd.png",
+    "9ae8eb26ace74ff292c5851e93663c75.png",
+    "f1cd1dbce5b84203956dd4faef1186b3.png",
+    "6d1ec835b52740139292db26b68fa806.png",
+    "6a7f7ee5c6c64e738bd7ed8e8ec1afe8.png",
+    "9ba0d7f44dd04e9c9ded8b81c8519154.png",
+    "f91316ea6e554b6ca29a8f7a64549120.png",
+    "c5089ab55dc44b4180ac77de6c4e778d.png",
+    "dd2da61f3ebf4498a025f5913c95a4df.png",
+    "e18a026ed2864c8f86c7ed969bb06c1a.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e830"
+  },
+  "author": "Darkkal44",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Darkkal44/Cozytile",
+  "screenshots": [
+    "https://github.com/Darkkal44/Cozytile/raw/main/Assets/preview.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Qtile"
+  },
+  "source_key": "github:darkkal44/cozytile",
+  "distro": "Debian",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "e197c441d1a446948f919a4139ace515.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7cd"
+  },
+  "author": "CmrCrabs",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/CmrCrabs/dotfiles",
+  "screenshots": [
+    "https://github.com/CmrCrabs/dotfiles/blob/main/assets/paradise.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:cmrcrabs/dotfiles",
+  "distro": "Arch",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "4f3581a3b20a42e1adf7f35bd99bc0c8.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7d7"
+  },
+  "author": "PassiveLemon",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/PassiveLemon/lemonix",
+  "screenshots": [
+    "https://github.com/PassiveLemon/lemonix/raw/master/other/Desktop-lock.png",
+    "https://github.com/PassiveLemon/lemonix/blob/master/other/Desktop-1.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:passivelemon/lemonix",
+  "distro": "Nixos",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "6a56912cb8f84aeeab7f7ec3ff655e5d.png",
+    "7940c169c71742a6ac411dbd72da19c6.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7dd"
+  },
+  "author": "Spaxly",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Spaxly/espresso",
+  "screenshots": [
+    "https://github.com/Spaxly/espresso/raw/main/assets/desktop.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:spaxly/espresso",
+  "distro": "Nixos",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "3e1b624f7b0c43ea8c3c04b816d5344b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7f9"
+  },
+  "author": "raihanadf",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/raihanadf/dotfiles",
+  "screenshots": [
+    "https://github.com/raihanadf/dotfiles/raw/main/config/screenshot.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "dwm"
+  },
+  "source_key": "github:raihanadf/dotfiles",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "cbff12b9c61f42ada2739ad345796b90.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e805"
+  },
+  "author": "cafreo",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/cafreo/hyprland-intergalactic",
+  "screenshots": [
+    "https://github.com/cafreo/hyprland-intergalactic/raw/main/screenshots/screenshot2.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:cafreo/hyprland-intergalactic",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "6fec389d33bd4e5f9d5703225b3679b2.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e816"
+  },
+  "author": "shub39",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/shub39/dotfiles",
+  "screenshots": [
+    "https://github.com/shub39/dotfiles/raw/main/screenshots/1.png",
+    "https://github.com/shub39/dotfiles/raw/main/screenshots/2.png",
+    "https://github.com/shub39/dotfiles/raw/main/screenshots/3.png",
+    "https://github.com/shub39/dotfiles/raw/main/screenshots/4.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:shub39/dotfiles",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "3eacdc1a21f74fdea9b89a8ca0d8e222.png",
+    "01578b7e9c6a4ab08c0424cd1efca4a0.png",
+    "e169a3ac79db4a10b83e1428deea9b4a.png",
+    "af9b3652f3ba4c628ddc1c802a8a2553.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e832"
+  },
+  "author": "gibranlp",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/gibranlp/QARSlp",
+  "screenshots": [
+    "https://github.com/gibranlp/QARSlp/blob/develop/screenshots/QARSlp2.png?raw=true",
+    "https://github.com/gibranlp/QARSlp/blob/develop/screenshots/QARSlp1.png?raw=true",
+    "https://github.com/gibranlp/QARSlp/blob/develop/screenshots/Slash1.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Qtile"
+  },
+  "source_key": "github:gibranlp/qarslp",
+  "distro": "Arch",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "966b136f13784b919d6abc685d3df10a.png",
+    "4bfb3cf521724adf90b8435d79bad93e.png",
+    "97e98c8e179b4290a347b9f685bdd745.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e83c"
+  },
+  "author": "command-z-z",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/command-z-z/dotfiles",
+  "screenshots": [
+    "https://github.com/command-z-z/dotfiles/raw/main/img/img1.png",
+    "https://github.com/command-z-z/dotfiles/raw/main/img/img2.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Yabai"
+  },
+  "source_key": "github:command-z-z/dotfiles",
+  "distro": "Tails",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "e7ff46437eab4610aa7760652217ebc1.png",
+    "6655f55a3dbe4e0995996bb08651e4f8.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18b50c558fb07cf8832"
+  },
+  "author": "d-solis",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/d-solis/dotfiles/tree/awesome",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/43517199/213188711-a370e0d1-a2c4-4119-95bc-d51e46d81214.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:d-solis/dotfiles/tree/awesome",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "dda6bbf1081b4912b61bc718dcb33318.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7de"
+  },
+  "author": "Stardust-kyun",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Stardust-kyun/dotfiles",
+  "screenshots": [
+    "https://raw.githubusercontent.com/Stardust-kyun/dotfiles/main/.github/latest.png",
+    "https://raw.githubusercontent.com/Stardust-kyun/dotfiles/main/.github/apps.png",
+    "https://raw.githubusercontent.com/Stardust-kyun/dotfiles/main/.github/launcher.png",
+    "https://raw.githubusercontent.com/Stardust-kyun/dotfiles/main/.github/preview.png",
+    "https://raw.githubusercontent.com/Stardust-kyun/dotfiles/main/.github/volume.png",
+    "https://raw.githubusercontent.com/Stardust-kyun/dotfiles/main/.github/lockscreen.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:stardust-kyun/dotfiles",
+  "distro": "Debian",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7ec"
+  },
+  "author": "probe2k",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/probe2k/bspwm_rice",
+  "screenshots": [
+    "https://camo.githubusercontent.com/a209f139c8b0853a40ea5e3acf960e1aea2fafdd6621e24cea643a250cafc0c0/68747470733a2f2f692e726564642e69742f3533377a7366786d34376837312e706e67"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:probe2k/bspwm_rice",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "b82381b5e0e747b5ac6df8b64ba854bf.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e807"
+  },
+  "author": "conrad-mo",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/conrad-mo/hyprland-dot",
+  "screenshots": [
+    "https://github.com/conrad-mo/hyprland-dot/raw/piano/screenshot.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:conrad-mo/hyprland-dot",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8c4cef76761348519f9712cf53fa0d77.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e808"
+  },
+  "author": "dankdezpair",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/dankdezpair/hypr.files-V2",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/55618993/240282779-89ad1f68-1e9a-4c46-b3d0-3b3a43d4b9b8.png",
+    "https://user-images.githubusercontent.com/55618993/240282820-26096051-2daf-407b-a075-89c120c6c1db.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:dankdezpair/hypr.files-v2",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "ec87765b07fe4976a36025602b3f4caf.png",
+    "aa93b843de6b414aaafde1e1a8f7ce14.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e810"
+  },
+  "author": "MaxMur",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/TheMaxMur/NixOS-Configuration",
+  "screenshots": [
+    "https://github.com/TheMaxMur/NixOS-Configuration/blob/master/assets/github/desktop0.png?raw=true",
+    "https://github.com/TheMaxMur/NixOS-Configuration/blob/master/assets/github/desktop1.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:themaxmur/nixos-configuration",
+  "distro": "Nixos",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "d56b18e7847940deaff2f238798f7e5f.png",
+    "cea66ec5159846979f78815a4bc95324.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e827"
+  },
+  "author": "Vallen217",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Vallen217/dotfiles",
+  "screenshots": [
+    "https://github.com/Vallen217/dotfiles/blob/main/screenshots/wallpaper.png?raw=true",
+    "https://github.com/Vallen217/dotfiles/blob/main/screenshots/nvim_nvim.png?raw=true",
+    "https://github.com/Vallen217/dotfiles/blob/main/screenshots/desktop_spicetify.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:vallen217/dotfiles",
+  "distro": "Arch",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "c8e44017d1b04a5a89b1419db118a8c2.png",
+    "8770b92bd9c642c3964c2d32af716328.png",
+    "d5cdce005af8470a82f349560113e66e.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68572f318fa814d7f4b17386"
+  },
+  "author": "Snoo_40615",
+  "dotfiles": "https://github.com/Almighty42/Nordic-Arch-Dotfiles",
+  "screenshots": [
+    "https://preview.redd.it/my-first-linux-rice-arch-nordic-awesomewm-v0-zwvs0q6j7a8f1.png?width=640&crop=smart&auto=webp&s=b036cf183392e2871402079ac46491c7d75b96d5",
+    "https://preview.redd.it/my-first-linux-rice-arch-nordic-awesomewm-v0-czokxr6j7a8f1.png?width=1080&crop=smart&auto=webp&s=eb4fb6e4b79f96b27f693e1005336afc1e20d2c0",
+    "https://preview.redd.it/my-first-linux-rice-arch-nordic-awesomewm-v0-ma0mgx6j7a8f1.png?width=1080&crop=smart&auto=webp&s=868b92065b1ca23afd2e02aa71a27cc24a5120d1",
+    "https://preview.redd.it/my-first-linux-rice-arch-nordic-awesomewm-v0-qn276d7j7a8f1.png?width=1080&crop=smart&auto=webp&s=fb193da48a2997de61dd07a3fb9aab773f320e99",
+    "https://preview.redd.it/my-first-linux-rice-arch-nordic-awesomewm-v0-foja4n7j7a8f1.png?width=1080&crop=smart&auto=webp&s=6ec8284846a05188a32001480fff304d193596f6",
+    "https://preview.redd.it/my-first-linux-rice-arch-nordic-awesomewm-v0-ipa3gc7j7a8f1.png?width=1080&crop=smart&auto=webp&s=318d13c1c3f97b8756532045dbb31b7ddfeb2e99"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "reddit_post": "https://www.reddit.com/r/unixporn/comments/1lgwhfx/my_first_linux_rice_arch_nordic_awesomewm/",
+  "status": "approved",
+  "source_key": "reddit:1lgwhfx",
+  "distro": "Arch",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d5"
+  },
+  "author": "MeledoJames",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/MeledoJames/awesome-setup",
+  "screenshots": [
+    "https://github.com/MeledoJames/awesome-setup/raw/Lavender/images/1.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:meledojames/awesome-setup",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "793709f4dab544a696d01659ab5e6efc.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7e9"
+  },
+  "author": "kabinspace",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/kabinspace/dotfiles",
+  "screenshots": [
+    "https://github.com/kabinspace/dotfiles/blob/master/.github/assets/preview.jpg?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:kabinspace/dotfiles",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "bc3ece5a6aa9406a856594dbfd85cdf0.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7f1"
+  },
+  "author": "XADE",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/imxade/dotbin",
+  "screenshots": [
+    "https://codeberg.org/XADE/dotbin/wiki/raw/assets/wall1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:imxade/dotbin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "155ed90a9eb64a36a455b854de33752b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7fa"
+  },
+  "author": "seeingangelz",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/seeingangelz/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/123886904/252125154-ecf02580-1666-487d-ae65-046b6e053dd1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "dwm"
+  },
+  "source_key": "github:seeingangelz/dotfiles",
+  "distro": "Arch",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "008a487ff79e450b97b13d1823973e51.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e814"
+  },
+  "author": "prasanthrangan",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/prasanthrangan/hyprdots",
+  "screenshots": [
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_latte_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_decay_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_rosine_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_tokyo_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_maura_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_graph_1.png",
+    "https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_cedge_1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:prasanthrangan/hyprdots",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "23a25aa41d5d4b8ebcb786bf8693f174.png",
+    "54b8c79daf584126a8db7010cca5b015.png",
+    "ef0195dab45945ac83b118b829e158f9.png",
+    "37025863c2c244748c9b3fe48cf35de5.png",
+    "3387c7e9ed4d45c4b0ec8684d2ac4149.png",
+    "b636b351a40c4492b30e03c991a0d8f2.png",
+    "6f7c4b25c20646d0bb769495cfd129dd.png",
+    "d58e3cea112a485f99cbbf06945398e3.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e81b"
+  },
+  "author": "Lonewolf4713",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/LoneWolf4713/seraphic.dotfiles",
+  "screenshots": [
+    "https://i.imgur.com/CmAtp5N.png",
+    "https://i.imgur.com/0BoKqUr.png",
+    "https://i.imgur.com/GzBBlOk.png",
+    "https://i.imgur.com/4PHoCci.png",
+    "https://i.imgur.com/hHPhKe8.png",
+    "https://i.imgur.com/FnHboPx.png",
+    "https://i.imgur.com/JeMPPx1.jpeg",
+    "https://i.imgur.com/ni8JjkZ.jpeg",
+    "https://i.imgur.com/76T5vK3.jpeg",
+    "https://i.imgur.com/43ejN4f.png",
+    "https://i.imgur.com/IxfFLAM.png",
+    "https://i.imgur.com/hBFFEqi.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:lonewolf4713/seraphic.dotfiles",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e825"
+  },
+  "author": "SunoBB",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/SunoBB/dot",
+  "screenshots": [
+    "https://github.com/SunoBB/dot/raw/main/background/preview/_028.jpg"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:sunobb/dot",
+  "theme": "Tokyo night",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "b4fca3aca2a64f5f8877b7c4e86c97ad.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e833"
+  },
+  "author": "Hamza12700",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Hamza12700/DotFiles",
+  "screenshots": [
+    "https://github.com/Hamza12700/DotFiles/raw/main/screenshots/screenshot.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Qtile"
+  },
+  "source_key": "github:hamza12700/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e835"
+  },
+  "author": "theCode-Breaker",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/theCode-Breaker/riverwm",
+  "screenshots": [
+    "https://raw.githubusercontent.com/theCode-Breaker/riverwm/main/screenshots/1.png",
+    "https://raw.githubusercontent.com/theCode-Breaker/riverwm/main/screenshots/3.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Riverwm"
+  },
+  "source_key": "github:thecode-breaker/riverwm",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "526784c0f19443678eb6c04570d697f3.png",
+    "8d374179a3874582a309b72737a22b94.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e839"
+  },
+  "author": "viperML",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/viperML/dotfiles",
+  "screenshots": [
+    "https://github.com/viperML/dotfiles/raw/master/misc/img/20230129.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Sway"
+  },
+  "source_key": "github:viperml/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "f5b6497752f843b8a1aeff56fc8adb6a.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7e0"
+  },
+  "author": "vulekhanh",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/vulekhanh/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/61068720/235719073-25941152-3121-41b6-b869-a163c3523a5d.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:vulekhanh/dotfiles",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "b7c307d9636c4afda109d1ba3fc8332d.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7e5"
+  },
+  "author": "Gwynsav",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Gwynsav/messydots",
+  "screenshots": [
+    "https://github.com/Gwynsav/messydots/raw/main/basicshowcase.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:gwynsav/messydots",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "f0e34a02aaa142ac9a1f7b6be8a75c44.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7fb"
+  },
+  "author": "1amSimp1e",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/1amSimp1e/dots",
+  "screenshots": [
+    "https://raw.githubusercontent.com/iamverysimp1e/dots/main/ScreenShots/Gnome_Rice/Rice1.png",
+    "https://raw.githubusercontent.com/iamverysimp1e/dots/main/ScreenShots/Gnome_Rice/Rice2.png",
+    "https://raw.githubusercontent.com/iamverysimp1e/dots/main/ScreenShots/Gnome_Rice/Rice3.png"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Gnome"
+  },
+  "source_key": "github:1amsimp1e/dots",
+  "distro": "Tails",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "dce7941d320d40e896ee4e99cfe77768.png",
+    "f2f14073199d4a849d3a191f4941d580.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e813"
+  },
+  "author": "ozwaldorf",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/ozwaldorf/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/8976745/249312484-3d8f346c-781e-478b-b7cc-2aab2b7b856d.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:ozwaldorf/dotfiles",
+  "distro": "Nixos",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "091d2350a09346b080116473bb9c1f01.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e819"
+  },
+  "author": "Yorubae",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Yorubae/wayland-dotfiles",
+  "screenshots": [
+    "https://github.com/Yorubae/wayland-dotfiles/raw/main/preview/ss4.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:yorubae/wayland-dotfiles",
+  "distro": "Debian",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "179cb0921a9742f7b4c5b55cdda09521.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e83e"
+  },
+  "author": "tcmmichaelb139",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/tcmmichaelb139/.dotfiles",
+  "screenshots": [
+    "https://github.com/tcmmichaelb139/.dotfiles/raw/main/assets/desktop-blank.png",
+    "https://github.com/tcmmichaelb139/.dotfiles/raw/main/assets/desktop-full.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Yabai"
+  },
+  "source_key": "github:tcmmichaelb139/.dotfiles",
+  "distro": "Arch",
+  "theme": "Tokyo night",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "58bcbf079322401399a12b15f7e1ac39.png",
+    "7a300447ea194909aa50235e629295a8.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18d50c558fb07cf885a"
+  },
+  "author": "AlphaTechnolog",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/dwm",
+  "screenshots": [
+    "https://github.com/AlphaTechnolog/dotfiles/raw/dwm/.github/assets/banner.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "dwm"
+  },
+  "source_key": "github:alphatechnolog/dotfiles/tree/dwm",
+  "distro": "Void linux",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "1293ad0bdbbb4b12807fa8122c06f864.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18d50c558fb07cf8873"
+  },
+  "author": "Knightfall01",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Knightfall01/Hyprland-i3/tree/master",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/107239398/224466747-ba5b8c9c-ea2a-4b2a-a1c1-3820c874364e.png",
+    "https://user-images.githubusercontent.com/107239398/219909848-7c7f962e-770e-4370-9839-0b9416adae17.png",
+    "https://user-images.githubusercontent.com/107239398/214760985-49abe680-e4b7-4099-a440-86ff07c2121e.png",
+    "https://user-images.githubusercontent.com/107239398/214392260-ff9cafe5-1910-40e8-822d-348ce57115c3.png",
+    "https://github.com/knightfallxz/Hyprland-Custom-Configuration/blob/master/assets/ImagesShowcase.png?raw=true",
+    "https://user-images.githubusercontent.com/107239398/218796171-0a421c4d-6ea4-42e2-8203-f8942f3df8b0.png",
+    "https://user-images.githubusercontent.com/107239398/219070968-a5e11084-dcf9-4cdf-885d-eb59ef96f005.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:knightfall01/hyprland-i3/tree/master",
+  "distro": "Arch",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "dcbb918fae6f42b3b9d05ff17929de7d.png",
+    "74c767929904441daae31b5c45f3108d.png",
+    "2f24a6df63a54693b0d8c1abee5b6095.png",
+    "5d5e21844fd343a38327b87182f94853.png",
+    "c75f927cac0341478ddc073782db04df.png",
+    "f3562a8d8bb4452a82a90ecfc129a122.png",
+    "ca5d3ab4ec7246fa92b5290f58e084b2.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "687bcd164831f75ee57faeae"
+  },
+  "author": "MinekokosPL",
+  "title": "",
+  "distro": "Ubuntu Cinnamon",
+  "dotfiles": "",
+  "reddit_post": "https://www.reddit.com/r/unixporn/comments/1m3r1uc/cinnamon_my_first_ricing_however_im_proud_of_it_3/",
+  "environment": {
+    "type": "DE",
+    "name": "Cinnamon"
+  },
+  "status": "approved",
+  "screenshots": [
+    "MinekokosPL_Cinnamon_reddit_1m3r1uc.webp"
+  ],
+  "source_key": "reddit:1m3r1uc"
+},
+{
+  "_id": {
+    "$oid": "687cc107b7f720b724b1ef41"
+  },
+  "author": "ECLIPSE00TWO",
+  "theme": "",
+  "distro": "",
+  "dotfiles": "https://github.com/ayoubchwt/Lucyna-Rice.git",
+  "reddit_post": "https://www.reddit.com/r/LinuxPorn/comments/1m2su9k/hyprland_lucyna_rice/",
+  "environment": {
+    "type": "WM",
+    "name": "hyprland"
+  },
+  "source_key": "reddit:1m2su9k",
+  "status": "pending",
+  "screenshots": [
+    "/home/mrxcrypt/github/rice-gallery/data/img/ECLIPSE00TWO_hyprland_reddit_1m2su9k_1pxy.webp",
+    "https://preview.redd.it/520k6tj84kdf1.png?width=1920&format=png&auto=webp&s=1100c3ef76829492ea7d2c0868bbfa962d974bdd",
+    "https://preview.redd.it/qke1asjk4kdf1.png?width=1920&format=png&auto=webp&s=314e0861904eb580e035665c2df508fb48061a57",
+    "https://preview.redd.it/oeqfnedy4kdf1.png?width=1920&format=png&auto=webp&s=3ac23009e8095a85469ceff23662acf5f165cec4",
+    "https://preview.redd.it/05ytno395kdf1.png?width=1920&format=png&auto=webp&s=8a6d193b3b1031b6008d4b6a4297df8f272cb8e0"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7d9"
+  },
+  "author": "rklyz",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/rklyz/MyRice",
+  "screenshots": [
+    "https://camo.githubusercontent.com/164954cb8ac243226e1f5deab84e056cb6e6d47068a1a81c9efe9abab9e84ca5/68747470733a2f2f692e696d6775722e636f6d2f31756d4644504d2e706e67"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:rklyz/myrice",
+  "distro": "Arch",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7dc"
+  },
+  "author": "Savecoders",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Savecoders/dotfiles",
+  "screenshots": [
+    "https://github.com/Savecoders/dotfiles/blob/main/.github/assets/Awesome/grubox/bar_editor.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:savecoders/dotfiles",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "ce14dc21d04a4dd69dcb542d78e71b55.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7fc"
+  },
+  "author": "AviVarma",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AviVarma/Dotfiles",
+  "screenshots": [
+    "https://github.com/AviVarma/Dotfiles/raw/main/images/Catppuccin-Mocha.png"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Gnome"
+  },
+  "source_key": "github:avivarma/dotfiles",
+  "distro": "Fedora",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "9ee8c365f0594db98c40a7e7f0e1477f.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7fe"
+  },
+  "author": "GabrielTenma",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/GabrielTenma/dotfiles-gnm",
+  "screenshots": [
+    "https://raw.githubusercontent.com/GabrielTenma/dotfiles-gnm/theme-graphitedark/.assets/desktop-1.png",
+    "https://raw.githubusercontent.com/GabrielTenma/dotfiles-gnm/theme-graphitedark/.assets/desktop-2.png"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Gnome"
+  },
+  "source_key": "github:gabrieltenma/dotfiles-gnm",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8040cf54dbb841a19fe68ff409a874a5.png",
+    "abcf4f041789476a82247b4086ee8ad0.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18e50c558fb07cf8891"
+  },
+  "author": "AlphaTechnolog",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/openbox",
+  "screenshots": [
+    "https://github.com/AlphaTechnolog/dotfiles/raw/openbox/.github/assets/banner.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Openbox"
+  },
+  "source_key": "github:alphatechnolog/dotfiles/tree/openbox",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "b27f833cf62e4339bf40ade6ae62879b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7ea"
+  },
+  "author": "Narmis-E",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Narmis-E/bspwm-catppuccin",
+  "screenshots": [
+    "https://github.com/Narmis-E/bspwm-catppuccin/blob/main/images/rice-complete.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:narmis-e/bspwm-catppuccin",
+  "distro": "Arch",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "3302a2a9fb7c43e3b1c9a05aa8fd12b2.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7f2"
+  },
+  "author": "Weirdchupacabra",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Weirdchupacabra/void-dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/107323289/237520032-cbca0d7f-517a-4d66-82f4-23c9261d3d44.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:weirdchupacabra/void-dotfiles",
+  "distro": "Void linux",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "989b2fb878ee418ebc10ab9056481a66.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e800"
+  },
+  "author": "slashedzer0",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/slashedzer0/nobara-dotfiles",
+  "screenshots": [
+    "https://github.com/slashedzer0/nobara-dotfiles/blob/catppuccin/screenshots/floating.png?raw=true",
+    "https://github.com/slashedzer0/nobara-dotfiles/blob/catppuccin/screenshots/busy.png?raw=true",
+    "https://github.com/slashedzer0/nobara-dotfiles/blob/catppuccin/screenshots/terminal.png?raw=true"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Gnome"
+  },
+  "source_key": "github:slashedzer0/nobara-dotfiles",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e811"
+  },
+  "author": "maxtaran2010",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/maxtaran2010/hyprland-rice",
+  "screenshots": [
+    "https://github.com/maxtaran2010/hyprland-rice/raw/main/2023-07-07-193611_hyprshot.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:maxtaran2010/hyprland-rice",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "529fb51ba5a94c98ad48982411d7eebd.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e81a"
+  },
+  "author": "Lonewolf4713",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/LoneWolf4713/aeronix-dotfiles",
+  "screenshots": [
+    "https://i.imgur.com/GRsMD0R.png",
+    "https://i.imgur.com/QMunv6M.png",
+    "https://i.imgur.com/vJGFQl0.png",
+    "https://i.imgur.com/EpQVw39.png",
+    "https://i.imgur.com/kHBTcXl.png",
+    "https://i.imgur.com/mWrGOX7.png",
+    "https://i.imgur.com/Rwm4BMR.png",
+    "https://i.imgur.com/o9PpaCX.png",
+    "https://i.imgur.com/jI21G7f.png",
+    "https://i.imgur.com/yn9lGdG.png",
+    "https://i.imgur.com/LDVP8An.png",
+    "https://i.imgur.com/hDRkZPL.jpeg",
+    "https://i.imgur.com/rOz1UgE.jpeg",
+    "https://i.imgur.com/EniPgWz.jpeg",
+    "https://i.imgur.com/bGbIA8C.jpeg",
+    "https://i.imgur.com/NoHsaJI.jpeg",
+    "https://i.imgur.com/Tp2JiDv.png",
+    "https://i.imgur.com/TcQfD87.png",
+    "https://i.imgur.com/iss4Uwb.jpeg",
+    "https://i.imgur.com/AqLT5qi.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:lonewolf4713/aeronix-dotfiles",
+  "distro": "Arch",
+  "theme": "Adwaita",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e820"
+  },
+  "author": "bibjaw99",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/bibjaw99/workstation",
+  "screenshots": [
+    "https://github.com/bibjaw99/workstation/blob/master/screenshots/i3.png?raw=true",
+    "https://github.com/bibjaw99/workstation/blob/master/screenshots/sway.png?raw=true",
+    "https://github.com/bibjaw99/workstation/blob/master/screenshots/waybar_floating.png?raw=true",
+    "https://github.com/bibjaw99/workstation/blob/master/screenshots/rofi_1.png?raw=true",
+    "https://github.com/bibjaw99/workstation/blob/master/screenshots/rofi_2.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:bibjaw99/workstation",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e821"
+  },
+  "author": "Blxckmage",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Blxckmage/dotfiles",
+  "screenshots": [
+    "https://github.com/Blxckmage/dotfiles/blob/main/.assets/picture-1.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:blxckmage/dotfiles",
+  "distro": "Linux mint",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e82f"
+  },
+  "author": "Barbaross93",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Barbaross93/Nebula",
+  "screenshots": [
+    "https://github.com/Barbaross93/Nebula/raw/main/Scrots/1650648471.png",
+    "https://github.com/Barbaross93/Nebula/raw/main/Scrots/1650648454.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Qtile"
+  },
+  "source_key": "github:barbaross93/nebula",
+  "distro": "Arch",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "11556f8e9e774babbde7b63be88441d2.png",
+    "9289adc174be41f2ab7755bf0c7121da.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e831"
+  },
+  "author": "Fluffy-Bean",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Fluffy-Bean/dots",
+  "screenshots": [
+    "https://github.com/Fluffy-Bean/dots/raw/main/.github/uwu.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Qtile"
+  },
+  "source_key": "github:fluffy-bean/dots",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "2c83275c19e147e0a82763bd1b35fb4f.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e83f"
+  },
+  "author": "ZhongXiLu",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/ZhongXiLu/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/25816683/135727227-9a02917c-a1be-4790-bf46-3a91cbc29453.png",
+    "https://user-images.githubusercontent.com/25816683/135727264-25800513-c2b9-4eb9-ab33-0fd17b6cbcec.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Yabai"
+  },
+  "source_key": "github:zhongxilu/dotfiles",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "00a3c340317440529d562c13985215f7.png",
+    "7d21a6145c954e058e431c90ce1ba8d0.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18b50c558fb07cf882e"
+  },
+  "author": "AlphaTechnolog",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/awesomewm",
+  "screenshots": [
+    "https://github.com/AlphaTechnolog/dotfiles/raw/awesomewm/.github/assets/banner.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:alphatechnolog/dotfiles/tree/awesomewm",
+  "distro": "Debian",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "09b31dc1c8f94dc4b35c76dc31d9178e.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18c50c558fb07cf8853"
+  },
+  "author": "sudoharun",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/sudo-harun/dotfiles/tree/main",
+  "screenshots": [
+    "https://github.com/sudo-harun/dotfiles/raw/main/assets/retroesque1.png",
+    "https://github.com/sudo-harun/dotfiles/raw/main/assets/gruvbox1.png",
+    "https://github.com/sudo-harun/dotfiles/raw/main/assets/generic1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:sudo-harun/dotfiles/tree/main",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "7ed93a4818fe46e5ac0c220db0228c60.png",
+    "5fa0d534d18f4ea59e8b903f4b22b78a.png",
+    "708d683b55f6467fadaaa0915ac51d19.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d0"
+  },
+  "author": "frapdotbm",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/frapdotbmp/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/118438453/218368968-958e54f0-b70f-4a33-83f0-bda9c2641cb8.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:frapdotbmp/dotfiles",
+  "distro": "Debian",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "0707cf383afa41a380b559f5da3b9146.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d3"
+  },
+  "author": "madhur",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/madhur/dotfiles",
+  "screenshots": [
+    "https://raw.githubusercontent.com/madhur/dotfiles/main/rofi.png",
+    "https://raw.githubusercontent.com/madhur/dotfiles/main/powermenu.png",
+    "https://raw.githubusercontent.com/madhur/dotfiles/main/nvim.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:madhur/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "731951e860214dcfb3ea8cb837b137fc.png",
+    "c9f6af3f5d9e4c45a8a41b99088e31c7.png",
+    "1963d85852344dec9e6d805b06d6e2f2.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e7f8"
+  },
+  "author": "nxb1t",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/nxb1t/dwm-dots",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/95064572/230124343-e46c7145-53ba-40e2-8049-856f6713b07c.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "dwm"
+  },
+  "source_key": "github:nxb1t/dwm-dots",
+  "distro": "Debian",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "7d0d72d3c9424b2ebaef89231195ef86.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebf6d70f4df72f0e803"
+  },
+  "author": "ad1822",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/ad1822/hyprdots",
+  "screenshots": [
+    "https://raw.githubusercontent.com/ad1822/hyprdots/refs/heads/main/Assets/main.png",
+    "https://raw.githubusercontent.com/ad1822/hyprdots/refs/heads/main/Assets/launcher.png",
+    "https://raw.githubusercontent.com/ad1822/hyprdots/refs/heads/main/Assets/powermenu.png",
+    "https://raw.githubusercontent.com/ad1822/hyprdots/refs/heads/main/Assets/btop.png",
+    "https://raw.githubusercontent.com/ad1822/hyprdots/refs/heads/main/Assets/yazi.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:ad1822/hyprdots",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "2acb0066155d43c88274800b07d0183f.png",
+    "8ed38100d4354945b76fdf7d38292ce0.png",
+    "d9091f9f02d749ac80d091d416e1ff39.png",
+    "9bcbb1cba6ee484cb96942cd34bf2f27.png",
+    "202022b3f78a4c9abb1fc0e97ee46960.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e836"
+  },
+  "author": "eoli3n",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/eoli3n/dotfiles",
+  "screenshots": [
+    "https://github.com/eoli3n/dotfiles/raw/master/screenshots/sway.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Sway"
+  },
+  "source_key": "github:eoli3n/dotfiles",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8993fc4a5d414aa48bc23669c266cf47.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "687baabf3c3af6f1d7ffda3b"
+  },
+  "author": "pivotkraner",
+  "title": "",
+  "distro": "Arch",
+  "dotfiles": "",
+  "reddit_post": "https://www.reddit.com/r/unixporn/comments/1m3lld6/i3_his_name_is_dante_yes_from_the_game/",
+  "environment": {
+    "type": "WM",
+    "name": "i3"
+  },
+  "status": "approved",
+  "source_key": "reddit:1m3lld6",
+  "screenshots": [
+    "https://preview.redd.it/i3-his-name-is-dante-yes-from-the-game-v0-jyx1ntlrxqdf1.png?width=1080&crop=smart&auto=webp&s=5258f983a34a175f5509544f4197874a9f60ea8d"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7cf"
+  },
+  "author": "elenapan",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/elenapan/dotfiles",
+  "screenshots": [
+    "https://raw.githubusercontent.com/wiki/elenapan/dotfiles/assets/amarena.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:elenapan/dotfiles",
+  "distro": "Arch",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "5397b8637fd94f4eaa00fb261f0f6d0b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7ee"
+  },
+  "author": "Sophed",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Sophed/dotfiles",
+  "screenshots": [
+    "https://github.com/Sophed/dotfiles/blob/main/assets/float.png?raw=true",
+    "https://github.com/Sophed/dotfiles/blob/main/assets/tile.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:sophed/dotfiles",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "543284da59a6439ea99cad25153784fe.png",
+    "5f6d2e21c6874d1b98bb2c2a7de50d5a.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e80a"
+  },
+  "author": "dragoshr1234",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/dragoshr1234/hyprland-rotaru",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/23416091/238871442-fa00eec6-1874-43d3-b884-e900db80093b.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:dragoshr1234/hyprland-rotaru",
+  "distro": "Arch",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "6dea8afb4ad94b8b8dac6737eb8a75d0.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e818"
+  },
+  "author": "Stetsed",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Stetsed/.dotfiles",
+  "screenshots": [
+    "https://github.com/Stetsed/.dotfiles/raw/main/.bin/show/extra/firefox.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:stetsed/.dotfiles",
+  "distro": "Arch",
+  "theme": "Catppuccin",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "c64e3b431f7a4b049a85d8676f3de562.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e834"
+  },
+  "author": "shayanaqvi",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/shayanaqvi/dotfilets",
+  "screenshots": [
+    "https://github.com/shayanaqvi/dotfilets/raw/main/screenshots/desktop.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Qtile"
+  },
+  "source_key": "github:shayanaqvi/dotfilets",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "adb16002a9d04bc3a268f3982e78b951.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18c50c558fb07cf8846"
+  },
+  "author": "AlphaTechnolog",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/AlphaTechnolog/dotfiles/tree/bspwm",
+  "screenshots": [
+    "https://github.com/AlphaTechnolog/dotfiles/raw/bspwm/.github/assets/banner.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:alphatechnolog/dotfiles/tree/bspwm",
+  "distro": "Void linux",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "70ac209dd77c4cb89d05fb87db26f47a.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d1"
+  },
+  "author": "gabrielfrimodig",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/gabrielfrimodig/dotfiles",
+  "screenshots": [
+    "https://github.com/gabrielfrimodig/dotfiles/blob/master/.github/assets/full_desktop.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:gabrielfrimodig/dotfiles",
+  "distro": "Ubuntu",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "4203714729a4472abac545e181c11438.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d2"
+  },
+  "author": "HoNamDuong",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/HoNamDuong/.dotfiles",
+  "screenshots": [
+    "https://github.com/HoNamDuong/.dotfiles/blob/master/screenshots/awesomewm.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:honamduong/.dotfiles",
+  "distro": "Arch",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "db82e1a5c2524505b9a71dc908f60b79.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7da"
+  },
+  "author": "rxyhn",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/rxyhn/yoru",
+  "screenshots": [
+    "https://github.com/rxyhn/yoru/raw/main/.github/assets/yoru.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:rxyhn/yoru",
+  "distro": "Arch",
+  "theme": "Nord",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "d44bcb12f5da48f58cafab8d996536a4.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e80b"
+  },
+  "author": "end-4",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/end-4/dots-hyprland/",
+  "screenshots": [
+    "https://end-4.github.io/dots-hyprland-wiki/screenshots/n-k.1.png",
+    "https://end-4.github.io/dots-hyprland-wiki/screenshots/hybrid.1.png",
+    "https://end-4.github.io/dots-hyprland-wiki/screenshots/windoes.1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:end-4/dots-hyprland",
+  "distro": "Arch",
+  "theme": "Materia",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "d9c03022cbac4dae856b1863345246ef.png",
+    "615cbfdbc37b42648552297fdce41f9d.png",
+    "b4557a46393a450392695bb63597855c.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e82b"
+  },
+  "author": "TheWisker",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/TheWisker/Shikai",
+  "screenshots": [
+    "https://github.com/TheWisker/Shikai/raw/master/assets/screenshots/Screenshot_One.png"
+  ],
+  "environment": {
+    "type": "Unknown",
+    "name": "Lightdm"
+  },
+  "source_key": "github:thewisker/shikai",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "b9f7f1adcc854fcb955401203a8dda60.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e837"
+  },
+  "author": "hifinerd",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/hifinerd/lugia-sway-dots",
+  "screenshots": [
+    "https://github.com/hifinerd/lugia-sway-dots/raw/main/lugiasway.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Sway"
+  },
+  "source_key": "github:hifinerd/lugia-sway-dots",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "7d09ae9a51bb46e8b41836c1c8bf0a6b.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7cb"
+  },
+  "author": "Amitabha37377",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Amitabha37377/Awful-DOTS",
+  "screenshots": [
+    "https://github.com/Amitabha37377/Awful-DOTS/raw/master/assets/topdock.png",
+    "https://github.com/Amitabha37377/Awful-DOTS/raw/master/assets/verticalbar.png",
+    "https://github.com/Amitabha37377/Awful-DOTS/raw/master/assets/bottombar.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:amitabha37377/awful-dots",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "6d46103c619c4d9eaf348088f0d0c1a3.png",
+    "4def377155e34d08989fb3a0dc355ed9.png",
+    "8f5f7f4cef0148b2b43401a5a2f39d78.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7cc"
+  },
+  "author": "chadcat7",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/chadcat7/crystal",
+  "screenshots": [
+    "https://github.com/chadcat7/crystal/raw/main/.github/screenshots/crystal.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:chadcat7/crystal",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "aff0a1b6a34241b0a7fe709456a9bc8f.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7d8"
+  },
+  "author": "rifsxd",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/rifsxd/oh-my-awesomewm-dots",
+  "screenshots": [
+    "https://github.com/rifsxd/oh-my-awesomewm-dots/blob/main/assets/default-preview.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:rifsxd/oh-my-awesomewm-dots",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "6b918deebcf84be29a919bd16c598731.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebd6d70f4df72f0e7e3"
+  },
+  "author": "Erennedirlo",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Erennedirlo/gruvbox-dotfiles",
+  "screenshots": [
+    "https://github.com/Erennedirlo/gruvbox-dotfiles/raw/main/screenshot/unixporn.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:erennedirlo/gruvbox-dotfiles",
+  "distro": "Void linux",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "882e86e9480d48b587005f8e66e57874.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e81f"
+  },
+  "author": "BIBJAW",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/BIBJAW/Final_Rice",
+  "screenshots": [
+    "https://github.com/BIBJAW/i3-gruvbox/raw/main/screenshots/desktop.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:bibjaw/final_rice",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "8d565d0ef38c470f9ffeb547f24029ae.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e83d"
+  },
+  "author": "FelixKratz",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/FelixKratz/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/22680421/221013836-9c06a95a-d33b-48d0-bf1e-ae72e78eb6a1.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Yabai"
+  },
+  "source_key": "github:felixkratz/dotfiles",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "1a7d57584ec24c969ab51a66ef796f77.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18d50c558fb07cf8861"
+  },
+  "author": "Comiclyy",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Comiclyy/dotfiles/tree/dotfiles-gnome",
+  "screenshots": [
+    "https://raw.githubusercontent.com/Comicly69/dotfiles/main/assets/screenza.png"
+  ],
+  "environment": {
+    "type": "DE",
+    "name": "Gnome"
+  },
+  "source_key": "github:comiclyy/dotfiles/tree/dotfiles-gnome",
+  "distro": "Debian",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "75ec90f04a944195b0d25511e11b32cc.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "6868e18e50c558fb07cf8883"
+  },
+  "author": "b1337xyz",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/b1337xyz/config/tree/xp",
+  "screenshots": [
+    "https://github.com/b1337xyz/config/raw/xp/screenshot.jpg"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:b1337xyz/config/tree/xp",
+  "distro": "Arch",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "41f7edf224fd445795480cb38fb1cfa8.jpg"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebe6d70f4df72f0e7ed"
+  },
+  "author": "rklyz",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/rklyz/.files",
+  "screenshots": [
+    "https://github.com/rklyz/.files/blob/main/screenshot.png?raw=true"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "bspwm"
+  },
+  "source_key": "github:rklyz/.files",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "67f629695ceb4be087c6b49296945006.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e80c"
+  },
+  "author": "HeinzDev",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/HeinzDev/Hyprland-dotfiles",
+  "screenshots": [
+    "https://camo.githubusercontent.com/777a615eb12d4b2e2f4a95b5b814e04fe90169917b7203a26fa7882dec6c1721/68747470733a2f2f692e696d6775722e636f6d2f53345854305a462e706e67",
+    "https://camo.githubusercontent.com/14558092ed81bb9b2a7cbae753aa2628c6337738b9b9c4ea86df9728ac7b478f/68747470733a2f2f692e696d6775722e636f6d2f304c7134724f652e706e67"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:heinzdev/hyprland-dotfiles",
+  "distro": "Nixos",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "736a22bf7cf44b3c80bad5d5d77438be.png",
+    "10607e758f5b4e4881aa6e4b6264c01c.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e812"
+  },
+  "author": "Narmis-E",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Narmis-E/hyprland-dots",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/109248529/230755089-6eb99aa0-2015-4ba4-b06c-8b60ab06b934.png",
+    "https://github.com/Narmis-E/hyprland-dots/raw/main/tokyonight/images/rice.png",
+    "https://user-images.githubusercontent.com/109248529/221400035-32215c77-6bc4-4779-b318-4b7d46604a7e.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:narmis-e/hyprland-dots",
+  "distro": "Arch",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "479bc9f3d34c41699cf48fda8c3be2b7.png",
+    "e6093a8927e04eeda4739187974c7a51.png",
+    "b260131b3fa646538d4e617dc2326bc1.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e81c"
+  },
+  "author": "Lonewolf4713",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/LoneWolf4713/blue-monday.dots",
+  "screenshots": [
+    "https://i.imgur.com/jueMHR9.png",
+    "https://i.imgur.com/n1xErEU.png",
+    "https://i.imgur.com/RIxqIn8.png",
+    "https://i.imgur.com/haOXh23.png",
+    "https://i.imgur.com/NfqSiEa.png",
+    "https://i.imgur.com/gw6v1sE.jpeg",
+    "https://i.imgur.com/zhCVvxa.jpeg",
+    "https://i.imgur.com/77TPg7z.jpeg",
+    "https://i.imgur.com/POSuLAC.jpeg",
+    "https://i.imgur.com/XZDxORq.jpeg"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:lonewolf4713/blue-monday.dots",
+  "distro": "Cachyos",
+  "theme": "Paper",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e822"
+  },
+  "author": "bryant-the-coder",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/bryant-the-coder/dotfiles",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/92417638/192753856-be6e4fc3-fea9-49ff-a947-35fad8f624ab.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:bryant-the-coder/dotfiles",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "d2d39f7608b9419897bbec6c6119122f.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e823"
+  },
+  "author": "fathulfahmy",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/fathulfahmy/dotfiles-linux/",
+  "screenshots": [
+    "https://github.com/fathulfahmy/dotfiles-linux/raw/main/assets/screenshots/xfce-showcase.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:fathulfahmy/dotfiles-linux",
+  "distro": "Arch",
+  "theme": "Gruvbox",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "93be1a318039431bbbe828d9e116290a.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e82d"
+  },
+  "author": "Narmis-E",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Narmis-E/openbox-everforest",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/109248529/247356751-87386519-cfb3-48d4-9b8d-2976411c8226.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Openbox"
+  },
+  "source_key": "github:narmis-e/openbox-everforest",
+  "theme": "Everforest",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "cdad52202e194e24959ed6349c58732e.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec26d70f4df72f0e83b"
+  },
+  "author": "Icy-Thought",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/Icy-Thought/snowflake",
+  "screenshots": [
+    "https://github.com/Icy-Thought/snowflake/raw/main/.github/assets/themes/rose-pine/xmonad.png",
+    "https://github.com/Icy-Thought/snowflake/raw/main/.github/assets/themes/rose-pine/neovim.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Xmonad"
+  },
+  "source_key": "github:icy-thought/snowflake",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "39fecacaa10940c0ab5cfc23394bfcc3.png",
+    "493651875cdb4feab9296570db89eb4d.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "687cba5183fb969a3601e031"
+  },
+  "author": "kkrpx",
+  "theme": "",
+  "distro": "nix",
+  "dotfiles": "https://github.com/rx342/partio",
+  "reddit_post": "https://www.reddit.com/r/unixporn/comments/1m3un0l/swayfx_portable_dots_powered_by_nix/",
+  "environment": {
+    "type": "WM",
+    "name": "sway"
+  },
+  "source_key": "reddit:1m3un0l",
+  "status": "approved",
+  "screenshots": [
+    "https://preview.redd.it/cfsvzfo4ntdf1.png?width=2560&format=png&auto=webp&s=f0e796676247ac40537c4d3c4ab9ec1549981118",
+    "https://preview.redd.it/418wqsl5ntdf1.png?width=2560&format=png&auto=webp&s=455fbff8f6f18ed7dbdbf9bf8d821b0deba4d293",
+    "https://preview.redd.it/yanzd8m6ntdf1.png?width=2560&format=png&auto=webp&s=18577a67e1b5b1e4e2352327e09453d40c87a531"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ebc6d70f4df72f0e7d6"
+  },
+  "author": "pablonoya",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/pablonoya/awesomewm-configuration",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/31524852/232510330-a812c5d7-f5e5-4aa3-a7d5-deb58a684390.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "AwesomeWM"
+  },
+  "source_key": "github:pablonoya/awesomewm-configuration",
+  "distro": "Arch",
+  "theme": "Pop",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "4b4a1d990c0642be997969719b82cc63.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec06d70f4df72f0e80f"
+  },
+  "author": "MathisP75",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/MathisP75/summer-day-and-night",
+  "screenshots": [
+    "https://github.com/MathisP75/summer-day-and-night/raw/main/screenshots/day-night.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:mathisp75/summer-day-and-night",
+  "theme": "Everforest",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "c27c4d8891b24c41bff1937eb30c9263.png"
+  ]
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e81d"
+  },
+  "author": "Lonewolf4713",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/LoneWolf4713/auspicious-dots",
+  "screenshots": [
+    "https://i.imgur.com/2GHSpXr.png",
+    "https://i.imgur.com/66rlfYd.png",
+    "https://i.imgur.com/MQSRVvX.png",
+    "https://i.imgur.com/iuRoI4O.png",
+    "https://i.imgur.com/76iPBdM.png",
+    "https://i.imgur.com/F84l7m8.png",
+    "https://i.imgur.com/3ojkmgs.png",
+    "https://i.imgur.com/FnAXP3X.jpeg",
+    "https://i.imgur.com/Gy5ULvp.png",
+    "https://i.imgur.com/hfbGM69.png",
+    "https://i.imgur.com/jqHPNT5.png",
+    "https://i.imgur.com/FzH0VV2.png",
+    "https://i.imgur.com/RVC2HBb.jpg",
+    "https://i.imgur.com/maGqevZ.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "Hyprland"
+  },
+  "source_key": "github:lonewolf4713/auspicious-dots",
+  "distro": "Cachyos",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "68570ec16d70f4df72f0e824"
+  },
+  "author": "sommaa",
+  "reddit_post": null,
+  "dotfiles": "https://github.com/sommaa/Mantis",
+  "screenshots": [
+    "https://user-images.githubusercontent.com/120776791/229539421-8e6aad53-e68e-4bc5-88d9-16ae9c0a3f44.png"
+  ],
+  "environment": {
+    "type": "WM",
+    "name": "i3wm"
+  },
+  "source_key": "github:sommaa/mantis",
+  "distro": "Ubuntu",
+  "theme": "Ant",
+  "reactions": {
+    "heart": 0,
+    "fire": 0,
+    "down": 0
+  },
+  "images": [
+    "cf653c0c60a34c7f92a9ce6fbd9a3774.png"
+  ]
+}]

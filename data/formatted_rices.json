@@ -17,7 +17,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:0xtux/nixos-config"
+    "source_key": "github:0xtux/nixos-config",
+    "images": [
+      "62d42a30892f4a3ba66149471b920db7.png"
+    ]
   },
   {
     "author": "alljavi",
@@ -32,7 +35,12 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:alljavi/tartarus-dotfiles"
+    "source_key": "github:alljavi/tartarus-dotfiles",
+    "images": [
+      "8b452d960c7f4ba793658ea29e82fd6c.png",
+      "6f98445374054283a17118b2b3113b99.png",
+      "71f2409eff59464a9528e0c8b6170d08.png"
+    ]
   },
   {
     "author": "AlphaTechnolog",
@@ -45,7 +53,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:alphatechnolog/dotfiles/tree/awesomewm"
+    "source_key": "github:alphatechnolog/dotfiles/tree/awesomewm",
+    "images": [
+      "09b31dc1c8f94dc4b35c76dc31d9178e.png"
+    ]
   },
   {
     "author": "Amitabha37377",
@@ -60,7 +71,12 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:amitabha37377/awful-dots"
+    "source_key": "github:amitabha37377/awful-dots",
+    "images": [
+      "6d46103c619c4d9eaf348088f0d0c1a3.png",
+      "4def377155e34d08989fb3a0dc355ed9.png",
+      "8f5f7f4cef0148b2b43401a5a2f39d78.png"
+    ]
   },
   {
     "author": "chadcat7",
@@ -73,7 +89,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:chadcat7/crystal"
+    "source_key": "github:chadcat7/crystal",
+    "images": [
+      "aff0a1b6a34241b0a7fe709456a9bc8f.png"
+    ]
   },
   {
     "author": "CmrCrabs",
@@ -86,7 +105,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:cmrcrabs/dotfiles"
+    "source_key": "github:cmrcrabs/dotfiles",
+    "images": [
+      "4f3581a3b20a42e1adf7f35bd99bc0c8.png"
+    ]
   },
   {
     "author": "d-solis",
@@ -99,7 +121,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:d-solis/dotfiles/tree/awesome"
+    "source_key": "github:d-solis/dotfiles/tree/awesome",
+    "images": [
+      "dda6bbf1081b4912b61bc718dcb33318.png"
+    ]
   },
   {
     "author": "elenapan",
@@ -112,7 +137,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:elenapan/dotfiles"
+    "source_key": "github:elenapan/dotfiles",
+    "images": [
+      "5397b8637fd94f4eaa00fb261f0f6d0b.png"
+    ]
   },
   {
     "author": "frapdotbm",
@@ -125,7 +153,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:frapdotbmp/dotfiles"
+    "source_key": "github:frapdotbmp/dotfiles",
+    "images": [
+      "0707cf383afa41a380b559f5da3b9146.png"
+    ]
   },
   {
     "author": "gabrielfrimodig",
@@ -138,7 +169,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:gabrielfrimodig/dotfiles"
+    "source_key": "github:gabrielfrimodig/dotfiles",
+    "images": [
+      "4203714729a4472abac545e181c11438.png"
+    ]
   },
   {
     "author": "HoNamDuong",
@@ -151,7 +185,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:honamduong/.dotfiles"
+    "source_key": "github:honamduong/.dotfiles",
+    "images": [
+      "db82e1a5c2524505b9a71dc908f60b79.png"
+    ]
   },
   {
     "author": "madhur",
@@ -166,7 +203,12 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:madhur/dotfiles"
+    "source_key": "github:madhur/dotfiles",
+    "images": [
+      "731951e860214dcfb3ea8cb837b137fc.png",
+      "c9f6af3f5d9e4c45a8a41b99088e31c7.png",
+      "1963d85852344dec9e6d805b06d6e2f2.png"
+    ]
   },
   {
     "author": "Manas140",
@@ -179,7 +221,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:manas140/dotfiles"
+    "source_key": "github:manas140/dotfiles",
+    "images": [
+      "a5d3028496394a17bce94ebddb6264ce.png"
+    ]
   },
   {
     "author": "MeledoJames",
@@ -192,7 +237,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:meledojames/awesome-setup"
+    "source_key": "github:meledojames/awesome-setup",
+    "images": [
+      "793709f4dab544a696d01659ab5e6efc.png"
+    ]
   },
   {
     "author": "pablonoya",
@@ -205,7 +253,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:pablonoya/awesomewm-configuration"
+    "source_key": "github:pablonoya/awesomewm-configuration",
+    "images": [
+      "4b4a1d990c0642be997969719b82cc63.png"
+    ]
   },
   {
     "author": "PassiveLemon",
@@ -219,7 +270,11 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:passivelemon/lemonix"
+    "source_key": "github:passivelemon/lemonix",
+    "images": [
+      "6a56912cb8f84aeeab7f7ec3ff655e5d.png",
+      "7940c169c71742a6ac411dbd72da19c6.png"
+    ]
   },
   {
     "author": "rifsxd",
@@ -232,7 +287,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:rifsxd/oh-my-awesomewm-dots"
+    "source_key": "github:rifsxd/oh-my-awesomewm-dots",
+    "images": [
+      "6b918deebcf84be29a919bd16c598731.png"
+    ]
   },
   {
     "author": "rklyz",
@@ -245,7 +303,8 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:rklyz/myrice"
+    "source_key": "github:rklyz/myrice",
+    "images": []
   },
   {
     "author": "rxyhn",
@@ -258,7 +317,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:rxyhn/yoru"
+    "source_key": "github:rxyhn/yoru",
+    "images": [
+      "d44bcb12f5da48f58cafab8d996536a4.png"
+    ]
   },
   {
     "author": "saimoomedits",
@@ -271,7 +333,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:saimoomedits/dotfiles"
+    "source_key": "github:saimoomedits/dotfiles",
+    "images": [
+      "3116e4cc58094aeb8a9804b67ee5242f.png"
+    ]
   },
   {
     "author": "Savecoders",
@@ -284,7 +349,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:savecoders/dotfiles"
+    "source_key": "github:savecoders/dotfiles",
+    "images": [
+      "ce14dc21d04a4dd69dcb542d78e71b55.png"
+    ]
   },
   {
     "author": "Spaxly",
@@ -297,7 +365,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:spaxly/espresso"
+    "source_key": "github:spaxly/espresso",
+    "images": [
+      "3e1b624f7b0c43ea8c3c04b816d5344b.png"
+    ]
   },
   {
     "author": "Stardust-kyun",
@@ -310,7 +381,8 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:stardust-kyun/dotfiles"
+    "source_key": "github:stardust-kyun/dotfiles",
+    "images": []
   },
   {
     "author": "TorchedSammy",
@@ -324,7 +396,8 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:torchedsammy/dotfiles"
+    "source_key": "github:torchedsammy/dotfiles",
+    "images": []
   },
   {
     "author": "vulekhanh",
@@ -337,7 +410,10 @@
       "type": "WM",
       "name": "AwesomeWM"
     },
-    "source_key": "github:vulekhanh/dotfiles"
+    "source_key": "github:vulekhanh/dotfiles",
+    "images": [
+      "b7c307d9636c4afda109d1ba3fc8332d.png"
+    ]
   },
   {
     "author": "adilhyz",
@@ -350,7 +426,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:adilhyz/dotfiles-v1"
+    "source_key": "github:adilhyz/dotfiles-v1",
+    "images": [
+      "14dd2deb8cfa46ff8346e253a4765085.gif"
+    ]
   },
   {
     "author": "AlphaTechnolog",
@@ -363,7 +442,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:alphatechnolog/dotfiles/tree/bspwm"
+    "source_key": "github:alphatechnolog/dotfiles/tree/bspwm",
+    "images": [
+      "70ac209dd77c4cb89d05fb87db26f47a.png"
+    ]
   },
   {
     "author": "Erennedirlo",
@@ -376,7 +458,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:erennedirlo/gruvbox-dotfiles"
+    "source_key": "github:erennedirlo/gruvbox-dotfiles",
+    "images": [
+      "882e86e9480d48b587005f8e66e57874.png"
+    ]
   },
   {
     "author": "gh0stzk",
@@ -400,7 +485,20 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:gh0stzk/dotfiles"
+    "source_key": "github:gh0stzk/dotfiles",
+    "images": [
+      "8b53879e4e2746fdbc95a95b7d1e0a8a.png",
+      "c3b5e85699b24da289436acf7a354455.png",
+      "2fa13ad8d6cd419c8fd16f014cbdbd6a.png",
+      "d48fbee5d4b04196a071aab804f9662b.png",
+      "7fc5f49ee7db46c8b974a71d69e39f44.png",
+      "f72236e299914874a21a8a972987cb2e.png",
+      "7730a0a78f564f05afb82a2fb2a27e31.png",
+      "3531da5910a5496595ef1f48ac579e7e.png",
+      "099b9c00b64342ef8ada91fca6a66ada.png",
+      "e7b9888cade44692956d3c8c619626e4.png",
+      "cc8d3de0ed664acdb2cd65751a7334a1.png"
+    ]
   },
   {
     "author": "Gwynsav",
@@ -413,7 +511,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:gwynsav/messydots"
+    "source_key": "github:gwynsav/messydots",
+    "images": [
+      "f0e34a02aaa142ac9a1f7b6be8a75c44.png"
+    ]
   },
   {
     "author": "hlissner",
@@ -426,7 +527,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:hlissner/dotfiles"
+    "source_key": "github:hlissner/dotfiles",
+    "images": [
+      "8a4ee8a6338f4758980652d25f3fa003.png"
+    ]
   },
   {
     "author": "JakeGinesin",
@@ -441,7 +545,8 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:jakeginesin/dotfiles"
+    "source_key": "github:jakeginesin/dotfiles",
+    "images": []
   },
   {
     "author": "justleoo",
@@ -454,7 +559,8 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:justleoo/dotfiles"
+    "source_key": "github:justleoo/dotfiles",
+    "images": []
   },
   {
     "author": "kabinspace",
@@ -467,7 +573,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:kabinspace/dotfiles"
+    "source_key": "github:kabinspace/dotfiles",
+    "images": [
+      "bc3ece5a6aa9406a856594dbfd85cdf0.jpg"
+    ]
   },
   {
     "author": "Narmis-E",
@@ -480,7 +589,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:narmis-e/bspwm-catppuccin"
+    "source_key": "github:narmis-e/bspwm-catppuccin",
+    "images": [
+      "3302a2a9fb7c43e3b1c9a05aa8fd12b2.png"
+    ]
   },
   {
     "author": "onlyvip",
@@ -494,7 +606,11 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:onlyvip/dopedots"
+    "source_key": "github:onlyvip/dopedots",
+    "images": [
+      "154e88fdb0be49ca8e7dbccdf1e5f288.png",
+      "584c93d5044d48218347756afdf228b0.png"
+    ]
   },
   {
     "author": "probe2k",
@@ -507,7 +623,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:probe2k/bspwm_rice"
+    "source_key": "github:probe2k/bspwm_rice",
+    "images": [
+      "b82381b5e0e747b5ac6df8b64ba854bf.png"
+    ]
   },
   {
     "author": "rklyz",
@@ -520,7 +639,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:rklyz/.files"
+    "source_key": "github:rklyz/.files",
+    "images": [
+      "67f629695ceb4be087c6b49296945006.png"
+    ]
   },
   {
     "author": "Sophed",
@@ -534,7 +656,11 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:sophed/dotfiles"
+    "source_key": "github:sophed/dotfiles",
+    "images": [
+      "543284da59a6439ea99cad25153784fe.png",
+      "5f6d2e21c6874d1b98bb2c2a7de50d5a.png"
+    ]
   },
   {
     "author": "sudoharun",
@@ -549,7 +675,12 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:sudo-harun/dotfiles/tree/main"
+    "source_key": "github:sudo-harun/dotfiles/tree/main",
+    "images": [
+      "7ed93a4818fe46e5ac0c220db0228c60.png",
+      "5fa0d534d18f4ea59e8b903f4b22b78a.png",
+      "708d683b55f6467fadaaa0915ac51d19.png"
+    ]
   },
   {
     "author": "valb-mig",
@@ -562,7 +693,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:valb-mig/.dotfiles"
+    "source_key": "github:valb-mig/.dotfiles",
+    "images": [
+      "97d8d1e87d0445b99fbee7a955bcfe93.png"
+    ]
   },
   {
     "author": "XADE",
@@ -575,7 +709,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:imxade/dotbin"
+    "source_key": "github:imxade/dotbin",
+    "images": [
+      "155ed90a9eb64a36a455b854de33752b.png"
+    ]
   },
   {
     "author": "Weirdchupacabra",
@@ -588,7 +725,10 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:weirdchupacabra/void-dotfiles"
+    "source_key": "github:weirdchupacabra/void-dotfiles",
+    "images": [
+      "989b2fb878ee418ebc10ab9056481a66.png"
+    ]
   },
   {
     "author": "zoddDev",
@@ -610,7 +750,19 @@
       "type": "WM",
       "name": "bspwm"
     },
-    "source_key": "github:zodddev/dotfiles"
+    "source_key": "github:zodddev/dotfiles",
+    "images": [
+      "1e4fc3eaf97e4612bd51cada82d537ae.png",
+      "96f46f1a8fe84b40b1c7d533f6b0e732.png",
+      "0a61d9cc80114f75ae278791e7d778cc.png",
+      "2ed3a1cf90db49e4b3bfbed58c2269f9.png",
+      "f6d19e6e51964d2cac0596c9054143fd.png",
+      "1f3c1b1aa7d24da0a0e7dd15b8d5cc13.png",
+      "f25de82d1b194da08b8840c62e334289.png",
+      "421bc38dc0224e8180d26683ebf4aada.png",
+      "d40a41afd45943d9a4fe3933a4e6234a.png",
+      "7c4562ef9709422ca4faf686f12a339b.png"
+    ]
   },
   {
     "author": "SpreadiesInSpace",
@@ -623,7 +775,10 @@
       "type": "DE",
       "name": "Cinnamon"
     },
-    "source_key": "github:spreadiesinspace/cinnamon-dotfiles/tree/main"
+    "source_key": "github:spreadiesinspace/cinnamon-dotfiles/tree/main",
+    "images": [
+      "8a7852d50464409393fb40b28943643f.png"
+    ]
   },
   {
     "author": "AlphaTechnolog",
@@ -636,7 +791,10 @@
       "type": "WM",
       "name": "DkWM"
     },
-    "source_key": "github:alphatechnolog/dotfiles/tree/dkwm"
+    "source_key": "github:alphatechnolog/dotfiles/tree/dkwm",
+    "images": [
+      "411840c2364a402e99bb4701ec648041.png"
+    ]
   },
   {
     "author": "AlphaTechnolog",
@@ -649,7 +807,10 @@
       "type": "WM",
       "name": "dwm"
     },
-    "source_key": "github:alphatechnolog/dotfiles/tree/dwm"
+    "source_key": "github:alphatechnolog/dotfiles/tree/dwm",
+    "images": [
+      "1293ad0bdbbb4b12807fa8122c06f864.png"
+    ]
   },
   {
     "author": "juacq97",
@@ -662,7 +823,10 @@
       "type": "WM",
       "name": "dwm"
     },
-    "source_key": "github:juacq97/dotfiles"
+    "source_key": "github:juacq97/dotfiles",
+    "images": [
+      "e908b44373b44bb1b1653c6e4bff3b65.png"
+    ]
   },
   {
     "author": "nxb1t",
@@ -675,7 +839,10 @@
       "type": "WM",
       "name": "dwm"
     },
-    "source_key": "github:nxb1t/dwm-dots"
+    "source_key": "github:nxb1t/dwm-dots",
+    "images": [
+      "7d0d72d3c9424b2ebaef89231195ef86.png"
+    ]
   },
   {
     "author": "raihanadf",
@@ -688,7 +855,10 @@
       "type": "WM",
       "name": "dwm"
     },
-    "source_key": "github:raihanadf/dotfiles"
+    "source_key": "github:raihanadf/dotfiles",
+    "images": [
+      "cbff12b9c61f42ada2739ad345796b90.png"
+    ]
   },
   {
     "author": "seeingangelz",
@@ -701,7 +871,10 @@
       "type": "WM",
       "name": "dwm"
     },
-    "source_key": "github:seeingangelz/dotfiles"
+    "source_key": "github:seeingangelz/dotfiles",
+    "images": [
+      "008a487ff79e450b97b13d1823973e51.png"
+    ]
   },
   {
     "author": "1amSimp1e",
@@ -716,7 +889,12 @@
       "type": "DE",
       "name": "Gnome"
     },
-    "source_key": "github:1amsimp1e/dots"
+    "source_key": "github:1amsimp1e/dots",
+    "images": [
+      "780c4d0fb49143d2bf28809dffe8291a.png",
+      "e2f361f53dca4e2980ddc11632fbd1e6.png",
+      "e368b89ab11f4106a6f32910847c5877.png"
+    ]
   },
   {
     "author": "AviVarma",
@@ -729,7 +907,10 @@
       "type": "DE",
       "name": "Gnome"
     },
-    "source_key": "github:avivarma/dotfiles"
+    "source_key": "github:avivarma/dotfiles",
+    "images": [
+      "9ee8c365f0594db98c40a7e7f0e1477f.png"
+    ]
   },
   {
     "author": "Comiclyy",
@@ -742,7 +923,10 @@
       "type": "DE",
       "name": "Gnome"
     },
-    "source_key": "github:comiclyy/dotfiles/tree/dotfiles-gnome"
+    "source_key": "github:comiclyy/dotfiles/tree/dotfiles-gnome",
+    "images": [
+      "75ec90f04a944195b0d25511e11b32cc.png"
+    ]
   },
   {
     "author": "GabrielTenma",
@@ -756,7 +940,11 @@
       "type": "DE",
       "name": "Gnome"
     },
-    "source_key": "github:gabrieltenma/dotfiles-gnm"
+    "source_key": "github:gabrieltenma/dotfiles-gnm",
+    "images": [
+      "8040cf54dbb841a19fe68ff409a874a5.png",
+      "abcf4f041789476a82247b4086ee8ad0.png"
+    ]
   },
   {
     "author": "NeuronSooup",
@@ -769,7 +957,8 @@
       "type": "DE",
       "name": "Gnome"
     },
-    "source_key": "github:neuronsooup/gnome-topbar-le-dots"
+    "source_key": "github:neuronsooup/gnome-topbar-le-dots",
+    "images": []
   },
   {
     "author": "slashedzer0",
@@ -784,7 +973,8 @@
       "type": "DE",
       "name": "Gnome"
     },
-    "source_key": "github:slashedzer0/nobara-dotfiles"
+    "source_key": "github:slashedzer0/nobara-dotfiles",
+    "images": []
   },
   {
     "author": "nuxshed",
@@ -797,7 +987,10 @@
       "type": "WM",
       "name": "Herbstluftwm"
     },
-    "source_key": "github:nuxshed/dotfiles"
+    "source_key": "github:nuxshed/dotfiles",
+    "images": [
+      "eaa3fab09ab04e3ab575f3e9d57e520b.png"
+    ]
   },
   {
     "author": "scourii",
@@ -812,7 +1005,12 @@
       "type": "WM",
       "name": "Herbstluftwm"
     },
-    "source_key": "github:scourii/.dotfiles/tree/main"
+    "source_key": "github:scourii/.dotfiles/tree/main",
+    "images": [
+      "bc1b50a5d3494bbdb17795ebdf982586.png",
+      "dce9de6238a34173a5764735606153bd.png",
+      "c7c90a73635c4dc29271e496eaae3c3e.png"
+    ]
   },
   {
     "author": "ad1822",
@@ -829,7 +1027,14 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:ad1822/hyprdots"
+    "source_key": "github:ad1822/hyprdots",
+    "images": [
+      "2acb0066155d43c88274800b07d0183f.png",
+      "8ed38100d4354945b76fdf7d38292ce0.png",
+      "d9091f9f02d749ac80d091d416e1ff39.png",
+      "9bcbb1cba6ee484cb96942cd34bf2f27.png",
+      "202022b3f78a4c9abb1fc0e97ee46960.png"
+    ]
   },
   {
     "author": "1amSimp1e",
@@ -843,7 +1048,11 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:1amsimp1e/dots"
+    "source_key": "github:1amsimp1e/dots",
+    "images": [
+      "dce7941d320d40e896ee4e99cfe77768.png",
+      "f2f14073199d4a849d3a191f4941d580.png"
+    ]
   },
   {
     "author": "AdiKsOnDev",
@@ -859,7 +1068,13 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:adiksondev/hyprvalley"
+    "source_key": "github:adiksondev/hyprvalley",
+    "images": [
+      "fc408d51de6742e6abc66834d891433b.png",
+      "db798cc987a34355a3bcf36293fcc1b8.png",
+      "00ea2f5b760d484fbe3826493533201f.png",
+      "1092d858a9094bd99720e9f471c22190.png"
+    ]
   },
   {
     "author": "cafreo",
@@ -872,7 +1087,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:cafreo/hyprland-intergalactic"
+    "source_key": "github:cafreo/hyprland-intergalactic",
+    "images": [
+      "6fec389d33bd4e5f9d5703225b3679b2.png"
+    ]
   },
   {
     "author": "command-z-z",
@@ -885,7 +1103,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:command-z-z/arch-dotfiles"
+    "source_key": "github:command-z-z/arch-dotfiles",
+    "images": [
+      "8e805a2ca67244b78d826f36ce882b2a.png"
+    ]
   },
   {
     "author": "conrad-mo",
@@ -898,7 +1119,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:conrad-mo/hyprland-dot"
+    "source_key": "github:conrad-mo/hyprland-dot",
+    "images": [
+      "8c4cef76761348519f9712cf53fa0d77.png"
+    ]
   },
   {
     "author": "dankdezpair",
@@ -912,7 +1136,11 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:dankdezpair/hypr.files-v2"
+    "source_key": "github:dankdezpair/hypr.files-v2",
+    "images": [
+      "ec87765b07fe4976a36025602b3f4caf.png",
+      "aa93b843de6b414aaafde1e1a8f7ce14.png"
+    ]
   },
   {
     "author": "debuggyo",
@@ -923,7 +1151,8 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:debuggyo/dots"
+    "source_key": "github:debuggyo/dots",
+    "images": []
   },
   {
     "author": "dragoshr1234",
@@ -936,7 +1165,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:dragoshr1234/hyprland-rotaru"
+    "source_key": "github:dragoshr1234/hyprland-rotaru",
+    "images": [
+      "6dea8afb4ad94b8b8dac6737eb8a75d0.png"
+    ]
   },
   {
     "author": "end-4",
@@ -951,7 +1183,12 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:end-4/dots-hyprland"
+    "source_key": "github:end-4/dots-hyprland",
+    "images": [
+      "d9c03022cbac4dae856b1863345246ef.png",
+      "615cbfdbc37b42648552297fdce41f9d.png",
+      "b4557a46393a450392695bb63597855c.png"
+    ]
   },
   {
     "author": "HeinzDev",
@@ -965,7 +1202,11 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:heinzdev/hyprland-dotfiles"
+    "source_key": "github:heinzdev/hyprland-dotfiles",
+    "images": [
+      "736a22bf7cf44b3c80bad5d5d77438be.png",
+      "10607e758f5b4e4881aa6e4b6264c01c.png"
+    ]
   },
   {
     "author": "justinlime",
@@ -980,7 +1221,12 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:justinlime/dotfiles"
+    "source_key": "github:justinlime/dotfiles",
+    "images": [
+      "ded4a60f942e40b39638fb8767fcc0b6.png",
+      "86ed266fd894420c9a9df68d5ec56e88.png",
+      "93ad3eb12c7342bd98a21211d8b9f5f7.png"
+    ]
   },
   {
     "author": "Knightfall01",
@@ -999,7 +1245,16 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:knightfall01/hyprland-i3/tree/master"
+    "source_key": "github:knightfall01/hyprland-i3/tree/master",
+    "images": [
+      "dcbb918fae6f42b3b9d05ff17929de7d.png",
+      "74c767929904441daae31b5c45f3108d.png",
+      "2f24a6df63a54693b0d8c1abee5b6095.png",
+      "5d5e21844fd343a38327b87182f94853.png",
+      "c75f927cac0341478ddc073782db04df.png",
+      "f3562a8d8bb4452a82a90ecfc129a122.png",
+      "ca5d3ab4ec7246fa92b5290f58e084b2.png"
+    ]
   },
   {
     "author": "MathisP75",
@@ -1012,7 +1267,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:mathisp75/summer-day-and-night"
+    "source_key": "github:mathisp75/summer-day-and-night",
+    "images": [
+      "c27c4d8891b24c41bff1937eb30c9263.png"
+    ]
   },
   {
     "author": "MaxMur",
@@ -1026,7 +1284,11 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:themaxmur/nixos-configuration"
+    "source_key": "github:themaxmur/nixos-configuration",
+    "images": [
+      "d56b18e7847940deaff2f238798f7e5f.png",
+      "cea66ec5159846979f78815a4bc95324.png"
+    ]
   },
   {
     "author": "maxtaran2010",
@@ -1039,7 +1301,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:maxtaran2010/hyprland-rice"
+    "source_key": "github:maxtaran2010/hyprland-rice",
+    "images": [
+      "529fb51ba5a94c98ad48982411d7eebd.png"
+    ]
   },
   {
     "author": "Narmis-E",
@@ -1054,7 +1319,12 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:narmis-e/hyprland-dots"
+    "source_key": "github:narmis-e/hyprland-dots",
+    "images": [
+      "479bc9f3d34c41699cf48fda8c3be2b7.png",
+      "e6093a8927e04eeda4739187974c7a51.png",
+      "b260131b3fa646538d4e617dc2326bc1.png"
+    ]
   },
   {
     "author": "ozwaldorf",
@@ -1067,7 +1337,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:ozwaldorf/dotfiles"
+    "source_key": "github:ozwaldorf/dotfiles",
+    "images": [
+      "091d2350a09346b080116473bb9c1f01.png"
+    ]
   },
   {
     "author": "prasanthrangan",
@@ -1087,7 +1360,17 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:prasanthrangan/hyprdots"
+    "source_key": "github:prasanthrangan/hyprdots",
+    "images": [
+      "23a25aa41d5d4b8ebcb786bf8693f174.png",
+      "54b8c79daf584126a8db7010cca5b015.png",
+      "ef0195dab45945ac83b118b829e158f9.png",
+      "37025863c2c244748c9b3fe48cf35de5.png",
+      "3387c7e9ed4d45c4b0ec8684d2ac4149.png",
+      "b636b351a40c4492b30e03c991a0d8f2.png",
+      "6f7c4b25c20646d0bb769495cfd129dd.png",
+      "d58e3cea112a485f99cbbf06945398e3.png"
+    ]
   },
   {
     "author": "qxb3",
@@ -1112,7 +1395,22 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:qxb3/gruvbox.hypr"
+    "source_key": "github:qxb3/gruvbox.hypr",
+    "images": [
+      "46fd9e05318647f5b450d37a0788ed17.png",
+      "51d430ce5bfd4c639f3f448f3d99cc18.png",
+      "5a70a8bda9dc4c60b4e5e4298b80133c.png",
+      "a5d967685fcf45fdbfd0634090c6a0cd.png",
+      "9ae8eb26ace74ff292c5851e93663c75.png",
+      "f1cd1dbce5b84203956dd4faef1186b3.png",
+      "6d1ec835b52740139292db26b68fa806.png",
+      "6a7f7ee5c6c64e738bd7ed8e8ec1afe8.png",
+      "9ba0d7f44dd04e9c9ded8b81c8519154.png",
+      "f91316ea6e554b6ca29a8f7a64549120.png",
+      "c5089ab55dc44b4180ac77de6c4e778d.png",
+      "dd2da61f3ebf4498a025f5913c95a4df.png",
+      "e18a026ed2864c8f86c7ed969bb06c1a.png"
+    ]
   },
   {
     "author": "shub39",
@@ -1128,7 +1426,13 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:shub39/dotfiles"
+    "source_key": "github:shub39/dotfiles",
+    "images": [
+      "3eacdc1a21f74fdea9b89a8ca0d8e222.png",
+      "01578b7e9c6a4ab08c0424cd1efca4a0.png",
+      "e169a3ac79db4a10b83e1428deea9b4a.png",
+      "af9b3652f3ba4c628ddc1c802a8a2553.png"
+    ]
   },
   {
     "author": "Spagett1",
@@ -1141,7 +1445,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:spagett1/dotfiles"
+    "source_key": "github:spagett1/dotfiles",
+    "images": [
+      "85b59197b826426e99dce4d68757751c.png"
+    ]
   },
   {
     "author": "Stetsed",
@@ -1154,7 +1461,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:stetsed/.dotfiles"
+    "source_key": "github:stetsed/.dotfiles",
+    "images": [
+      "c64e3b431f7a4b049a85d8676f3de562.png"
+    ]
   },
   {
     "author": "Yorubae",
@@ -1167,7 +1477,10 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:yorubae/wayland-dotfiles"
+    "source_key": "github:yorubae/wayland-dotfiles",
+    "images": [
+      "179cb0921a9742f7b4c5b55cdda09521.png"
+    ]
   },
   {
     "author": "Lonewolf4713",
@@ -1183,7 +1496,8 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:lonewolf4713/aeronix-dotfiles"
+    "source_key": "github:lonewolf4713/aeronix-dotfiles",
+    "images": []
   },
   {
     "author": "Lonewolf4713",
@@ -1199,7 +1513,8 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:lonewolf4713/seraphic.dotfiles"
+    "source_key": "github:lonewolf4713/seraphic.dotfiles",
+    "images": []
   },
   {
     "author": "Lonewolf4713",
@@ -1214,7 +1529,8 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:lonewolf4713/blue-monday.dots"
+    "source_key": "github:lonewolf4713/blue-monday.dots",
+    "images": []
   },
   {
     "author": "Lonewolf4713",
@@ -1229,7 +1545,8 @@
       "type": "WM",
       "name": "Hyprland"
     },
-    "source_key": "github:lonewolf4713/auspicious-dots"
+    "source_key": "github:lonewolf4713/auspicious-dots",
+    "images": []
   },
   {
     "author": "b1337xyz",
@@ -1242,7 +1559,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:b1337xyz/config/tree/xp"
+    "source_key": "github:b1337xyz/config/tree/xp",
+    "images": [
+      "41f7edf224fd445795480cb38fb1cfa8.jpg"
+    ]
   },
   {
     "author": "BIBJAW",
@@ -1255,7 +1575,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:bibjaw/final_rice"
+    "source_key": "github:bibjaw/final_rice",
+    "images": [
+      "8d565d0ef38c470f9ffeb547f24029ae.png"
+    ]
   },
   {
     "author": "bibjaw99",
@@ -1272,7 +1595,8 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:bibjaw99/workstation"
+    "source_key": "github:bibjaw99/workstation",
+    "images": []
   },
   {
     "author": "Blxckmage",
@@ -1285,7 +1609,8 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:blxckmage/dotfiles"
+    "source_key": "github:blxckmage/dotfiles",
+    "images": []
   },
   {
     "author": "bryant-the-coder",
@@ -1298,7 +1623,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:bryant-the-coder/dotfiles"
+    "source_key": "github:bryant-the-coder/dotfiles",
+    "images": [
+      "d2d39f7608b9419897bbec6c6119122f.png"
+    ]
   },
   {
     "author": "fathulfahmy",
@@ -1311,7 +1639,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:fathulfahmy/dotfiles-linux"
+    "source_key": "github:fathulfahmy/dotfiles-linux",
+    "images": [
+      "e08bae7786bb46029f4010fb4e6ef710.png"
+    ]
   },
   {
     "author": "sommaa",
@@ -1324,7 +1655,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:sommaa/mantis"
+    "source_key": "github:sommaa/mantis",
+    "images": [
+      "cf653c0c60a34c7f92a9ce6fbd9a3774.png"
+    ]
   },
   {
     "author": "SunoBB",
@@ -1337,7 +1671,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:sunobb/dot"
+    "source_key": "github:sunobb/dot",
+    "images": [
+      "b4fca3aca2a64f5f8877b7c4e86c97ad.jpg"
+    ]
   },
   {
     "author": "TKK13909",
@@ -1350,7 +1687,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:tkk13909/dotfiles"
+    "source_key": "github:tkk13909/dotfiles",
+    "images": [
+      "f5d8ef7c02784011a393ebea4f7c05e1.png"
+    ]
   },
   {
     "author": "Vallen217",
@@ -1365,7 +1705,12 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:vallen217/dotfiles"
+    "source_key": "github:vallen217/dotfiles",
+    "images": [
+      "c8e44017d1b04a5a89b1419db118a8c2.png",
+      "8770b92bd9c642c3964c2d32af716328.png",
+      "d5cdce005af8470a82f349560113e66e.png"
+    ]
   },
   {
     "author": "zemmsoares",
@@ -1378,7 +1723,10 @@
       "type": "WM",
       "name": "i3wm"
     },
-    "source_key": "github:zemmsoares/.dotfiles"
+    "source_key": "github:zemmsoares/.dotfiles",
+    "images": [
+      "623c1f604d044f2bb95eca82cc097ac1.png"
+    ]
   },
   {
     "author": "ComplexPlatform",
@@ -1396,7 +1744,15 @@
       "type": "DE",
       "name": "KDE"
     },
-    "source_key": "github:complexplatform/kde-dotfiles"
+    "source_key": "github:complexplatform/kde-dotfiles",
+    "images": [
+      "33b1bb1561ea472abfd8cc569d4188a9.png",
+      "771ad88ff1bb40cf9dd2a6bfc9afb49f.png",
+      "612152e60c8c4a40bdd6baec002fbfec.png",
+      "90f971ce0f414b19bf35b817516e17d3.png",
+      "a30078bd5dd747b49031176e54626649.png",
+      "22acf745b676468d97cc9724e3b753be.png"
+    ]
   },
   {
     "author": "almqv",
@@ -1409,7 +1765,10 @@
       "type": "WM",
       "name": "LeftWM"
     },
-    "source_key": "github:almqv/dotfiles"
+    "source_key": "github:almqv/dotfiles",
+    "images": [
+      "2710709fb7224015aa47bad7894c76b9.png"
+    ]
   },
   {
     "author": "TheWisker",
@@ -1422,7 +1781,10 @@
       "type": "Unknown",
       "name": "Lightdm"
     },
-    "source_key": "github:thewisker/shikai"
+    "source_key": "github:thewisker/shikai",
+    "images": [
+      "b9f7f1adcc854fcb955401203a8dda60.png"
+    ]
   },
   {
     "author": "AlphaTechnolog",
@@ -1435,7 +1797,10 @@
       "type": "WM",
       "name": "Openbox"
     },
-    "source_key": "github:alphatechnolog/dotfiles/tree/openbox"
+    "source_key": "github:alphatechnolog/dotfiles/tree/openbox",
+    "images": [
+      "b27f833cf62e4339bf40ade6ae62879b.png"
+    ]
   },
   {
     "author": "Narmis-E",
@@ -1448,7 +1813,10 @@
       "type": "WM",
       "name": "Openbox"
     },
-    "source_key": "github:narmis-e/openbox-everforest"
+    "source_key": "github:narmis-e/openbox-everforest",
+    "images": [
+      "cdad52202e194e24959ed6349c58732e.png"
+    ]
   },
   {
     "author": "owl4ce",
@@ -1461,7 +1829,10 @@
       "type": "WM",
       "name": "Openbox"
     },
-    "source_key": "github:owl4ce/dotfiles/tree/ng"
+    "source_key": "github:owl4ce/dotfiles/tree/ng",
+    "images": [
+      "d988d8125e7e4a89993fe94030a4e2c4.png"
+    ]
   },
   {
     "author": "Barbaross93",
@@ -1475,7 +1846,11 @@
       "type": "WM",
       "name": "Qtile"
     },
-    "source_key": "github:barbaross93/nebula"
+    "source_key": "github:barbaross93/nebula",
+    "images": [
+      "11556f8e9e774babbde7b63be88441d2.png",
+      "9289adc174be41f2ab7755bf0c7121da.png"
+    ]
   },
   {
     "author": "Darkkal44",
@@ -1488,7 +1863,10 @@
       "type": "WM",
       "name": "Qtile"
     },
-    "source_key": "github:darkkal44/cozytile"
+    "source_key": "github:darkkal44/cozytile",
+    "images": [
+      "e197c441d1a446948f919a4139ace515.png"
+    ]
   },
   {
     "author": "Fluffy-Bean",
@@ -1501,7 +1879,10 @@
       "type": "WM",
       "name": "Qtile"
     },
-    "source_key": "github:fluffy-bean/dots"
+    "source_key": "github:fluffy-bean/dots",
+    "images": [
+      "2c83275c19e147e0a82763bd1b35fb4f.png"
+    ]
   },
   {
     "author": "gibranlp",
@@ -1516,7 +1897,12 @@
       "type": "WM",
       "name": "Qtile"
     },
-    "source_key": "github:gibranlp/qarslp"
+    "source_key": "github:gibranlp/qarslp",
+    "images": [
+      "966b136f13784b919d6abc685d3df10a.png",
+      "4bfb3cf521724adf90b8435d79bad93e.png",
+      "97e98c8e179b4290a347b9f685bdd745.png"
+    ]
   },
   {
     "author": "Hamza12700",
@@ -1529,7 +1915,8 @@
       "type": "WM",
       "name": "Qtile"
     },
-    "source_key": "github:hamza12700/dotfiles"
+    "source_key": "github:hamza12700/dotfiles",
+    "images": []
   },
   {
     "author": "shayanaqvi",
@@ -1542,7 +1929,10 @@
       "type": "WM",
       "name": "Qtile"
     },
-    "source_key": "github:shayanaqvi/dotfilets"
+    "source_key": "github:shayanaqvi/dotfilets",
+    "images": [
+      "adb16002a9d04bc3a268f3982e78b951.png"
+    ]
   },
   {
     "author": "theCode-Breaker",
@@ -1556,7 +1946,11 @@
       "type": "WM",
       "name": "Riverwm"
     },
-    "source_key": "github:thecode-breaker/riverwm"
+    "source_key": "github:thecode-breaker/riverwm",
+    "images": [
+      "526784c0f19443678eb6c04570d697f3.png",
+      "8d374179a3874582a309b72737a22b94.png"
+    ]
   },
   {
     "author": "eoli3n",
@@ -1569,7 +1963,10 @@
       "type": "WM",
       "name": "Sway"
     },
-    "source_key": "github:eoli3n/dotfiles"
+    "source_key": "github:eoli3n/dotfiles",
+    "images": [
+      "8993fc4a5d414aa48bc23669c266cf47.png"
+    ]
   },
   {
     "author": "hifinerd",
@@ -1582,7 +1979,10 @@
       "type": "WM",
       "name": "Sway"
     },
-    "source_key": "github:hifinerd/lugia-sway-dots"
+    "source_key": "github:hifinerd/lugia-sway-dots",
+    "images": [
+      "7d09ae9a51bb46e8b41836c1c8bf0a6b.png"
+    ]
   },
   {
     "author": "RicArch97",
@@ -1595,7 +1995,10 @@
       "type": "WM",
       "name": "Sway"
     },
-    "source_key": "github:ricarch97/nixos-config"
+    "source_key": "github:ricarch97/nixos-config",
+    "images": [
+      "357330a53d0042e3bec64a26ed0669ee.png"
+    ]
   },
   {
     "author": "viperML",
@@ -1608,7 +2011,10 @@
       "type": "WM",
       "name": "Sway"
     },
-    "source_key": "github:viperml/dotfiles"
+    "source_key": "github:viperml/dotfiles",
+    "images": [
+      "f5b6497752f843b8a1aeff56fc8adb6a.png"
+    ]
   },
   {
     "author": "Lonewolf4713",
@@ -1623,7 +2029,8 @@
       "type": "WM",
       "name": "Sway"
     },
-    "source_key": "github:lonewolf4713/new-wave"
+    "source_key": "github:lonewolf4713/new-wave",
+    "images": []
   },
   {
     "author": "fathulfahmy",
@@ -1636,7 +2043,10 @@
       "type": "DE",
       "name": "Xfce"
     },
-    "source_key": "github:fathulfahmy/dotfiles-linux"
+    "source_key": "github:fathulfahmy/dotfiles-linux",
+    "images": [
+      "93be1a318039431bbbe828d9e116290a.png"
+    ]
   },
   {
     "author": "Icy-Thought",
@@ -1650,7 +2060,11 @@
       "type": "WM",
       "name": "Xmonad"
     },
-    "source_key": "github:icy-thought/snowflake"
+    "source_key": "github:icy-thought/snowflake",
+    "images": [
+      "39fecacaa10940c0ab5cfc23394bfcc3.png",
+      "493651875cdb4feab9296570db89eb4d.png"
+    ]
   },
   {
     "author": "command-z-z",
@@ -1664,7 +2078,11 @@
       "type": "WM",
       "name": "Yabai"
     },
-    "source_key": "github:command-z-z/dotfiles"
+    "source_key": "github:command-z-z/dotfiles",
+    "images": [
+      "e7ff46437eab4610aa7760652217ebc1.png",
+      "6655f55a3dbe4e0995996bb08651e4f8.png"
+    ]
   },
   {
     "author": "FelixKratz",
@@ -1677,7 +2095,10 @@
       "type": "WM",
       "name": "Yabai"
     },
-    "source_key": "github:felixkratz/dotfiles"
+    "source_key": "github:felixkratz/dotfiles",
+    "images": [
+      "1a7d57584ec24c969ab51a66ef796f77.png"
+    ]
   },
   {
     "author": "tcmmichaelb139",
@@ -1691,7 +2112,11 @@
       "type": "WM",
       "name": "Yabai"
     },
-    "source_key": "github:tcmmichaelb139/.dotfiles"
+    "source_key": "github:tcmmichaelb139/.dotfiles",
+    "images": [
+      "58bcbf079322401399a12b15f7e1ac39.png",
+      "7a300447ea194909aa50235e629295a8.png"
+    ]
   },
   {
     "author": "ZhongXiLu",
@@ -1705,6 +2130,10 @@
       "type": "WM",
       "name": "Yabai"
     },
-    "source_key": "github:zhongxilu/dotfiles"
+    "source_key": "github:zhongxilu/dotfiles",
+    "images": [
+      "00a3c340317440529d562c13985215f7.png",
+      "7d21a6145c954e058e431c90ce1ba8d0.png"
+    ]
   }
 ]

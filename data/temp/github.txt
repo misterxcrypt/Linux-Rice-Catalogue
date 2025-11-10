@@ -1,0 +1,17 @@
+https://github.com/0xTux/nixos-config
+https://github.com/rklyz/MyRice
+https://github.com/Stardust-kyun/dotfiles
+https://github.com/TorchedSammy/dotfiles
+https://github.com/gh0stzk/dotfiles
+https://github.com/JakeGinesin/dotfiles
+https://github.com/justleoo/dotfiles
+https://github.com/NeuronSooup/Gnome-topbar-le-dots
+https://github.com/slashedzer0/nobara-dotfiles
+https://github.com/LoneWolf4713/aeronix-dotfiles
+https://github.com/LoneWolf4713/seraphic.dotfiles
+https://github.com/LoneWolf4713/blue-monday.dots
+https://github.com/LoneWolf4713/auspicious-dots
+https://github.com/bibjaw99/workstation
+https://github.com/Blxckmage/dotfiles
+https://github.com/Hamza12700/DotFiles
+https://github.com/LoneWolf4713/new-wave

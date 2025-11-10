@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "api/**/*.js": {
+      "excludeFiles": [
+        "data/img/**"
+      ]
+    }
+  }
+}

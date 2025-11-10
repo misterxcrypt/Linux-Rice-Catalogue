@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Filename required' });
   }
 
-  const imagePath = path.join(process.cwd(), 'data', 'img', filename);
+  const imagePath = path.join(process.cwd(), 'public', 'img', filename);
 
   try {
     // Check if file exists

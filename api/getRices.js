@@ -9,9 +9,14 @@ module.exports = async (req, res) => {
   try {
     const db = await getDb();
     const rices = await db.collection('rice').find({
-      $or: [
-        { status: 'approved' },
-        { status: { $exists: false } }
+      $and: [
+        {
+          $or: [
+            { status: 'approved' },
+            { status: { $exists: false } }
+          ]
+        },
+        { images: { $exists: true, $ne: [] } }
       ]
     }).toArray();
     return res.status(200).json(rices);

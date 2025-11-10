@@ -3,46 +3,76 @@ const { getDb } = require('../utils/db');
 const fetch = require('node-fetch');
 const { file: tmpFile, dir: tmpDir } = require('tmp-promise');
 const fs = require('fs-extra');
-const cloudinary = require('cloudinary').v2;
+const ImageKit = require('imagekit');
 const sharp = require('sharp');
-const { formidable } = require('formidable'); 
+const { formidable } = require('formidable');
 const path = require('path');
+const crypto = require('crypto');
 
-// Cloudinary config (from env)
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+// ImageKit config (from env)
+const imagekit = new ImageKit({
+  publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
+  privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
+  urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
 
-async function resizeIfNeeded(filePath, maxSizeMB = 10) {
-  const stats = await fs.stat(filePath);
-  if (stats.size <= maxSizeMB * 1024 * 1024) {
-    return filePath;
-  }
+async function compressTo500KB(filePath) {
+  try {
+    const stats = await fs.stat(filePath);
+    const targetSize = 500 * 1024; // 500KB in bytes
 
-  const resizedPath = filePath.replace(/\.(\w+)$/, '_resized.$1');
-  let quality = 90;
-
-  while (quality >= 30) {
-    try {
-      await sharp(filePath)
-        .jpeg({ quality }) // or .png() based on format
-        .toFile(resizedPath);
-
-      const resizedStats = await fs.stat(resizedPath);
-      if (resizedStats.size <= maxSizeMB * 1024 * 1024) {
-        return resizedPath;
-      }
-      quality -= 10;
-    } catch (err) {
-      console.warn(`⚠️ Resize attempt failed at quality ${quality}:`, err);
-      break;
+    // If already under 500KB, return original
+    if (stats.size <= targetSize) {
+      return filePath;
     }
-  }
 
-  console.warn(`❌ Could not resize ${filePath} under ${maxSizeMB}MB`);
-  return null;
+    const ext = path.extname(filePath).toLowerCase();
+    const baseName = path.basename(filePath, ext);
+    const dirName = path.dirname(filePath);
+    const compressedPath = path.join(dirName, `${baseName}_compressed${ext}`);
+
+    let quality = 90;
+    let currentSize = stats.size;
+
+    // Try different quality levels until under 500KB
+    while (quality >= 10 && currentSize > targetSize) {
+      try {
+        if (ext === '.jpg' || ext === '.jpeg') {
+          await sharp(filePath)
+            .jpeg({ quality, mozjpeg: true })
+            .toFile(compressedPath);
+        } else if (ext === '.png') {
+          await sharp(filePath)
+            .png({ quality, compressionLevel: 9 })
+            .toFile(compressedPath);
+        } else {
+          // For other formats, convert to JPEG
+          await sharp(filePath)
+            .jpeg({ quality, mozjpeg: true })
+            .toFile(compressedPath.replace(ext, '.jpg'));
+        }
+
+        const compressedStats = await fs.stat(compressedPath);
+        currentSize = compressedStats.size;
+
+        if (currentSize <= targetSize) {
+          return compressedPath;
+        }
+
+        quality -= 10;
+      } catch (err) {
+        console.warn(`⚠️ Compression attempt failed at quality ${quality}:`, err);
+        break;
+      }
+    }
+
+    // If compression failed or still too large, return original
+    console.warn(`⚠️ Could not compress ${filePath} under 500KB, using original`);
+    return filePath;
+  } catch (err) {
+    console.warn(`⚠️ Compression error for ${filePath}:`, err);
+    return filePath; // Return original on error
+  }
 }
 // --- Extract source_key from reddit or github links ---
 function getRedditKey(redditUrl) {
@@ -72,47 +102,83 @@ function getSourceKey(doc) {
   return null;
 }
 
-async function downloadAndUploadToCloudinary(urls, docId) {
+async function downloadAndUploadToImageKit(urls, docId) {
   const tempDir = await tmpDir({ unsafeCleanup: true });
-  const cloudinaryUrls = [];
+  const uuids = [];
   try {
     for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
       const res = await fetch(url);
       if (!res.ok) continue;
+
+      // Generate UUID for filename
+      const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
+
       const ext = url.split('.').pop().split('?')[0] || 'jpg';
       const filePath = `${tempDir.path}/img_${i}.${ext}`;
       const buffer = await res.buffer();
       await fs.writeFile(filePath, buffer);
 
-      // Resize before upload
-      const finalPath = await resizeIfNeeded(filePath);
-      if (!finalPath) continue; // Skip if still too large
+      // Compress to 500KB
+      const compressedPath = await compressTo500KB(filePath);
 
-      // Upload to Cloudinary
-      const publicId = `rices/${docId}_${i}`;
-      const uploadRes = await cloudinary.uploader.upload(filePath, { public_id: publicId });
-      cloudinaryUrls.push(uploadRes.secure_url);
+      // Upload to ImageKit
+      const uploadResponse = await imagekit.upload({
+        file: fs.readFileSync(compressedPath),
+        fileName: `${uuid}.jpg`,
+        folder: '/rices/',
+        useUniqueFileName: false,
+        overwriteFile: true
+      });
+
+      if (uploadResponse.url) {
+        uuids.push(`${uuid}.jpg`);
+      }
     }
-    return cloudinaryUrls;
+    return uuids;
   } finally {
     await fs.remove(tempDir.path); // Clean up temp folder
   }
 }
 
-// Helper to upload files to Cloudinary after resizing
-async function uploadToCloudinary(files, docId) {
-  const cloudinaryUrls = [];
+// Helper to process and upload files to ImageKit
+async function uploadToImageKit(files, docId) {
+  const uuids = [];
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
-    const resizedPath = await resizeIfNeeded(file.filepath); // Reuse your own function
-    if (!resizedPath) continue;
 
-    const publicId = `rices/${docId}_${i}`;
-    const uploadRes = await cloudinary.uploader.upload(resizedPath, { public_id: publicId });
-    cloudinaryUrls.push(uploadRes.secure_url);
+    // Generate UUID for filename
+    const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
+
+    // Copy file to local storage with UUID name
+    const ext = path.extname(file.originalFilename || file.newFilename || 'image.png');
+    const localFilename = `${uuid}${ext}`;
+    const localPath = path.join(__dirname, '../public/img', localFilename);
+
+    try {
+      await fs.copy(file.filepath, localPath);
+      console.log(`📁 Saved local copy to ${localPath}`);
+
+      // Compress to 500KB
+      const compressedPath = await compressTo500KB(localPath);
+
+      // Upload to ImageKit
+      const uploadResponse = await imagekit.upload({
+        file: fs.readFileSync(compressedPath),
+        fileName: `${uuid}.jpg`,
+        folder: '/rices/',
+        useUniqueFileName: false,
+        overwriteFile: true
+      });
+
+      if (uploadResponse.url) {
+        uuids.push(`${uuid}.jpg`);
+      }
+    } catch (error) {
+      console.error(`❌ ImageKit upload failed for ${uuid}:`, error);
+    }
   }
-  return cloudinaryUrls;
+  return uuids;
 }
 
 // --- Main serverless handler ---
@@ -235,7 +301,7 @@ module.exports = async (req, res) => {
   //         { $set: { images: cloudinaryUrls } }
   //       );
   //       console.log('☁️ Uploaded to Cloudinary:', cloudinaryUrls);
-  //     }
+  //     }Generate 32-character UUID
 
   //     return res.status(200).json({ success: true, insertedId: result.insertedId, images: cloudinaryUrls });
   //   } catch (e) {
@@ -287,36 +353,25 @@ module.exports = async (req, res) => {
       rice.source_key = getSourceKey(rice);
     
       if (uploadedFiles.length > 0) {
-        await Promise.all(uploadedFiles.map(async (file) => {
-          const ext = path.extname(file.originalFilename || file.newFilename || 'image.png');
-          const safeAuthor = (rice.author || 'anonymous').replace(/\W+/g, '_');
-          const safeWM = (rice.environment.name || 'unknown').replace(/\W+/g, '_');
-          const safeKey = (rice.source_key || 'nokey').replace(/\W+/g, '_');
-          const newName = `${safeAuthor}_${safeWM}_${safeKey}_${Math.random().toString(36).substring(2, 6)}${ext}`;
-          const destPath = path.join(localSaveDir, newName);
-          await fs.copy(file.filepath, destPath);
-          screenshotsLocal.push(destPath);
-          console.log(`📁 Saved local copy to ${destPath}`);
-        }));
-    
-        const localCloudUrls = await uploadToCloudinary(uploadedFiles, rice.source_key || Math.random().toString(36).substring(2, 8));
-        cloudinaryImages.push(...localCloudUrls);
-      } 
+        const uuids = await uploadToImageKit(uploadedFiles, rice.source_key || Math.random().toString(36).substring(2, 8));
+        cloudinaryImages.push(...uuids);
+        // screenshotsLocal is now handled inside uploadToImageKit
+      }
 
       if (urlList.length > 0) {
         screenshotsFromUrls.push(...urlList);
-        const urlCloudUrls = await downloadAndUploadToCloudinary(urlList, rice.source_key || Math.random().toString(36).substring(2, 8));
-        cloudinaryImages.push(...urlCloudUrls);
+        const urlUuids = await downloadAndUploadToImageKit(urlList, rice.source_key || Math.random().toString(36).substring(2, 8));
+        cloudinaryImages.push(...urlUuids);
       }
 
-      rice.screenshots = [...screenshotsLocal, ...screenshotsFromUrls];
+      rice.screenshots = [...screenshotsFromUrls]; // screenshotsLocal now handled in uploadToImageKit
       rice.images = cloudinaryImages;
     
       const db = await getDb();
       const collection = db.collection('rice');
       const result = await collection.insertOne(rice);
     
-      console.log('☁️ Uploaded to Cloudinary:', rice.images);
+      console.log('☁️ Uploaded to ImageKit:', rice.images);
     
       return res.status(200).json({ success: true, insertedId: result.insertedId, images: rice.images });
     } catch (e) {

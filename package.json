@@ -12,6 +12,7 @@
     "cloudinary": "^2.7.0",
     "formidable": "^3.5.4",
     "fs-extra": "^11.3.0",
+    "imagekit": "^6.0.0",
     "mongodb": "^5.7.0",
     "node-fetch": "^2.7.0",
     "sharp": "^0.34.3",

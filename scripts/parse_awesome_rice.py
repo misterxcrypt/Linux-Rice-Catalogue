@@ -46,7 +46,7 @@ def classify_environment(name):
     return {"type": "Unknown", "name": name.strip()}
 
 # --- Main Parsing Function ---
-def parse_awesome_rices(md_path, output_path="formatted_rices.json"):
+def parse_awesome_rices(md_path, output_path="new_formatted_rices.json"):
     with open(md_path, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -88,4 +88,4 @@ def parse_awesome_rices(md_path, output_path="formatted_rices.json"):
     print(f"✅ Parsed {len(results)} entries into {output_path}")
 
 # --- Example Usage ---
-parse_awesome_rices("../data/awesome-rice.md", "../data/formatted_rices.json")
+parse_awesome_rices("../data/awesome-rice.md", "../data/new_formatted_rices.json")

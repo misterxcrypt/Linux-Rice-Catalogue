@@ -95,7 +95,7 @@ async function scrapeRedditPost(url) {
 
     // Handle images
     if (post.url && (post.url.endsWith('.png') || post.url.endsWith('.jpg') || post.url.endsWith('.jpeg'))) {
-      images.push(post.url);
+      images.push(post.url.replace(/&amp;/g, '&'));
     }
 
     // Handle gallery images
@@ -104,7 +104,7 @@ async function scrapeRedditPost(url) {
       for (const item of items) {
         const mediaId = item.media_id;
         if (post.media_metadata[mediaId] && post.media_metadata[mediaId].status === 'valid') {
-          const imgUrl = post.media_metadata[mediaId].s.u.replace(/&/g, '&');
+          const imgUrl = post.media_metadata[mediaId].s.u.replace(/&amp;/g, '&');
           images.push(imgUrl);
         }
       }

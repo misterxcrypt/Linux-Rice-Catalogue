@@ -1,4 +1,5 @@
 // /functions/submitRice.js
+require('dotenv').config();
 const { getDb } = require('../utils/db');
 const fetch = require('node-fetch');
 const { file: tmpFile, dir: tmpDir } = require('tmp-promise');
@@ -103,24 +104,42 @@ function getSourceKey(doc) {
 }
 
 async function downloadAndUploadToImageKit(urls, docId) {
-  const tempDir = await tmpDir({ unsafeCleanup: true });
-  const uuids = [];
+  console.log('🔄 Starting downloadAndUploadToImageKit for URLs:', urls.length);
+  const { path: tempDirPath, cleanup } = await tmpDir({ unsafeCleanup: true });
+  const localSaveDir = path.join(__dirname, '../data/img');
+  console.log('📂 Local save dir:', localSaveDir);
+  await fs.ensureDir(localSaveDir);
+  const results = [];
   try {
     for (let i = 0; i < urls.length; i++) {
-      const url = urls[i];
+      let url = urls[i];
+      // Decode HTML entities in URL
+      url = url.replace(/&/g, '&');
+      console.log(`🌐 Fetching URL: ${url}`);
       const res = await fetch(url);
-      if (!res.ok) continue;
+      if (!res.ok) {
+        console.log(`❌ Fetch failed for ${url}: ${res.status}`);
+        continue;
+      }
 
       // Generate UUID for filename
       const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
 
       const ext = url.split('.').pop().split('?')[0] || 'jpg';
-      const filePath = `${tempDir.path}/img_${i}.${ext}`;
+      const filePath = `${tempDirPath}/img_${i}.${ext}`;
       const buffer = await res.buffer();
       await fs.writeFile(filePath, buffer);
+      console.log(`💾 Downloaded to temp: ${filePath}`);
 
       // Compress to 500KB
       const compressedPath = await compressTo500KB(filePath);
+      console.log(`🗜️ Compressed to: ${compressedPath}`);
+
+      // Save compressed image to local storage
+      const localFilename = `${uuid}.jpg`;
+      const localPath = path.join(localSaveDir, localFilename);
+      await fs.copy(compressedPath, localPath);
+      console.log(`📁 Saved local copy to ${localPath}`);
 
       // Upload to ImageKit
       const uploadResponse = await imagekit.upload({
@@ -132,28 +151,36 @@ async function downloadAndUploadToImageKit(urls, docId) {
       });
 
       if (uploadResponse.url) {
-        uuids.push(`${uuid}.jpg`);
+        console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
+        results.push({ uuid: `${uuid}.jpg`, localPath });
+      } else {
+        console.log('❌ ImageKit upload failed, no URL');
       }
     }
-    return uuids;
+    console.log('✅ downloadAndUploadToImageKit completed, results:', results.length);
+    return results;
   } finally {
-    await fs.remove(tempDir.path); // Clean up temp folder
+    cleanup(); // Clean up temp folder
   }
 }
 
 // Helper to process and upload files to ImageKit
 async function uploadToImageKit(files, docId) {
-  const uuids = [];
+  console.log('🔄 Starting uploadToImageKit for files:', files.length);
+  const localSaveDir = path.join(__dirname, '../data/img');
+  console.log('📂 Local save dir:', localSaveDir);
+  await fs.ensureDir(localSaveDir);
+  const results = [];
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
+    console.log(`📎 Processing file: ${file.originalFilename || file.newFilename}`);
 
     // Generate UUID for filename
     const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
 
     // Copy file to local storage with UUID name
-    const ext = path.extname(file.originalFilename || file.newFilename || 'image.png');
-    const localFilename = `${uuid}${ext}`;
-    const localPath = path.join(__dirname, '../public/img', localFilename);
+    const localFilename = `${uuid}.jpg`;
+    const localPath = path.join(localSaveDir, localFilename);
 
     try {
       await fs.copy(file.filepath, localPath);
@@ -161,6 +188,7 @@ async function uploadToImageKit(files, docId) {
 
       // Compress to 500KB
       const compressedPath = await compressTo500KB(localPath);
+      console.log(`🗜️ Compressed to: ${compressedPath}`);
 
       // Upload to ImageKit
       const uploadResponse = await imagekit.upload({
@@ -172,13 +200,17 @@ async function uploadToImageKit(files, docId) {
       });
 
       if (uploadResponse.url) {
-        uuids.push(`${uuid}.jpg`);
+        console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
+        results.push({ uuid: `${uuid}.jpg`, localPath });
+      } else {
+        console.log('❌ ImageKit upload failed, no URL');
       }
     } catch (error) {
       console.error(`❌ ImageKit upload failed for ${uuid}:`, error);
     }
   }
-  return uuids;
+  console.log('✅ uploadToImageKit completed, results:', results.length);
+  return results;
 }
 
 // --- Main serverless handler ---
@@ -196,119 +228,8 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  // try {
-  //   // Debug: log the incoming request body
-  //   console.log('📦 Incoming req.body:', req.body);
-  //   const rice = req.body;
-  //   rice.status = 'pending';
-  //   rice.source_key = getSourceKey(rice);
-
-  //   // Always save the original user input in screenshots
-  //   console.log('🔍 rice.images before normalization:', rice.images);
-  //   const screenshots = Array.isArray(rice.images) ? rice.images : (rice.images ? [rice.images] : []);
-  //   rice.screenshots = screenshots;
-  //   // Remove images from rice before insert, so it doesn't overwrite screenshots
-  //   delete rice.images;
-  //   console.log('📥 Submitting rice with screenshots:', screenshots);
-
-  //   const db = await getDb();
-  //   const collection = db.collection('rice');
-  //   const result = await collection.insertOne(rice);
-
-  //   let cloudinaryUrls = [];
-  //   if (screenshots.length > 0) {
-  //     cloudinaryUrls = await downloadAndUploadToCloudinary(screenshots, result.insertedId.toString());
-  //     await collection.updateOne(
-  //       { _id: result.insertedId },
-  //       { $set: { images: cloudinaryUrls } }
-  //     );
-  //     console.log('☁️ Uploaded to Cloudinary:', cloudinaryUrls);
-  //   }
-
-  //   return res.status(200).json({ success: true, insertedId: result.insertedId, images: cloudinaryUrls });
-  // } catch (err) {
-  //   console.error('❌ Failed to submit rice:', err);
-  //   return res.status(500).json({ error: 'Failed to submit rice' });
-  // }
-
   const form = formidable({ multiples: true, keepExtensions: true });
 
-  // form.parse(req, async (err, fields, files) => {
-  //   res.setHeader('Content-Type', 'application/json');
-  //   if (err) {
-  //     console.error('❌ Form parsing error:', err);
-  //     return res.status(400).json({ error: 'Invalid form submission' });
-  //   }
-
-  //   try {
-  //     const localSaveDir = path.join(__dirname, '../data/img'); // Adjust if needed
-  //     await fs.ensureDir(localSaveDir);
-      
-  //     // Normalize screenshots array from uploaded files
-  //     const uploadedFiles = Array.isArray(files.screenshots)
-  //     ? files.screenshots
-  //     : files.screenshots
-  //     ? [files.screenshots]
-  //     : [];
-
-  //     // Debug logs
-  //     console.log('📬 Fields:', fields);
-  //     console.log('📎 Uploaded Files:', uploadedFiles.map(f => f.originalFilename || f.filepath));
-
-  //     const getField = (key) => fields[key]?.[0]?.trim() || '';
-
-  //     const rice = {
-  //       author: getField('author'),
-  //       title: getField('title'),
-  //       distro: getField('distro'),
-  //       dotfiles: getField('dotfiles'),
-  //       reddit_post: getField('reddit_post'),
-  //       environment: {
-  //         type: getField('type'),
-  //         name: getField('wmName'),
-  //       },
-  //       status: 'pending',
-  //       screenshots: [], // for record-keeping only
-  //     };
-
-  //     rice.source_key = getSourceKey(rice);
-  //     const screenshotPaths = [];
-
-  //     await Promise.all(uploadedFiles.map(async (file) => {
-  //       const ext = path.extname(file.originalFilename || file.newFilename || 'image.png');
-  //       const safeAuthor = (rice.author || 'anonymous').replace(/\W+/g, '_');
-  //       const safeWM = (rice.environment.name || 'unknown').replace(/\W+/g, '_');
-  //       const safeKey = (rice.source_key || 'nokey').replace(/\W+/g, '_');
-  //       const newName = `${safeAuthor}_${safeWM}_${safeKey}${ext}`;
-  //       const destPath = path.join(localSaveDir, newName);
-  //       await fs.copy(file.filepath, destPath);
-  //       screenshotPaths.push(destPath);
-  //       console.log(`📁 Saved local copy to ${destPath}`);
-  //     }));
-
-  //     rice.screenshots = screenshotPaths;
-  //     // rice.screenshots = uploadedFiles.map(file => file.originalFilename || file.newFilename || file.filepath); // for record-keeping only
-
-  //     const db = await getDb();
-  //     const collection = db.collection('rice');
-  //     const result = await collection.insertOne(rice);
-
-  //     let cloudinaryUrls = [];
-  //     if (uploadedFiles.length > 0) {
-  //       cloudinaryUrls = await uploadToCloudinary(uploadedFiles, result.insertedId.toString());
-  //       await collection.updateOne(
-  //         { _id: result.insertedId },
-  //         { $set: { images: cloudinaryUrls } }
-  //       );
-  //       console.log('☁️ Uploaded to Cloudinary:', cloudinaryUrls);
-  //     }Generate 32-character UUID
-
-  //     return res.status(200).json({ success: true, insertedId: result.insertedId, images: cloudinaryUrls });
-  //   } catch (e) {
-  //     console.error('❌ Failed to submit rice:', e);
-  //     return res.status(500).json({ error: 'Failed to submit rice' });
-  //   }
-  // });
   form.parse(req, async (err, fields, files) => {
     res.setHeader('Content-Type', 'application/json');
     if (err) {
@@ -332,8 +253,8 @@ module.exports = async (req, res) => {
 
       const screenshotsLocal = [];
       const screenshotsFromUrls = [];
-      let cloudinaryImages = [];
-    
+      let imagekitImages = [];
+
       const rice = {
         author: getField('author'),
         theme: getField('theme'),
@@ -349,30 +270,36 @@ module.exports = async (req, res) => {
         screenshots: [],
         images: []              // Set later
       };
-    
+
       rice.source_key = getSourceKey(rice);
-    
+
       if (uploadedFiles.length > 0) {
-        const uuids = await uploadToImageKit(uploadedFiles, rice.source_key || Math.random().toString(36).substring(2, 8));
-        cloudinaryImages.push(...uuids);
-        // screenshotsLocal is now handled inside uploadToImageKit
+        console.log('📤 Processing uploaded files:', uploadedFiles.length);
+        const results = await uploadToImageKit(uploadedFiles, rice.source_key || Math.random().toString(36).substring(2, 8));
+        imagekitImages.push(...results.map(r => r.uuid));
+        screenshotsLocal.push(...results.map(r => r.localPath));
+        console.log('✅ Processed uploaded files, results:', results.length);
       }
 
       if (urlList.length > 0) {
+        console.log('📥 Processing URLs:', urlList);
         screenshotsFromUrls.push(...urlList);
-        const urlUuids = await downloadAndUploadToImageKit(urlList, rice.source_key || Math.random().toString(36).substring(2, 8));
-        cloudinaryImages.push(...urlUuids);
+        const results = await downloadAndUploadToImageKit(urlList, rice.source_key || Math.random().toString(36).substring(2, 8));
+        imagekitImages.push(...results.map(r => r.uuid));
+        screenshotsLocal.push(...results.map(r => r.localPath));
+        console.log('✅ Processed URLs, results:', results.length);
       }
 
-      rice.screenshots = [...screenshotsFromUrls]; // screenshotsLocal now handled in uploadToImageKit
-      rice.images = cloudinaryImages;
+      rice.screenshots = [...screenshotsFromUrls];
+      rice.images = imagekitImages;
     
       const db = await getDb();
       const collection = db.collection('rice');
       const result = await collection.insertOne(rice);
-    
+
       console.log('☁️ Uploaded to ImageKit:', rice.images);
-    
+      console.log('📁 Saved local images:', screenshotsLocal);
+
       return res.status(200).json({ success: true, insertedId: result.insertedId, images: rice.images });
     } catch (e) {
       console.error('❌ Failed to submit rice:', e);

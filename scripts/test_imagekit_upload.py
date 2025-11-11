@@ -21,7 +21,7 @@ imagekit = ImageKit(
 def test_single_upload():
     """Test uploading a single image and print the response"""
     # Get the first image from public/img
-    img_dir = Path('../public/img')
+    img_dir = Path('../data/img')
     image_files = list(img_dir.glob('*'))
     image_files = [f for f in image_files if f.is_file() and f.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp'}]
 

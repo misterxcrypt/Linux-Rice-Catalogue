@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "cloudinary": "^2.7.0",
+    "dotenv": "^17.2.3",
     "formidable": "^3.5.4",
     "fs-extra": "^11.3.0",
     "imagekit": "^6.0.0",

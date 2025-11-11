@@ -1,16 +1,11 @@
 import os, json, re
-try:
-    import praw
-except ImportError:
-    # Fallback for environments without praw
-    praw = None
+import praw
 
-if praw is not None:
-    reddit = praw.Reddit(
-        client_id=os.getenv("REDDIT_CLIENT_ID"),
-        client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
-        user_agent=os.getenv("REDDIT_USER_AGENT")
-    )
+reddit = praw.Reddit(
+    client_id=os.getenv("REDDIT_CLIENT_ID"),
+    client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
+    user_agent=os.getenv("REDDIT_USER_AGENT")
+)
 
 def normalize(text):
     return text.lower().replace('-', ' ').replace('_', ' ')

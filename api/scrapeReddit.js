@@ -26,7 +26,7 @@ async function scrapeRedditPost(url) {
 
     const response = await fetch(jsonUrl, {
       headers: {
-        'User-Agent': 'rice-gallery-bot/1.0'
+        'User-Agent': 'linuxrice by u/misterxcrypt'
       }
     });
 

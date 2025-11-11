@@ -317,7 +317,7 @@ module.exports = async (req, res) => {
     }
 
     try {
-      const localSaveDir = path.join(__dirname, '../public/img');
+      const localSaveDir = path.join(__dirname, '../data/img');
       await fs.ensureDir(localSaveDir);
     
       const uploadedFiles = Array.isArray(files.screenshots)

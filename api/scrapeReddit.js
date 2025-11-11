@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const pythonPath = path.join(__dirname, '..', '.venv', 'bin', 'python'); // or 'python' based on environment
+    const pythonPath = path.join(__dirname, '..', 'scripts', '.venv', 'bin', 'python'); // Use scripts/.venv
     const scriptPath = path.join(__dirname, '..', 'scripts', 'scrape_reddit.py');
 
     const python = spawn(pythonPath, [scriptPath, url]);
@@ -25,12 +25,17 @@ module.exports = async (req, res) => {
     python.stderr.on('data', chunk => error += chunk);
 
     python.on('close', code => {
+      console.log('📊 Python script output:', data);
+      // console.log('❌ Python script errors:', error);
+      // console.log('🔢 Exit code:', code);
+
       if (code !== 0 || error) {
         console.error('❌ Python Error:', error);
         return res.status(500).json({ error: 'Python scraping failed' });
       }
       try {
         const parsed = JSON.parse(data);
+        console.log('✅ Parsed data:', parsed);
         return res.status(200).json(parsed);
       } catch (err) {
         console.error('❌ JSON Parse Error:', err);

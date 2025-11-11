@@ -106,9 +106,6 @@ function getSourceKey(doc) {
 async function downloadAndUploadToImageKit(urls, docId) {
   console.log('🔄 Starting downloadAndUploadToImageKit for URLs:', urls.length);
   const { path: tempDirPath, cleanup } = await tmpDir({ unsafeCleanup: true });
-  const localSaveDir = path.join(__dirname, '../data/img');
-  console.log('📂 Local save dir:', localSaveDir);
-  await fs.ensureDir(localSaveDir);
   const results = [];
   try {
     for (let i = 0; i < urls.length; i++) {
@@ -135,12 +132,6 @@ async function downloadAndUploadToImageKit(urls, docId) {
       const compressedPath = await compressTo500KB(filePath);
       console.log(`🗜️ Compressed to: ${compressedPath}`);
 
-      // Save compressed image to local storage
-      const localFilename = `${uuid}.jpg`;
-      const localPath = path.join(localSaveDir, localFilename);
-      await fs.copy(compressedPath, localPath);
-      console.log(`📁 Saved local copy to ${localPath}`);
-
       // Upload to ImageKit
       const uploadResponse = await imagekit.upload({
         file: fs.readFileSync(compressedPath),
@@ -152,7 +143,7 @@ async function downloadAndUploadToImageKit(urls, docId) {
 
       if (uploadResponse.url) {
         console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
-        results.push({ uuid: `${uuid}.jpg`, localPath });
+        results.push({ uuid: `${uuid}.jpg` });
       } else {
         console.log('❌ ImageKit upload failed, no URL');
       }
@@ -167,27 +158,23 @@ async function downloadAndUploadToImageKit(urls, docId) {
 // Helper to process and upload files to ImageKit
 async function uploadToImageKit(files, docId) {
   console.log('🔄 Starting uploadToImageKit for files:', files.length);
-  const localSaveDir = path.join(__dirname, '../data/img');
-  console.log('📂 Local save dir:', localSaveDir);
-  await fs.ensureDir(localSaveDir);
+  const { path: tempDirPath, cleanup } = await tmpDir({ unsafeCleanup: true });
   const results = [];
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    console.log(`📎 Processing file: ${file.originalFilename || file.newFilename}`);
+  try {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      console.log(`📎 Processing file: ${file.originalFilename || file.newFilename}`);
 
-    // Generate UUID for filename
-    const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
+      // Generate UUID for filename
+      const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
 
-    // Copy file to local storage with UUID name
-    const localFilename = `${uuid}.jpg`;
-    const localPath = path.join(localSaveDir, localFilename);
-
-    try {
-      await fs.copy(file.filepath, localPath);
-      console.log(`📁 Saved local copy to ${localPath}`);
+      // Copy file to temp directory
+      const tempPath = path.join(tempDirPath, `${uuid}_temp.jpg`);
+      await fs.copy(file.filepath, tempPath);
+      console.log(`📁 Copied to temp: ${tempPath}`);
 
       // Compress to 500KB
-      const compressedPath = await compressTo500KB(localPath);
+      const compressedPath = await compressTo500KB(tempPath);
       console.log(`🗜️ Compressed to: ${compressedPath}`);
 
       // Upload to ImageKit
@@ -201,16 +188,16 @@ async function uploadToImageKit(files, docId) {
 
       if (uploadResponse.url) {
         console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
-        results.push({ uuid: `${uuid}.jpg`, localPath });
+        results.push({ uuid: `${uuid}.jpg` });
       } else {
         console.log('❌ ImageKit upload failed, no URL');
       }
-    } catch (error) {
-      console.error(`❌ ImageKit upload failed for ${uuid}:`, error);
     }
+    console.log('✅ uploadToImageKit completed, results:', results.length);
+    return results;
+  } finally {
+    cleanup(); // Clean up temp folder
   }
-  console.log('✅ uploadToImageKit completed, results:', results.length);
-  return results;
 }
 
 // --- Main serverless handler ---
@@ -238,20 +225,16 @@ module.exports = async (req, res) => {
     }
 
     try {
-      const localSaveDir = path.join(__dirname, '../data/img');
-      await fs.ensureDir(localSaveDir);
-    
       const uploadedFiles = Array.isArray(files.screenshots)
         ? files.screenshots
         : files.screenshots
         ? [files.screenshots]
         : [];
-    
+
       const getField = (key) => fields[key]?.[0]?.trim() || '';
       const urlFields = fields.urls || []; // Each entry is a single URL string
       const urlList = Array.isArray(urlFields) ? urlFields : [urlFields];
 
-      const screenshotsLocal = [];
       const screenshotsFromUrls = [];
       let imagekitImages = [];
 
@@ -277,7 +260,6 @@ module.exports = async (req, res) => {
         console.log('📤 Processing uploaded files:', uploadedFiles.length);
         const results = await uploadToImageKit(uploadedFiles, rice.source_key || Math.random().toString(36).substring(2, 8));
         imagekitImages.push(...results.map(r => r.uuid));
-        screenshotsLocal.push(...results.map(r => r.localPath));
         console.log('✅ Processed uploaded files, results:', results.length);
       }
 
@@ -286,19 +268,17 @@ module.exports = async (req, res) => {
         screenshotsFromUrls.push(...urlList);
         const results = await downloadAndUploadToImageKit(urlList, rice.source_key || Math.random().toString(36).substring(2, 8));
         imagekitImages.push(...results.map(r => r.uuid));
-        screenshotsLocal.push(...results.map(r => r.localPath));
         console.log('✅ Processed URLs, results:', results.length);
       }
 
       rice.screenshots = [...screenshotsFromUrls];
       rice.images = imagekitImages;
-    
+
       const db = await getDb();
       const collection = db.collection('rice');
       const result = await collection.insertOne(rice);
 
       console.log('☁️ Uploaded to ImageKit:', rice.images);
-      console.log('📁 Saved local images:', screenshotsLocal);
 
       return res.status(200).json({ success: true, insertedId: result.insertedId, images: rice.images });
     } catch (e) {

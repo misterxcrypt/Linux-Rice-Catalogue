@@ -298,15 +298,19 @@
         }
 
         try {
-            // Client-side scraping using Reddit's JSON API
+            // Client-side scraping using CORS proxy
             const jsonUrl = redditUrl.replace(/\/$/, '') + '/.json';
+            const corsProxy = 'https://api.allorigins.win/get?url=';
+            const proxiedUrl = corsProxy + encodeURIComponent(jsonUrl);
 
-            const response = await fetch(jsonUrl);
+            const response = await fetch(proxiedUrl);
             if (!response.ok) {
-                throw new Error(`Reddit API returned ${response.status}`);
+                throw new Error(`CORS proxy returned ${response.status}`);
             }
 
-            const data = await response.json();
+            const proxyData = await response.json();
+            const data = JSON.parse(proxyData.contents);
+
             const post = data[0].data.children[0].data;
 
             // Extract data from Reddit post

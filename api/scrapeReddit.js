@@ -13,7 +13,11 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const pythonPath = path.join(__dirname, '..', 'scripts', '.venv', 'bin', 'python'); // Use scripts/.venv
+    // Use virtual environment Python for local development, system Python for Vercel
+    const isVercel = process.env.VERCEL || process.env.LAMBDA_TASK_ROOT;
+    const pythonPath = isVercel
+      ? 'python3'  // Vercel system Python
+      : path.join(__dirname, '..', 'scripts', '.venv', 'bin', 'python'); // Local venv
     const scriptPath = path.join(__dirname, '..', 'scripts', 'scrape_reddit.py');
 
     const python = spawn(pythonPath, [scriptPath, url]);

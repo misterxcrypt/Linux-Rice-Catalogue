@@ -28,8 +28,13 @@ module.exports = async (req, res) => {
       }
     });
 
+    console.log('📊 Response status:', response.status);
+    console.log('📊 Response headers:', Object.fromEntries(response.headers.entries()));
+
     if (!response.ok) {
-      throw new Error(`Reddit API returned ${response.status}`);
+      const errorText = await response.text();
+      console.log('❌ Error response body:', errorText);
+      throw new Error(`Reddit API returned ${response.status}: ${errorText}`);
     }
 
     const data = await response.json();

@@ -298,18 +298,15 @@
         }
 
         try {
-            // Client-side scraping using CORS proxy
+            // Client-side scraping using our own proxy API
             const jsonUrl = redditUrl.replace(/\/$/, '') + '/.json';
-            const corsProxy = 'https://api.allorigins.win/get?url=';
-            const proxiedUrl = corsProxy + encodeURIComponent(jsonUrl);
 
-            const response = await fetch(proxiedUrl);
+            const response = await fetch(`/api/proxy?url=${encodeURIComponent(jsonUrl)}`);
             if (!response.ok) {
-                throw new Error(`CORS proxy returned ${response.status}`);
+                throw new Error(`Proxy API returned ${response.status}`);
             }
 
-            const proxyData = await response.json();
-            const data = JSON.parse(proxyData.contents);
+            const data = await response.json();
 
             const post = data[0].data.children[0].data;
 

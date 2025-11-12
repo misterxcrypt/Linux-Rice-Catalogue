@@ -516,10 +516,11 @@
             try {
                 const res = await fetch('/api/getRices');
                 const data = await res.json();
-                // Flatten wm for filtering
+                // Flatten wm for filtering and transform images
                 ricesData = data.map(rice => ({
                     ...rice,
-                    wm: (rice.environment && rice.environment.name) || ''
+                    wm: (rice.environment && rice.environment.name) || '',
+                    images: rice.images ? rice.images.map(([filename, fileId]) => filename) : []
                 }));
             } catch (e) {
                 console.error('Failed to fetch rices:', e);

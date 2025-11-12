@@ -143,7 +143,7 @@ async function downloadAndUploadToImageKit(urls, docId) {
 
       if (uploadResponse.url) {
         console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
-        results.push({ uuid: `${uuid}.jpg` });
+        results.push({ filename: `${uuid}.jpg`, fileId: uploadResponse.fileId });
       } else {
         console.log('❌ ImageKit upload failed, no URL');
       }
@@ -188,7 +188,7 @@ async function uploadToImageKit(files, docId) {
 
       if (uploadResponse.url) {
         console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
-        results.push({ uuid: `${uuid}.jpg` });
+        results.push({ filename: `${uuid}.jpg`, fileId: uploadResponse.fileId });
       } else {
         console.log('❌ ImageKit upload failed, no URL');
       }
@@ -259,7 +259,7 @@ module.exports = async (req, res) => {
       if (uploadedFiles.length > 0) {
         console.log('📤 Processing uploaded files:', uploadedFiles.length);
         const results = await uploadToImageKit(uploadedFiles, rice.source_key || Math.random().toString(36).substring(2, 8));
-        imagekitImages.push(...results.map(r => r.uuid));
+        imagekitImages.push(...results.map(r => [r.filename, r.fileId]));
         console.log('✅ Processed uploaded files, results:', results.length);
       }
 
@@ -267,7 +267,7 @@ module.exports = async (req, res) => {
         console.log('📥 Processing URLs:', urlList);
         screenshotsFromUrls.push(...urlList);
         const results = await downloadAndUploadToImageKit(urlList, rice.source_key || Math.random().toString(36).substring(2, 8));
-        imagekitImages.push(...results.map(r => r.uuid));
+        imagekitImages.push(...results.map(r => [r.filename, r.fileId]));
         console.log('✅ Processed URLs, results:', results.length);
       }
 

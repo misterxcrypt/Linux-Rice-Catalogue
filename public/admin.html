@@ -99,6 +99,19 @@
             </div>
         </section>
     </div>
+
+    <!-- Delete Confirmation Dialog -->
+    <div id="delete-dialog" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+      <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
+        <h2 class="text-2xl font-bold mb-4 text-white">Delete Image</h2>
+        <p class="text-gray-300 mb-6 text-center">Are you sure you want to delete this image? This action cannot be undone.</p>
+        <div class="flex gap-4">
+          <button id="delete-confirm" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Delete</button>
+          <button id="delete-cancel" class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <script>
         // document.getElementById('toggle-chart-type').addEventListener('click', () => {
         //     currentChartType = currentChartType === 'wms' ? 'themes' : 'wms';
@@ -151,6 +164,48 @@
             alert(`❌ Failed to update status: ${error.message}`);
             }
         }
+        // Function to update rice details
+        async function updateRiceDetails(id, data) {
+            try {
+            const res = await fetch('/api/updateRice', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+                },
+                body: JSON.stringify({ _id: id, ...data })
+            });
+            const result = await res.json();
+            if (!res.ok) {
+                throw new Error(result.error || 'Failed to update rice');
+            }
+            return result;
+            } catch (error) {
+            console.error(`❌ Error updating rice ${id}:`, error);
+            alert(`❌ Failed to update rice: ${error.message}`);
+            }
+        }
+        // Function to delete image from ImageKit
+        async function deleteImage(url) {
+            try {
+            const res = await fetch('/api/deleteImage', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+                },
+                body: JSON.stringify({ url })
+            });
+            const result = await res.json();
+            if (!res.ok) {
+                throw new Error(result.error || 'Failed to delete image');
+            }
+            return result;
+            } catch (error) {
+            console.error(`❌ Error deleting image ${url}:`, error);
+            alert(`❌ Failed to delete image: ${error.message}`);
+            }
+        }
         // Fetch and render pending rices
         async function fetchPendingRices() {
             const res = await fetch('/api/getPendingRices', {
@@ -165,6 +220,143 @@
             const rices = await res.json();
             renderPendingRices(rices);
         }
+        // HTML templates
+        const viewHTML = (rice) => `
+            <div class="flex-1">
+            <div class="font-bold text-lg text-white">${rice.author || ''}</div>
+            <div class="font-mono text-sm text-gray-400">
+                ${(rice.environment && rice.environment.name) || ''}
+                ${rice.distro ? '· ' + rice.distro : ''}
+            </div>
+            ${rice.dotfiles ? `
+                <div class="mt-2">
+                    <a href="${rice.dotfiles}" target="_blank" class="text-blue-400 underline">Dotfiles</a>
+                </div>` : ''}
+            ${rice.reddit_post ? `
+                <div class="mt-1">
+                    <a href="${rice.reddit_post}" target="_blank" class="text-orange-400 underline">Reddit Post</a>
+                </div>` : ''}
+            <div class="flex gap-2 mt-2">
+                ${(rice.images || []).slice(0, 2).map(image =>
+                    `<img src="${image.url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}
+            </div>
+            </div>
+            <div class="flex gap-2">
+                <button class="edit-btn px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700" data-id="${rice._id}">Edit</button>
+                <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
+                <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
+            </div>
+        `;
+        const editHTML = (rice) => `
+            <div class="flex-1">
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Author</label>
+                <input type="text" value="${rice.author || ''}" class="author-input w-full p-2 rounded bg-gray-700 text-white" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Environment</label>
+                <input type="text" value="${rice.environment && rice.environment.name || ''}" class="env-input w-full p-2 rounded bg-gray-700 text-white" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Distro</label>
+                <input type="text" value="${rice.distro || ''}" class="distro-input w-full p-2 rounded bg-gray-700 text-white" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Dotfiles</label>
+                <input type="url" value="${rice.dotfiles || ''}" class="dotfiles-input w-full p-2 rounded bg-gray-700 text-white" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Reddit Post</label>
+                <input type="url" value="${rice.reddit_post || ''}" class="reddit-input w-full p-2 rounded bg-gray-700 text-white" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Images</label>
+                <div class="flex gap-2 mt-2 images-container">
+                    ${(rice.images || []).map((url, index) => `
+                        <div class="relative">
+                            <img src="${url}" class="w-20 h-12 object-cover rounded-md" />
+                            <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${url}">×</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            </div>
+            <div class="flex gap-2">
+                <button class="save-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Save</button>
+                <button class="cancel-btn px-4 py-2 rounded-lg bg-gray-600 text-white font-semibold hover:bg-gray-700" data-id="${rice._id}">Cancel</button>
+            </div>
+        `;
+        function attachViewHandlers(div, rice) {
+            const editBtn = div.querySelector('.edit-btn');
+            const approveBtn = div.querySelector('.approve-btn');
+            const rejectBtn = div.querySelector('.reject-btn');
+            editBtn.addEventListener('click', () => {
+                div.innerHTML = editHTML(rice);
+                attachEditHandlers(div, rice);
+            });
+            approveBtn.addEventListener('click', async () => {
+                approveBtn.disabled = true;
+                approveBtn.textContent = 'Approving...';
+                await updateRiceStatus(approveBtn.dataset.id, 'approved');
+                fetchPendingRices();
+            });
+            rejectBtn.addEventListener('click', async () => {
+                rejectBtn.disabled = true;
+                rejectBtn.textContent = 'Rejecting...';
+                await updateRiceStatus(rejectBtn.dataset.id, 'rejected');
+                fetchPendingRices();
+            });
+        }
+        function attachEditHandlers(div, rice) {
+            let currentImages = [...(rice.images || [])];
+            const saveBtn = div.querySelector('.save-btn');
+            const cancelBtn = div.querySelector('.cancel-btn');
+            saveBtn.addEventListener('click', async () => {
+                const author = div.querySelector('.author-input').value;
+                const env = div.querySelector('.env-input').value;
+                const distro = div.querySelector('.distro-input').value;
+                const dotfiles = div.querySelector('.dotfiles-input').value;
+                const reddit = div.querySelector('.reddit-input').value;
+                const data = {
+                    author,
+                    environment: { type: rice.environment.type, name: env },
+                    distro,
+                    dotfiles,
+                    reddit_post: reddit,
+                    images: currentImages.map(image => {
+                        const filename = image.url.split('/').pop();
+                        return [filename, image.fileId];
+                    })
+                };
+                await updateRiceDetails(rice._id, data);
+                // Refresh the entire list with updated data from DB
+                fetchPendingRices();
+            });
+            cancelBtn.addEventListener('click', () => {
+                div.innerHTML = viewHTML(rice);
+                attachViewHandlers(div, rice);
+            });
+            // Image deletion handlers
+            function updateImagesContainer(images) {
+                const container = div.querySelector('.images-container');
+                container.innerHTML = images.map((image, index) => `
+                    <div class="relative">
+                        <img src="${image.url}" class="w-20 h-12 object-cover rounded-md" />
+                        ${image.fileId ? `<button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>` : ''}
+                    </div>
+                `).join('');
+                // Re-attach delete handlers
+                div.querySelectorAll('.delete-image-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const index = parseInt(btn.dataset.index);
+                        const url = btn.dataset.url;
+                        pendingDelete = { index, url, currentImages, updateImagesContainer };
+                        deleteDialog.classList.replace('hidden', 'flex');
+                    });
+                });
+            }
+            updateImagesContainer(currentImages); // initial attach
+        }
         function renderPendingRices(rices) {
             const list = document.getElementById('pending-list');
             if (!rices.length) {
@@ -175,53 +367,10 @@
             rices.forEach(rice => {
                 const div = document.createElement('div');
                 div.className = 'glass-panel p-4 rounded-lg flex flex-col md:flex-row md:items-center gap-4';
-                div.innerHTML = `
-                    <div class="flex-1">
-                    <div class="font-bold text-lg text-white">${rice.author || ''}</div>
-                    <div class="font-mono text-sm text-gray-400">
-                        ${(rice.environment && rice.environment.name) || ''} 
-                        ${rice.distro ? '· ' + rice.distro : ''}
-                    </div>
-
-                    ${rice.dotfiles ? `
-                        <div class="mt-2">
-                            <a href="${rice.dotfiles}" target="_blank" class="text-blue-400 underline">Dotfiles</a>
-                        </div>` : ''}
-
-                    ${rice.reddit_post ? `
-                        <div class="mt-1">
-                            <a href="${rice.reddit_post}" target="_blank" class="text-orange-400 underline">Reddit Post</a>
-                        </div>` : ''}
-
-                    <div class="flex gap-2 mt-2">
-                        ${(rice.images || []).slice(0, 2).map(url =>
-                            `<img src="${url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}
-                    </div>
-                </div>
-                <div class="flex gap-2">
-                    <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
-                    <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
-                </div>
-                `;
+                div.innerHTML = viewHTML(rice);
                 list.appendChild(div);
-            });
-            // Attach approve/reject handlers
-            list.querySelectorAll('.approve-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                btn.disabled = true;
-                btn.textContent = 'Approving...';
-                await updateRiceStatus(btn.dataset.id, 'approved');
-                fetchPendingRices();
-            });
-            });
-
-            list.querySelectorAll('.reject-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                btn.disabled = true;
-                btn.textContent = 'Rejecting...';
-                await updateRiceStatus(btn.dataset.id, 'rejected');
-                fetchPendingRices();
-            });
+                div.rice = rice;
+                attachViewHandlers(div, rice);
             });
         }
 
@@ -366,6 +515,32 @@
             localStorage.removeItem('adminToken');
             window.location.href = '/';
         });
+        // Delete dialog handlers
+        const deleteDialog = document.getElementById('delete-dialog');
+        const deleteConfirm = document.getElementById('delete-confirm');
+        const deleteCancel = document.getElementById('delete-cancel');
+        let pendingDelete = null;
+
+        deleteConfirm.addEventListener('click', async () => {
+            if (pendingDelete) {
+                const { index, url, currentImages, updateImagesContainer } = pendingDelete;
+                try {
+                    await deleteImage(url);
+                    currentImages.splice(index, 1);
+                    updateImagesContainer(currentImages);
+                } catch (error) {
+                    // error already alerted
+                }
+                pendingDelete = null;
+            }
+            deleteDialog.classList.replace('flex', 'hidden');
+        });
+
+        deleteCancel.addEventListener('click', () => {
+            pendingDelete = null;
+            deleteDialog.classList.replace('flex', 'hidden');
+        });
+
         // On page load
         fetchPendingRices();
     </script>

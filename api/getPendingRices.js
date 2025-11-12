@@ -27,12 +27,25 @@ module.exports = async (req, res) => {
     const db = await getDb();
     const rices = await db.collection('rice').find({ status: 'pending' }).toArray();
 
-    // Transform image filenames to ImageKit URLs
+    // Transform images to objects with url and fileId
     const transformedRices = rices.map(rice => ({
       ...rice,
-      images: rice.images ? rice.images.map(filename =>
-        `https://ik.imagekit.io/y1n9qg16a/rices/${filename}`
-      ) : []
+      images: rice.images ? rice.images.map(image => {
+        if (Array.isArray(image)) {
+          // New format: [filename, fileId]
+          const [filename, fileId] = image;
+          return {
+            url: `https://ik.imagekit.io/y1n9qg16a/rices/${filename}`,
+            fileId
+          };
+        } else {
+          // Old format: filename string
+          return {
+            url: `https://ik.imagekit.io/y1n9qg16a/rices/${image}`,
+            fileId: null // No fileId stored for old images
+          };
+        }
+      }) : []
     }));
 
     return res.status(200).json(transformedRices);

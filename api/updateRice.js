@@ -1,6 +1,7 @@
 // /functions/updateRice.js
 // Serverless function to update/approve a rice (admin only)
 const { getDb } = require('../utils/db');
+const { ObjectId } = require('mongodb');
 
 // Placeholder: In production, validate token properly
 function isAuthorized(req) {
@@ -22,9 +23,9 @@ module.exports = async (req, res) => {
   }
   try {
     const db = await getDb();
-    await db.collection('rices').updateOne({ _id }, { $set: update });
+    await db.collection('rice').updateOne({ _id: new ObjectId(_id) }, { $set: update });
     return res.status(200).json({ success: true });
   } catch (err) {
     return res.status(500).json({ error: 'Failed to update rice' });
   }
-}; 
+};

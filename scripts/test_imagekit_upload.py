@@ -21,7 +21,7 @@ imagekit = ImageKit(
 def test_single_upload():
     """Test uploading a single image and print the response"""
     # Get the first image from public/img
-    img_dir = Path('../data/img')
+    img_dir = Path('../data/temp')
     image_files = list(img_dir.glob('*'))
     image_files = [f for f in image_files if f.is_file() and f.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp'}]
 
@@ -69,9 +69,9 @@ def test_single_upload():
             upload_response = upload_response.json()
 
         print("✅ Upload successful!")
-        print("📋 Response type:", type(upload_response))
-        print("📋 Response content:")
-        print(upload_response)
+        print("📋 Full response:")
+        import json
+        print(json.dumps(upload_response, indent=2))
 
         # Try to access different possible response formats
         if hasattr(upload_response, 'url'):

@@ -17,62 +17,69 @@ const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
 });
 
-async function compressTo500KB(filePath) {
-  try {
-    const stats = await fs.stat(filePath);
-    const targetSize = 500 * 1024; // 500KB in bytes
+async function compressTo500KBInternal(filePath) {
+  const stats = await fs.stat(filePath);
+  const targetSize = 500 * 1024; // 500KB in bytes
 
-    // If already under 500KB, return original
-    if (stats.size <= targetSize) {
-      return filePath;
-    }
-
-    const ext = path.extname(filePath).toLowerCase();
-    const baseName = path.basename(filePath, ext);
-    const dirName = path.dirname(filePath);
-    const compressedPath = path.join(dirName, `${baseName}_compressed${ext}`);
-
-    let quality = 90;
-    let currentSize = stats.size;
-
-    // Try different quality levels until under 500KB
-    while (quality >= 10 && currentSize > targetSize) {
-      try {
-        if (ext === '.jpg' || ext === '.jpeg') {
-          await sharp(filePath)
-            .jpeg({ quality, mozjpeg: true })
-            .toFile(compressedPath);
-        } else if (ext === '.png') {
-          await sharp(filePath)
-            .png({ quality, compressionLevel: 9 })
-            .toFile(compressedPath);
-        } else {
-          // For other formats, convert to JPEG
-          await sharp(filePath)
-            .jpeg({ quality, mozjpeg: true })
-            .toFile(compressedPath.replace(ext, '.jpg'));
-        }
-
-        const compressedStats = await fs.stat(compressedPath);
-        currentSize = compressedStats.size;
-
-        if (currentSize <= targetSize) {
-          return compressedPath;
-        }
-
-        quality -= 10;
-      } catch (err) {
-        console.warn(`⚠️ Compression attempt failed at quality ${quality}:`, err);
-        break;
-      }
-    }
-
-    // If compression failed or still too large, return original
-    console.warn(`⚠️ Could not compress ${filePath} under 500KB, using original`);
+  // If already under 500KB, return original
+  if (stats.size <= targetSize) {
     return filePath;
+  }
+
+  const ext = path.extname(filePath).toLowerCase();
+  const baseName = path.basename(filePath, ext);
+  const dirName = path.dirname(filePath);
+  const compressedPath = path.join(dirName, `${baseName}_compressed${ext}`);
+
+  let quality = 90;
+  let currentSize = stats.size;
+
+  // Try different quality levels until under 500KB
+  while (quality >= 10 && currentSize > targetSize) {
+    try {
+      if (ext === '.jpg' || ext === '.jpeg') {
+        await sharp(filePath)
+          .jpeg({ quality, mozjpeg: true })
+          .toFile(compressedPath);
+      } else if (ext === '.png') {
+        await sharp(filePath)
+          .png({ quality, compressionLevel: 9 })
+          .toFile(compressedPath);
+      } else {
+        // For other formats, convert to JPEG
+        await sharp(filePath)
+          .jpeg({ quality, mozjpeg: true })
+          .toFile(compressedPath.replace(ext, '.jpg'));
+      }
+
+      const compressedStats = await fs.stat(compressedPath);
+      currentSize = compressedStats.size;
+
+      if (currentSize <= targetSize) {
+        return compressedPath;
+      }
+
+      quality -= 10;
+    } catch (err) {
+      console.warn(`⚠️ Compression attempt failed at quality ${quality}:`, err);
+      break;
+    }
+  }
+
+  // If compression failed or still too large, return original
+  console.warn(`⚠️ Could not compress ${filePath} under 500KB, using original`);
+  return filePath;
+}
+
+async function compressTo500KB(filePath, timeoutMs = 15000) {
+  try {
+    return await Promise.race([
+      compressTo500KBInternal(filePath),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Compression timeout')), timeoutMs))
+    ]);
   } catch (err) {
-    console.warn(`⚠️ Compression error for ${filePath}:`, err);
-    return filePath; // Return original on error
+    console.warn(`⚠️ Compression timed out or failed for ${filePath}:`, err);
+    return filePath; // Use original on timeout or error
   }
 }
 // --- Extract source_key from reddit or github links ---

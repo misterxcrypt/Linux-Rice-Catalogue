@@ -66,6 +66,7 @@
         <div class="mb-8 flex gap-4">
             <button id="tab-submissions" class="tab-btn px-6 py-2 rounded-lg font-semibold active">Submissions</button>
             <button id="tab-stats" class="tab-btn px-6 py-2 rounded-lg font-semibold">Stats</button>
+            <button id="tab-keywords" class="tab-btn px-6 py-2 rounded-lg font-semibold">Keywords</button>
         </div>
         <!-- Submissions Section -->
         <section id="submissions-section" class="glass-panel rounded-xl p-6">
@@ -90,12 +91,19 @@
                         🎛️ View: WM
                       </button>
                     </div>
-                  
+
                     <!-- 👇 Add max-w and aspect control to the canvas wrapper -->
                     <div class="w-full max-w-md mx-auto">
                       <canvas id="stats-pie" width="500" height="500"></canvas>
                     </div>
                 </div>
+            </div>
+        </section>
+        <!-- Keywords Section -->
+        <section id="keywords-section" class="glass-panel rounded-xl p-6 hidden">
+            <h2 class="text-2xl font-bold mb-4">Keywords Management</h2>
+            <div id="keywords-content">
+                <!-- Keywords content will be loaded here -->
             </div>
         </section>
     </div>
@@ -125,14 +133,29 @@
         tabSubmissions.addEventListener('click', () => {
             tabSubmissions.classList.add('active');
             tabStats.classList.remove('active');
+            tabKeywords.classList.remove('active');
             submissionsSection.classList.remove('hidden');
             statsSection.classList.add('hidden');
+            keywordsSection.classList.add('hidden');
         });
         tabStats.addEventListener('click', () => {
             tabStats.classList.add('active');
             tabSubmissions.classList.remove('active');
+            tabKeywords.classList.remove('active');
             statsSection.classList.remove('hidden');
             submissionsSection.classList.add('hidden');
+            keywordsSection.classList.add('hidden');
+        });
+        const tabKeywords = document.getElementById('tab-keywords');
+        const keywordsSection = document.getElementById('keywords-section');
+        tabKeywords.addEventListener('click', () => {
+            tabKeywords.classList.add('active');
+            tabSubmissions.classList.remove('active');
+            tabStats.classList.remove('active');
+            keywordsSection.classList.remove('hidden');
+            submissionsSection.classList.add('hidden');
+            statsSection.classList.add('hidden');
+            fetchKeywords();
         });
 
         // --- Admin API Integration ---
@@ -371,6 +394,272 @@
                 list.appendChild(div);
                 div.rice = rice;
                 attachViewHandlers(div, rice);
+            });
+        }
+
+        // Keywords management
+        async function fetchKeywords() {
+            const res = await fetch('/api/keywords', {
+                headers: { 'Authorization': token }
+            });
+            if (res.status === 401) {
+                alert('Session expired. Please login again.');
+                localStorage.removeItem('adminToken');
+                window.location.href = '/';
+                return;
+            }
+            const keywords = await res.json();
+            renderKeywords(keywords);
+        }
+
+        function renderKeywords(keywords) {
+            const content = document.getElementById('keywords-content');
+            let html = '<div class="mb-6">';
+            html += '<div class="flex gap-4 mb-4">';
+            html += '<button id="mode-variant" class="px-4 py-2 rounded bg-gray-600 text-white">Add Variant</button>';
+            html += '<button id="mode-canonical" class="px-4 py-2 rounded bg-blue-600 text-white">Add Canonical</button>';
+            html += '</div>';
+            html += '<div id="form-container"></div>';
+            html += '</div>';
+            html += '<div id="current-keywords"><h3 class="text-xl font-bold mb-4">Current Keywords</h3></div>';
+            content.innerHTML = html;
+
+            let currentMode = 'canonical'; // default
+
+            const modeVariantBtn = document.getElementById('mode-variant');
+            const modeCanonicalBtn = document.getElementById('mode-canonical');
+            const formContainer = document.getElementById('form-container');
+            if (!modeVariantBtn || !modeCanonicalBtn || !formContainer) return;
+
+            function renderForm() {
+                let formHtml = '';
+                if (currentMode === 'variant') {
+                    formHtml += '<h3 class="text-xl font-bold mb-4">Add Variant to Existing Canonical</h3>';
+                    formHtml += '<form id="add-variant-form" class="space-y-4">';
+                    formHtml += '<div><label class="block text-sm font-medium text-gray-300">Category</label>';
+                    formHtml += '<select id="category-select" class="w-full p-2 rounded bg-gray-700 text-white">';
+                    Object.keys(keywords).forEach(cat => {
+                        formHtml += `<option value="${cat}">${cat.toUpperCase()}</option>`;
+                    });
+                    formHtml += '</select></div>';
+                    formHtml += '<div><label class="block text-sm font-medium text-gray-300">Canonical Name</label>';
+                    formHtml += '<select id="canonical-select" class="w-full p-2 rounded bg-gray-700 text-white">';
+                    formHtml += '</select></div>';
+                    formHtml += '<div><label class="block text-sm font-medium text-gray-300">New Variant</label>';
+                    formHtml += '<input type="text" id="variant-input" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="e.g., ubuntu os" /></div>';
+                    formHtml += '<button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Add Variant</button>';
+                    formHtml += '</form>';
+                } else {
+                    formHtml += '<h3 class="text-xl font-bold mb-4">Add New Canonical</h3>';
+                    formHtml += '<form id="add-canonical-form" class="space-y-4">';
+                    formHtml += '<div><label class="block text-sm font-medium text-gray-300">Category</label>';
+                    formHtml += '<select id="category-select-new" class="w-full p-2 rounded bg-gray-700 text-white">';
+                    Object.keys(keywords).forEach(cat => {
+                        formHtml += `<option value="${cat}">${cat.toUpperCase()}</option>`;
+                    });
+                    formHtml += '</select></div>';
+                    formHtml += '<div><label class="block text-sm font-medium text-gray-300">New Canonical Name</label>';
+                    formHtml += '<input type="text" id="canonical-input" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="e.g., New DE" /></div>';
+                    formHtml += '<div><label class="block text-sm font-medium text-gray-300">Variants (comma-separated, optional)</label>';
+                    formHtml += '<input type="text" id="variants-input" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="e.g., new de, newde" /></div>';
+                    formHtml += '<button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Add Canonical</button>';
+                    formHtml += '</form>';
+                }
+                formContainer.innerHTML = formHtml;
+
+                if (currentMode === 'variant') {
+                    const categorySelect = document.getElementById('category-select');
+                    const canonicalSelect = document.getElementById('canonical-select');
+                    if (!categorySelect || !canonicalSelect) return;
+
+                    function updateCanonicals() {
+                        const cat = categorySelect.value;
+                        canonicalSelect.innerHTML = '';
+                        Object.keys(keywords[cat]).forEach(can => {
+                            canonicalSelect.innerHTML += `<option value="${can}">${can}</option>`;
+                        });
+                    }
+
+                    categorySelect.addEventListener('change', () => {
+                        updateCanonicals();
+                        updateCurrentKeywords(categorySelect.value);
+                    });
+                    updateCanonicals();
+
+                    const form = document.getElementById('add-variant-form');
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const category = categorySelect.value;
+                        const canonical = canonicalSelect.value;
+                        const variant = document.getElementById('variant-input').value.trim();
+                        if (!variant) {
+                            alert('Please enter a variant');
+                            return;
+                        }
+                        try {
+                            const res = await fetch('/api/keywords', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': token
+                                },
+                                body: JSON.stringify({ category, canonical, variant })
+                            });
+                            const result = await res.json();
+                            if (!res.ok) {
+                                throw new Error(result.error || 'Failed to add variant');
+                            }
+                            alert('Variant added successfully');
+                            fetchKeywords();
+                        } catch (error) {
+                            alert(`Error: ${error.message}`);
+                        }
+                    });
+                } else {
+                    const categorySelectNew = document.getElementById('category-select-new');
+                    if (!categorySelectNew) return;
+                    categorySelectNew.addEventListener('change', () => {
+                        updateCurrentKeywords(categorySelectNew.value);
+                    });
+
+                    const canonicalForm = document.getElementById('add-canonical-form');
+                    canonicalForm.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        const category = categorySelectNew.value;
+                        const canonical = document.getElementById('canonical-input').value.trim();
+                        const variants = document.getElementById('variants-input').value.trim();
+                        if (!canonical) {
+                            alert('Please enter a canonical name');
+                            return;
+                        }
+                        try {
+                            const res = await fetch('/api/keywords', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': token
+                                },
+                                body: JSON.stringify({ category, canonical, variants })
+                            });
+                            const result = await res.json();
+                            if (!res.ok) {
+                                throw new Error(result.error || 'Failed to add canonical');
+                            }
+                            alert('Canonical added successfully');
+                            fetchKeywords();
+                        } catch (error) {
+                            alert(`Error: ${error.message}`);
+                        }
+                    });
+                }
+            }
+
+            modeVariantBtn.addEventListener('click', () => {
+                currentMode = 'variant';
+                modeVariantBtn.classList.add('bg-green-600');
+                modeVariantBtn.classList.remove('bg-gray-600');
+                modeCanonicalBtn.classList.add('bg-gray-600');
+                modeCanonicalBtn.classList.remove('bg-blue-600');
+                renderForm();
+                const initialCategorySelect = document.getElementById(currentMode === 'variant' ? 'category-select' : 'category-select-new');
+                if (initialCategorySelect) updateCurrentKeywords(initialCategorySelect.value);
+            });
+
+            modeCanonicalBtn.addEventListener('click', () => {
+                currentMode = 'canonical';
+                modeCanonicalBtn.classList.add('bg-blue-600');
+                modeCanonicalBtn.classList.remove('bg-gray-600');
+                modeVariantBtn.classList.add('bg-gray-600');
+                modeVariantBtn.classList.remove('bg-green-600');
+                renderForm();
+                const catSel = document.getElementById('category-select-new');
+                if (catSel) updateCurrentKeywords(catSel.value);
+            });
+
+            renderForm();
+
+            const categorySelect = document.getElementById('category-select');
+            const canonicalSelect = document.getElementById('canonical-select');
+            const currentKeywordsDiv = document.getElementById('current-keywords');
+
+            function updateCanonicals() {
+                const cat = categorySelect.value;
+                canonicalSelect.innerHTML = '';
+                Object.keys(keywords[cat]).forEach(can => {
+                    canonicalSelect.innerHTML += `<option value="${can}">${can}</option>`;
+                });
+                updateCurrentKeywords(cat);
+            }
+
+            function updateCurrentKeywords(cat) {
+                let html = `<h3 class="text-xl font-bold mb-4">Current Keywords - ${cat.toUpperCase()}</h3>`;
+                Object.keys(keywords[cat]).forEach(canonical => {
+                    html += `<div class="ml-4 mb-2"><strong>${canonical}:</strong> ${keywords[cat][canonical].join(', ')}</div>`;
+                });
+                currentKeywordsDiv.innerHTML = html;
+            }
+
+            categorySelect.addEventListener('change', updateCanonicals);
+            updateCanonicals();
+
+            const form = document.getElementById('add-variant-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const category = categorySelect.value;
+                const canonical = canonicalSelect.value;
+                const variant = document.getElementById('variant-input').value.trim();
+                if (!variant) {
+                    alert('Please enter a variant');
+                    return;
+                }
+                try {
+                    const res = await fetch('/api/keywords', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify({ category, canonical, variant })
+                    });
+                    const result = await res.json();
+                    if (!res.ok) {
+                        throw new Error(result.error || 'Failed to add variant');
+                    }
+                    alert('Variant added successfully');
+                    fetchKeywords();
+                } catch (error) {
+                    alert(`Error: ${error.message}`);
+                }
+            });
+
+            const canonicalForm = document.getElementById('add-canonical-form');
+            canonicalForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const category = document.getElementById('category-select-new').value;
+                const canonical = document.getElementById('canonical-input').value.trim();
+                const variants = document.getElementById('variants-input').value.trim();
+                if (!canonical) {
+                    alert('Please enter a canonical name');
+                    return;
+                }
+                try {
+                    const res = await fetch('/api/keywords', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify({ category, canonical, variants })
+                    });
+                    const result = await res.json();
+                    if (!res.ok) {
+                        throw new Error(result.error || 'Failed to add canonical');
+                    }
+                    alert('Canonical added successfully');
+                    fetchKeywords();
+                } catch (error) {
+                    alert(`Error: ${error.message}`);
+                }
             });
         }
 

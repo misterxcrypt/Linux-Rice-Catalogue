@@ -106,6 +106,17 @@
         .animate-floatInSpace {
         animation: floatInSpace 5s ease-in-out forwards;
         }
+
+        select {
+            background: var(--panel-bg);
+            color: #E0E0E0;
+            border: 1px solid var(--border-color);
+        }
+
+        select option {
+            background: var(--bg-color);
+            color: #E0E0E0;
+        }
     </style>
 </head>
 <body class="min-h-screen text-gray-300">
@@ -118,8 +129,8 @@
                     <div class="text-3xl md:text-4xl w-10 h-10 flex items-center justify-center">🌾</div>
                     <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Rice Gallery</h1>
                  </div>
-                 <div class="w-full md:w-[500px] p-2 rounded-md bg-white/5 border border-[var(--border-color)] font-mono text-sm">
-                    <input id="search-input" type="text" placeholder="🔍 Search rices (author, WM, distro, theme)" class="w-full p-2 rounded-md bg-white/5 border border-[var(--border-color)] font-mono text-sm" />
+                 <div class="w-full md:w-[500px] p-2 rounded-md glass-panel font-mono text-sm">
+                    <input id="search-input" type="text" placeholder="🔍 Search rices (author, WM, distro, theme)" class="w-full p-2 rounded-md glass-panel font-mono text-sm" />
                  </div>
                  <div class="flex items-center gap-2">
                     <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
@@ -142,9 +153,11 @@
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
                 <div class="font-mono text-sm uppercase text-gray-400">Filter By:</div>
                 <div id="filter-type-toggle" class="flex gap-1 glass-panel p-1 rounded-lg">
-                    <button data-filter-type="wm" class="control-btn px-4 py-1.5 text-sm rounded-md active">WM</button>
-                    <button data-filter-type="distro" class="control-btn px-4 py-1.5 text-sm rounded-md">Distro</button>
-                </div>
+                        <button data-filter-type="wm" class="control-btn px-4 py-1.5 text-sm rounded-md active">WM</button>
+                        <button data-filter-type="de" class="control-btn px-4 py-1.5 text-sm rounded-md">DE</button>
+                        <button data-filter-type="distro" class="control-btn px-4 py-1.5 text-sm rounded-md">Distro</button>
+                        <button data-filter-type="theme" class="control-btn px-4 py-1.5 text-sm rounded-md">Theme</button>
+                    </div>
             </div>
             <div id="filter-pills-container" class="flex flex-wrap gap-2 justify-center">
                 <!-- Filter pills injected here -->
@@ -206,29 +219,44 @@
                 <div>
                 <label class="font-mono text-sm">Reddit Post</label>
                 <div class="flex items-center gap-2 mt-1">
-                    <input id="reddit-post-input" type="text" placeholder="e.g., https://reddit.com" class="flex-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
+                    <input id="reddit-post-input" type="text" placeholder="e.g., https://reddit.com" class="flex-1 p-2 rounded-md glass-panel">
                     <button id="scrape-reddit-btn" type="button" class="px-3 py-2 rounded-md text-sm font-mono bg-[var(--accent-color)] hover:opacity-90 transition">
                     Populate
                     </button>
                 </div>
                 </div>
-                <div><label class="font-mono text-sm">Author*</label><input required type="text" placeholder="e.g., crunchghost" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
-                <div><label class="font-mono text-sm">Theme</label><input type="text" placeholder="e.g., Catppuccin (Leave it if no specific theme was used)" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Author*</label><input required type="text" placeholder="e.g., crunchghost" oninput="updatePreview()" class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <div>
+                <label class="font-mono text-sm">Theme</label>
+                <select id="theme-select" onchange="toggleCustomInput('theme')" class="w-full mt-1 p-2 rounded-md glass-panel">
+                    <!-- Options populated by JS -->
+                </select>
+                <input id="theme-custom" type="text" placeholder="Enter custom theme" oninput="updatePreview()" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
                 <!-- Dropdown to choose WM or DE -->
                 <div>
                 <label class="font-mono text-sm">Type*</label>
-                <select id="wmde-type" required onchange="updateLabelAndPlaceholder()" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
+                <select id="wmde-type" required onchange="updateLabelAndPlaceholder(); updatePreview()" class="w-full mt-1 p-2 rounded-md glass-panel">
                     <option value="WM">WM (Window Manager)</option>
                     <option value="DE">DE (Desktop Environment)</option>
                 </select>
                 </div>
 
-                <!-- Input field whose label/placeholder change based on selection -->
+                <!-- Select field for WM/DE name -->
                 <div>
                 <label id="wmde-label" class="font-mono text-sm">Name of WM*</label>
-                <input id="wmde-name" required type="text" placeholder="e.g., Hyprland" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]">
+                <select id="wmde-name-select" required onchange="toggleCustomInput('wmde-name')" class="w-full mt-1 p-2 rounded-md glass-panel">
+                    <!-- Options populated by JS -->
+                </select>
+                <input id="wmde-name-custom" type="text" placeholder="Enter custom name" oninput="updatePreview()" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
                 </div>
-                <div><label class="font-mono text-sm">Distro</label><input type="text" placeholder="Arch Linux" class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div>
+                <label class="font-mono text-sm">Distro</label>
+                <select id="distro-select" onchange="toggleCustomInput('distro')" class="w-full mt-1 p-2 rounded-md glass-panel">
+                    <!-- Options populated by JS -->
+                </select>
+                <input id="distro-custom" type="text" placeholder="Enter custom distro" oninput="updatePreview()" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
                 
                 <!--
                 <div id="screenshot-fields" class="space-y-2">
@@ -249,12 +277,12 @@
                 <div id="screenshot-preview" class="flex flex-wrap gap-3 mt-3"></div>
                 </div>
 
-                <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md bg-white/5 border border-[var(--border-color)]"></div>
+                <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md glass-panel"></div>
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
             </form>
             <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
                 <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
-                <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 class="text-xl font-bold">Your Name</h3><p class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
+                <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 id="preview-author" class="text-xl font-bold">Your Name</h3><p id="preview-details" class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
             </div>
              <button id="submission-close-btn" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80"><span class="material-icons-outlined">close</span></button>
         </div>
@@ -280,7 +308,7 @@
       <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
         <h2 class="text-2xl font-bold mb-4 text-white">Admin Login</h2>
         <form id="login-form" class="w-full flex flex-col gap-4">
-          <input type="password" id="admin-password" placeholder="Admin Password" required class="w-full p-3 rounded-lg bg-white/5 border border-[var(--border-color)] text-white" />
+          <input type="password" id="admin-password" placeholder="Admin Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
           <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Login</button>
         </form>
         <button id="login-close-btn" class="mt-4 text-gray-400 hover:text-white">Cancel</button>
@@ -311,10 +339,44 @@
             // 🧠 Populate relevant fields
             redditInput.value = data.reddit_post || redditUrl;
             document.querySelector('input[placeholder*="crunchghost"]').value = data.author || '';
-            document.querySelector('input[placeholder*="Catppuccin"]').value = data.theme || '';
+            const theme = data.theme || '';
+            const themeSelect = document.getElementById('theme-select');
+            const themeCustom = document.getElementById('theme-custom');
+            if (themeSelect.querySelector(`option[value="${theme}"]`)) {
+                themeSelect.value = theme;
+                themeCustom.classList.add('hidden');
+            } else {
+                themeSelect.value = 'Other';
+                themeCustom.value = theme;
+                themeCustom.classList.remove('hidden');
+            }
             document.getElementById('wmde-type').value = data.environment?.type || '';
-            document.getElementById('wmde-name').value = data.environment?.name || '';
-            document.querySelector('input[placeholder="Arch Linux"]').value = data.distro || '';
+            updateLabelAndPlaceholder(); // Update options after setting type
+            const wmdeName = data.environment?.name || '';
+            const wmdeSelect = document.getElementById('wmde-name-select');
+            const wmdeCustom = document.getElementById('wmde-name-custom');
+            if (wmdeSelect.querySelector(`option[value="${wmdeName}"]`)) {
+                wmdeSelect.value = wmdeName;
+                wmdeCustom.classList.add('hidden');
+                wmdeCustom.required = false;
+            } else {
+                wmdeSelect.value = 'Other';
+                wmdeCustom.value = wmdeName;
+                wmdeCustom.classList.remove('hidden');
+                wmdeCustom.required = true;
+            }
+            const distro = data.distro || '';
+            const distroSelect = document.getElementById('distro-select');
+            const distroCustom = document.getElementById('distro-custom');
+            if (distroSelect.querySelector(`option[value="${distro}"]`)) {
+                distroSelect.value = distro;
+                distroCustom.classList.add('hidden');
+                distroCustom.required = false;
+            } else {
+                distroSelect.value = 'Other';
+                distroCustom.value = distro;
+                distroCustom.classList.remove('hidden');
+            }
             document.querySelector('input[placeholder^="https://github.com"]').value = data.dotfiles || '';
 
             // 🖼️ Screenshot preview
@@ -486,18 +548,92 @@
         });
     }
 
-    function updateLabelAndPlaceholder() {
+    let keywords = {};
+
+    async function loadKeywords() {
+        try {
+            const res = await fetch('/api/keywords');
+            if (res.ok) {
+                keywords = await res.json();
+                /* console.log('Keywords loaded:', keywords); */
+            } else {
+                console.error('Failed to load keywords');
+            }
+        } catch (e) {
+            console.error('Failed to load keywords:', e);
+        }
+    }
+
+    function populateSelect(selectId, options) {
+        /* console.log('Populating', selectId, 'with', options); */
+        const select = document.getElementById(selectId);
+        select.innerHTML = '<option value="">Select or choose Other</option>';
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt;
+            option.textContent = opt;
+            select.appendChild(option);
+        });
+        const otherOption = document.createElement('option');
+        otherOption.value = 'Other';
+        otherOption.textContent = 'Other';
+        select.appendChild(otherOption);
+    }
+
+    function toggleCustomInput(type) {
+        const select = document.getElementById(type + '-select');
+        const custom = document.getElementById(type + '-custom');
+        if (select.value === 'Other') {
+            custom.classList.remove('hidden');
+            custom.required = true;
+        } else {
+            custom.classList.add('hidden');
+            custom.required = false;
+            custom.value = '';
+        }
+        updatePreview();
+    }
+
+    function updatePreview() {
+        const author = document.querySelector('input[placeholder*="crunchghost"]').value || 'Your Name';
+        const wmdeType = document.getElementById('wmde-type').value;
+        let wmde = document.getElementById('wmde-name-select').value;
+        if (wmde === 'Other') {
+            wmde = document.getElementById('wmde-name-custom').value;
+        }
+        let distro = document.getElementById('distro-select').value;
+        if (distro === 'Other') {
+            distro = document.getElementById('distro-custom').value;
+        }
+        let theme = document.getElementById('theme-select').value;
+        if (theme === 'Other') {
+            theme = document.getElementById('theme-custom').value;
+        }
+        document.getElementById('preview-author').textContent = author;
+        document.getElementById('preview-details').textContent = `${distro || 'Distro'} + ${wmde || 'WM/DE'} + ${theme || 'Theme'}`;
+    }
+
+    async function updateLabelAndPlaceholder() {
         const type = document.getElementById('wmde-type').value;
         const label = document.getElementById('wmde-label');
-        const input = document.getElementById('wmde-name');
+        const select = document.getElementById('wmde-name-select');
 
         if (type === 'WM') {
-        label.textContent = 'Name of WM*';
-        input.placeholder = 'e.g., Hyprland, i3, bspwm';
+            label.textContent = 'Name of WM*';
+            const wmKeys = Object.keys(keywords.wm || {});
+            /* console.log('WM keys:', wmKeys); */
+            populateSelect('wmde-name-select', wmKeys);
         } else {
-        label.textContent = 'Name of DE*';
-        input.placeholder = 'e.g., GNOME, KDE, XFCE';
+            label.textContent = 'Name of DE*';
+            const deKeys = Object.keys(keywords.de || {});
+            /* console.log('DE keys:', deKeys); */
+            populateSelect('wmde-name-select', deKeys);
         }
+        // Reset select value and custom input
+        document.getElementById('wmde-name-select').value = '';
+        document.getElementById('wmde-name-custom').classList.add('hidden');
+        document.getElementById('wmde-name-custom').required = false;
+        document.getElementById('wmde-name-custom').value = '';
     }
 
     function getContrastTextColor([r, g, b]) {
@@ -506,7 +642,12 @@
     }
 
     // Initialize once on page load
-    updateLabelAndPlaceholder();
+    (async () => {
+        await loadKeywords();
+        await updateLabelAndPlaceholder();
+        populateSelect('distro-select', Object.keys(keywords.distro || {}));
+        populateSelect('theme-select', Object.keys(keywords.theme || {}));
+    })();
     </script>
 
     <script>
@@ -581,7 +722,14 @@
                 let dataToRender = ricesData;
 
                 if (state.activeFilterValue !== 'All') {
-                    dataToRender = dataToRender.filter(r => r[state.activeFilterType] === state.activeFilterValue);
+                    if (state.activeFilterType === 'wm') {
+                        dataToRender = dataToRender.filter(r => r.environment?.type === 'WM' && r.environment?.name === state.activeFilterValue);
+                    } else if (state.activeFilterType === 'de') {
+                        dataToRender = dataToRender.filter(r => r.environment?.type === 'DE' && r.environment?.name === state.activeFilterValue);
+                    } else {
+                        // For distro and theme
+                        dataToRender = dataToRender.filter(r => r[state.activeFilterType] === state.activeFilterValue);
+                    }
                 }
 
                 if (query) {
@@ -606,9 +754,31 @@
             
             const renderFilters = () => {
                 const filterKey = state.activeFilterType;
-                const uniqueValues = ['All', ...new Set(ricesData.map(r => r[filterKey]).sort())];
-                
-                el.filterPillsContainer.innerHTML = uniqueValues.map(value => 
+                let uniqueValues;
+                if (filterKey === 'wm') {
+                    uniqueValues = ['All', ...new Set(
+                        ricesData
+                            .filter(r => r.environment?.type === 'WM')
+                            .map(r => r.environment?.name)
+                            .filter(Boolean)
+                            .sort()
+                    )];
+                } else if (filterKey === 'de') {
+                    uniqueValues = ['All', ...new Set(
+                        ricesData
+                            .filter(r => r.environment?.type === 'DE')
+                            .map(r => r.environment?.name)
+                            .filter(Boolean)
+                            .sort()
+                    )];
+                } else {
+                    // For distro and theme
+                    uniqueValues = ['All', ...new Set(
+                        ricesData.map(r => r[filterKey]).filter(Boolean).sort()
+                    )];
+                }
+
+                el.filterPillsContainer.innerHTML = uniqueValues.map(value =>
                     `<button data-filter-value="${value}" class="control-btn px-3 py-1.5 rounded-lg text-sm transition-colors hover:bg-white/10 ${value === state.activeFilterValue ? 'active' : ''}">${value}</button>`
                 ).join('');
 
@@ -703,6 +873,7 @@
                     distro: rice.distro || '',
                     theme: rice.theme || '',
                     url: rice.dotfiles || '',
+                    reddit_post: rice.reddit_post || '',
                     images,
                 };
                 state.currentImageIndex = 0;
@@ -772,13 +943,20 @@
                 setContent('#lightbox-wm-distro-theme', `${rice.wm || 'Unknown'} / ${rice.distro || 'Unknown'} / ${rice.theme || 'Unknown'}`);
                 el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div>`;
                 const dotfilesHTML = rice.url
-                    ? `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3>
+                    ? `<h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Dotfiles</h3>
                         <div class="grid grid-cols-1 gap-2">
                         <a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
                         </div>`
-                    : `<h3 class="font-mono text-sm uppercase text-gray-400">Dotfiles</h3>
-                        <p class="text-white/60 text-sm italic">No dotfiles provided for this rice.</p>`;
-                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = dotfilesHTML;            
+                    : `<h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Dotfiles</h3>
+                        <p class="text-white/60 text-sm italic">No dotfiles found.</p>`;
+                const redditHTML = rice.reddit_post
+                    ? `<div class="mt-6"><h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Reddit Post</h3>
+                        <div class="grid grid-cols-1 gap-2">
+                        <a href="${rice.reddit_post}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
+                        </div></div>`
+                    : `<div class="mt-6"><h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Reddit Post</h3>
+                        <p class="text-white/60 text-sm italic">No reddit post found.</p></div>`;
+                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = dotfilesHTML + redditHTML;
                 const reactions = [
                     { key: 'heart', emoji: '❤️' },
                     { key: 'fire', emoji: '🔥' },
@@ -945,22 +1123,6 @@
         container.appendChild(newField);
     }
 
-    function updateLabelAndPlaceholder() {
-        const type = document.getElementById('wmde-type').value;
-        const label = document.getElementById('wmde-label');
-        const input = document.getElementById('wmde-name');
-
-        if (type === 'WM') {
-        label.textContent = 'Name of WM*';
-        input.placeholder = 'e.g., Hyprland, i3, bspwm';
-        } else {
-        label.textContent = 'Name of DE*';
-        input.placeholder = 'e.g., GNOME, KDE, XFCE';
-        }
-    }
-
-    // Auto-set on load
-    updateLabelAndPlaceholder();
 
     // --- Submit Handler ---
     document.getElementById('submission-form').addEventListener('submit', async function (e) {
@@ -969,10 +1131,19 @@
         const form = e.target;
         const reddit_post = form.querySelector('input[placeholder*="https://reddit.com"]').value;
         const author = form.querySelector('input[placeholder*="crunchghost"]').value;
-        const theme = form.querySelector('input[placeholder*="Catppuccin"]').value;
+        let theme = document.getElementById('theme-select').value;
+        if (theme === 'Other') {
+            theme = document.getElementById('theme-custom').value;
+        }
         const type = document.getElementById('wmde-type').value;
-        const wmName = document.getElementById('wmde-name').value;
-        const distro = form.querySelector('input[placeholder="Arch Linux"]').value;
+        let wmName = document.getElementById('wmde-name-select').value;
+        if (wmName === 'Other') {
+            wmName = document.getElementById('wmde-name-custom').value;
+        }
+        let distro = document.getElementById('distro-select').value;
+        if (distro === 'Other') {
+            distro = document.getElementById('distro-custom').value;
+        }
         /* const images = Array.from(form.querySelectorAll('input[name="screenshot"]'))
             .map(input => input.value.trim())
             .filter(url => url !== ""); */
@@ -1045,7 +1216,13 @@
             if (res.ok) {
                 /* alert('🚀 Rice submitted successfully! Awaiting approval.'); */
                 form.reset();
-                updateLabelAndPlaceholder(); // Reset label after form clears
+                await updateLabelAndPlaceholder(); // Reset label after form clears
+                populateSelect('distro-select', Object.keys(keywords.distro || {}));
+                populateSelect('theme-select', Object.keys(keywords.theme || {}));
+                document.getElementById('wmde-name-custom').classList.add('hidden');
+                document.getElementById('wmde-name-custom').required = false;
+                document.getElementById('distro-custom').classList.add('hidden');
+                document.getElementById('theme-custom').classList.add('hidden');
                 window.selectedFiles = [];
                 document.getElementById('screenshot-preview').innerHTML = '';
             } else {

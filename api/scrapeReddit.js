@@ -1,5 +1,6 @@
 // /api/scrapeReddit.js - Reddit scraping endpoint
 const fetch = require('node-fetch');
+const { getDb } = require('../utils/db');
 
 async function getRedditAccessToken() {
   const credentials = Buffer.from(
@@ -28,10 +29,21 @@ function normalize(text) {
   return text.toLowerCase().replace(/-/g, ' ').replace(/_/g, ' ');
 }
 
-function matchKeywords(text, keywords) {
+function matchKeywords(text, keywordMap) {
   const normalizedText = normalize(text);
-  const matches = keywords.filter(k => normalizedText.includes(k));
-  return matches.length > 0 ? matches[0] : null;
+  if (Array.isArray(keywordMap)) {
+    // Old way for themes
+    const matches = keywordMap.filter(k => normalizedText.includes(k));
+    return matches.length > 0 ? matches[0] : null;
+  } else {
+    // New way for maps
+    for (const [canonical, variants] of Object.entries(keywordMap)) {
+      if (variants.some(v => normalizedText.includes(v))) {
+        return canonical;
+      }
+    }
+    return null;
+  }
 }
 
 function extractGithubLink(text) {
@@ -39,6 +51,8 @@ function extractGithubLink(text) {
   const matches = text.match(/https?:\/\/(?:www\.)?github\.com\/[^\s)>\]]+/);
   return matches ? matches[0] : null;
 }
+
+// Load keyword maps from MongoDB
 
 async function scrapeRedditPost(url) {
   try {
@@ -110,11 +124,23 @@ async function scrapeRedditPost(url) {
       }
     }
 
+    // Load keyword maps from MongoDB
+    const db = await getDb();
+    const keywordsCollection = db.collection('keywords');
+    const wmDoc = await keywordsCollection.findOne({ _id: 'wm' });
+    const deDoc = await keywordsCollection.findOne({ _id: 'de' });
+    const themeDoc = await keywordsCollection.findOne({ _id: 'theme' });
+    const distroDoc = await keywordsCollection.findOne({ _id: 'distro' });
+    const wmMap = wmDoc ? wmDoc.data : {};
+    const deMap = deDoc ? deDoc.data : {};
+    const themeMap = themeDoc ? themeDoc.data : {};
+    const distroMap = distroDoc ? distroDoc.data : {};
+
     // Match keywords for WM/DE/Theme/Distro
-    const wm = matchKeywords(title, ['i3', 'bspwm', 'sway', 'hyprland', 'dwm', 'openbox', 'qtile', 'awesome', 'xmonad', 'yabai', 'herbstluftwm', 'dkwm', 'riverwm', 'leftwm']);
-    const de = matchKeywords(title, ['gnome', 'kde', 'xfce', 'lxde', 'lxqt', 'cinnamon', 'mate', 'budgie']);
-    const theme = matchKeywords(title, ['gruvbox', 'nord', 'dracula', 'solarized dark', 'solarized light', 'monokai', 'tokyo night', 'catppuccin', 'one dark', 'everforest', 'material theme', 'material dark', 'adwaita', 'adwaita dark', 'arc dark', 'arc-darker', 'layan', 'sweet', 'sweet dark', 'colloid', 'flat remix', 'flatery', 'numix', 'numix dark', 'pop', 'whitesur', 'orchis', 'mojave', 'matcha', 'qogir', 'canta', 'yaru', 'mcmojave', 'zuki', 'materia', 'ant', 'aritim dark', 'darkman', 'cyberpunk', 'dark forest', 'ayu dark', 'ayu light', 'tokyonight night', 'tokyonight storm', 'tokyonight moon', 'tokyonight day', 'base16', 'palenight', 'oxocarbon', 'zenburn', 'paper', 'vimix', 'blue sky', 'highcontrast', 'hooli', 'nightfox', 'doom one', 'rose pine', 'rose-pine', 'rose pine moon', 'rose pine dawn', 'skeuomorph', 'pastel dark', 'juno', 'hacktober', 'frost', 'azenis', 'obsidian', 'carbonfox', 'gruvbox material', 'neo-gruvbox', 'spacegray', 'iceberg', 'aether', 'tango', 'darkside', 'breeze', 'breeze dark', 'menta', 'mint-y', 'mint-x', 'kali-dark', 'gogh themes']);
-    const distro = matchKeywords(title, ['debian', 'arch', 'arch linux', 'rhel', 'red hat enterprise linux', 'slackware', 'gentoo', 'void linux', 'alpine linux', 'nixos', 'ubuntu', 'kubuntu', 'xubuntu', 'lubuntu', 'ubuntu mate', 'ubuntu studio', 'ubuntu budgie', 'linux mint', 'pop!_os', 'zorin os', 'elementary os', 'deepin', 'kali linux', 'tails', 'mx linux', 'antix', 'pureos', 'parrot os', 'manjaro', 'endeavouros', 'garuda linux', 'arcolinux', 'artix linux', 'rebornos', 'cachyos', 'archcraft', 'blackarch', 'archbang', 'hyperbola', 'fedora', 'centos stream', 'rocky linux', 'almalinux', 'clearos', 'calculate linux', 'sabayon', 'redcore linux', 'centos', 'slax', 'zenwalk', 'porteus', 'solus', 'clear linux', 'bodhi linux', 'qubes os', 'guix system', 'bedrock linux', 'reactos', 'raspberry pi os', 'steamos', 'openwrt', 'libreelec', 'osmc', 'ipfire', 'garuda', 'pfsense', 'rescatux', 'systemrescue', 'linux from scratch', 'tiny core linux', 'puppy linux', 'damn small linux', 'kolibrios', 'popos', 'kali', 'tails', 'cinnamon ubuntu']);
+    const wm = matchKeywords(title, wmMap);
+    const de = matchKeywords(title, deMap);
+    const theme = matchKeywords(title, themeMap);
+    const distro = matchKeywords(title, distroMap);
 
     return {
       "reddit_post": url,

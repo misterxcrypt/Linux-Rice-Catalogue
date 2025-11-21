@@ -385,6 +385,9 @@
                 refreshPreview();
             }
 
+            // Update live preview text
+            updatePreview();
+
             console.log('✅ Successfully scraped and populated Reddit data!');
         } catch (err) {
             console.error('❌ Scrape failed:', err);
@@ -516,6 +519,10 @@
             const reader = new FileReader();
             reader.onload = () => {
                 addPreviewImage(reader.result, window.selectedFiles.length - 1);
+                // Update live preview with first image
+                if (window.selectedFiles.length === 1) {
+                    document.querySelector('#submission-modal .rice-card img').src = reader.result;
+                }
             };
             reader.readAsDataURL(file);
         });
@@ -546,6 +553,14 @@
             const src = entry.url || (entry.file ? URL.createObjectURL(entry.file) : '');
             addPreviewImage(src, i);
         });
+        // Update live preview
+        if (window.selectedFiles.length > 0) {
+            const firstEntry = window.selectedFiles[0];
+            const src = firstEntry.url || (firstEntry.file ? URL.createObjectURL(firstEntry.file) : '');
+            document.querySelector('#submission-modal .rice-card img').src = src;
+        } else {
+            document.querySelector('#submission-modal .rice-card img').src = 'https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png';
+        }
     }
 
     let keywords = {};
@@ -998,11 +1013,18 @@
                     starContainer.appendChild(star);
                 }
 
+                // Update animated rice card with live preview image
+                const livePreviewImg = document.querySelector('#submission-modal .rice-card img');
+                const animatedImg = document.querySelector('#animated-rice-card img');
+                if (livePreviewImg && animatedImg) {
+                    animatedImg.src = livePreviewImg.src;
+                }
+
                 const ship = document.getElementById('space-travel-ship');
                 ship.classList.remove('animate-floatInSpace');
                 void ship.offsetWidth; // trigger reflow
                 ship.classList.add('animate-floatInSpace');
-                
+
                 el.spaceTravelOverlay.prepend(starContainer);
                 el.spaceTravelOverlay.classList.remove('hidden');
                 setTimeout(() => el.spaceTravelOverlay.classList.add('hidden'), 5000);
@@ -1225,6 +1247,7 @@
                 document.getElementById('theme-custom').classList.add('hidden');
                 window.selectedFiles = [];
                 document.getElementById('screenshot-preview').innerHTML = '';
+                refreshPreview(); // Reset live preview
             } else {
                 throw new Error(result.error || 'Failed to submit');
             }

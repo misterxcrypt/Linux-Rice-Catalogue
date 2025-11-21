@@ -84,6 +84,8 @@
                     <div>Total Rices: <span id="stat-total" class="font-bold">0</span></div>
                     <div>Unique WMs: <span id="stat-wms" class="font-bold">0</span></div>
                     <div>Unique Themes: <span id="stat-themes" class="font-bold">0</span></div>
+                    <div>Unique DEs: <span id="stat-des" class="font-bold">0</span></div>
+                    <div>Unique Distros: <span id="stat-distros" class="font-bold">0</span></div>
                 </div>
                 <div class="flex-1">
                     <div class="flex justify-end items-center mb-4">
@@ -244,9 +246,17 @@
             renderPendingRices(rices);
         }
         // HTML templates
-        const viewHTML = (rice) => `
+        const viewHTML = (rice) => {
+            const customBadges = [];
+            if (rice.isCustomTheme) customBadges.push('<span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs">Custom Theme</span>');
+            if (rice.isCustomDistro) customBadges.push('<span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs">Custom Distro</span>');
+            if (rice.isCustomEnvironment) customBadges.push('<span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs">Custom WM/DE</span>');
+            const badgesHTML = customBadges.length > 0 ? `<div class="flex gap-1 mt-1">${customBadges.join('')}</div>` : '';
+
+            return `
             <div class="flex-1">
             <div class="font-bold text-lg text-white">${rice.author || ''}</div>
+            ${badgesHTML}
             <div class="font-mono text-sm text-gray-400">
                 ${(rice.environment && rice.environment.name) || ''}
                 ${rice.distro ? '· ' + rice.distro : ''}
@@ -269,7 +279,8 @@
                 <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
                 <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
             </div>
-        `;
+            `;
+        };
         const editHTML = (rice) => `
             <div class="flex-1">
             <div class="mb-2">
@@ -722,7 +733,9 @@
         const toggleBtn = document.getElementById('toggle-chart-type');
         toggleBtn.addEventListener('click', () => {
             console.log('✅ Toggle clicked. Current type:', currentChartType);
-            currentChartType = currentChartType === 'wms' ? 'themes' : 'wms';
+            const types = ['wms', 'themes', 'des', 'distros'];
+            const currentIndex = types.indexOf(currentChartType);
+            currentChartType = types[(currentIndex + 1) % types.length];
             renderStats(window.latestStats);
         });
 
@@ -747,14 +760,30 @@
             document.getElementById('stat-total').textContent = stats.total;
             document.getElementById('stat-wms').textContent = Object.keys(stats.wms).length;
             document.getElementById('stat-themes').textContent = Object.keys(stats.themes).length;
+            document.getElementById('stat-des').textContent = Object.keys(stats.des || {}).length;
+            document.getElementById('stat-distros').textContent = Object.keys(stats.distros || {}).length;
 
             const ctx = document.getElementById('stats-pie').getContext('2d');
             if (window.statsPieChart) window.statsPieChart.destroy();
 
-            const dataSource = currentChartType === 'wms' ? stats.wms : stats.themes;
+            let dataSource;
+            let buttonText;
+            if (currentChartType === 'wms') {
+                dataSource = stats.wms;
+                buttonText = '🎛️ View: WM';
+            } else if (currentChartType === 'themes') {
+                dataSource = stats.themes;
+                buttonText = '🎨 View: Themes';
+            } else if (currentChartType === 'des') {
+                dataSource = stats.des || {};
+                buttonText = '🖥️ View: DE';
+            } else if (currentChartType === 'distros') {
+                dataSource = stats.distros || {};
+                buttonText = '🐧 View: Distro';
+            }
 
             // Update button label
-            toggleBtn.textContent = currentChartType === 'wms' ? '🎛️ View: WM' : '🎨 View: Themes';
+            toggleBtn.textContent = buttonText;
 
             const darkColors = [
             '#8ec07c', '#fabd2f', '#83a598', '#d3869b', '#fe8019',

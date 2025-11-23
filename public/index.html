@@ -56,17 +56,12 @@
         @media (min-width: 1536px) { .grid-masonry { column-count: 4; } } /* 2xl */
         .grid-masonry .rice-card { break-inside: avoid; margin-bottom: 1.5rem; }
 
-        .grid-bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-        .grid-bento .rice-card:nth-child(7n+1) { grid-column: span 2; grid-row: span 2; }
-        .grid-bento .rice-card:nth-child(7n+4) { grid-column: span 1; grid-row: span 2; }
+        .grid-bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
         @media (max-width: 1024px) {
             .grid-bento { grid-template-columns: repeat(2, 1fr); }
-            .grid-bento .rice-card { grid-column: span 1 !important; grid-row: span 1 !important; }
-            .grid-bento .rice-card:nth-child(5n+1) { grid-column: span 2 !important; }
         }
          @media (max-width: 639px) { /* xs */
             .grid-bento { grid-template-columns: repeat(1, 1fr); }
-            .grid-bento .rice-card { grid-column: span 1 !important; grid-row: span 1 !important; }
         }
 
 
@@ -135,7 +130,7 @@
                  <div class="flex items-center gap-2">
                     <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
                         <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10 active"><span class="material-icons-outlined">grid_view</span></button>
-                        <button title="Bento View" data-view="bento" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">dashboard</span></button>
+                        <button title="Grid View" data-view="bento" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">view_module</span></button>
                         <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">view_agenda</span></button>
                     </div>
                     <button id="submit-rice-btn" class="p-2.5 bg-[var(--accent-color)] text-white rounded-lg ml-2 hover:opacity-90"><span class="material-icons-outlined">add_circle</span></button>

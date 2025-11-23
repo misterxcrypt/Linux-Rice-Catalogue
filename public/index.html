@@ -158,7 +158,9 @@
                 <!-- Filter pills injected here -->
             </div>
         </div>
-        
+
+        <div id="rice-count" class="mb-4 text-left text-gray-400 font-mono">Showing 0 rices</div>
+
         <div id="rice-gallery" class="grid-masonry"></div>
     </div>
 
@@ -726,6 +728,7 @@
                 el.gallery.className = `grid-${state.viewMode}`;
                 dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
                 initScrollObserver();
+                document.getElementById('rice-count').textContent = `Showing ${dataToRender.length} of ${ricesData.length} rices`;
             }; */
             const renderGallery = () => {
                 const query = document.getElementById('search-input')?.value.toLowerCase() || "";
@@ -757,6 +760,7 @@
                 el.gallery.innerHTML = '';
                 el.gallery.className = `grid-${state.viewMode}`;
                 dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
+                document.getElementById('rice-count').textContent = `Showing ${dataToRender.length} of ${ricesData.length} rices`;
                 initScrollObserver();
             };
 

@@ -84,6 +84,7 @@
         
         .rice-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .rice-card:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--accent-glow), 0 0 0 1px var(--accent-color); z-index: 10; }
+        .rice-card:hover .rice-overlay { opacity: 1; }
 
         .control-btn { transition: background-color 1s ease, color 1s ease; }
         .control-btn.active { background-color: var(--accent-color); color: white; font-weight: 600; }
@@ -848,6 +849,13 @@
                 let images = rice.images || [];
                 if (typeof images === 'string') images = [images];
                 const reactions = rice.reactions || { heart: 0, fire: 0, down: 0 };
+                const isLight = document.documentElement.classList.contains('light-mode');
+                /* const overlayColor = isLight ? 'from-black/100' : 'from-white/100'; */
+                const overlayColor = 'from-black/100';
+                /* const textColor = isLight ? 'text-white' : 'text-black'; */
+                const textColor = 'text-white';
+                /* const textColor70 = isLight ? 'text-white/70' : 'text-black/70'; */
+                const textColor70 = 'text-white/70';
                 const card = document.createElement('div');
                 card.className = `rice-card group relative rounded-2xl overflow-hidden cursor-pointer flex bg-[#111116] border border-[var(--border-color)]`;
                 card.dataset.index = originalIndex;
@@ -856,9 +864,9 @@
                     <div class="card-image w-full h-full">
                         <img src="https://ik.imagekit.io/y1n9qg16a/rices/${images[0] || ''}" alt="${user}'s ${wm} rice" loading="lazy" class="w-full h-full object-cover">
                     </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end">
-                        <h3 class="text-xl font-bold text-white">${user}</h3>
-                        <div class="flex justify-between items-center text-sm text-white/70">
+                    <div class="rice-overlay absolute inset-0 bg-gradient-to-t ${overlayColor} p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300">
+                        <h3 class="text-xl font-bold ${textColor}">${user}</h3>
+                        <div class="flex justify-between items-center text-sm ${textColor70}">
                             <p class="font-mono truncate">${distro} + ${wm}</p>
                             <!-- <div class="flex gap-2 text-white/80 ml-4 shrink-0">
                                 <span title="Love">❤️ ${reactions.heart || 0}</span>

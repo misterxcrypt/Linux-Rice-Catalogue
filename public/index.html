@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/colorthief@2.3.2/dist/color-thief.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
     
     <style>
         :root {
@@ -20,7 +21,21 @@
             --border-color: rgba(255, 255, 255, 0.08);
             --accent-color: #5D5FEF;
             --accent-glow: rgba(93, 95, 239, 0.4);
-            transition: --accent-color 0.5s ease, --accent-glow 0.5s ease;
+            --text-color: #E0E0E0;
+            --muted-text: #A0A0A0;
+            --placeholder-color: #A0A0A0;
+            --bg-pattern: rgba(255, 255, 255, 0.02);
+            transition: --accent-color 1s ease, --accent-glow 1s ease, --bg-color 1s ease, --text-color 1s ease;
+        }
+
+        .light-mode {
+            --bg-color: #F8F9FA;
+            --panel-bg: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-color: #212529;
+            --muted-text: #6C757D;
+            --placeholder-color: #000;
+            --bg-pattern: rgba(0, 0, 0, 0.04);
         }
 
         @property --accent-color { syntax: '<color>'; initial-value: #5D5FEF; inherits: true; }
@@ -28,14 +43,14 @@
 
         body {
             background-color: var(--bg-color);
-            color: #E0E0E0;
+            color: var(--text-color);
             font-family: 'Inter', sans-serif;
-            background-image: 
-                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0),
+            background-image:
+                radial-gradient(circle at 1px 1px, var(--bg-pattern) 1px, transparent 0),
                 radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 45%);
             background-size: 30px 30px, 100% 100%;
             background-repeat: repeat, no-repeat;
-            transition: background-position 1s ease-out;
+            transition: background-color 1s ease, background-position 1s ease-out;
         }
 
         .font-mono { font-family: 'JetBrains Mono', monospace; }
@@ -70,7 +85,9 @@
         .rice-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .rice-card:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--accent-glow), 0 0 0 1px var(--accent-color); z-index: 10; }
 
+        .control-btn { transition: background-color 1s ease, color 1s ease; }
         .control-btn.active { background-color: var(--accent-color); color: white; font-weight: 600; }
+        .control-btn.active:hover { background-color: var(--accent-color); }
         .lightbox-content, .submission-modal-content, .mood-switcher-panel { border: 1px solid var(--accent-color); box-shadow: 0 10px 50px var(--accent-glow); animation: slideUp 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
         
         @keyframes slideUp { from { transform: translateY(30px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
@@ -102,42 +119,52 @@
         animation: floatInSpace 5s ease-in-out forwards;
         }
 
+        #mood-switcher-panel { transform: translateX(100%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; min-width: 180px; }
+        #mood-switcher-panel.open { transform: translateX(0); opacity: 1; }
+
         select {
             background: var(--panel-bg);
-            color: #E0E0E0;
+            color: var(--text-color);
             border: 1px solid var(--border-color);
         }
 
         select option {
             background: var(--bg-color);
-            color: #E0E0E0;
+            color: var(--text-color);
+        }
+
+        input::placeholder {
+            color: var(--placeholder-color);
         }
     </style>
 </head>
-<body class="min-h-screen text-gray-300">
+<body class="min-h-screen text-gray-400">
 
     <!-- MAIN UI -->
-    <div class="p-4 md:p-6 lg:p-8">
+    <div id="smooth-wrapper">
+        <div id="smooth-content" class="p-4 md:p-6 lg:p-8">
         <header class="mb-6 space-y-4">
              <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                  <div class="flex items-center gap-3">
                     <div class="text-3xl md:text-4xl w-10 h-10 flex items-center justify-center">🌾</div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Rice Gallery</h1>
+                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight" style="color: var(--text-color)">Rice Gallery</h1>
                  </div>
                  <div class="w-full md:w-[500px] p-2 rounded-md glass-panel font-mono text-sm">
                     <input id="search-input" type="text" placeholder="🔍 Search rices (author, WM, distro, theme)" class="w-full p-2 rounded-md glass-panel font-mono text-sm" />
                  </div>
                  <div class="flex items-center gap-2">
                     <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
-                        <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10 active"><span class="material-icons-outlined">grid_view</span></button>
-                        <button title="Grid View" data-view="bento" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">view_module</span></button>
-                        <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md transition-colors hover:bg-white/10"><span class="material-icons-outlined">view_agenda</span></button>
+                        <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md active"><span class="material-icons-outlined">grid_view</span></button>
+                        <button title="Grid View" data-view="bento" class="control-btn p-2 rounded-md"><span class="material-icons-outlined">view_module</span></button>
+                        <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md"><span class="material-icons-outlined">view_agenda</span></button>
                     </div>
-                    <button id="submit-rice-btn" class="p-2.5 bg-[var(--accent-color)] text-white rounded-lg ml-2 hover:opacity-90"><span class="material-icons-outlined">add_circle</span></button>
                     <button id="login-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10">Login</button>
                     <button id="admin-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10" style="display:none">Admin</button>
                     <button id="logout-btn" class="p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-white font-semibold hover:bg-white/10" style="display:none">
                         <span class="material-icons-outlined text-gray-300">logout</span>
+                    </button>
+                    <button id="theme-toggle-btn" class="p-2.5 ml-2 glass-panel rounded-lg hover:bg-white/10" title="Toggle Dark/Light Mode">
+                        <span class="material-icons-outlined">dark_mode</span>
                     </button>
                  </div>
              </div>
@@ -146,7 +173,7 @@
         <!-- Filter Controls -->
         <div id="filter-controls" class="mb-8 p-4 glass-panel rounded-xl">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                <div class="font-mono text-sm uppercase text-gray-400">Filter By:</div>
+                <div class="font-mono text-sm uppercase" style="color: var(--muted-text)">Filter By:</div>
                 <div id="filter-type-toggle" class="flex gap-1 glass-panel p-1 rounded-lg">
                         <button data-filter-type="wm" class="control-btn px-4 py-1.5 text-sm rounded-md active">WM</button>
                         <button data-filter-type="de" class="control-btn px-4 py-1.5 text-sm rounded-md">DE</button>
@@ -159,9 +186,13 @@
             </div>
         </div>
 
-        <div id="rice-count" class="mb-4 text-left text-gray-400 font-mono">Showing 0 rices</div>
+        <div class="mb-4 flex justify-between items-center">
+            <div id="rice-count" class="font-mono" style="color: var(--muted-text)">Showing 0 rices</div>
+            <button id="submit-rice-btn" class="bg-[var(--accent-color)] text-white rounded-lg px-4 py-2 hover:opacity-90">Submit your rice</button>
+        </div>
 
         <div id="rice-gallery" class="grid-masonry"></div>
+        </div>
     </div>
 
     <!-- MODALS AND OVERLAYS (Same as before) -->
@@ -194,7 +225,7 @@
         <!-- Details Panel -->
         <div id="lightbox-details-panel" class="w-full md:w-1/3 lg:w-1/4 p-6 flex flex-col space-y-4 overflow-y-auto">
         <div>
-            <h2 id="lightbox-user" class="text-3xl font-bold text-white break-words"></h2>
+            <h2 id="lightbox-user" class="text-3xl font-bold break-words" style="color: var(--text-color)"></h2>
             <p class="font-mono text-lg" style="color: var(--modal-accent, #fff)" id="lightbox-wm-distro-theme"></p>
         </div>
         <div class="space-y-3 font-mono text-sm border-t border-b py-4 border-[var(--border-color)]" id="lightbox-metadata"></div>
@@ -296,9 +327,10 @@
         </div>
     </div>
     <div id="mood-switcher-container" class="fixed bottom-4 right-4 z-40">
-        <div id="mood-switcher-panel" class="absolute bottom-14 right-0 grid grid-cols-4 gap-3 p-3 rounded-2xl glass-panel hidden"></div>
+        <div id="mood-switcher-panel" class="absolute bottom-0 right-16 grid grid-cols-4 gap-3 p-2 rounded-2xl glass-panel place-items-center"></div>
         <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
     </div>
+
 
     <!-- Add Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
@@ -711,7 +743,9 @@
                 currentImageIndex: 0,
             };
             
-            const moodThemes = [ { name: 'Arc', color: '#5D5FEF', glow: 'rgba(93, 95, 239, 0.4)' }, { name: 'Pastel Pink', color: '#F48FB1', glow: 'rgba(244, 143, 177, 0.5)' }, { name: 'Terminal Green', color: '#4CAF50', glow: 'rgba(76, 175, 80, 0.4)' }, { name: 'Solarized', color: '#268BD2', glow: 'rgba(38, 139, 210, 0.4)' }, { name: 'Gruvbox', color: '#D65D0E', glow: 'rgba(214, 93, 14, 0.4)' }, { name: 'Dracula', color: '#BD93F9', glow: 'rgba(189, 147, 249, 0.4)' }, { name: 'Nord', color: '#88C0D0', glow: 'rgba(136, 192, 208, 0.4)' }, { name: 'Void', color: '#9E9E9E', glow: 'rgba(158, 158, 158, 0.3)' }, ];
+            const darkThemes = [ { name: 'Blue', color: '#5D5FEF', glow: 'rgba(30, 58, 138, 0.5)' }, { name: 'Forest Green', color: '#14532d', glow: 'rgba(20, 83, 45, 0.5)' }, { name: 'Burgundy', color: '#7c2d12', glow: 'rgba(124, 45, 18, 0.5)' }, { name: 'Deep Blue', color: '#1e3a8a', glow: 'rgba(30, 41, 59, 0.5)' }, ];
+            const lightThemes = [ { name: 'Pastel Pink', color: '#F48FB1', glow: 'rgba(244, 143, 177, 0.5)' }, { name: 'Sky Blue', color: '#87CEEB', glow: 'rgba(135, 206, 235, 0.5)' }, { name: 'Lavender', color: '#d374f2', glow: 'rgba(230, 230, 250, 0.5)' }, { name: 'Mint', color: '#98FB98', glow: 'rgba(152, 251, 152, 0.5)' }, ];
+            let moodThemes = darkThemes;
             
             const render = () => {
                 renderFilters();
@@ -793,7 +827,7 @@
                 }
 
                 el.filterPillsContainer.innerHTML = uniqueValues.map(value =>
-                    `<button data-filter-value="${value}" class="control-btn px-3 py-1.5 rounded-lg text-sm transition-colors hover:bg-white/10 ${value === state.activeFilterValue ? 'active' : ''}">${value}</button>`
+                    `<button data-filter-value="${value}" class="control-btn px-3 py-1.5 rounded-lg text-sm ${value === state.activeFilterValue ? 'active' : ''}">${value}</button>`
                 ).join('');
 
                 el.filterPillsContainer.querySelectorAll('button').forEach(btn => {
@@ -840,15 +874,16 @@
 
             const initScrollObserver = () => {
                 const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const rice = ricesData[parseInt(entry.target.dataset.index)];
-                            const themeName = rice.theme || 'Arc'; // Fallback to Arc if no theme
-                            const theme = moodThemes.find(t => t.name.toLowerCase() === themeName.toLowerCase()) || moodThemes.find(t => t.name === 'Arc');
-                            document.documentElement.style.setProperty('--accent-color', theme.color);
-                            document.documentElement.style.setProperty('--accent-glow', theme.glow);
-                        }
-                    });
+                    // Theme change on scroll disabled for consistency with manual theme selection
+                    // entries.forEach(entry => {
+                    //     if (entry.isIntersecting) {
+                    //         const rice = ricesData[parseInt(entry.target.dataset.index)];
+                    //         const themeName = rice.theme || 'Arc'; // Fallback to Arc if no theme
+                    //         const theme = moodThemes.find(t => t.name.toLowerCase() === themeName.toLowerCase()) || moodThemes.find(t => t.name === 'Arc');
+                    //         document.documentElement.style.setProperty('--accent-color', theme.color);
+                    //         document.documentElement.style.setProperty('--accent-glow', theme.glow);
+                    //     }
+                    // });
                 }, { rootMargin: '-40% 0px -40% 0px' });
                 el.gallery.querySelectorAll('.rice-card').forEach(card => observer.observe(card));
             };
@@ -957,19 +992,19 @@
                 setContent('#lightbox-wm-distro-theme', `${rice.wm || 'Unknown'} / ${rice.distro || 'Unknown'} / ${rice.theme || 'Unknown'}`);
                 el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div>`;
                 const dotfilesHTML = rice.url
-                    ? `<h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Dotfiles</h3>
+                    ? `<h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Dotfiles</h3>
                         <div class="grid grid-cols-1 gap-2">
                         <a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
                         </div>`
-                    : `<h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Dotfiles</h3>
-                        <p class="text-white/60 text-sm italic">No dotfiles found.</p>`;
+                    : `<h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Dotfiles</h3>
+                        <p class="text-sm italic" style="color: var(--muted-text)">No dotfiles found.</p>`;
                 const redditHTML = rice.reddit_post
-                    ? `<div class="mt-6"><h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Reddit Post</h3>
+                    ? `<div class="mt-6"><h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Reddit Post</h3>
                         <div class="grid grid-cols-1 gap-2">
                         <a href="${rice.reddit_post}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
                         </div></div>`
-                    : `<div class="mt-6"><h3 class="font-mono text-sm uppercase text-gray-400 mb-2">Reddit Post</h3>
-                        <p class="text-white/60 text-sm italic">No reddit post found.</p></div>`;
+                    : `<div class="mt-6"><h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Reddit Post</h3>
+                        <p class="text-sm italic" style="color: var(--muted-text)">No reddit post found.</p></div>`;
                 el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = dotfilesHTML + redditHTML;
                 const reactions = [
                     { key: 'heart', emoji: '❤️' },
@@ -1036,18 +1071,26 @@
                 el.moodSwitcher.btn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
                 localStorage.setItem('rice-gallery-theme', theme.name);
             };
-            const initMoodSwitcher = () => {
+            const updateMoodSwitcherPanel = () => {
+                el.moodSwitcher.panel.innerHTML = '';
                 moodThemes.forEach(theme => {
                     const btn = document.createElement('button');
-                    btn.className = 'w-10 h-10 rounded-full transition-transform hover:scale-110';
+                    btn.className = 'w-8 h-8 rounded-full transition-transform hover:scale-110';
                     btn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
                     btn.title = theme.name;
                     btn.addEventListener('click', () => applyTheme(theme));
                     el.moodSwitcher.panel.appendChild(btn);
                 });
+            };
+            const initMoodSwitcher = () => {
+                updateMoodSwitcherPanel();
                 const savedTheme = localStorage.getItem('rice-gallery-theme');
-                if (savedTheme) applyTheme(moodThemes.find(t => t.name === savedTheme) || moodThemes[0]);
-                el.moodSwitcher.btn.addEventListener('click', () => el.moodSwitcher.panel.classList.toggle('hidden'));
+                if (savedTheme && moodThemes.find(t => t.name === savedTheme)) {
+                    applyTheme(moodThemes.find(t => t.name === savedTheme));
+                } else {
+                    applyTheme(moodThemes[0]);
+                }
+                el.moodSwitcher.btn.addEventListener('click', () => el.moodSwitcher.panel.classList.toggle('open'));
             };
 
             // ATTACH LISTENERS
@@ -1116,10 +1159,133 @@
             document.getElementById('logout-btn').addEventListener('click', handleLogout);
             checkLogin();
 
+            // Theme toggle
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const themeIcon = themeToggleBtn.querySelector('span');
+
+            function applyThemeMode(isLight) {
+                if (isLight) {
+                    document.documentElement.classList.add('light-mode');
+                    document.body.className = 'min-h-screen text-gray-800';
+                    themeIcon.textContent = 'light_mode';
+                    localStorage.setItem('theme-mode', 'light');
+                    // Update button colors
+                    document.getElementById('login-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-black font-semibold hover:bg-black/10';
+                    document.getElementById('admin-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-black font-semibold hover:bg-black/10';
+                    document.getElementById('logout-btn').className = 'p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-black font-semibold hover:bg-black/10';
+                    document.getElementById('submit-rice-btn').className = 'bg-[var(--accent-color)] text-black rounded-lg px-4 py-2 hover:opacity-90';
+                    // Update login modal colors
+                    document.getElementById('login-modal').className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
+                    document.getElementById('login-modal').querySelector('h2').className = 'text-2xl font-bold mb-4 text-black';
+                    document.getElementById('admin-password').className = 'w-full p-3 rounded-lg glass-panel text-black';
+                    document.getElementById('login-form').querySelector('button').className = 'w-full p-3 font-bold rounded-lg text-black';
+                    document.getElementById('login-close-btn').className = 'mt-4 text-gray-600 hover:text-black';
+                    // Update submission modal live preview text
+                    const livePreviewText = document.querySelector('#submission-modal p.font-mono');
+                    if (livePreviewText) livePreviewText.className = 'font-mono text-black mb-4 text-center';
+                    // Update submission modal preview background
+                    const submissionBg = document.querySelector('#submission-modal .bg-black\\/20');
+                    if (submissionBg) submissionBg.className = 'w-full md:w-1/2 p-6 bg-white/5 flex flex-col items-center justify-center';
+                    // Update search input color
+                    const searchInput = document.getElementById('search-input');
+                    if (searchInput) searchInput.className = 'w-full p-2 rounded-md glass-panel font-mono text-sm text-black';
+                    // Update lightbox image background
+                    const lightboxImgBg = document.querySelector('#lightbox .bg-black\\/40');
+                    if (lightboxImgBg) lightboxImgBg.className = 'relative w-full md:w-2/3 lg:w-3/4 bg-white/40 flex items-center justify-center';
+                    // Update lightbox details panel background
+                    const detailsPanel = document.getElementById('lightbox-details-panel');
+                    if (detailsPanel) detailsPanel.className = 'w-full md:w-1/3 lg:w-1/4 p-6 flex flex-col space-y-4 overflow-y-auto bg-white';
+                    // Update lightbox navigation buttons
+                    document.querySelectorAll('#lightbox-prev-rice, #lightbox-next-rice').forEach(btn => {
+                        if (btn) btn.className = 'absolute top-1/2 -translate-y-1/2 text-black bg-white/60 hover:bg-white/80 p-4 rounded-full z-40 text-3xl shadow-lg transition-transform hover:scale-110';
+                    });
+                    const prevRice = document.getElementById('lightbox-prev-rice');
+                    if (prevRice) prevRice.classList.add('left-4');
+                    const nextRice = document.getElementById('lightbox-next-rice');
+                    if (nextRice) nextRice.classList.add('right-4');
+                    // Update lightbox image navigation buttons
+                    document.querySelectorAll('#lightbox-prev, #lightbox-next').forEach(btn => {
+                        if (btn) btn.className = 'absolute top-1/2 -translate-y-1/2 p-2 bg-white/40 rounded-full hover:bg-white/60';
+                    });
+                    const prevImg = document.getElementById('lightbox-prev');
+                    if (prevImg) prevImg.classList.add('left-4');
+                    const nextImg = document.getElementById('lightbox-next');
+                    if (nextImg) nextImg.classList.add('right-4');
+                } else {
+                    document.documentElement.classList.remove('light-mode');
+                    document.body.className = 'min-h-screen text-gray-400';
+                    themeIcon.textContent = 'dark_mode';
+                    localStorage.setItem('theme-mode', 'dark');
+                    // Update button colors
+                    document.getElementById('login-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10';
+                    document.getElementById('admin-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10';
+                    document.getElementById('logout-btn').className = 'p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-white font-semibold hover:bg-white/10';
+                    document.getElementById('submit-rice-btn').className = 'bg-[var(--accent-color)] text-white rounded-lg px-4 py-2 hover:opacity-90';
+                    // Update login modal colors
+                    document.getElementById('login-modal').className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
+                    document.getElementById('login-modal').querySelector('h2').className = 'text-2xl font-bold mb-4 text-white';
+                    document.getElementById('admin-password').className = 'w-full p-3 rounded-lg glass-panel text-white';
+                    document.getElementById('login-form').querySelector('button').className = 'w-full p-3 font-bold rounded-lg text-white';
+                    document.getElementById('login-close-btn').className = 'mt-4 text-gray-400 hover:text-white';
+                    // Update submission modal live preview text
+                    const livePreviewText = document.querySelector('#submission-modal p.font-mono');
+                    if (livePreviewText) livePreviewText.className = 'font-mono text-gray-400 mb-4 text-center';
+                    // Update submission modal preview background
+                    const submissionBg = document.querySelector('#submission-modal .bg-white\\/5');
+                    if (submissionBg) submissionBg.className = 'w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center';
+                    // Update search input color
+                    const searchInputDark = document.getElementById('search-input');
+                    if (searchInputDark) searchInputDark.className = 'w-full p-2 rounded-md glass-panel font-mono text-sm text-white';
+                    // Update lightbox image background
+                    const lightboxImgBg = document.querySelector('#lightbox .bg-white\\/40');
+                    if (lightboxImgBg) lightboxImgBg.className = 'relative w-full md:w-2/3 lg:w-3/4 bg-black/40 flex items-center justify-center';
+                    // Update lightbox details panel background
+                    const detailsPanel = document.getElementById('lightbox-details-panel');
+                    if (detailsPanel) detailsPanel.className = 'w-full md:w-1/3 lg:w-1/4 p-6 flex flex-col space-y-4 overflow-y-auto bg-gray-900';
+                    // Update lightbox navigation buttons
+                    document.querySelectorAll('#lightbox-prev-rice, #lightbox-next-rice').forEach(btn => {
+                        if (btn) btn.className = 'absolute top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/80 p-4 rounded-full z-40 text-3xl shadow-lg transition-transform hover:scale-110';
+                    });
+                    const prevRice = document.getElementById('lightbox-prev-rice');
+                    if (prevRice) prevRice.classList.add('left-4');
+                    const nextRice = document.getElementById('lightbox-next-rice');
+                    if (nextRice) nextRice.classList.add('right-4');
+                    // Update lightbox image navigation buttons
+                    document.querySelectorAll('#lightbox-prev, #lightbox-next').forEach(btn => {
+                        if (btn) btn.className = 'absolute top-1/2 -translate-y-1/2 p-2 bg-black/40 rounded-full hover:bg-black/60';
+                    });
+                    const prevImg = document.getElementById('lightbox-prev');
+                    if (prevImg) prevImg.classList.add('left-4');
+                    const nextImg = document.getElementById('lightbox-next');
+                    if (nextImg) nextImg.classList.add('right-4');
+                }
+                // Update mood switcher themes based on mode
+                moodThemes = isLight ? lightThemes : darkThemes;
+                updateMoodSwitcherPanel();
+                applyTheme(moodThemes[0]);
+                setTimeout(() => render(), 1000); // Delay render to match transition
+            }
+
+            // Load saved theme - default to light mode
+            const savedTheme = localStorage.getItem('theme-mode');
+            applyThemeMode(savedTheme !== 'dark');
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light-mode');
+                applyThemeMode(!isLight);
+            });
+
             // INITIALIZE
             await loadRicesData();
             initMoodSwitcher();
             render(); // Initial render
+
+            // Initialize GSAP ScrollSmoother
+            ScrollSmoother.create({
+                wrapper: "#smooth-wrapper",
+                content: "#smooth-content",
+                smooth: 2
+            });
         });
     </script>
     <script>

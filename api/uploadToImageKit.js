@@ -102,15 +102,15 @@ async function downloadAndUploadToImageKit(urls) {
       const compressedPath = await compressTo500KB(filePath);
       console.log(`🗜️ Compressed to: ${compressedPath}`);
 
-      if (process.env.LOCAL_DEV === 'true') {
+      if (process.env.NODE_ENV === 'development') {
         // Save to local folder instead of ImageKit
-        const localImagesDir = path.join(__dirname, '..', 'public', 'local-images');
+        const localImagesDir = path.join(__dirname, '..', 'public', 'uploads');
         await fs.ensureDir(localImagesDir);
         const localFileName = `${uuid}.jpg`;
         const localFilePath = path.join(localImagesDir, localFileName);
         await fs.copy(compressedPath, localFilePath);
         console.log(`💾 Saved locally: ${localFilePath}`);
-        results.push({ filename: localFileName, fileId: '', url: `/local-images/${localFileName}` });
+        results.push({ filename: localFileName, fileId: '', url: `/uploads/${localFileName}` });
       } else {
         const uploadResponse = await imagekit.upload({
           file: fs.readFileSync(compressedPath),

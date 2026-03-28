@@ -46,24 +46,58 @@ git clone https://github.com/yourusername/rice-gallery.git
 cd rice-gallery
 ```
 
-### 2. Environment Configuration
+### 2. Prerequisites
+- Node.js >= 14
+- Docker (for local MongoDB)
+- Vercel CLI: `npm install -g vercel`
+
+### 3. Local Development Setup
 ```bash
-cp .env.example .env
-# Edit .env with your actual credentials
+# Clone the repo
+git clone https://github.com/yourusername/rice-gallery.git
+cd rice-gallery
+
+# Copy development environment
+cp .env.development .env
+
+# Install dependencies
+npm install
+
+# Start development environment (includes local DB, seeding, and server)
+npm run dev
 ```
 
-Required environment variables:
-- `MONGODB_URI`: Your MongoDB connection string
-- `IMAGEKIT_*`: ImageKit API keys (optional for basic functionality)
-- `REDDIT_*`: Reddit API credentials for submission scraping
-- `ADMIN_PASSWORD`: Secure password for admin login
+This will:
+- Start a local MongoDB instance via Docker
+- Seed the database with sample data
+- Start the development server on http://localhost:3000
 
-#### Local Development Mode
-For easier setup without external services:
-- Set `LOCAL_DEV=true` in `.env`
-- This uses `sample-db.json` for data and local images instead of MongoDB/ImageKit
-- Add dummy images to `public/local-images/` (e.g., sample1.png, sample2.png, sample3.png)
-- Run the backend locally or use Vercel dev for API functions
+#### Adding Sample Images
+- Place dummy images in `public/uploads/` (e.g., sample1.png, sample2.png)
+- The sample data references these files
+
+#### Contributing New Data
+- Add JSON files to `contributions/` folder
+- Format: Same as `sample-db.json` entries
+- Submit PR with your contribution file
+- Maintainers will review and add approved data to production
+
+### 4. Production Deployment
+```bash
+# Copy production environment
+cp .env.production .env
+# Fill in your production credentials
+
+# Deploy to Vercel
+npm run dev:vercel
+vercel --prod
+```
+
+Required production environment variables:
+- `MONGODB_URI`: Your MongoDB Atlas connection string
+- `IMAGEKIT_*`: ImageKit API keys for cloud image storage
+- `REDDIT_*`: Reddit API credentials for scraping
+- `ADMIN_PASSWORD`: Secure admin password
 
 ### 3. Deploy Backend
 The backend consists of serverless functions. Deploy to Vercel, Netlify, or your preferred serverless platform.

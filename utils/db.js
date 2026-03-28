@@ -2,7 +2,10 @@
 // MongoDB connection utility for serverless functions
 const { MongoClient } = require('mongodb');
 
-const uri = process.env.MONGODB_URI;
+const isDevelopment = process.env.NODE_ENV === 'development';
+const uri = isDevelopment
+  ? (process.env.MONGODB_URI_DEV || 'mongodb://admin:password@localhost:27017/ricegallery?authSource=admin')
+  : process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB || 'ricegallery';
 
 let cachedClient = null;

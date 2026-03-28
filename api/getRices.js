@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
 
   try {
     let rices;
-    if (process.env.LOCAL_DEV === 'true') {
+    if (process.env.NODE_ENV === 'development') {
       // Load from local sample-db.json
       const sampleDbPath = path.join(__dirname, '..', 'sample-db.json');
       const data = fs.readFileSync(sampleDbPath, 'utf8');
@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
       // Modify images to use local paths
       rices = rices.map(rice => ({
         ...rice,
-        images: rice.images.map(img => `/local-images/${img}`)
+        images: rice.images.map(img => `/uploads/${img}`)
       }));
     } else {
       const db = await getDb();

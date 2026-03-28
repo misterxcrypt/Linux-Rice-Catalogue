@@ -1,6 +1,13 @@
 const { getDb } = require('../utils/db');
 const { ObjectId } = require('mongodb');
 
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+
+function isAdminAuthorized(req) {
+  const auth = req.headers['authorization'];
+  return !!auth;
+}
+
 async function loadKeywords(db) {
   const keywords = {};
   const docs = await db.collection('keywords').find({}).toArray();
@@ -27,9 +34,22 @@ async function addToKeywords(db, category, canonical) {
 }
 
 module.exports = async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
-    console.warn('⛔ Invalid method:', req.method);
     return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  if (!token || token.length < 10) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {

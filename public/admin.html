@@ -200,7 +200,8 @@
             const res = await fetch('/api/updateStatus', {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ id, status })
             });
@@ -224,7 +225,7 @@
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ _id: id, ...data })
             });
@@ -245,7 +246,7 @@
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
+                'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ url })
             });
@@ -262,7 +263,7 @@
         // Fetch and render pending rices
         async function fetchPendingRices() {
             const res = await fetch('/api/getPendingRices', {
-                headers: { 'Authorization': token }
+                headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.status === 401) {
                 alert('Session expired. Please login again.');
@@ -740,7 +741,7 @@
         // Keywords management
         async function fetchKeywords() {
             const res = await fetch('/api/keywords', {
-                headers: { 'Authorization': token }
+                headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.status === 401) {
                 alert('Session expired. Please login again.');
@@ -841,7 +842,7 @@
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    'Authorization': token
+                                    'Authorization': `Bearer ${token}`
                                 },
                                 body: JSON.stringify({ category, canonical, variant })
                             });
@@ -877,7 +878,7 @@
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    'Authorization': token
+                                    'Authorization': `Bearer ${token}`
                                 },
                                 body: JSON.stringify({ category, canonical, variants })
                             });
@@ -957,7 +958,7 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': token
+                            'Authorization': `Bearer ${token}`
                         },
                         body: JSON.stringify({ category, canonical, variant })
                     });
@@ -987,7 +988,7 @@
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': token
+                            'Authorization': `Bearer ${token}`
                         },
                         body: JSON.stringify({ category, canonical, variants })
                     });
@@ -1008,7 +1009,7 @@
         //         method: 'POST',
         //         headers: {
         //             'Content-Type': 'application/json',
-        //             'Authorization': token
+        //             'Authorization': `Bearer ${token}`
         //         },
         //         body: JSON.stringify({ _id: id, status })
         //     });
@@ -1017,7 +1018,7 @@
         // Fetch and render stats
         // async function fetchStats() {
         //     const res = await fetch('/api/stats', {
-        //         headers: { 'Authorization': token }
+        //         headers: { 'Authorization': `Bearer ${token}` }
         //     });
         //     if (res.status === 401) {
         //         alert('Session expired. Please login again.');
@@ -1071,7 +1072,7 @@
         // Fetch stats from backend
         async function fetchStats() {
             const res = await fetch('/api/stats', {
-            headers: { 'Authorization': token }
+            headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.status === 401) {
             alert('Session expired. Please login again.');

@@ -9,6 +9,7 @@ const sharp = require('sharp');
 const { formidable } = require('formidable');
 const path = require('path');
 const crypto = require('crypto');
+const { authMiddleware } = require('../utils/authMiddleware');
 
 // ImageKit config (from env)
 const imagekit = new ImageKit({
@@ -212,7 +213,7 @@ module.exports = async (req, res) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -220,6 +221,16 @@ module.exports = async (req, res) => {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  // Authenticate user (optional - if no token, submit as guest)
+  let ownerId = null;
+  const authHeader = req.headers['authorization'];
+  if (authHeader) {
+    const authResult = await authMiddleware(req, res);
+    if (authResult.authenticated) {
+      ownerId = authResult.user._id;
+    }
   }
 
   const form = formidable({ multiples: true, keepExtensions: true });
@@ -258,7 +269,10 @@ module.exports = async (req, res) => {
         source_key: null,       // Set later
         status: 'pending',
         screenshots: [],
-        images: []              // Set later
+        images: [],             // Set later
+        ownerId: ownerId,       // User ID if authenticated
+        createdAt: new Date(),
+        updatedAt: new Date()
       };
 
       rice.source_key = getSourceKey(rice);

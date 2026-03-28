@@ -17,17 +17,51 @@ module.exports = async (req, res) => {
   }
   try {
     const db = await getDb();
-    const rices = await db.collection('rice').find({
-      $and: [
-        {
-          $or: [
-            { status: 'approved' },
-            { status: { $exists: false } }
+    const rices = await db.collection('rice').aggregate([
+      {
+        $match: {
+          $and: [
+            {
+              $or: [
+                { status: 'approved' },
+                { status: { $exists: false } }
+              ]
+            },
+            { images: { $exists: true, $ne: [] } }
           ]
-        },
-        { images: { $exists: true, $ne: [] } }
-      ]
-    }).toArray();
+        }
+      },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'ownerId',
+          foreignField: '_id',
+          as: 'owner'
+        }
+      },
+      {
+        $unwind: {
+          path: '$owner',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $addFields: {
+          ownerId: {
+            _id: '$owner._id',
+            username: '$owner.username'
+          }
+        }
+      },
+      {
+        $project: {
+          owner: 0
+        }
+      },
+      {
+        $sort: { _id: -1 }
+      }
+    ]).toArray();
     return res.status(200).json(rices);
   } catch (err) {
     return res.status(500).json({ error: 'Failed to fetch rices' });

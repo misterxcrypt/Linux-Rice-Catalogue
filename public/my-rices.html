@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Rices - Rice Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0A0A0F;
+            --panel-bg: rgba(22, 22, 30, 0.4);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-color: #5D5FEF;
+            --accent-glow: rgba(93, 95, 239, 0.4);
+            --text-color: #E0E0E0;
+            --muted-text: #A0A0A0;
+            --placeholder-color: #A0A0A0;
+            --bg-pattern: rgba(255, 255, 255, 0.02);
+            transition: --accent-color 1s ease, --accent-glow 1s ease, --bg-color 1s ease, --text-color 1s ease;
+        }
+        @property --accent-color { syntax: '<color>'; initial-value: #5D5FEF; inherits: true; }
+        @property --accent-glow { syntax: '<color>'; initial-value: rgba(93, 95, 239, 0.4); inherits: true; }
+        .light-mode {
+            --bg-color: #F8F9FA;
+            --panel-bg: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-color: #212529;
+            --muted-text: #6C757D;
+            --placeholder-color: #000;
+            --bg-pattern: rgba(0, 0, 0, 0.04);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            background-image:
+                radial-gradient(circle at 1px 1px, var(--bg-pattern) 1px, transparent 0),
+                radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 45%);
+            background-size: 30px 30px, 100% 100%;
+            min-height: 100vh;
+            transition: background-color 1s ease, background-position 1s ease-out;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel {
+            background-color: var(--panel-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--border-color);
+        }
+        .grid-masonry { column-count: 1; column-gap: 1.5rem; }
+        @media (min-width: 640px) { .grid-masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .grid-masonry { column-count: 3; } }
+        .grid-masonry .rice-card { break-inside: avoid; margin-bottom: 1.5rem; }
+        .rice-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .rice-card:hover { transform: scale(1.02); box-shadow: 0 0 25px var(--accent-glow), 0 0 0 1px var(--accent-color); z-index: 10; }
+        .rice-card:hover .rice-overlay { opacity: 1; }
+        select {
+            background: var(--panel-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        select option {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        input::placeholder {
+            color: var(--placeholder-color, #A0A0A0);
+        }
+        .submission-modal-content { border: 1px solid var(--accent-color); box-shadow: 0 10px 50px var(--accent-glow); animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        #mood-switcher-panel { transform: translateX(100%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; min-width: 180px; }
+        #mood-switcher-panel.open { transform: translateX(0); opacity: 1; }
+    </style>
+</head>
+<body class="min-h-screen text-gray-400">
+    <div class="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto">
+        <header class="mb-6">
+            <div class="flex justify-between items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <a href="/" class="glass-panel px-4 py-2 rounded-lg font-semibold hover:bg-white/10">← Back</a>
+                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight">My Rices</h1>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle-btn" class="glass-panel p-2 rounded-lg hover:bg-white/10" title="Toggle Dark/Light Mode">
+                        <span class="material-icons-outlined">dark_mode</span>
+                    </button>
+                    <button id="logout-btn" class="glass-panel px-4 py-2 rounded-lg font-semibold hover:bg-white/10">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="mood-switcher-container" class="fixed bottom-4 right-4 z-50">
+            <div id="mood-switcher-panel" class="absolute bottom-0 right-16 grid grid-cols-4 gap-3 p-2 rounded-2xl glass-panel place-items-center"></div>
+            <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
+        </div>
+
+        <div id="app">
+            <div id="loading" class="text-center py-12">
+                <span class="material-icons-outlined text-4xl animate-spin">sync</span>
+                <p class="mt-2">Loading...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal - Same as submit form -->
+    <div id="edit-modal" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60">
+        <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
+            <form id="edit-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
+                <h2 class="text-2xl font-bold text-white">Edit Rice</h2>
+                <div>
+                    <label class="font-mono text-sm">Reddit Post</label>
+                    <div class="flex items-center gap-2 mt-1">
+                        <input id="edit-reddit-post-input" type="text" placeholder="e.g., https://reddit.com" class="flex-1 p-2 rounded-md glass-panel">
+                        <button id="edit-scrape-reddit-btn" type="button" class="px-3 py-2 rounded-md text-sm font-mono bg-[var(--accent-color)] hover:opacity-90 transition">
+                        Populate
+                        </button>
+                    </div>
+                </div>
+                <div><label class="font-mono text-sm">Author*</label><input id="edit-author" type="text" class="w-full mt-1 p-2 rounded-md glass-panel" required></div>
+                <div>
+                    <label class="font-mono text-sm">Theme</label>
+                    <select id="edit-theme-select" onchange="toggleEditCustom('theme')" class="w-full mt-1 p-2 rounded-md glass-panel"></select>
+                    <input id="edit-theme-custom" type="text" placeholder="Enter custom theme" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
+                <div>
+                    <label class="font-mono text-sm">Type*</label>
+                    <select id="edit-wmde-type" onchange="updateEditLabelAndPlaceholder()" class="w-full mt-1 p-2 rounded-md glass-panel">
+                        <option value="WM">WM (Window Manager)</option>
+                        <option value="DE">DE (Desktop Environment)</option>
+                    </select>
+                </div>
+                <div>
+                    <label id="edit-wmde-label" class="font-mono text-sm">Name of WM*</label>
+                    <select id="edit-wmde-name-select" class="w-full mt-1 p-2 rounded-md glass-panel"></select>
+                    <input id="edit-wmde-name-custom" type="text" placeholder="Enter custom name" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
+                <div>
+                    <label class="font-mono text-sm">Distro</label>
+                    <select id="edit-distro-select" onchange="toggleEditCustom('distro')" class="w-full mt-1 p-2 rounded-md glass-panel"></select>
+                    <input id="edit-distro-custom" type="text" placeholder="Enter custom distro" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
+                <div><label class="font-mono text-sm">Dotfiles URL</label><input id="edit-dotfiles" type="url" class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <div><label class="font-mono text-sm">Reddit Post</label><input id="edit-reddit" type="url" class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <div class="space-y-2" id="edit-screenshot-upload-section">
+                    <label class="block text-sm font-medium text-gray-300">Upload New Screenshots <span class="text-gray-500">(optional, replaces existing)</span></label>
+                    <input type="file" id="edit-screenshot-input" accept='image/*' multiple class="hidden" />
+                    <button type="button" id="edit-upload-btn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white">📤 Select Images</button>
+                    <div id="edit-screenshot-preview" class="flex flex-wrap gap-3 mt-3"></div>
+                </div>
+                <div class="flex gap-3 mt-2">
+                    <button type="submit" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Save Changes</button>
+                    <button type="button" onclick="closeEditModal()" class="px-6 p-3 rounded-lg font-bold bg-gray-600 text-white">Cancel</button>
+                </div>
+            </form>
+            <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
+                <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
+                <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden">
+                    <img id="edit-preview-image" src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end">
+                        <h3 id="edit-preview-author" class="text-xl font-bold">Author</h3>
+                        <p id="edit-preview-details" class="font-mono text-sm text-white/70">Distro + WM/DE + Theme</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeEditModal()" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80 z-40">
+                <span class="material-icons-outlined">close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div id="delete-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-6 w-full max-w-sm mx-4" style="box-shadow: 0 10px 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-xl font-bold mb-4 text-white">Delete Rice?</h2>
+            <p class="text-gray-400 mb-4 font-mono text-sm">This will permanently delete this rice and its images. This action cannot be undone.</p>
+            <div class="flex gap-3">
+                <button id="delete-confirm" class="flex-1 p-3 rounded-lg font-bold bg-red-600 text-white">Delete</button>
+                <button onclick="closeDeleteModal()" class="px-6 p-3 rounded-lg font-bold bg-gray-600 text-white">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let keywords = {};
+        const token = localStorage.getItem('userToken');
+
+        // Load keywords for dropdowns
+        async function loadKeywords() {
+            try {
+                const res = await fetch('/api/keywords');
+                if (res.ok) keywords = await res.json();
+            } catch (e) { console.error('Failed to load keywords:', e); }
+        }
+        loadKeywords();
+
+        // Mood switcher themes
+        const darkThemes = [ { name: 'Blue', color: '#5D5FEF', glow: 'rgba(30, 58, 138, 0.5)' }, { name: 'Forest Green', color: '#14532d', glow: 'rgba(20, 83, 45, 0.5)' }, { name: 'Burgundy', color: '#7c2d12', glow: 'rgba(124, 45, 18, 0.5)' }, { name: 'Deep Blue', color: '#1e3a8a', glow: 'rgba(30, 41, 59, 0.5)' }, ];
+        const lightThemes = [ { name: 'Pastel Pink', color: '#F48FB1', glow: 'rgba(244, 143, 177, 0.5)' }, { name: 'Sky Blue', color: '#87CEEB', glow: 'rgba(135, 206, 235, 0.5)' }, { name: 'Lavender', color: '#d374f2', glow: 'rgba(230, 230, 250, 0.5)' }, { name: 'Mint', color: '#98FB98', glow: 'rgba(152, 251, 152, 0.5)' }, ];
+        let moodThemes = darkThemes;
+
+        const applyTheme = (theme) => {
+            document.documentElement.style.setProperty('--accent-color', theme.color);
+            document.documentElement.style.setProperty('--accent-glow', theme.glow);
+            document.getElementById('mood-switcher-btn').style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
+            localStorage.setItem('rice-gallery-theme', theme.name);
+        };
+        const updateMoodSwitcherPanel = () => {
+            const panel = document.getElementById('mood-switcher-panel');
+            panel.innerHTML = '';
+            moodThemes.forEach(theme => {
+                const btn = document.createElement('button');
+                btn.className = 'w-8 h-8 rounded-full transition-transform hover:scale-110';
+                btn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
+                btn.title = theme.name;
+                btn.addEventListener('click', () => applyTheme(theme));
+                panel.appendChild(btn);
+            });
+        };
+        const initMoodSwitcher = () => {
+            updateMoodSwitcherPanel();
+            const savedTheme = localStorage.getItem('rice-gallery-theme');
+            if (savedTheme && moodThemes.find(t => t.name === savedTheme)) {
+                applyTheme(moodThemes.find(t => t.name === savedTheme));
+            } else {
+                applyTheme(moodThemes[0]);
+            }
+            document.getElementById('mood-switcher-btn').addEventListener('click', () => document.getElementById('mood-switcher-panel').classList.toggle('open'));
+        };
+
+        // Theme toggle
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = themeToggleBtn.querySelector('span');
+
+        function applyThemeMode(isLight) {
+            if (isLight) {
+                document.documentElement.classList.add('light-mode');
+                document.body.className = 'min-h-screen text-gray-800';
+                themeIcon.textContent = 'light_mode';
+                localStorage.setItem('theme-mode', 'light');
+                moodThemes = lightThemes;
+            } else {
+                document.documentElement.classList.remove('light-mode');
+                document.body.className = 'min-h-screen text-gray-400';
+                themeIcon.textContent = 'dark_mode';
+                localStorage.setItem('theme-mode', 'dark');
+                moodThemes = darkThemes;
+            }
+            updateMoodSwitcherPanel();
+        }
+
+        if (localStorage.getItem('theme-mode') === 'light') {
+            applyThemeMode(true);
+        }
+        themeToggleBtn.addEventListener('click', () => {
+            const isLight = document.documentElement.classList.contains('light-mode');
+            applyThemeMode(!isLight);
+        });
+
+        initMoodSwitcher();
+
+        // Populate select dropdowns
+        function populateEditSelect(selectId, options) {
+            const select = document.getElementById(selectId);
+            select.innerHTML = '<option value="">Select or choose Other</option>';
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt;
+                option.textContent = opt;
+                select.appendChild(option);
+            });
+            const otherOption = document.createElement('option');
+            otherOption.value = 'Other';
+            otherOption.textContent = 'Other';
+            select.appendChild(otherOption);
+        }
+
+        function updateEditLabelAndPlaceholder() {
+            const type = document.getElementById('edit-wmde-type').value;
+            const label = document.getElementById('edit-wmde-label');
+            if (type === 'WM') {
+                label.textContent = 'Name of WM*';
+                populateEditSelect('edit-wmde-name-select', Object.keys(keywords.wm || {}));
+            } else {
+                label.textContent = 'Name of DE*';
+                populateEditSelect('edit-wmde-name-select', Object.keys(keywords.de || {}));
+            }
+            document.getElementById('edit-wmde-name-custom').classList.add('hidden');
+            document.getElementById('edit-wmde-name-custom').value = '';
+        }
+
+        function toggleEditCustom(type) {
+            const select = document.getElementById('edit-' + type + '-select');
+            const custom = document.getElementById('edit-' + type + '-custom');
+            if (select.value === 'Other') {
+                custom.classList.remove('hidden');
+                custom.required = true;
+            } else {
+                custom.classList.add('hidden');
+                custom.required = false;
+                custom.value = '';
+            }
+            updateEditPreview();
+        }
+
+        // Reddit scraper for edit modal
+        document.getElementById('edit-scrape-reddit-btn').addEventListener('click', async () => {
+            const redditInput = document.getElementById('edit-reddit-post-input');
+            const redditUrl = redditInput.value.trim();
+
+            if (!redditUrl || !redditUrl.includes('reddit.com')) {
+                alert('❌ Please enter a valid Reddit post URL');
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/scrapeReddit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: redditUrl })
+                });
+
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Failed to scrape Reddit');
+
+                // Populate relevant fields
+                document.getElementById('edit-reddit').value = data.reddit_post || redditUrl;
+                document.getElementById('edit-author').value = data.author || '';
+                
+                const theme = data.theme || '';
+                const themeSelect = document.getElementById('edit-theme-select');
+                const themeCustom = document.getElementById('edit-theme-custom');
+                if (theme && [...themeSelect.options].some(o => o.value === theme)) {
+                    themeSelect.value = theme;
+                    themeCustom.classList.add('hidden');
+                } else if (theme) {
+                    themeSelect.value = 'Other';
+                    themeCustom.value = theme;
+                    themeCustom.classList.remove('hidden');
+                } else {
+                    themeSelect.value = '';
+                }
+
+                document.getElementById('edit-wmde-type').value = data.environment?.type || 'WM';
+                updateEditLabelAndPlaceholder();
+                
+                const wmdeName = data.environment?.name || '';
+                const wmdeSelect = document.getElementById('edit-wmde-name-select');
+                const wmdeCustom = document.getElementById('edit-wmde-name-custom');
+                if (wmdeName && [...wmdeSelect.options].some(o => o.value === wmdeName)) {
+                    wmdeSelect.value = wmdeName;
+                    wmdeCustom.classList.add('hidden');
+                } else if (wmdeName) {
+                    wmdeSelect.value = 'Other';
+                    wmdeCustom.value = wmdeName;
+                    wmdeCustom.classList.remove('hidden');
+                } else {
+                    wmdeSelect.value = '';
+                }
+
+                const distro = data.distro || '';
+                const distroSelect = document.getElementById('edit-distro-select');
+                const distroCustom = document.getElementById('edit-distro-custom');
+                if (distro && [...distroSelect.options].some(o => o.value === distro)) {
+                    distroSelect.value = distro;
+                    distroCustom.classList.add('hidden');
+                } else if (distro) {
+                    distroSelect.value = 'Other';
+                    distroCustom.value = distro;
+                    distroCustom.classList.remove('hidden');
+                } else {
+                    distroSelect.value = '';
+                }
+
+                document.getElementById('edit-dotfiles').value = data.dotfiles || '';
+
+                updateEditPreview();
+                console.log('✅ Successfully scraped Reddit data!');
+            } catch (err) {
+                console.error('❌ Scrape failed:', err);
+                alert('❌ Failed to fetch data from Reddit. Check the URL or try again.');
+            }
+        });
+
+        // Edit image upload handling
+        window.editSelectedFiles = [];
+        const editScreenshotInput = document.getElementById('edit-screenshot-input');
+        const editUploadBtn = document.getElementById('edit-upload-btn');
+        const editPreviewContainer = document.getElementById('edit-screenshot-preview');
+
+        editUploadBtn.addEventListener('click', () => editScreenshotInput.click());
+
+        editScreenshotInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            window.editSelectedFiles = [];
+            editPreviewContainer.innerHTML = '';
+            
+            files.forEach(file => {
+                if (!file.type.startsWith('image/')) return;
+                window.editSelectedFiles.push({ file });
+                
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const imgBox = document.createElement('div');
+                    imgBox.className = "relative";
+                    imgBox.innerHTML = `
+                        <img src="${reader.result}" class="w-24 h-24 object-cover rounded" />
+                        <button type="button" class="edit-remove-btn absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">&times;</button>
+                    `;
+                    imgBox.querySelector('.edit-remove-btn').addEventListener('click', () => {
+                        const idx = window.editSelectedFiles.findIndex(f => f.file === file);
+                        if (idx > -1) window.editSelectedFiles.splice(idx, 1);
+                        imgBox.remove();
+                    });
+                    editPreviewContainer.appendChild(imgBox);
+                };
+                reader.readAsDataURL(file);
+            });
+            editScreenshotInput.value = '';
+        });
+
+        function updateEditPreview() {
+            const author = document.getElementById('edit-author').value || 'Author';
+            const wmdeType = document.getElementById('edit-wmde-type').value;
+            let wmde = document.getElementById('edit-wmde-name-select').value;
+            if (wmde === 'Other') wmde = document.getElementById('edit-wmde-name-custom').value;
+            let distro = document.getElementById('edit-distro-select').value;
+            if (distro === 'Other') distro = document.getElementById('edit-distro-custom').value;
+            let theme = document.getElementById('edit-theme-select').value;
+            if (theme === 'Other') theme = document.getElementById('edit-theme-custom').value;
+            document.getElementById('edit-preview-author').textContent = author;
+            document.getElementById('edit-preview-details').textContent = `${distro || 'Distro'} + ${wmde || 'WM/DE'} + ${theme || 'Theme'}`;
+        }
+
+        // Initialize dropdowns on load
+        (async () => {
+            await loadKeywords();
+            populateEditSelect('edit-theme-select', Object.keys(keywords.theme || {}));
+            populateEditSelect('edit-distro-select', Object.keys(keywords.distro || {}));
+            updateEditLabelAndPlaceholder();
+        })();
+
+        // Add input listeners for preview
+        document.getElementById('edit-author').addEventListener('input', updateEditPreview);
+        document.getElementById('edit-wmde-type').addEventListener('change', () => { updateEditLabelAndPlaceholder(); updateEditPreview(); });
+        document.getElementById('edit-wmde-name-select').addEventListener('change', () => { toggleEditCustom('wmde-name'); updateEditPreview(); });
+        document.getElementById('edit-wmde-name-custom').addEventListener('input', updateEditPreview);
+        document.getElementById('edit-distro-select').addEventListener('change', () => { toggleEditCustom('distro'); updateEditPreview(); });
+        document.getElementById('edit-distro-custom').addEventListener('input', updateEditPreview);
+        document.getElementById('edit-theme-select').addEventListener('change', () => { toggleEditCustom('theme'); updateEditPreview(); });
+        document.getElementById('edit-theme-custom').addEventListener('input', updateEditPreview);
+
+        if (!token) {
+            document.getElementById('app').innerHTML = `
+                <div class="glass-panel p-8 rounded-xl text-center">
+                    <p class="text-xl mb-4 font-mono">Please log in first</p>
+                    <a href="/" class="inline-block px-6 py-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Go to Login</a>
+                </div>
+            `;
+        } else {
+            loadMyRices();
+        }
+
+        async function loadMyRices() {
+            try {
+                const res = await fetch('/api/getMyRices', {
+                    method: 'GET',
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                
+                if (res.status === 401) {
+                    document.getElementById('app').innerHTML = `
+                        <div class="glass-panel p-8 rounded-xl text-center">
+                            <p class="text-xl mb-4 text-yellow-400 font-mono">Session expired</p>
+                            <a href="/" class="inline-block px-6 py-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Go to Login</a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const rices = await res.json();
+                window.allRices = rices;
+                renderRices(rices);
+            } catch (err) {
+                document.getElementById('app').innerHTML = `
+                    <div class="glass-panel p-8 rounded-xl text-center text-red-400 font-mono">
+                        <p>Error: ${err.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderRices(rices) {
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl) loadingEl.remove();
+            
+            if (!rices || rices.length === 0) {
+                document.getElementById('app').innerHTML = `
+                    <div class="glass-panel p-12 rounded-xl text-center">
+                        <span class="material-icons-outlined text-6xl mb-4 text-gray-500">folder_open</span>
+                        <h2 class="text-2xl font-bold mb-2">No rices yet</h2>
+                        <p class="text-gray-400 mb-4 font-mono text-sm">Submit your first rice!</p>
+                        <a href="/" class="inline-block px-6 py-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Submit Rice</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="grid-masonry">';
+            rices.forEach(rice => {
+                let imageUrl = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100"%3E%3Crect fill="%23111116" width="100" height="100"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" fill="%23666" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
+                if (rice.images && rice.images.length > 0) {
+                    const firstImage = rice.images[0];
+                    const filename = Array.isArray(firstImage) ? firstImage[0] : firstImage;
+                    imageUrl = `https://ik.imagekit.io/y1n9qg16a/rices/${filename}`;
+                }
+                
+                const statusBadge = rice.status === 'approved' 
+                    ? '<span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-600 text-white">Approved</span>'
+                    : '<span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-600 text-white">Pending</span>';
+                
+                const author = rice.author || 'Unknown';
+                const wmde = rice.environment?.name || '';
+                const distro = rice.distro || '';
+                
+                html += `
+                    <div class="rice-card group relative rounded-2xl overflow-hidden cursor-pointer bg-[#111116] border border-[var(--border-color)]">
+                        <div class="card-image w-full h-full">
+                            <img src="${imageUrl}" alt="${author}'s rice" loading="lazy" class="w-full h-full object-cover">
+                        </div>
+                        <div class="rice-overlay absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl font-bold text-white">${author}</h3>
+                                ${statusBadge}
+                            </div>
+                            <div class="flex justify-between items-center text-sm text-white/70">
+                                <p class="font-mono truncate">${distro} + ${wmde}</p>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <button onclick="openEditModal('${rice._id}')" class="flex-1 py-2 rounded-lg text-sm font-semibold bg-white/10 hover:bg-white/20">Edit</button>
+                                <button onclick="openDeleteModal('${rice._id}')" class="py-2 px-4 rounded-lg text-sm font-semibold bg-red-600/50 hover:bg-red-600 text-white">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            document.getElementById('app').innerHTML = html;
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('userData');
+            window.location.href = '/';
+        });
+
+        window.allRices = [];
+
+        window.openEditModal = function(id) {
+            const rice = window.allRices.find(r => r._id === id);
+            if (!rice) return;
+            
+            // Wait for keywords to load if not ready
+            if (Object.keys(keywords).length === 0) {
+                loadKeywords().then(() => openEditModal(id));
+                return;
+            }
+            
+            // Clear any new images
+            window.editSelectedFiles = [];
+            editPreviewContainer.innerHTML = '';
+            
+            document.getElementById('edit-form').dataset.riceId = id;
+            document.getElementById('edit-reddit-post-input').value = rice.reddit_post || '';
+            document.getElementById('edit-author').value = rice.author || '';
+            
+            // Theme dropdown
+            const themeVal = rice.theme || '';
+            const themeSelect = document.getElementById('edit-theme-select');
+            if (themeVal && [...themeSelect.options].some(o => o.value === themeVal)) {
+                themeSelect.value = themeVal;
+                document.getElementById('edit-theme-custom').classList.add('hidden');
+            } else if (themeVal) {
+                themeSelect.value = 'Other';
+                document.getElementById('edit-theme-custom').value = themeVal;
+                document.getElementById('edit-theme-custom').classList.remove('hidden');
+            } else {
+                themeSelect.value = '';
+            }
+            
+            // WM/DE type and name
+            const envType = rice.environment?.type || 'WM';
+            document.getElementById('edit-wmde-type').value = envType;
+            updateEditLabelAndPlaceholder();
+            
+            const envName = rice.environment?.name || '';
+            const wmdeSelect = document.getElementById('edit-wmde-name-select');
+            if (envName && [...wmdeSelect.options].some(o => o.value === envName)) {
+                wmdeSelect.value = envName;
+                document.getElementById('edit-wmde-name-custom').classList.add('hidden');
+            } else if (envName) {
+                wmdeSelect.value = 'Other';
+                document.getElementById('edit-wmde-name-custom').value = envName;
+                document.getElementById('edit-wmde-name-custom').classList.remove('hidden');
+            } else {
+                wmdeSelect.value = '';
+            }
+            
+            // Distro dropdown
+            const distroVal = rice.distro || '';
+            const distroSelect = document.getElementById('edit-distro-select');
+            if (distroVal && [...distroSelect.options].some(o => o.value === distroVal)) {
+                distroSelect.value = distroVal;
+                document.getElementById('edit-distro-custom').classList.add('hidden');
+            } else if (distroVal) {
+                distroSelect.value = 'Other';
+                document.getElementById('edit-distro-custom').value = distroVal;
+                document.getElementById('edit-distro-custom').classList.remove('hidden');
+            } else {
+                distroSelect.value = '';
+            }
+            
+            document.getElementById('edit-dotfiles').value = rice.dotfiles || '';
+            document.getElementById('edit-reddit').value = rice.reddit_post || '';
+            
+            // Update preview
+            updateEditPreview();
+            
+            // Set preview image from rice
+            if (rice.images && rice.images.length > 0) {
+                const firstImage = rice.images[0];
+                const filename = Array.isArray(firstImage) ? firstImage[0] : firstImage;
+                document.getElementById('edit-preview-image').src = `https://ik.imagekit.io/y1n9qg16a/rices/${filename}`;
+            } else {
+                document.getElementById('edit-preview-image').src = 'https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png';
+            }
+            
+            document.getElementById('edit-modal').classList.remove('hidden');
+        };
+
+        window.closeEditModal = function() {
+            document.getElementById('edit-modal').classList.add('hidden');
+        };
+
+        document.getElementById('edit-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-form').dataset.riceId;
+            
+            let wmdeName = document.getElementById('edit-wmde-name-select').value;
+            if (wmdeName === 'Other') wmdeName = document.getElementById('edit-wmde-name-custom').value;
+            
+            let theme = document.getElementById('edit-theme-select').value;
+            if (theme === 'Other') theme = document.getElementById('edit-theme-custom').value;
+            
+            let distro = document.getElementById('edit-distro-select').value;
+            if (distro === 'Other') distro = document.getElementById('edit-distro-custom').value;
+            
+            const update = {
+                _id: id,
+                author: document.getElementById('edit-author').value,
+                theme: theme,
+                distro: distro,
+                dotfiles: document.getElementById('edit-dotfiles').value,
+                reddit_post: document.getElementById('edit-reddit').value,
+                environment: {
+                    type: document.getElementById('edit-wmde-type').value,
+                    name: wmdeName
+                }
+            };
+            
+            // Handle new image uploads if any
+            if (window.editSelectedFiles && window.editSelectedFiles.length > 0) {
+                const formData = new FormData();
+                formData.append('rice', JSON.stringify(update));
+                window.editSelectedFiles.forEach((entry, i) => {
+                    formData.append(`image${i}`, entry.file);
+                });
+                
+                try {
+                    const res = await fetch('/api/updateMyRice', {
+                        method: 'POST',
+                        headers: { 
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: formData
+                    });
+                    if (!res.ok) throw new Error('Failed to update');
+                } catch (err) {
+                    alert('Failed to update rice: ' + err.message);
+                    return;
+                }
+            } else {
+                try {
+                    const res = await fetch('/api/updateMyRice', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(update)
+                    });
+                    if (!res.ok) throw new Error('Failed to update');
+                } catch (err) {
+                    alert('Failed to update rice: ' + err.message);
+                    return;
+                }
+            }
+            
+            closeEditModal();
+            window.editSelectedFiles = [];
+            editPreviewContainer.innerHTML = '';
+            loadMyRices();
+        });
+
+        let deleteId = null;
+        
+        window.openDeleteModal = function(id) {
+            deleteId = id;
+            document.getElementById('delete-modal').classList.remove('hidden');
+            document.getElementById('delete-modal').classList.add('flex');
+        };
+
+        window.closeDeleteModal = function() {
+            deleteId = null;
+            document.getElementById('delete-modal').classList.add('hidden');
+            document.getElementById('delete-modal').classList.remove('flex');
+        };
+
+        document.getElementById('delete-confirm').addEventListener('click', async () => {
+            if (!deleteId) return;
+            try {
+                const res = await fetch('/api/deleteMyRice', {
+                    method: 'POST',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ _id: deleteId })
+                });
+                if (!res.ok) throw new Error('Failed to delete');
+                closeDeleteModal();
+                loadMyRices();
+            } catch (err) {
+                alert('Failed to delete rice: ' + err.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -153,20 +153,47 @@
                  <div class="w-full md:w-[500px] p-2 rounded-md glass-panel font-mono text-sm">
                     <input id="search-input" type="text" placeholder="🔍 Search rices (author, WM, distro, theme)" class="w-full p-2 rounded-md glass-panel font-mono text-sm" />
                  </div>
-                 <div class="flex items-center gap-2">
-                    <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
+                  <div class="flex items-center gap-2">
+                     <button id="leaderboard-btn" title="Leaderboard" class="control-btn p-2 glass-panel rounded-lg hover:bg-white/10"><span class="material-icons-outlined">leaderboard</span></button>
+                     <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
                         <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md active"><span class="material-icons-outlined">grid_view</span></button>
                         <button title="Grid View" data-view="bento" class="control-btn p-2 rounded-md"><span class="material-icons-outlined">view_module</span></button>
                         <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md"><span class="material-icons-outlined">view_agenda</span></button>
                     </div>
-                    <button id="login-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10">Login</button>
-                    <button id="admin-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10" style="display:none">Admin</button>
-                    <button id="logout-btn" class="p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-white font-semibold hover:bg-white/10" style="display:none">
-                        <span class="material-icons-outlined text-gray-300">logout</span>
-                    </button>
                     <button id="theme-toggle-btn" class="p-2.5 ml-2 glass-panel rounded-lg hover:bg-white/10" title="Toggle Dark/Light Mode">
                         <span class="material-icons-outlined">dark_mode</span>
                     </button>
+                    <button id="login-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10">Login</button>
+                    <div class="relative" id="user-menu-container" style="display:none">
+                        <button id="profile-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10 flex items-center gap-1">
+                            <span class="material-icons-outlined">account_circle</span>
+                        </button>
+                        <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 glass-panel rounded-xl overflow-hidden hidden z-50">
+                            <a id="my-rices-dropdown-btn" href="/my-rices.html" class="flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                                <span class="material-icons-outlined">folder</span>
+                                My Rices
+                            </a>
+                            <button id="user-logout-btn" class="w-full flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                                <span class="material-icons-outlined">logout</span>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                    <div class="relative" id="admin-menu-container" style="display:none">
+                        <button id="admin-profile-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10 flex items-center gap-1">
+                            <span class="material-icons-outlined">admin_panel_settings</span>
+                        </button>
+                        <div id="admin-dropdown" class="absolute right-0 top-full mt-2 w-48 glass-panel rounded-xl overflow-hidden hidden z-50">
+                            <a id="admin-panel-dropdown-btn" href="/admin.html" class="flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                                <span class="material-icons-outlined">dashboard</span>
+                                Admin Panel
+                            </a>
+                            <button id="admin-logout-btn" class="w-full flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                                <span class="material-icons-outlined">logout</span>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
                  </div>
              </div>
         </header>
@@ -227,10 +254,19 @@
         <div id="lightbox-details-panel" class="w-full md:w-1/3 lg:w-1/4 p-6 flex flex-col space-y-4 overflow-y-auto">
         <div>
             <h2 id="lightbox-user" class="text-3xl font-bold break-words" style="color: var(--text-color)"></h2>
-            <p class="font-mono text-lg" style="color: var(--modal-accent, #fff)" id="lightbox-wm-distro-theme"></p>
+            <p class="font-mono text-sm" style="color: var(--muted-text)" id="lightbox-owner"></p>
+            <p class="font-mono text-lg mt-1" style="color: var(--modal-accent, #fff)" id="lightbox-wm-distro-theme"></p>
         </div>
         <div class="space-y-3 font-mono text-sm border-t border-b py-4 border-[var(--border-color)]" id="lightbox-metadata"></div>
         <div class="space-y-2" id="lightbox-dotfiles"></div>
+        <div id="lightbox-admin-actions" class="flex gap-2 mt-4 hidden">
+            <button id="lightbox-edit-btn" class="flex-1 py-2 rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white">
+                <span class="material-icons-outlined text-sm mr-1">edit</span> Edit
+            </button>
+            <button id="lightbox-delete-btn" class="flex-1 py-2 rounded-lg text-sm font-semibold bg-red-600 hover:bg-red-700 text-white">
+                <span class="material-icons-outlined text-sm mr-1">delete</span> Delete
+            </button>
+        </div>
         <div class="flex-grow"></div>
         </div>
 
@@ -309,9 +345,12 @@
                 <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md glass-panel"></div>
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
             </form>
-            <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
-                <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
-                <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 id="preview-author" class="text-xl font-bold">Your Name</h3><p id="preview-details" class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
+            <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col">
+                <p id="login-note" class="font-mono flex items-center p-2 mb-2 w-full" style="font-size: 0.75rem; color: #A0A0A0; border: 2px solid #5D5FEF; background-color: rgba(0,0,0,0.5); border-radius: 0.75rem; padding-left: 0.5rem;"><span class="material-icons-outlined" style="font-size: 0.75rem; color: #5D5FEF; margin-right: 1rem;">warning</span>If you log in and submit a rice, your name will show under the rice. Otherwise it will show "by admin".</p>
+                <div class="flex flex-col items-center justify-center flex-grow">
+                    <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
+                    <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 id="preview-author" class="text-xl font-bold">Your Rice</h3><p id="preview-by" class="text-xs font-mono text-white/70">by admin</p><p id="preview-details" class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
+                </div>
             </div>
              <button id="submission-close-btn" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80"><span class="material-icons-outlined">close</span></button>
         </div>
@@ -332,15 +371,167 @@
         <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
     </div>
 
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Logout</h2>
+            <p class="text-gray-400 mb-6 font-mono text-center">Are you sure you want to logout?</p>
+            <div class="flex gap-3">
+                <button id="logout-confirm" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Logout</button>
+                <button id="logout-cancel" class="px-6 p-3 rounded-lg font-bold bg-gray-600 text-white">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Failed Modal -->
+    <div id="admin-login-failed-modal" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Login Failed</h2>
+            <p class="text-gray-400 mb-6 font-mono text-center">Invalid admin password. Please try again.</p>
+            <div class="flex gap-3">
+                <button id="admin-login-failed-ok" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rice Update Success Modal -->
+    <div id="rice-update-success-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Success</h2>
+            <p class="text-gray-400 mb-6 font-mono text-center">Rice updated successfully.</p>
+            <div class="flex gap-3">
+                <button id="rice-update-success-ok" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rice Update Failed Modal -->
+    <div id="rice-update-failed-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Error</h2>
+            <p class="text-gray-400 mb-6 font-mono text-center">Failed to update rice.</p>
+            <div class="flex gap-3">
+                <button id="rice-update-failed-ok" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-md mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Leaderboard</h2>
+            <div id="leaderboard-list" class="space-y-2 max-h-96 overflow-y-auto">
+                <!-- Leaderboard items will be populated here -->
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button id="leaderboard-close" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Rice Modal -->
+    <div id="edit-rice-modal" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60">
+        <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
+            <form id="edit-rice-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
+                <h2 class="text-2xl font-bold text-white">Edit Rice</h2>
+                <input type="hidden" id="edit-rice-id" />
+                <div>
+                <label class="font-mono text-sm">Reddit Post</label>
+                <div class="flex items-center gap-2 mt-1">
+                    <input id="edit-reddit-post-input" type="text" placeholder="e.g., https://reddit.com" class="flex-1 p-2 rounded-md glass-panel">
+                    <button id="edit-scrape-reddit-btn" type="button" class="px-3 py-2 rounded-md text-sm font-mono bg-[var(--accent-color)] hover:opacity-90 transition">
+                    Populate
+                    </button>
+                </div>
+                </div>
+                <div><label class="font-mono text-sm">Author*</label><input required type="text" id="edit-author-input" placeholder="e.g., crunchghost" oninput="updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <div>
+                <label class="font-mono text-sm">Theme</label>
+                <select id="edit-theme-select" onchange="if(this.value==='Other'){document.getElementById('edit-theme-custom').classList.remove('hidden');}else{document.getElementById('edit-theme-custom').classList.add('hidden');}updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel">
+                </select>
+                <input id="edit-theme-custom" type="text" placeholder="Enter custom theme" oninput="updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
+                <div>
+                <label class="font-mono text-sm">Type*</label>
+                <select id="edit-wmde-type" required onchange="updateEditLabelAndPlaceholder(); updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel">
+                    <option value="WM">WM (Window Manager)</option>
+                    <option value="DE">DE (Desktop Environment)</option>
+                </select>
+                </div>
+                <div>
+                <label id="edit-wmde-label" class="font-mono text-sm">Name of WM*</label>
+                <select id="edit-wmde-name-select" onchange="if(this.value==='Other'){document.getElementById('edit-wmde-name-custom').classList.remove('hidden');}else{document.getElementById('edit-wmde-name-custom').classList.add('hidden');}updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel">
+                </select>
+                <input id="edit-wmde-name-custom" type="text" placeholder="Enter custom name" oninput="updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
+                <div>
+                <label class="font-mono text-sm">Distro</label>
+                <select id="edit-distro-select" onchange="if(this.value==='Other'){document.getElementById('edit-distro-custom').classList.remove('hidden');}else{document.getElementById('edit-distro-custom').classList.add('hidden');}updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel">
+                </select>
+                <input id="edit-distro-custom" type="text" placeholder="Enter custom distro" oninput="updateEditPreview()" class="w-full mt-1 p-2 rounded-md glass-panel hidden">
+                </div>
+                <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-300">Upload Screenshots</label>
+                <input type="file" id="edit-screenshot-input" accept='image/*' multiple class="hidden" /> 
+                <button type="button" id="edit-upload-btn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white">📤 Select Images</button>
+                <div id="edit-screenshot-preview" class="flex flex-wrap gap-3 mt-3"></div>
+                </div>
+                <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" id="edit-dotfiles-url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Save Changes</button>
+            </form>
+            <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
+                <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
+                <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img id="edit-preview-image" src=""><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 id="edit-preview-author" class="text-xl font-bold">Your Name</h3><p id="edit-preview-details" class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
+            </div>
+            <button id="edit-rice-close-btn" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80"><span class="material-icons-outlined">close</span></button>
+        </div>
+    </div>
+
+    <!-- Delete Rice Confirmation Modal -->
+    <div id="delete-rice-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Delete Rice</h2>
+            <p class="text-gray-400 mb-6 font-mono text-center">Are you sure you want to delete this rice? This action cannot be undone.</p>
+            <div class="flex gap-3">
+                <button id="delete-rice-confirm" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Delete</button>
+                <button id="delete-rice-cancel" class="px-6 p-3 rounded-lg font-bold bg-gray-600 text-white">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Add Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
       <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
-        <h2 class="text-2xl font-bold mb-4 text-white">Admin Login</h2>
-        <form id="login-form" class="w-full flex flex-col gap-4">
-          <input type="password" id="admin-password" placeholder="Admin Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
-          <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Login</button>
-        </form>
+        <div class="flex gap-4 mb-4 border-b border-white/20">
+          <button id="user-auth-tab" class="pb-2 text-white border-b-2 border-[var(--accent-color)] font-semibold">User</button>
+          <button id="admin-auth-tab" class="pb-2 text-gray-400 hover:text-white">Admin</button>
+        </div>
+        <!-- User Login/Register Form -->
+        <div id="user-auth-form" class="w-full">
+          <h2 class="text-2xl font-bold mb-4 text-white text-center">Welcome</h2>
+          <form id="user-login-form" class="w-full flex flex-col gap-3">
+            <input type="text" id="user-email" placeholder="Email" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <input type="password" id="user-password" placeholder="Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Sign In</button>
+          </form>
+          <div class="text-center mt-3 text-gray-400 text-sm">or</div>
+          <form id="user-register-form" class="w-full flex flex-col gap-3 mt-3">
+            <input type="text" id="register-username" placeholder="Username" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <input type="email" id="register-email" placeholder="Email" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <input type="password" id="register-password" placeholder="Password (min 6 chars)" required minlength="6" class="w-full p-3 rounded-lg glass-panel text-white" />
+            <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Sign Up</button>
+          </form>
+          <div id="user-auth-error" class="text-red-400 text-sm mt-2 hidden"></div>
+        </div>
+        <!-- Admin Login Form -->
+        <div id="admin-auth-form" class="w-full hidden">
+          <h2 class="text-2xl font-bold mb-4 text-white text-center">Admin Login</h2>
+          <form id="login-form" class="w-full flex flex-col gap-4">
+            <input type="password" id="admin-password" placeholder="Admin Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Login</button>
+          </form>
+        </div>
         <button id="login-close-btn" class="mt-4 text-gray-400 hover:text-white">Cancel</button>
       </div>
     </div>
@@ -689,10 +880,30 @@
     // Initialize once on page load
     (async () => {
         await loadKeywords();
+        window.keywords = keywords;
         await updateLabelAndPlaceholder();
         populateSelect('distro-select', Object.keys(keywords.distro || {}));
         populateSelect('theme-select', Object.keys(keywords.theme || {}));
+        
+        // Also populate edit modal dropdowns
+        populateSelect('edit-distro-select', Object.keys(keywords.distro || {}));
+        populateSelect('edit-theme-select', Object.keys(keywords.theme || {}));
+        populateEditWMDEOptions();
     })();
+    
+    function populateEditWMDEOptions() {
+        const type = document.getElementById('edit-wmde-type')?.value || 'WM';
+        const select = document.getElementById('edit-wmde-name-select');
+        if (!select) return;
+        
+        if (type === 'WM') {
+            const wmKeys = Object.keys(keywords.wm || {});
+            populateSelect('edit-wmde-name-select', wmKeys);
+        } else {
+            const deKeys = Object.keys(keywords.de || {});
+            populateSelect('edit-wmde-name-select', deKeys);
+        }
+    }
     </script>
 
     <script>
@@ -718,6 +929,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
+            // Show submit button by default (for non-logged in users)
+            document.getElementById('submit-rice-btn').classList.add('hidden');
+            
             const el = {
                 gallery: document.getElementById('rice-gallery'),
                 filterPillsContainer: document.getElementById('filter-pills-container'),
@@ -888,13 +1102,9 @@
                     </div>
                     <div class="rice-overlay absolute inset-0 bg-gradient-to-t ${overlayColor} p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300">
                         <h3 class="text-xl font-bold ${textColor}">${user}</h3>
+                        <p class="text-xs ${textColor70} font-mono">by ${rice.ownerId ? rice.ownerId.username || 'unknown' : 'admin'}</p>
                         <div class="flex justify-between items-center text-sm ${textColor70}">
                             <p class="font-mono truncate">${distro} + ${wm}</p>
-                            <!-- <div class="flex gap-2 text-white/80 ml-4 shrink-0">
-                                <span title="Love">❤️ ${reactions.heart || 0}</span>
-                                <span title="Fire">🔥 ${reactions.fire || 0}</span>
-                                <span title="Downvote">⬇️ ${reactions.down || 0}</span>
-                            </div> -->
                         </div>
                     </div>
                 `;
@@ -915,11 +1125,37 @@
             
             const handleViewToggle = (e) => {
                 const btn = e.target.closest('button');
-                if (btn) {
+                if (btn && btn.dataset.view) {
                     state.viewMode = btn.dataset.view;
                     document.querySelector('.view-toggle .active').classList.remove('active');
                     btn.classList.add('active');
                     renderGallery(false); // Reset pagination on view change
+                }
+            };
+
+            const showLeaderboardModal = async () => {
+                try {
+                    const res = await fetch('/api/getLeaderboard');
+                    const data = await res.json();
+                    const listEl = document.getElementById('leaderboard-list');
+                    listEl.innerHTML = '';
+                    if (data.length === 0) {
+                        listEl.innerHTML = '<p class="text-gray-400 font-mono text-center">No users found.</p>';
+                    } else {
+                        data.forEach((user, index) => {
+                            const item = document.createElement('div');
+                            item.className = 'flex justify-between items-center p-2 rounded-lg bg-black/20';
+                            item.innerHTML = `
+                                <span class="font-mono text-white">${index + 1}. ${user.username}</span>
+                                <span class="font-mono text-[var(--accent-color)]">${user.riceCount} rices</span>
+                            `;
+                            listEl.appendChild(item);
+                        });
+                    }
+                    document.getElementById('leaderboard-modal').classList.remove('hidden');
+                    document.getElementById('leaderboard-modal').classList.add('flex');
+                } catch (err) {
+                    console.error('Failed to load leaderboard:', err);
                 }
             };
 
@@ -942,6 +1178,7 @@
                 let images = rice.images || [];
                 if (typeof images === 'string') images = [images];
                 state.currentLightboxRice = {
+                    _id: rice._id,
                     user: rice.author || '',
                     wm: (rice.environment && rice.environment.name) || '',
                     distro: rice.distro || '',
@@ -949,6 +1186,7 @@
                     url: rice.dotfiles || '',
                     reddit_post: rice.reddit_post || '',
                     images,
+                    ownerId: rice.ownerId || null,
                 };
                 state.currentImageIndex = 0;
                 const imgEl = el.lightbox.querySelector('#lightbox-image');
@@ -1014,6 +1252,8 @@
                 const rice = state.currentLightboxRice;
                 const setContent = (id, text) => el.lightbox.querySelector(id).textContent = text;
                 setContent('#lightbox-user', rice.user);
+                const ownerText = rice.ownerId ? `by ${rice.ownerId.username || 'unknown'}` : 'by admin';
+                setContent('#lightbox-owner', ownerText);
                 setContent('#lightbox-wm-distro-theme', `${rice.wm || 'Unknown'} / ${rice.distro || 'Unknown'} / ${rice.theme || 'Unknown'}`);
                 el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div>`;
                 const dotfilesHTML = rice.url
@@ -1031,6 +1271,15 @@
                     : `<div class="mt-6"><h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Reddit Post</h3>
                         <p class="text-sm italic" style="color: var(--muted-text)">No reddit post found.</p></div>`;
                 el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = dotfilesHTML + redditHTML;
+                
+                // Show admin buttons if logged in as admin
+                const adminToken = localStorage.getItem('adminToken');
+                const adminActions = document.getElementById('lightbox-admin-actions');
+                if (adminToken) {
+                    adminActions.classList.remove('hidden');
+                } else {
+                    adminActions.classList.add('hidden');
+                }
                 const reactions = [
                     { key: 'heart', emoji: '❤️' },
                     { key: 'fire', emoji: '🔥' },
@@ -1056,8 +1305,101 @@
             };
             
             // SUBMISSION & ANIMATION (Logic remains the same)
-            const showSubmissionModal = () => el.submissionModal.classList.replace('hidden', 'grid');
+            const showSubmissionModal = () => {
+                const userToken = localStorage.getItem('userToken');
+                const userData = localStorage.getItem('userData');
+                const noteEl = document.getElementById('login-note');
+                const authorInput = document.querySelector('input[placeholder*="crunchghost"]');
+                if (userToken && userData) {
+                    try {
+                        const user = JSON.parse(userData);
+                        noteEl.style.display = 'none'; // Hide the note when logged in
+                        // Do not pre-fill author input
+                        document.getElementById('preview-by').textContent = `by ${user.username}`;
+                    } catch (e) {
+                        noteEl.innerHTML = '<span class="material-icons-outlined text-sm" style="color: var(--accent-color)">warning</span>If you log in and submit a rice, your name will show under the rice. Otherwise it will show "by admin".';
+                        noteEl.style.display = 'block';
+                        noteEl.style.color = 'var(--muted-text)';
+                        noteEl.style.borderColor = 'var(--accent-color)';
+                        document.getElementById('preview-by').textContent = 'by admin';
+                    }
+                } else {
+                    noteEl.innerHTML = '<span class="material-icons-outlined text-sm" style="color: var(--accent-color)">warning</span>If you log in and submit a rice, your name will show under the rice. Otherwise it will show "by admin".';
+                    noteEl.style.display = 'block';
+                    noteEl.style.color = 'var(--muted-text)';
+                    noteEl.style.borderColor = 'var(--accent-color)';
+                    document.getElementById('preview-by').textContent = 'by admin';
+                }
+                updatePreview();
+                el.submissionModal.classList.replace('hidden', 'grid');
+            };
             const hideSubmissionModal = () => el.submissionModal.classList.replace('grid', 'hidden');
+            
+            const showEditModal = (rice) => {
+                hideLightbox();
+                document.getElementById('edit-rice-id').value = rice._id;
+                document.getElementById('edit-author-input').value = rice.user || '';
+                document.getElementById('edit-dotfiles-url').value = rice.url || '';
+                document.getElementById('edit-reddit-post-input').value = rice.reddit_post || '';
+                
+                document.getElementById('edit-theme-select').value = rice.theme || '';
+                document.getElementById('edit-distro-select').value = rice.distro || '';
+                document.getElementById('edit-wmde-type').value = rice.wm ? 'WM' : 'WM';
+                
+                updateEditLabelAndPlaceholder();
+                setTimeout(() => {
+                    document.getElementById('edit-wmde-name-select').value = rice.wm || '';
+                }, 100);
+                
+                const previewImg = document.getElementById('edit-preview-image');
+                if (rice.images && rice.images[0]) {
+                    previewImg.src = `https://ik.imagekit.io/y1n9qg16a/rices/${rice.images[0]}`;
+                }
+                updateEditPreview();
+                
+                document.getElementById('edit-rice-modal').classList.replace('hidden', 'grid');
+            };
+            
+            const hideEditModal = () => document.getElementById('edit-rice-modal').classList.replace('grid', 'hidden');
+            
+            const updateEditPreview = () => {
+                const author = document.getElementById('edit-author-input').value || 'Your Name';
+                const wm = document.getElementById('edit-wmde-name-select')?.value || document.getElementById('edit-wmde-name-custom').value || '';
+                const distro = document.getElementById('edit-distro-select')?.value || document.getElementById('edit-distro-custom').value || '';
+                const theme = document.getElementById('edit-theme-select')?.value || document.getElementById('edit-theme-custom').value || '';
+                document.getElementById('edit-preview-author').textContent = author;
+                document.getElementById('edit-preview-details').textContent = `${distro} + ${wm} + ${theme}`;
+            };
+            
+            const updateEditLabelAndPlaceholder = () => {
+                const kw = window.keywords || {};
+                const type = document.getElementById('edit-wmde-type').value;
+                const label = document.getElementById('edit-wmde-label');
+                if (type === 'WM') {
+                    label.textContent = 'Name of WM*';
+                    populateSelect('edit-wmde-name-select', Object.keys(kw.wm || {}));
+                } else {
+                    label.textContent = 'Name of DE*';
+                    populateSelect('edit-wmde-name-select', Object.keys(kw.de || {}));
+                }
+                document.getElementById('edit-wmde-name-select').value = '';
+                document.getElementById('edit-wmde-name-custom').classList.add('hidden');
+            };
+            
+            const toggleEditCustomInput = (field) => {
+                const select = document.getElementById(field + '-select');
+                const custom = document.getElementById(field + '-custom');
+                if (select.value === 'Other') {
+                    custom.classList.remove('hidden');
+                    custom.required = true;
+                } else {
+                    custom.classList.add('hidden');
+                    custom.required = false;
+                    custom.value = '';
+                }
+                updateEditPreview();
+            }
+            
             const handleSubmission = (e) => {
                 e.preventDefault();
                 hideSubmissionModal();
@@ -1128,9 +1470,103 @@
             });
             el.lightbox.querySelector('#lightbox-prev').addEventListener('click', () => changeLightboxImage(-1));
             el.lightbox.querySelector('#lightbox-next').addEventListener('click', () => changeLightboxImage(1));
+            
+            // Lightbox admin actions
+            document.getElementById('lightbox-edit-btn').addEventListener('click', () => {
+                const rice = state.currentLightboxRice;
+                if (rice && rice._id) {
+                    showEditModal(rice);
+                }
+            });
+            
+            document.getElementById('lightbox-delete-btn').addEventListener('click', async () => {
+                const rice = state.currentLightboxRice;
+                if (!rice || !rice._id) return;
+                document.getElementById('delete-rice-modal').classList.replace('hidden', 'flex');
+            });
+            
+            document.getElementById('delete-rice-confirm').addEventListener('click', async () => {
+                const rice = state.currentLightboxRice;
+                if (!rice || !rice._id) return;
+                try {
+                    const adminToken = localStorage.getItem('adminToken');
+                    const res = await fetch('/api/deleteRice', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${adminToken}`
+                        },
+                        body: JSON.stringify({ _id: rice._id })
+                    });
+                    if (res.ok) {
+                        document.getElementById('delete-rice-modal').classList.replace('flex', 'hidden');
+                        hideLightbox();
+                        loadRicesData().then(() => renderGallery());
+                    } else {
+                        alert('Failed to delete rice');
+                    }
+                } catch (err) {
+                    alert('Error deleting rice: ' + err.message);
+                }
+            });
+            
+            document.getElementById('delete-rice-cancel').addEventListener('click', () => {
+                document.getElementById('delete-rice-modal').classList.replace('flex', 'hidden');
+            });
+            
             document.getElementById('submit-rice-btn').addEventListener('click', showSubmissionModal);
             document.getElementById('submission-close-btn').addEventListener('click', hideSubmissionModal);
             document.getElementById('submission-form').addEventListener('submit', handleSubmission);
+
+            document.getElementById('edit-rice-close-btn').addEventListener('click', hideEditModal);
+            document.getElementById('edit-rice-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const riceId = document.getElementById('edit-rice-id').value;
+                const author = document.getElementById('edit-author-input').value;
+                const theme = document.getElementById('edit-theme-custom').classList.contains('hidden') 
+                    ? document.getElementById('edit-theme-select').value 
+                    : document.getElementById('edit-theme-custom').value;
+                const wmType = document.getElementById('edit-wmde-type').value;
+                const wmName = document.getElementById('edit-wmde-name-custom').classList.contains('hidden')
+                    ? document.getElementById('edit-wmde-name-select').value
+                    : document.getElementById('edit-wmde-name-custom').value;
+                const distro = document.getElementById('edit-distro-custom').classList.contains('hidden')
+                    ? document.getElementById('edit-distro-select').value
+                    : document.getElementById('edit-distro-custom').value;
+                const dotfiles = document.getElementById('edit-dotfiles-url').value;
+                const reddit = document.getElementById('edit-reddit-post-input').value;
+                
+                try {
+                    const adminToken = localStorage.getItem('adminToken');
+                    const res = await fetch('/api/updateRice', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${adminToken}`
+                        },
+                        body: JSON.stringify({ 
+                            _id: riceId,
+                            author,
+                            theme,
+                            environment: { type: wmType, name: wmName },
+                            distro,
+                            dotfiles,
+                            reddit_post: reddit
+                        })
+                    });
+                    if (res.ok) {
+                        hideEditModal();
+                        loadRicesData().then(() => renderGallery());
+                        document.getElementById('rice-update-success-modal').classList.remove('hidden');
+                        document.getElementById('rice-update-success-modal').classList.add('flex');
+                    } else {
+                        document.getElementById('rice-update-failed-modal').classList.remove('hidden');
+                        document.getElementById('rice-update-failed-modal').classList.add('flex');
+                    }
+                } catch (err) {
+                    alert('Error updating rice: ' + err.message);
+                }
+            });
 
             // --- Admin Login Logic ---
             function showLoginModal() {
@@ -1139,20 +1575,109 @@
             function hideLoginModal() {
               document.getElementById('login-modal').classList.replace('flex', 'hidden');
             }
-            function showLogoutBtn() {
+            function showUserButtons(username) {
                 document.getElementById('login-btn').style.display = 'none';
-                document.getElementById('admin-btn').style.display = '';
-                document.getElementById('logout-btn').style.display = '';
+                document.getElementById('user-menu-container').style.display = '';
+                document.getElementById('admin-menu-container').style.display = 'none';
+            }
+            function showAdminButtons() {
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('user-menu-container').style.display = 'none';
+                document.getElementById('admin-menu-container').style.display = '';
+                document.getElementById('submit-rice-btn').classList.remove('hidden');
             }
             function showLoginBtn() {
                 document.getElementById('login-btn').style.display = '';
-                document.getElementById('admin-btn').style.display = 'none';
-                document.getElementById('logout-btn').style.display = 'none';
+                document.getElementById('user-menu-container').style.display = 'none';
+                document.getElementById('admin-menu-container').style.display = 'none';
+                document.getElementById('submit-rice-btn').classList.remove('hidden');
             }
-            async function handleLogin(e) {
+            // Auth tabs switching
+            document.getElementById('user-auth-tab').addEventListener('click', () => {
+                document.getElementById('user-auth-tab').className = 'pb-2 text-white border-b-2 border-[var(--accent-color)] font-semibold';
+                document.getElementById('admin-auth-tab').className = 'pb-2 text-gray-400 hover:text-white';
+                document.getElementById('user-auth-form').classList.remove('hidden');
+                document.getElementById('admin-auth-form').classList.add('hidden');
+            });
+            document.getElementById('admin-auth-tab').addEventListener('click', () => {
+                document.getElementById('admin-auth-tab').className = 'pb-2 text-white border-b-2 border-[var(--accent-color)] font-semibold';
+                document.getElementById('user-auth-tab').className = 'pb-2 text-gray-400 hover:text-white';
+                document.getElementById('admin-auth-form').classList.remove('hidden');
+                document.getElementById('user-auth-form').classList.add('hidden');
+            });
+
+            // User login
+            document.getElementById('user-login-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('user-email').value;
+                const password = document.getElementById('user-password').value;
+                const errorEl = document.getElementById('user-auth-error');
+                errorEl.classList.add('hidden');
+                try {
+                    const res = await fetch('/api/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                    if (res.ok) {
+                        const { token, user } = await res.json();
+                        localStorage.setItem('userToken', token);
+                        localStorage.setItem('userData', JSON.stringify(user));
+                        hideLoginModal();
+                        showUserButtons(user.username);
+                    } else {
+                        const data = await res.json();
+                        errorEl.textContent = data.error || 'Login failed';
+                        errorEl.classList.remove('hidden');
+                    }
+                } catch (err) {
+                    errorEl.textContent = 'Login failed';
+                    errorEl.classList.remove('hidden');
+                }
+            });
+
+            // User register
+            document.getElementById('user-register-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const username = document.getElementById('register-username').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const errorEl = document.getElementById('user-auth-error');
+                errorEl.classList.add('hidden');
+                try {
+                    const res = await fetch('/api/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, email, password })
+                    });
+                    if (res.ok) {
+                        const { token, user } = await res.json();
+                        localStorage.setItem('userToken', token);
+                        localStorage.setItem('userData', JSON.stringify(user));
+                        hideLoginModal();
+                        showUserButtons(user.username);
+                    } else {
+                        const data = await res.json();
+                        errorEl.textContent = data.error || 'Registration failed';
+                        errorEl.classList.remove('hidden');
+                    }
+                } catch (err) {
+                    errorEl.textContent = 'Registration failed';
+                    errorEl.classList.remove('hidden');
+                }
+            });
+
+            function showUserButtons(username) {
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('user-menu-container').style.display = '';
+                document.getElementById('admin-menu-container').style.display = 'none';
+                document.getElementById('submit-rice-btn').classList.remove('hidden');
+            }
+
+            async function handleAdminLogin(e) {
               e.preventDefault();
               const password = document.getElementById('admin-password').value;
-              const res = await fetch('/api/login', {
+              const res = await fetch('/api/admin-login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password })
@@ -1162,26 +1687,114 @@
                 localStorage.setItem('adminToken', token);
                 window.location.href = '/admin.html';
               } else {
-                alert('Login failed');
+                hideLoginModal();
+                document.getElementById('admin-login-failed-modal').classList.remove('hidden');
+                document.getElementById('admin-login-failed-modal').classList.add('flex');
               }
             }
             function handleLogout() {
-              localStorage.removeItem('adminToken');
-              showLoginBtn();
+              document.getElementById('logout-modal').classList.remove('hidden');
+              document.getElementById('logout-modal').classList.add('flex');
+              document.getElementById('logout-confirm').onclick = () => {
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('userToken');
+                localStorage.removeItem('userData');
+                showLoginBtn();
+                document.getElementById('admin-dropdown').classList.add('hidden');
+                document.getElementById('logout-modal').classList.add('hidden');
+                document.getElementById('logout-modal').classList.remove('flex');
+              };
+              document.getElementById('logout-cancel').onclick = () => {
+                document.getElementById('logout-modal').classList.add('hidden');
+                document.getElementById('logout-modal').classList.remove('flex');
+              };
             }
+            function handleUserLogout() {
+              document.getElementById('logout-modal').classList.remove('hidden');
+              document.getElementById('logout-modal').classList.add('flex');
+              document.getElementById('logout-confirm').onclick = () => {
+                localStorage.removeItem('userToken');
+                localStorage.removeItem('userData');
+                showLoginBtn();
+                document.getElementById('user-dropdown').classList.add('hidden');
+                document.getElementById('logout-modal').classList.add('hidden');
+                document.getElementById('logout-modal').classList.remove('flex');
+              };
+              document.getElementById('logout-cancel').onclick = () => {
+                document.getElementById('logout-modal').classList.add('hidden');
+                document.getElementById('logout-modal').classList.remove('flex');
+              };
+            }
+            
+            // User dropdown toggle
+            document.getElementById('profile-btn').addEventListener('click', (e) => {
+              e.stopPropagation();
+              document.getElementById('user-dropdown').classList.toggle('hidden');
+              document.getElementById('admin-dropdown').classList.add('hidden');
+            });
+            
+            // Admin dropdown toggle
+            document.getElementById('admin-profile-btn').addEventListener('click', (e) => {
+              e.stopPropagation();
+              document.getElementById('admin-dropdown').classList.toggle('hidden');
+              document.getElementById('user-dropdown').classList.add('hidden');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+              document.getElementById('user-dropdown').classList.add('hidden');
+              document.getElementById('admin-dropdown').classList.add('hidden');
+            });
+            
+            document.getElementById('user-dropdown').addEventListener('click', (e) => {
+              e.stopPropagation();
+            });
             function handleAdmin() {
                 window.location.href = '/admin.html';
             }   
             function checkLogin() {
-              const token = localStorage.getItem('adminToken');
-              if (token) showLogoutBtn();
-              else showLoginBtn();
+              const adminToken = localStorage.getItem('adminToken');
+              const userToken = localStorage.getItem('userToken');
+              const userData = localStorage.getItem('userData');
+              
+              if (userToken && userData) {
+                  try {
+                      const user = JSON.parse(userData);
+                      showUserButtons(user.username);
+                  } catch (e) {
+                      showLoginBtn();
+                  }
+              } else if (adminToken) {
+                showAdminButtons();
+              } else {
+                showLoginBtn();
+              }
             }
             document.getElementById('login-btn').addEventListener('click', showLoginModal);
             document.getElementById('login-close-btn').addEventListener('click', hideLoginModal);
-            document.getElementById('login-form').addEventListener('submit', handleLogin);
-            document.getElementById('admin-btn').addEventListener('click', handleAdmin);
-            document.getElementById('logout-btn').addEventListener('click', handleLogout);
+            document.getElementById('login-form').addEventListener('submit', handleAdminLogin);
+            document.getElementById('admin-login-failed-ok').addEventListener('click', () => {
+                document.getElementById('admin-login-failed-modal').classList.add('hidden');
+                document.getElementById('admin-login-failed-modal').classList.remove('flex');
+            });
+            document.getElementById('rice-update-success-ok').addEventListener('click', () => {
+                document.getElementById('rice-update-success-modal').classList.add('hidden');
+                document.getElementById('rice-update-success-modal').classList.remove('flex');
+            });
+            document.getElementById('rice-update-failed-ok').addEventListener('click', () => {
+                document.getElementById('rice-update-failed-modal').classList.add('hidden');
+                document.getElementById('rice-update-failed-modal').classList.remove('flex');
+            });
+            document.getElementById('leaderboard-btn').addEventListener('click', showLeaderboardModal);
+            document.getElementById('leaderboard-close').addEventListener('click', () => {
+                document.getElementById('leaderboard-modal').classList.add('hidden');
+                document.getElementById('leaderboard-modal').classList.remove('flex');
+            });
+            document.getElementById('admin-logout-btn').addEventListener('click', handleLogout);
+            document.getElementById('user-logout-btn').addEventListener('click', handleUserLogout);
+            document.getElementById('admin-dropdown').addEventListener('click', (e) => {
+              e.stopPropagation();
+            });
             checkLogin();
 
             // Theme toggle
@@ -1196,8 +1809,10 @@
                     localStorage.setItem('theme-mode', 'light');
                     // Update button colors
                     document.getElementById('login-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-black font-semibold hover:bg-black/10';
-                    document.getElementById('admin-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-black font-semibold hover:bg-black/10';
-                    document.getElementById('logout-btn').className = 'p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-black font-semibold hover:bg-black/10';
+                    const userMenuContainer = document.getElementById('user-menu-container');
+                    if (userMenuContainer) userMenuContainer.className = 'relative ml-2';
+                    const adminMenuContainer = document.getElementById('admin-menu-container');
+                    if (adminMenuContainer) adminMenuContainer.className = 'relative ml-2';
                     document.getElementById('submit-rice-btn').className = 'bg-[var(--accent-color)] text-black rounded-lg px-4 py-2 hover:opacity-90';
                     // Update login modal colors
                     document.getElementById('login-modal').className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
@@ -1205,6 +1820,65 @@
                     document.getElementById('admin-password').className = 'w-full p-3 rounded-lg glass-panel text-black';
                     document.getElementById('login-form').querySelector('button').className = 'w-full p-3 font-bold rounded-lg text-black';
                     document.getElementById('login-close-btn').className = 'mt-4 text-gray-600 hover:text-black';
+                    // Update logout modal colors
+                    const logoutModal = document.getElementById('logout-modal');
+                    if (logoutModal) logoutModal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
+                    const logoutModalContent = document.querySelector('#logout-modal .glass-panel');
+                    if (logoutModalContent) {
+                        logoutModalContent.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        logoutModalContent.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const logoutTitle = document.querySelector('#logout-modal h2');
+                    if (logoutTitle) logoutTitle.className = 'text-2xl font-bold mb-4 text-black text-center';
+                    const logoutMsg = document.querySelector('#logout-modal p');
+                    if (logoutMsg) logoutMsg.className = 'text-gray-600 mb-6 font-mono text-center';
+                    const logoutCancel = document.getElementById('logout-cancel');
+                    if (logoutCancel) logoutCancel.className = 'px-6 p-3 rounded-lg font-bold bg-gray-400 text-black';
+                    // Update admin login failed modal colors
+                    const adminLoginFailedModal = document.getElementById('admin-login-failed-modal');
+                    if (adminLoginFailedModal) adminLoginFailedModal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
+                    const adminLoginFailedModalContent = document.querySelector('#admin-login-failed-modal .glass-panel');
+                    if (adminLoginFailedModalContent) {
+                        adminLoginFailedModalContent.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        adminLoginFailedModalContent.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const adminLoginFailedTitle = document.querySelector('#admin-login-failed-modal h2');
+                    if (adminLoginFailedTitle) adminLoginFailedTitle.className = 'text-2xl font-bold mb-4 text-black text-center';
+                    const adminLoginFailedMsg = document.querySelector('#admin-login-failed-modal p');
+                    if (adminLoginFailedMsg) adminLoginFailedMsg.className = 'text-gray-600 mb-6 font-mono text-center';
+                    // Update rice update modals
+                    const riceUpdateSuccessModal = document.getElementById('rice-update-success-modal');
+                    if (riceUpdateSuccessModal) riceUpdateSuccessModal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
+                    const riceUpdateSuccessModalContent = document.querySelector('#rice-update-success-modal .glass-panel');
+                    if (riceUpdateSuccessModalContent) {
+                        riceUpdateSuccessModalContent.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        riceUpdateSuccessModalContent.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const riceUpdateSuccessTitle = document.querySelector('#rice-update-success-modal h2');
+                    if (riceUpdateSuccessTitle) riceUpdateSuccessTitle.className = 'text-2xl font-bold mb-4 text-black text-center';
+                    const riceUpdateSuccessMsg = document.querySelector('#rice-update-success-modal p');
+                    if (riceUpdateSuccessMsg) riceUpdateSuccessMsg.className = 'text-gray-600 mb-6 font-mono text-center';
+                    const riceUpdateFailedModal = document.getElementById('rice-update-failed-modal');
+                    if (riceUpdateFailedModal) riceUpdateFailedModal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
+                    const riceUpdateFailedModalContent = document.querySelector('#rice-update-failed-modal .glass-panel');
+                    if (riceUpdateFailedModalContent) {
+                        riceUpdateFailedModalContent.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        riceUpdateFailedModalContent.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const riceUpdateFailedTitle = document.querySelector('#rice-update-failed-modal h2');
+                    if (riceUpdateFailedTitle) riceUpdateFailedTitle.className = 'text-2xl font-bold mb-4 text-black text-center';
+                    const riceUpdateFailedMsg = document.querySelector('#rice-update-failed-modal p');
+                    if (riceUpdateFailedMsg) riceUpdateFailedMsg.className = 'text-gray-600 mb-6 font-mono text-center';
+                    // Update leaderboard modal
+                    const leaderboardModal = document.getElementById('leaderboard-modal');
+                    if (leaderboardModal) leaderboardModal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-white/60';
+                    const leaderboardModalContent = document.querySelector('#leaderboard-modal .glass-panel');
+                    if (leaderboardModalContent) {
+                        leaderboardModalContent.className = 'glass-panel rounded-2xl p-8 w-full max-w-md mx-4';
+                        leaderboardModalContent.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const leaderboardTitle = document.querySelector('#leaderboard-modal h2');
+                    if (leaderboardTitle) leaderboardTitle.className = 'text-2xl font-bold mb-4 text-black text-center';
                     // Update submission modal live preview text
                     const livePreviewText = document.querySelector('#submission-modal p.font-mono');
                     if (livePreviewText) livePreviewText.className = 'font-mono text-black mb-4 text-center';
@@ -1236,6 +1910,14 @@
                     if (prevImg) prevImg.classList.add('left-4');
                     const nextImg = document.getElementById('lightbox-next');
                     if (nextImg) nextImg.classList.add('right-4');
+                    // Update lightbox admin actions
+                    const adminActionsLight = document.getElementById('lightbox-admin-actions');
+                    if (adminActionsLight) {
+                        const editBtn = adminActionsLight.querySelector('#lightbox-edit-btn');
+                        const deleteBtn = adminActionsLight.querySelector('#lightbox-delete-btn');
+                        if (editBtn) editBtn.className = 'flex-1 py-2 rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-black';
+                        if (deleteBtn) deleteBtn.className = 'flex-1 py-2 rounded-lg text-sm font-semibold bg-red-600 hover:bg-red-700 text-black';
+                    }
                 } else {
                     document.documentElement.classList.remove('light-mode');
                     document.body.className = 'min-h-screen text-gray-400';
@@ -1243,8 +1925,10 @@
                     localStorage.setItem('theme-mode', 'dark');
                     // Update button colors
                     document.getElementById('login-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10';
-                    document.getElementById('admin-btn').className = 'p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10';
-                    document.getElementById('logout-btn').className = 'p-2.5 ml-2 bg-[var(--accent-color)] glass-panel rounded-lg text-white font-semibold hover:bg-white/10';
+                    const userMenuContainerDark = document.getElementById('user-menu-container');
+                    if (userMenuContainerDark) userMenuContainerDark.className = 'relative ml-2';
+                    const adminMenuContainerDark = document.getElementById('admin-menu-container');
+                    if (adminMenuContainerDark) adminMenuContainerDark.className = 'relative ml-2';
                     document.getElementById('submit-rice-btn').className = 'bg-[var(--accent-color)] text-white rounded-lg px-4 py-2 hover:opacity-90';
                     // Update login modal colors
                     document.getElementById('login-modal').className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
@@ -1252,6 +1936,65 @@
                     document.getElementById('admin-password').className = 'w-full p-3 rounded-lg glass-panel text-white';
                     document.getElementById('login-form').querySelector('button').className = 'w-full p-3 font-bold rounded-lg text-white';
                     document.getElementById('login-close-btn').className = 'mt-4 text-gray-400 hover:text-white';
+                    // Update logout modal colors
+                    const logoutModalDark = document.getElementById('logout-modal');
+                    if (logoutModalDark) logoutModalDark.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
+                    const logoutModalContentDark = document.querySelector('#logout-modal .glass-panel');
+                    if (logoutModalContentDark) {
+                        logoutModalContentDark.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        logoutModalContentDark.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const logoutTitleDark = document.querySelector('#logout-modal h2');
+                    if (logoutTitleDark) logoutTitleDark.className = 'text-2xl font-bold mb-4 text-white text-center';
+                    const logoutMsgDark = document.querySelector('#logout-modal p');
+                    if (logoutMsgDark) logoutMsgDark.className = 'text-gray-400 mb-6 font-mono text-center';
+                    const logoutCancelDark = document.getElementById('logout-cancel');
+                    if (logoutCancelDark) logoutCancelDark.className = 'px-6 p-3 rounded-lg font-bold bg-gray-600 text-white';
+                    // Update admin login failed modal colors
+                    const adminLoginFailedModalDark = document.getElementById('admin-login-failed-modal');
+                    if (adminLoginFailedModalDark) adminLoginFailedModalDark.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
+                    const adminLoginFailedModalContentDark = document.querySelector('#admin-login-failed-modal .glass-panel');
+                    if (adminLoginFailedModalContentDark) {
+                        adminLoginFailedModalContentDark.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        adminLoginFailedModalContentDark.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const adminLoginFailedTitleDark = document.querySelector('#admin-login-failed-modal h2');
+                    if (adminLoginFailedTitleDark) adminLoginFailedTitleDark.className = 'text-2xl font-bold mb-4 text-white text-center';
+                    const adminLoginFailedMsgDark = document.querySelector('#admin-login-failed-modal p');
+                    if (adminLoginFailedMsgDark) adminLoginFailedMsgDark.className = 'text-gray-400 mb-6 font-mono text-center';
+                    // Update rice update modals
+                    const riceUpdateSuccessModalDark = document.getElementById('rice-update-success-modal');
+                    if (riceUpdateSuccessModalDark) riceUpdateSuccessModalDark.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
+                    const riceUpdateSuccessModalContentDark = document.querySelector('#rice-update-success-modal .glass-panel');
+                    if (riceUpdateSuccessModalContentDark) {
+                        riceUpdateSuccessModalContentDark.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        riceUpdateSuccessModalContentDark.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const riceUpdateSuccessTitleDark = document.querySelector('#rice-update-success-modal h2');
+                    if (riceUpdateSuccessTitleDark) riceUpdateSuccessTitleDark.className = 'text-2xl font-bold mb-4 text-white text-center';
+                    const riceUpdateSuccessMsgDark = document.querySelector('#rice-update-success-modal p');
+                    if (riceUpdateSuccessMsgDark) riceUpdateSuccessMsgDark.className = 'text-gray-400 mb-6 font-mono text-center';
+                    const riceUpdateFailedModalDark = document.getElementById('rice-update-failed-modal');
+                    if (riceUpdateFailedModalDark) riceUpdateFailedModalDark.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
+                    const riceUpdateFailedModalContentDark = document.querySelector('#rice-update-failed-modal .glass-panel');
+                    if (riceUpdateFailedModalContentDark) {
+                        riceUpdateFailedModalContentDark.className = 'glass-panel rounded-2xl p-8 w-full max-w-sm mx-4';
+                        riceUpdateFailedModalContentDark.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const riceUpdateFailedTitleDark = document.querySelector('#rice-update-failed-modal h2');
+                    if (riceUpdateFailedTitleDark) riceUpdateFailedTitleDark.className = 'text-2xl font-bold mb-4 text-white text-center';
+                    const riceUpdateFailedMsgDark = document.querySelector('#rice-update-failed-modal p');
+                    if (riceUpdateFailedMsgDark) riceUpdateFailedMsgDark.className = 'text-gray-400 mb-6 font-mono text-center';
+                    // Update leaderboard modal
+                    const leaderboardModalDark = document.getElementById('leaderboard-modal');
+                    if (leaderboardModalDark) leaderboardModalDark.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-black/60';
+                    const leaderboardModalContentDark = document.querySelector('#leaderboard-modal .glass-panel');
+                    if (leaderboardModalContentDark) {
+                        leaderboardModalContentDark.className = 'glass-panel rounded-2xl p-8 w-full max-w-md mx-4';
+                        leaderboardModalContentDark.style.boxShadow = '0 0 50px var(--accent-glow)';
+                    }
+                    const leaderboardTitleDark = document.querySelector('#leaderboard-modal h2');
+                    if (leaderboardTitleDark) leaderboardTitleDark.className = 'text-2xl font-bold mb-4 text-white text-center';
                     // Update submission modal live preview text
                     const livePreviewText = document.querySelector('#submission-modal p.font-mono');
                     if (livePreviewText) livePreviewText.className = 'font-mono text-gray-400 mb-4 text-center';
@@ -1283,6 +2026,14 @@
                     if (prevImg) prevImg.classList.add('left-4');
                     const nextImg = document.getElementById('lightbox-next');
                     if (nextImg) nextImg.classList.add('right-4');
+                    // Update lightbox admin actions
+                    const adminActionsDark = document.getElementById('lightbox-admin-actions');
+                    if (adminActionsDark) {
+                        const editBtn = adminActionsDark.querySelector('#lightbox-edit-btn');
+                        const deleteBtn = adminActionsDark.querySelector('#lightbox-delete-btn');
+                        if (editBtn) editBtn.className = 'flex-1 py-2 rounded-lg text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white';
+                        if (deleteBtn) deleteBtn.className = 'flex-1 py-2 rounded-lg text-sm font-semibold bg-red-600 hover:bg-red-700 text-white';
+                    }
                 }
                 // Update mood switcher themes based on mode
                 moodThemes = isLight ? lightThemes : darkThemes;
@@ -1424,8 +2175,16 @@
 
             /* console.log(formData) */
 
+            // Add auth token if user is logged in
+            const userToken = localStorage.getItem('userToken');
+            const headers = {};
+            if (userToken) {
+                headers['Authorization'] = `Bearer ${userToken}`;
+            }
+
             const res = await fetch('/api/submitRice', {
                 method: 'POST',
+                headers: headers,
                 body: formData
             });
 

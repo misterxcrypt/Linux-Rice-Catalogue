@@ -2,9 +2,10 @@
 // Returns all rices with status 'pending' (admin only)
 const { getDb } = require('../utils/db');
 
-function isAuthorized(req) {
-  const auth = req.headers['authorization'];
-  return !!auth;
+function isAdminAuthorized(req) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  return !!token && token.length > 10;
 }
 
 async function loadKeywords(db) {
@@ -29,7 +30,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
-  if (!isAuthorized(req)) {
+  if (!isAdminAuthorized(req)) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   try {

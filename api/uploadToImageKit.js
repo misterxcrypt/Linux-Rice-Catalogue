@@ -102,30 +102,19 @@ async function downloadAndUploadToImageKit(urls) {
       const compressedPath = await compressTo500KB(filePath);
       console.log(`🗜️ Compressed to: ${compressedPath}`);
 
-      if (process.env.NODE_ENV === 'development') {
-        // Save to local folder instead of ImageKit
-        const localImagesDir = path.join(__dirname, '..', 'public', 'uploads');
-        await fs.ensureDir(localImagesDir);
-        const localFileName = `${uuid}.jpg`;
-        const localFilePath = path.join(localImagesDir, localFileName);
-        await fs.copy(compressedPath, localFilePath);
-        console.log(`💾 Saved locally: ${localFilePath}`);
-        results.push({ filename: localFileName, fileId: '', url: `/uploads/${localFileName}` });
-      } else {
-        const uploadResponse = await imagekit.upload({
-          file: fs.readFileSync(compressedPath),
-          fileName: `${uuid}.jpg`,
-          folder: '/rices/',
-          useUniqueFileName: false,
-          overwriteFile: true
-        });
+      const uploadResponse = await imagekit.upload({
+        file: fs.readFileSync(compressedPath),
+        fileName: `${uuid}.jpg`,
+        folder: '/rices/',
+        useUniqueFileName: false,
+        overwriteFile: true
+      });
 
-        if (uploadResponse.url) {
-          console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
-          results.push({ filename: `${uuid}.jpg`, fileId: uploadResponse.fileId, url: uploadResponse.url });
-        } else {
-          console.log('❌ ImageKit upload failed, no URL');
-        }
+      if (uploadResponse.url) {
+        console.log(`☁️ Uploaded to ImageKit: ${uploadResponse.url}`);
+        results.push({ filename: `${uuid}.jpg`, fileId: uploadResponse.fileId, url: uploadResponse.url });
+      } else {
+        console.log('❌ ImageKit upload failed, no URL');
       }
     }
 

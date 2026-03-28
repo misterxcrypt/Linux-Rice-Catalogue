@@ -1,19 +1,12 @@
 {
   "name": "rice-gallery",
   "version": "1.0.0",
-  "description": "A modern gallery for showcasing Linux desktop rices",
+  "description": "A simple gallery for Linux rices with MongoDB Atlas and serverless functions.",
   "main": "index.js",
   "scripts": {
-    "dev": "docker-compose up -d mongo && npm run wait-for-db && npm run seed && npm run serve",
-    "wait-for-db": "node scripts/wait-for-db.js",
-    "seed": "node scripts/seed-db.js",
-    "serve": "vercel dev --port 3000",
     "dev:vercel": "vercel dev",
     "dev:netlify": "netlify dev",
-    "build": "echo 'No build step required'",
-    "test": "echo 'No tests yet'",
-    "lint": "echo 'No linter configured'",
-    "clean": "docker-compose down -v"
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "cloudinary": "^2.7.0",
@@ -25,11 +18,5 @@
     "node-fetch": "^2.7.0",
     "sharp": "^0.34.3",
     "tmp-promise": "^3.0.3"
-  },
-  "devDependencies": {
-    "vercel": "^24.0.0"
-  },
-  "engines": {
-    "node": ">=14.0.0"
   }
 }

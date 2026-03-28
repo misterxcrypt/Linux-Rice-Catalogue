@@ -27,6 +27,3 @@ pnpm-lock.yaml
 doc.txt
 .vercel
 img.zip
-
-# Local development uploads
-public/uploads/

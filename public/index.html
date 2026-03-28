@@ -697,6 +697,9 @@
 
     <script>
         let ricesData = [];
+        const RICES_PER_PAGE = 12;
+        let currentPage = 1;
+        let isLoading = false;
 
         async function loadRicesData() {
             try {
@@ -747,25 +750,8 @@
             const darkThemes = [ { name: 'Blue', color: '#5D5FEF', glow: 'rgba(30, 58, 138, 0.5)' }, { name: 'Forest Green', color: '#14532d', glow: 'rgba(20, 83, 45, 0.5)' }, { name: 'Burgundy', color: '#7c2d12', glow: 'rgba(124, 45, 18, 0.5)' }, { name: 'Deep Blue', color: '#1e3a8a', glow: 'rgba(30, 41, 59, 0.5)' }, ];
             const lightThemes = [ { name: 'Pastel Pink', color: '#F48FB1', glow: 'rgba(244, 143, 177, 0.5)' }, { name: 'Sky Blue', color: '#87CEEB', glow: 'rgba(135, 206, 235, 0.5)' }, { name: 'Lavender', color: '#d374f2', glow: 'rgba(230, 230, 250, 0.5)' }, { name: 'Mint', color: '#98FB98', glow: 'rgba(152, 251, 152, 0.5)' }, ];
             let moodThemes = darkThemes;
-            
-            const render = () => {
-                renderFilters();
-                renderGallery();
-            };
 
-            /* const renderGallery = () => {
-                let dataToRender = ricesData;
-                if (state.activeFilterValue !== 'All') {
-                    dataToRender = ricesData.filter(r => r[state.activeFilterType] === state.activeFilterValue);
-                }
-                
-                el.gallery.innerHTML = '';
-                el.gallery.className = `grid-${state.viewMode}`;
-                dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
-                initScrollObserver();
-                document.getElementById('rice-count').textContent = `Showing ${dataToRender.length} of ${ricesData.length} rices`;
-            }; */
-            const renderGallery = () => {
+            const getFilteredRices = () => {
                 const query = document.getElementById('search-input')?.value.toLowerCase() || "";
                 let dataToRender = ricesData;
 
@@ -775,7 +761,6 @@
                     } else if (state.activeFilterType === 'de') {
                         dataToRender = dataToRender.filter(r => r.environment?.type === 'DE' && r.environment?.name === state.activeFilterValue);
                     } else {
-                        // For distro and theme
                         dataToRender = dataToRender.filter(r => r[state.activeFilterType] === state.activeFilterValue);
                     }
                 }
@@ -792,14 +777,51 @@
                     });
                 }
 
-                el.gallery.innerHTML = '';
-                el.gallery.className = `grid-${state.viewMode}`;
-                dataToRender.forEach((rice) => el.gallery.appendChild(createRiceCard(rice, ricesData.indexOf(rice))));
-                document.getElementById('rice-count').textContent = `Showing ${dataToRender.length} of ${ricesData.length} rices`;
-                initScrollObserver();
+                return dataToRender;
             };
 
-            document.getElementById('search-input').addEventListener('input', renderGallery);
+            const render = () => {
+                renderFilters();
+                renderGallery(false); // Start fresh, not append
+            };
+
+            const renderGallery = (append = false) => {
+                const dataToRender = getFilteredRices();
+                const totalPages = Math.ceil(dataToRender.length / RICES_PER_PAGE);
+
+                if (!append) {
+                    currentPage = 1;
+                    el.gallery.innerHTML = '';
+                }
+
+                // Don't load more if already at end
+                if (currentPage > totalPages) return;
+
+                el.gallery.className = `grid-${state.viewMode}`;
+
+                const start = (currentPage - 1) * RICES_PER_PAGE;
+                const end = start + RICES_PER_PAGE;
+                const ricesToRender = dataToRender.slice(start, end);
+
+                ricesToRender.forEach((rice) => {
+                    const originalIndex = ricesData.indexOf(rice);
+                    el.gallery.appendChild(createRiceCard(rice, originalIndex));
+                });
+
+                document.getElementById('rice-count').textContent = `Showing ${dataToRender.length} rices`;
+
+                // Reset observer and set up for next page
+                if (observer) observer.disconnect();
+                observer = new IntersectionObserver(handleIntersection, { rootMargin: '100px' });
+                const lastCard = el.gallery.lastElementChild;
+                if (lastCard && currentPage < totalPages) {
+                    observer.observe(lastCard);
+                }
+            };
+
+            document.getElementById('search-input').addEventListener('input', () => {
+                renderGallery(false); // Reset to first page on search
+            });
             
             const renderFilters = () => {
                 const filterKey = state.activeFilterType;
@@ -880,20 +902,15 @@
                 return card;
             };
 
-            const initScrollObserver = () => {
-                const observer = new IntersectionObserver((entries) => {
-                    // Theme change on scroll disabled for consistency with manual theme selection
-                    // entries.forEach(entry => {
-                    //     if (entry.isIntersecting) {
-                    //         const rice = ricesData[parseInt(entry.target.dataset.index)];
-                    //         const themeName = rice.theme || 'Arc'; // Fallback to Arc if no theme
-                    //         const theme = moodThemes.find(t => t.name.toLowerCase() === themeName.toLowerCase()) || moodThemes.find(t => t.name === 'Arc');
-                    //         document.documentElement.style.setProperty('--accent-color', theme.color);
-                    //         document.documentElement.style.setProperty('--accent-glow', theme.glow);
-                    //     }
-                    // });
-                }, { rootMargin: '-40% 0px -40% 0px' });
-                el.gallery.querySelectorAll('.rice-card').forEach(card => observer.observe(card));
+            let observer = null;
+
+            const handleIntersection = (entries) => {
+                if (entries[0].isIntersecting && !isLoading) {
+                    isLoading = true;
+                    currentPage++;
+                    renderGallery(true); // Append mode
+                    isLoading = false;
+                }
             };
             
             const handleViewToggle = (e) => {
@@ -902,7 +919,7 @@
                     state.viewMode = btn.dataset.view;
                     document.querySelector('.view-toggle .active').classList.remove('active');
                     btn.classList.add('active');
-                    renderGallery();
+                    renderGallery(false); // Reset pagination on view change
                 }
             };
 
@@ -1270,13 +1287,28 @@
                 // Update mood switcher themes based on mode
                 moodThemes = isLight ? lightThemes : darkThemes;
                 updateMoodSwitcherPanel();
-                applyTheme(moodThemes[0]);
+                // Apply saved theme preference if it exists and is valid
+                const savedMoodTheme = localStorage.getItem('rice-gallery-theme');
+                if (savedMoodTheme && moodThemes.find(t => t.name === savedMoodTheme)) {
+                    applyTheme(moodThemes.find(t => t.name === savedMoodTheme));
+                } else {
+                    applyTheme(moodThemes[0]);
+                }
                 setTimeout(() => render(), 1000); // Delay render to match transition
             }
 
-            // Load saved theme - default to light mode
-            const savedTheme = localStorage.getItem('theme-mode');
-            applyThemeMode(savedTheme !== 'dark');
+            // Load saved light/dark mode - default to light mode
+            const savedThemeMode = localStorage.getItem('theme-mode');
+            const isLight = savedThemeMode !== 'dark';
+
+            // Set moodThemes based on saved light/dark mode BEFORE initializing
+            moodThemes = isLight ? lightThemes : darkThemes;
+
+            // Initialize mood switcher (uses the correct moodThemes array)
+            initMoodSwitcher();
+
+            // Apply light/dark mode
+            applyThemeMode(isLight);
 
             themeToggleBtn.addEventListener('click', () => {
                 const isLight = document.documentElement.classList.contains('light-mode');
@@ -1285,7 +1317,6 @@
 
             // INITIALIZE
             await loadRicesData();
-            initMoodSwitcher();
             render(); // Initial render
 
             // Initialize GSAP ScrollSmoother

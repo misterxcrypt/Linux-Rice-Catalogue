@@ -54,16 +54,50 @@ function extractGithubLink(text) {
 
 // Load keyword maps from MongoDB
 
+async function resolveRedditUrl(url) {
+  // If already a full comments URL, no need to resolve
+  if (url.includes('/comments/')) {
+    return url.replace(/\/$/, ''); // Remove trailing slash if present
+  }
+
+  try {
+    // Fetch the URL with redirect: 'manual' to get the final URL
+    const response = await fetch(url, {
+      method: 'HEAD',
+      redirect: 'follow',
+      headers: {
+        'User-Agent': 'linuxrice by u/misterxcrypt'
+      }
+    });
+
+    // Get the final URL after redirects
+    const finalUrl = response.url;
+    console.log('🔗 Resolved short URL:', url, '->', finalUrl);
+
+    // Extract just the comments path
+    const match = finalUrl.match(/https?:\/\/(?:www\.)?reddit\.com\/r\/[a-zA-Z0-9_]+\/comments\/[a-z0-9]+/i);
+    if (match) {
+      return match[0].replace(/\/$/, '');
+    }
+
+    return finalUrl.replace(/\/$/, '');
+  } catch (err) {
+    console.warn('⚠️ Failed to resolve URL, using original:', err);
+    return url.replace(/\/$/, '');
+  }
+}
+
 async function scrapeRedditPost(url) {
   try {
-    // // Convert Reddit URL to JSON API URL
-    // const jsonUrl = url.replace(/\/$/, '') + '/.json';
+    // First, resolve any short Reddit URLs to their final form
+    const resolvedUrl = await resolveRedditUrl(url);
+    console.log('🔗 Using resolved URL:', resolvedUrl);
+
     const accessToken = await getRedditAccessToken();
 
     // Convert Reddit URL to OAuth API endpoint
-    const path = url
-      .replace(/^https?:\/\/(www\.)?reddit\.com\//, '')
-      .replace(/\/$/, '')
+    const path = resolvedUrl
+      .replace(/^https?:\/\/(?:www\.)?reddit\.com\//, '')
       + '/.json';
     const jsonUrl = `https://oauth.reddit.com/${path}`;
     console.log('🔍 Fetching Reddit data from:', jsonUrl);
@@ -143,7 +177,7 @@ async function scrapeRedditPost(url) {
     const distro = matchKeywords(title, distroMap);
 
     return {
-      "reddit_post": url,
+      "reddit_post": resolvedUrl,
       "author": author,
       "dotfiles": dotfiles,
       "environment": {

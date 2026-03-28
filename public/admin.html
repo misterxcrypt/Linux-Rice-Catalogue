@@ -17,17 +17,32 @@
             --border-color: rgba(255, 255, 255, 0.08);
             --accent-color: #5D5FEF;
             --accent-glow: rgba(93, 95, 239, 0.4);
-            transition: --accent-color 0.5s ease, --accent-glow 0.5s ease;
+            --text-color: #E0E0E0;
+            --muted-text: #A0A0A0;
+            transition: --accent-color 1s ease, --accent-glow 1s ease, --bg-color 1s ease, --text-color 1s ease;
         }
+
+        .light-mode {
+            --bg-color: #F8F9FA;
+            --panel-bg: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-color: #212529;
+            --muted-text: #6C757D;
+        }
+
+        @property --accent-color { syntax: '<color>'; initial-value: #5D5FEF; inherits: true; }
+        @property --accent-glow { syntax: '<color>'; initial-value: rgba(93, 95, 239, 0.4); inherits: true; }
+
         body {
             background-color: var(--bg-color);
-            color: #E0E0E0;
+            color: var(--text-color);
             font-family: 'Inter', sans-serif;
-            background-image: 
-                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.04) 1px, transparent 0),
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.02) 1px, transparent 0),
                 radial-gradient(ellipse at 50% 0%, var(--accent-glow) 0%, transparent 45%);
             background-size: 30px 30px, 100% 100%;
             background-repeat: repeat, no-repeat;
+            transition: background-color 1s ease, background-position 1s ease-out;
         }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         .glass-panel {
@@ -40,6 +55,10 @@
             background: var(--accent-color);
             color: #fff;
         }
+
+        #mood-switcher-panel { transform: translateX(100%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; min-width: 180px; }
+        #mood-switcher-panel.open { transform: translateX(0); opacity: 1; }
+        #mood-switcher-btn { transition: background-color 1s ease; }
     </style>
 </head>
 <body class="min-h-screen text-gray-300">
@@ -47,11 +66,14 @@
         <header class="mb-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
             <!--  <img src="https://raw.githubusercontent.com/zemmsoares/awesome-rices/main/assets/logo.webp" alt="Awesome Rices logo" class="w-10 h-10"> -->
-              <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Admin Dashboard</h1>
+              <h1 class="text-3xl md:text-4xl font-bold tracking-tight" style="color: var(--text-color)">Admin Dashboard</h1>
             </div>
           
             <div class="flex items-center gap-3">
-              <a href="/" class="glass-panel px-4 py-2 rounded-lg text-white font-semibold hover:bg-white/10">
+              <button id="theme-toggle-btn" class="glass-panel p-2 rounded-lg hover:bg-white/10" title="Toggle Dark/Light Mode">
+                <span class="material-icons-outlined">dark_mode</span>
+              </button>
+              <a href="/" class="glass-panel px-4 py-2 rounded-lg font-semibold hover:bg-white/10" style="color: var(--text-color)">
                 Back to Gallery
               </a>
               <button
@@ -120,6 +142,12 @@
           <button id="delete-cancel" class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Cancel</button>
         </div>
       </div>
+    </div>
+
+    <!-- Mood Switcher -->
+    <div id="mood-switcher-container" class="fixed bottom-4 right-4 z-40">
+        <div id="mood-switcher-panel" class="absolute bottom-0 right-16 grid grid-cols-4 gap-3 p-2 rounded-2xl glass-panel place-items-center"></div>
+        <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
     </div>
 
     <script>
@@ -248,60 +276,131 @@
         // HTML templates
         const viewHTML = (rice) => {
             const customBadges = [];
-            if (rice.isCustomTheme) customBadges.push('<span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs">Custom Theme</span>');
-            if (rice.isCustomDistro) customBadges.push('<span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs">Custom Distro</span>');
-            if (rice.isCustomEnvironment) customBadges.push('<span class="bg-yellow-500 text-black px-2 py-1 rounded text-xs">Custom WM/DE</span>');
-            const badgesHTML = customBadges.length > 0 ? `<div class="flex gap-1 mt-1">${customBadges.join('')}</div>` : '';
+            if (rice.isCustomTheme) customBadges.push('<span class="bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded text-xs border border-yellow-500/30">Custom Theme</span>');
+            if (rice.isCustomDistro) customBadges.push('<span class="bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded text-xs border border-yellow-500/30">Custom Distro</span>');
+            if (rice.isCustomEnvironment) customBadges.push('<span class="bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded text-xs border border-yellow-500/30">Custom WM/DE</span>');
+            const badgesHTML = customBadges.length > 0 ? `<div class="flex gap-1 mt-2">${customBadges.join('')}</div>` : '';
 
             return `
-            <div class="flex-1">
-            <div class="font-bold text-lg text-white">${rice.author || ''}</div>
-            ${badgesHTML}
-            <div class="font-mono text-sm text-gray-400">
-                ${(rice.environment && rice.environment.name) || ''}
-                ${rice.distro ? '· ' + rice.distro : ''}
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="text-2xl">🌾</div>
+                    <div class="font-bold text-lg" style="color: var(--text-color)">${rice.author || 'Anonymous'}</div>
+                </div>
+                ${badgesHTML}
+                <div class="font-mono text-sm mt-2 flex flex-wrap items-center gap-2" style="color: var(--muted-text)">
+                    <span class="bg-white/5 px-2 py-1 rounded">${(rice.environment && rice.environment.name) || 'Unknown'}</span>
+                    <span style="color: var(--border-color)">·</span>
+                    <span class="bg-white/5 px-2 py-1 rounded">${rice.distro || 'Unknown'}</span>
+                    ${rice.theme ? `
+                    <span style="color: var(--border-color)">·</span>
+                    <span class="bg-white/5 px-2 py-1 rounded">${rice.theme}</span>
+                    ` : ''}
+                </div>
+                <div class="flex gap-3 mt-3">
+                    ${rice.dotfiles ? `
+                        <a href="${rice.dotfiles}" target="_blank" class="flex items-center gap-1.5 text-sm transition hover:opacity-80" style="color: var(--accent-color)">
+                            <span class="material-icons-outlined text-base">code</span>
+                            <span>Dotfiles</span>
+                        </a>
+                    ` : ''}
+                    ${rice.reddit_post ? `
+                        <a href="${rice.reddit_post}" target="_blank" class="flex items-center gap-1.5 text-sm transition hover:opacity-80" style="color: var(--accent-color)">
+                            <span class="material-icons-outlined text-base">link</span>
+                            <span>Reddit</span>
+                        </a>
+                    ` : ''}
+                </div>
+                ${(rice.images || []).length > 0 ? `
+                <div class="flex gap-2 mt-3 overflow-hidden">
+                    ${(rice.images || []).slice(0, 3).map(image => `
+                        <img src="${image.url}" class="w-24 h-14 object-cover rounded-md border border-white/10 hover:border-[var(--accent-color)] transition" />
+                    `).join('')}
+                    ${(rice.images || []).length > 3 ? `
+                        <div class="w-24 h-14 rounded-md border border-white/10 bg-white/5 flex items-center justify-center text-xs text-gray-400">
+                            +${(rice.images || []).length - 3}
+                        </div>
+                    ` : ''}
+                </div>
+                ` : ''}
             </div>
-            ${rice.dotfiles ? `
-                <div class="mt-2">
-                    <a href="${rice.dotfiles}" target="_blank" class="text-blue-400 underline">Dotfiles</a>
-                </div>` : ''}
-            ${rice.reddit_post ? `
-                <div class="mt-1">
-                    <a href="${rice.reddit_post}" target="_blank" class="text-orange-400 underline">Reddit Post</a>
-                </div>` : ''}
-            <div class="flex gap-2 mt-2">
-                ${(rice.images || []).slice(0, 2).map(image =>
-                    `<img src="${image.url}" class="w-20 h-12 object-cover rounded-md" />`).join('')}
-            </div>
-            </div>
-            <div class="flex gap-2">
-                <button class="edit-btn px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700" data-id="${rice._id}">Edit</button>
-                <button class="approve-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Approve</button>
-                <button class="reject-btn px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700" data-id="${rice._id}">Reject</button>
+            <div class="flex gap-2 flex-shrink-0">
+                <button class="edit-btn px-4 py-2 rounded-lg bg-blue-600/80 text-white font-semibold hover:bg-blue-600 transition" data-id="${rice._id}">
+                    <span class="material-icons-outlined text-sm">edit</span>
+                </button>
+                <button class="approve-btn px-4 py-2 rounded-lg bg-green-600/80 text-white font-semibold hover:bg-green-600 transition" data-id="${rice._id}">
+                    <span class="material-icons-outlined text-sm">check</span>
+                </button>
+                <button class="reject-btn px-4 py-2 rounded-lg bg-red-600/80 text-white font-semibold hover:bg-red-600 transition" data-id="${rice._id}">
+                    <span class="material-icons-outlined text-sm">close</span>
+                </button>
             </div>
             `;
         };
-        const editHTML = (rice) => `
-            <div class="flex-1">
+        const editHTML = (rice, keywords) => {
+            const wmOptions = keywords?.wm ? Object.keys(keywords.wm) : [];
+            const deOptions = keywords?.de ? Object.keys(keywords.de) : [];
+            const distroOptions = keywords?.distro ? Object.keys(keywords.distro) : [];
+            const themeOptions = keywords?.theme ? Object.keys(keywords.theme) : [];
+
+            const isWM = rice.environment?.type === 'WM';
+            const wmdeOptions = isWM ? wmOptions : deOptions;
+            const currentWmde = rice.environment?.name || '';
+            const isWmdeCustom = !wmdeOptions.includes(currentWmde);
+
+            const isDistroCustom = rice.distro && !distroOptions.includes(rice.distro);
+            const isThemeCustom = rice.theme && !themeOptions.includes(rice.theme);
+
+            return `
+            <div class="flex-1 max-h-[60vh] overflow-y-auto pr-2">
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Reddit Post</label>
+                <div class="flex items-center gap-2 mt-1">
+                    <input type="url" value="${rice.reddit_post || ''}" class="reddit-input flex-1 p-2 rounded bg-gray-700 text-white" />
+                    <button type="button" class="populate-btn px-3 py-2 rounded bg-blue-600 text-white text-sm font-mono hover:bg-blue-700">Populate</button>
+                </div>
+            </div>
             <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-300">Author</label>
                 <input type="text" value="${rice.author || ''}" class="author-input w-full p-2 rounded bg-gray-700 text-white" />
             </div>
             <div class="mb-2">
-                <label class="block text-sm font-medium text-gray-300">Environment</label>
-                <input type="text" value="${rice.environment && rice.environment.name || ''}" class="env-input w-full p-2 rounded bg-gray-700 text-white" />
+                <label class="block text-sm font-medium text-gray-300">Type</label>
+                <select class="env-type-input w-full p-2 rounded bg-gray-700 text-white">
+                    <option value="WM" ${isWM ? 'selected' : ''}>WM (Window Manager)</option>
+                    <option value="DE" ${!isWM ? 'selected' : ''}>DE (Desktop Environment)</option>
+                </select>
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">${isWM ? 'WM' : 'DE'} Name</label>
+                <select class="env-name-input w-full p-2 rounded bg-gray-700 text-white">
+                    <option value="">Select or choose Other</option>
+                    ${wmdeOptions.map(opt => `<option value="${opt}" ${opt === currentWmde ? 'selected' : ''}>${opt}</option>`).join('')}
+                    <option value="Other" ${isWmdeCustom ? 'selected' : ''}>Other</option>
+                </select>
+                <input type="text" value="${isWmdeCustom ? currentWmde : ''}" class="env-name-custom w-full mt-1 p-2 rounded bg-gray-700 text-white ${isWmdeCustom ? '' : 'hidden'}" placeholder="Enter custom ${isWM ? 'WM' : 'DE'}" />
             </div>
             <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-300">Distro</label>
-                <input type="text" value="${rice.distro || ''}" class="distro-input w-full p-2 rounded bg-gray-700 text-white" />
+                <select class="distro-input w-full p-2 rounded bg-gray-700 text-white">
+                    <option value="">Select or choose Other</option>
+                    ${distroOptions.map(opt => `<option value="${opt}" ${opt === rice.distro ? 'selected' : ''}>${opt}</option>`).join('')}
+                    <option value="Other" ${isDistroCustom ? 'selected' : ''}>Other</option>
+                </select>
+                <input type="text" value="${isDistroCustom ? rice.distro : ''}" class="distro-custom w-full mt-1 p-2 rounded bg-gray-700 text-white ${isDistroCustom ? '' : 'hidden'}" placeholder="Enter custom distro" />
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Theme</label>
+                <select class="theme-input w-full p-2 rounded bg-gray-700 text-white">
+                    <option value="">Select or choose Other</option>
+                    ${themeOptions.map(opt => `<option value="${opt}" ${opt === rice.theme ? 'selected' : ''}>${opt}</option>`).join('')}
+                    <option value="Other" ${isThemeCustom ? 'selected' : ''}>Other</option>
+                </select>
+                <input type="text" value="${isThemeCustom ? rice.theme : ''}" class="theme-custom w-full mt-1 p-2 rounded bg-gray-700 text-white ${isThemeCustom ? '' : 'hidden'}" placeholder="Enter custom theme" />
             </div>
             <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-300">Dotfiles</label>
                 <input type="url" value="${rice.dotfiles || ''}" class="dotfiles-input w-full p-2 rounded bg-gray-700 text-white" />
-            </div>
-            <div class="mb-2">
-                <label class="block text-sm font-medium text-gray-300">Reddit Post</label>
-                <input type="url" value="${rice.reddit_post || ''}" class="reddit-input w-full p-2 rounded bg-gray-700 text-white" />
             </div>
             <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-300">Images</label>
@@ -315,17 +414,32 @@
                 </div>
             </div>
             </div>
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-shrink-0">
                 <button class="save-btn px-4 py-2 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700" data-id="${rice._id}">Save</button>
                 <button class="cancel-btn px-4 py-2 rounded-lg bg-gray-600 text-white font-semibold hover:bg-gray-700" data-id="${rice._id}">Cancel</button>
             </div>
         `;
+        };
+        let keywordsCache = {};
+
+        async function loadKeywords() {
+            try {
+                const res = await fetch('/api/keywords');
+                if (res.ok) {
+                    keywordsCache = await res.json();
+                }
+            } catch (e) {
+                console.error('Failed to load keywords:', e);
+            }
+        }
+
         function attachViewHandlers(div, rice) {
             const editBtn = div.querySelector('.edit-btn');
             const approveBtn = div.querySelector('.approve-btn');
             const rejectBtn = div.querySelector('.reject-btn');
-            editBtn.addEventListener('click', () => {
-                div.innerHTML = editHTML(rice);
+            editBtn.addEventListener('click', async () => {
+                await loadKeywords();
+                div.innerHTML = editHTML(rice, keywordsCache);
                 attachEditHandlers(div, rice);
             });
             approveBtn.addEventListener('click', async () => {
@@ -345,21 +459,236 @@
             let currentImages = [...(rice.images || [])];
             const saveBtn = div.querySelector('.save-btn');
             const cancelBtn = div.querySelector('.cancel-btn');
+            const populateBtn = div.querySelector('.populate-btn');
+
+            // Toggle functions for custom inputs
+            function toggleEnvNameCustom() {
+                const select = div.querySelector('.env-name-input');
+                const custom = div.querySelector('.env-name-custom');
+                const isOther = select.value === 'Other';
+                custom.classList.toggle('hidden', !isOther);
+                if (isOther) custom.focus();
+            }
+
+            function toggleDistroCustom() {
+                const select = div.querySelector('.distro-input');
+                const custom = div.querySelector('.distro-custom');
+                const isOther = select.value === 'Other';
+                custom.classList.toggle('hidden', !isOther);
+                if (isOther) custom.focus();
+            }
+
+            function toggleThemeCustom() {
+                const select = div.querySelector('.theme-input');
+                const custom = div.querySelector('.theme-custom');
+                const isOther = select.value === 'Other';
+                custom.classList.toggle('hidden', !isOther);
+                if (isOther) custom.focus();
+            }
+
+            // Attach change listeners for custom input toggles
+            div.querySelector('.env-name-input').addEventListener('change', () => {
+                toggleEnvNameCustom();
+                // Update WM/DE dropdown options when type changes
+                const typeSelect = div.querySelector('.env-type-input');
+                const envNameSelect = div.querySelector('.env-name-input');
+                const type = typeSelect.value;
+                const options = type === 'WM'
+                    ? (keywordsCache.wm ? Object.keys(keywordsCache.wm) : [])
+                    : (keywordsCache.de ? Object.keys(keywordsCache.de) : []);
+
+                // Save current selection
+                const currentVal = envNameSelect.value;
+
+                // Rebuild options
+                envNameSelect.innerHTML = '<option value="">Select or choose Other</option>' +
+                    options.map(opt => `<option value="${opt}">${opt}</option>`).join('') +
+                    '<option value="Other">Other</option>';
+
+                // Restore selection if valid
+                if (options.includes(currentVal)) envNameSelect.value = currentVal;
+                else if (currentVal === 'Other') envNameSelect.value = 'Other';
+
+                toggleEnvNameCustom();
+            });
+
+            div.querySelector('.env-type-input').addEventListener('change', () => {
+                const type = div.querySelector('.env-type-input').value;
+                const label = div.querySelector('label.block.text-sm.font-medium.text-gray-300');
+                const envNameLabel = label.parentElement.querySelector('label');
+                if (envNameLabel) {
+                    envNameLabel.textContent = type === 'WM' ? 'WM Name' : 'DE Name';
+                }
+                div.querySelector('.env-name-input').dispatchEvent(new Event('change'));
+            });
+
+            div.querySelector('.distro-input').addEventListener('change', toggleDistroCustom);
+            div.querySelector('.theme-input').addEventListener('change', toggleThemeCustom);
+
+            // Initialize custom input states
+            toggleEnvNameCustom();
+            toggleDistroCustom();
+            toggleThemeCustom();
+
+            // Populate button handler
+            populateBtn.addEventListener('click', async () => {
+                const redditInput = div.querySelector('.reddit-input');
+                const redditUrl = redditInput.value.trim();
+
+                if (!redditUrl || !redditUrl.includes('reddit.com')) {
+                    alert('❌ Please enter a valid Reddit post URL');
+                    return;
+                }
+
+                populateBtn.disabled = true;
+                populateBtn.textContent = 'Fetching...';
+
+                try {
+                    // Step 1: Scrape Reddit data
+                    const res = await fetch('/api/scrapeReddit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url: redditUrl })
+                    });
+
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Failed to scrape Reddit');
+
+                    // Populate fields
+                    redditInput.value = data.reddit_post || redditUrl;
+                    div.querySelector('.author-input').value = data.author || '';
+                    div.querySelector('.env-type-input').value = data.environment?.type || 'WM';
+                    div.querySelector('.env-type-input').dispatchEvent(new Event('change'));
+
+                    // Set WM/DE (select or custom)
+                    const envNameSelect = div.querySelector('.env-name-input');
+                    const envNameCustom = div.querySelector('.env-name-custom');
+                    const envName = data.environment?.name || '';
+                    const wmdeOptions = data.environment?.type === 'WM'
+                        ? (keywordsCache.wm ? Object.keys(keywordsCache.wm) : [])
+                        : (keywordsCache.de ? Object.keys(keywordsCache.de) : []);
+                    if (wmdeOptions.includes(envName)) {
+                        envNameSelect.value = envName;
+                        envNameCustom.classList.add('hidden');
+                    } else {
+                        envNameSelect.value = 'Other';
+                        envNameCustom.value = envName;
+                        envNameCustom.classList.remove('hidden');
+                    }
+
+                    // Set distro (select or custom)
+                    const distroSelect = div.querySelector('.distro-input');
+                    const distroCustom = div.querySelector('.distro-custom');
+                    const distroOptions = keywordsCache.distro ? Object.keys(keywordsCache.distro) : [];
+                    if (distroOptions.includes(data.distro)) {
+                        distroSelect.value = data.distro;
+                        distroCustom.classList.add('hidden');
+                    } else {
+                        distroSelect.value = 'Other';
+                        distroCustom.value = data.distro || '';
+                        distroCustom.classList.remove('hidden');
+                    }
+
+                    // Set theme (select or custom)
+                    const themeSelect = div.querySelector('.theme-input');
+                    const themeCustom = div.querySelector('.theme-custom');
+                    const themeOptions = keywordsCache.theme ? Object.keys(keywordsCache.theme) : [];
+                    if (themeOptions.includes(data.theme)) {
+                        themeSelect.value = data.theme;
+                        themeCustom.classList.add('hidden');
+                    } else {
+                        themeSelect.value = 'Other';
+                        themeCustom.value = data.theme || '';
+                        themeCustom.classList.remove('hidden');
+                    }
+
+                    div.querySelector('.dotfiles-input').value = data.dotfiles || '';
+
+                    // Step 2: Upload images to ImageKit
+                    if (Array.isArray(data.screenshots) && data.screenshots.length > 0) {
+                        populateBtn.textContent = 'Uploading images...';
+
+                        const imgRes = await fetch('/api/uploadToImageKit', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ urls: data.screenshots })
+                        });
+
+                        const imgData = await imgRes.json();
+                        if (imgRes.ok && imgData.images) {
+                            currentImages = imgData.images.map(img => ({
+                                url: img.url,
+                                fileId: img.fileId
+                            }));
+                        } else {
+                            // Fallback to raw URLs if upload fails
+                            currentImages = data.screenshots.map(url => ({ url, fileId: '' }));
+                        }
+
+                        const container = div.querySelector('.images-container');
+                        container.innerHTML = currentImages.map((image, index) => `
+                            <div class="relative">
+                                <img src="${image.url}" class="w-20 h-12 object-cover rounded-md" />
+                                <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>
+                            </div>
+                        `).join('');
+
+                        // Re-attach delete handlers
+                        div.querySelectorAll('.delete-image-btn').forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                const index = parseInt(btn.dataset.index);
+                                const url = btn.dataset.url;
+                                pendingDelete = { index, url, currentImages, updateImagesContainer };
+                                deleteDialog.classList.replace('hidden', 'flex');
+                            });
+                        });
+                    }
+
+                    alert('✅ Successfully populated from Reddit!');
+                } catch (err) {
+                    console.error('❌ Scrape failed:', err);
+                    alert('❌ Failed to fetch data from Reddit. Check the URL or try again.');
+                } finally {
+                    populateBtn.disabled = false;
+                    populateBtn.textContent = 'Populate';
+                }
+            });
+
             saveBtn.addEventListener('click', async () => {
                 const author = div.querySelector('.author-input').value;
-                const env = div.querySelector('.env-input').value;
-                const distro = div.querySelector('.distro-input').value;
+                const envType = div.querySelector('.env-type-input').value;
+
+                // Get WM/DE value (from select or custom input)
+                const envNameSelect = div.querySelector('.env-name-input');
+                let env = envNameSelect.value === 'Other'
+                    ? div.querySelector('.env-name-custom').value
+                    : envNameSelect.value;
+
+                // Get distro value (from select or custom input)
+                const distroSelect = div.querySelector('.distro-input');
+                let distro = distroSelect.value === 'Other'
+                    ? div.querySelector('.distro-custom').value
+                    : distroSelect.value;
+
+                // Get theme value (from select or custom input)
+                const themeSelect = div.querySelector('.theme-input');
+                let theme = themeSelect.value === 'Other'
+                    ? div.querySelector('.theme-custom').value
+                    : themeSelect.value;
+
                 const dotfiles = div.querySelector('.dotfiles-input').value;
                 const reddit = div.querySelector('.reddit-input').value;
+
                 const data = {
                     author,
-                    environment: { type: rice.environment.type, name: env },
+                    theme,
+                    environment: { type: envType, name: env },
                     distro,
                     dotfiles,
                     reddit_post: reddit,
                     images: currentImages.map(image => {
                         const filename = image.url.split('/').pop();
-                        return [filename, image.fileId];
+                        return [filename, image.fileId || ''];
                     })
                 };
                 await updateRiceDetails(rice._id, data);
@@ -858,6 +1187,92 @@
             pendingDelete = null;
             deleteDialog.classList.replace('flex', 'hidden');
         });
+
+        // --- Theme Toggle Logic ---
+        (function() {
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const themeIcon = themeToggleBtn.querySelector('span');
+
+            // Mood switcher themes (matching index.html)
+            const darkThemes = [ { name: 'Blue', color: '#5D5FEF', glow: 'rgba(30, 58, 138, 0.5)' }, { name: 'Forest Green', color: '#14532d', glow: 'rgba(20, 83, 45, 0.5)' }, { name: 'Burgundy', color: '#7c2d12', glow: 'rgba(124, 45, 18, 0.5)' }, { name: 'Deep Blue', color: '#1e3a8a', glow: 'rgba(30, 41, 59, 0.5)' }, ];
+            const lightThemes = [ { name: 'Pastel Pink', color: '#F48FB1', glow: 'rgba(244, 143, 177, 0.5)' }, { name: 'Sky Blue', color: '#87CEEB', glow: 'rgba(135, 206, 235, 0.5)' }, { name: 'Lavender', color: '#d374f2', glow: 'rgba(230, 230, 250, 0.5)' }, { name: 'Mint', color: '#98FB98', glow: 'rgba(152, 251, 152, 0.5)' }, ];
+            let moodThemes = darkThemes;
+
+            const moodSwitcherBtn = document.getElementById('mood-switcher-btn');
+            const moodSwitcherPanel = document.getElementById('mood-switcher-panel');
+
+            function applyTheme(theme) {
+                document.documentElement.style.setProperty('--accent-color', theme.color);
+                document.documentElement.style.setProperty('--accent-glow', theme.glow);
+                moodSwitcherBtn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
+                localStorage.setItem('rice-gallery-theme', theme.name);
+            }
+
+            function updateMoodSwitcherPanel() {
+                moodSwitcherPanel.innerHTML = '';
+                moodThemes.forEach(theme => {
+                    const btn = document.createElement('button');
+                    btn.className = 'w-8 h-8 rounded-full transition-transform hover:scale-110';
+                    btn.style.background = `linear-gradient(45deg, ${theme.color}, ${theme.glow})`;
+                    btn.title = theme.name;
+                    btn.addEventListener('click', () => applyTheme(theme));
+                    moodSwitcherPanel.appendChild(btn);
+                });
+            }
+
+            function initMoodSwitcher() {
+                updateMoodSwitcherPanel();
+                const savedTheme = localStorage.getItem('rice-gallery-theme');
+                if (savedTheme && moodThemes.find(t => t.name === savedTheme)) {
+                    applyTheme(moodThemes.find(t => t.name === savedTheme));
+                } else {
+                    applyTheme(moodThemes[0]);
+                }
+                moodSwitcherBtn.addEventListener('click', () => moodSwitcherPanel.classList.toggle('open'));
+            }
+
+            function applyThemeMode(isLight) {
+                if (isLight) {
+                    document.documentElement.classList.add('light-mode');
+                    document.body.className = 'min-h-screen text-gray-800';
+                    themeIcon.textContent = 'light_mode';
+                    localStorage.setItem('theme-mode', 'light');
+                } else {
+                    document.documentElement.classList.remove('light-mode');
+                    document.body.className = 'min-h-screen text-gray-300';
+                    themeIcon.textContent = 'dark_mode';
+                    localStorage.setItem('theme-mode', 'dark');
+                }
+                // Update mood switcher themes based on mode
+                moodThemes = isLight ? lightThemes : darkThemes;
+                updateMoodSwitcherPanel();
+                // Apply saved theme preference if it exists and is valid
+                const savedMoodTheme = localStorage.getItem('rice-gallery-theme');
+                if (savedMoodTheme && moodThemes.find(t => t.name === savedMoodTheme)) {
+                    applyTheme(moodThemes.find(t => t.name === savedMoodTheme));
+                } else {
+                    applyTheme(moodThemes[0]);
+                }
+            }
+
+            // Load saved light/dark mode - default to light (matching index.html behavior)
+            const savedThemeMode = localStorage.getItem('theme-mode');
+            const isLight = savedThemeMode !== 'dark';
+
+            // Set moodThemes based on saved light/dark mode BEFORE initializing
+            moodThemes = isLight ? lightThemes : darkThemes;
+
+            // Initialize mood switcher (uses the correct moodThemes array)
+            initMoodSwitcher();
+
+            // Apply light/dark mode
+            applyThemeMode(isLight);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isLight = document.documentElement.classList.contains('light-mode');
+                applyThemeMode(!isLight);
+            });
+        })();
 
         // On page load
         fetchPendingRices();

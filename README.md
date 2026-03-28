@@ -58,6 +58,13 @@ Required environment variables:
 - `REDDIT_*`: Reddit API credentials for submission scraping
 - `ADMIN_PASSWORD`: Secure password for admin login
 
+#### Local Development Mode
+For easier setup without external services:
+- Set `LOCAL_DEV=true` in `.env`
+- This uses `sample-db.json` for data and local images instead of MongoDB/ImageKit
+- Add dummy images to `public/local-images/` (e.g., sample1.png, sample2.png, sample3.png)
+- Run the backend locally or use Vercel dev for API functions
+
 ### 3. Deploy Backend
 The backend consists of serverless functions. Deploy to Vercel, Netlify, or your preferred serverless platform.
 

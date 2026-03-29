@@ -10,27 +10,21 @@ async function getLeaderboard(req, res) {
     const db = await getDb();
     const rices = await db.collection('rice').find({}).toArray();
 
-    const stats = { total: rices.length, wm: {}, de: {}, theme: {}, distro: {} };
-
+    const userCounts = {};
     rices.forEach(rice => {
-      if (rice.theme && typeof rice.theme === 'string') {
-        stats.theme[rice.theme] = (stats.theme[rice.theme] || 0) + 1;
-      }
-      if (rice.environment && rice.environment.type === 'WM' && rice.environment.name && typeof rice.environment.name === 'string') {
-        stats.wm[rice.environment.name] = (stats.wm[rice.environment.name] || 0) + 1;
-      }
-      if (rice.environment && rice.environment.type === 'DE' && rice.environment.name && typeof rice.environment.name === 'string') {
-        stats.de[rice.environment.name] = (stats.de[rice.environment.name] || 0) + 1;
-      }
-      if (rice.distro && typeof rice.distro === 'string') {
-        stats.distro[rice.distro] = (stats.distro[rice.distro] || 0) + 1;
-      }
+      const author = rice.author || rice.ownerId?.username || 'admin';
+      userCounts[author] = (userCounts[author] || 0) + 1;
     });
 
-    return res.status(200).json(stats);
+    const leaderboard = Object.entries(userCounts)
+      .map(([username, riceCount]) => ({ username, riceCount }))
+      .sort((a, b) => b.riceCount - a.riceCount)
+      .slice(0, 20);
+
+    return res.status(200).json(leaderboard);
   } catch (err) {
-    console.error('Stats error:', err);
-    return res.status(500).json({ error: 'Failed to fetch stats' });
+    console.error('Leaderboard error:', err);
+    return res.status(500).json({ error: 'Failed to fetch leaderboard' });
   }
 }
 

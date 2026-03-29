@@ -191,7 +191,7 @@
         // Load keywords for dropdowns
         async function loadKeywords() {
             try {
-                const res = await fetch('/api/keywords');
+                const res = await fetch('/api/system?action=keywords');
                 if (res.ok) keywords = await res.json();
             } catch (e) { console.error('Failed to load keywords:', e); }
         }
@@ -317,7 +317,7 @@
             }
 
             try {
-                const res = await fetch('/api/scrapeReddit', {
+                const res = await fetch('/api/system?action=scrapeReddit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url: redditUrl })
@@ -466,7 +466,7 @@
 
         async function loadMyRices() {
             try {
-                const res = await fetch('/api/getMyRices', {
+                const res = await fetch('/api/rices?action=getMyRices', {
                     method: 'GET',
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
@@ -480,7 +480,11 @@
                     `;
                     return;
                 }
-                
+
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+                }
+
                 const rices = await res.json();
                 window.allRices = rices;
                 renderRices(rices);
@@ -638,11 +642,11 @@
                 document.getElementById('edit-preview-image').src = 'https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png';
             }
             
-            document.getElementById('edit-modal').classList.remove('hidden');
+            document.getElementById('edit-modal').classList.replace('hidden', 'grid');
         };
 
         window.closeEditModal = function() {
-            document.getElementById('edit-modal').classList.add('hidden');
+            document.getElementById('edit-modal').classList.replace('grid', 'hidden');
         };
 
         document.getElementById('edit-form').addEventListener('submit', async (e) => {
@@ -680,9 +684,9 @@
                 });
                 
                 try {
-                    const res = await fetch('/api/updateMyRice', {
+                    const res = await fetch('/api/rices?action=updateMyRice', {
                         method: 'POST',
-                        headers: { 
+                        headers: {
                             'Authorization': `Bearer ${token}`
                         },
                         body: formData
@@ -694,9 +698,9 @@
                 }
             } else {
                 try {
-                    const res = await fetch('/api/updateMyRice', {
+                    const res = await fetch('/api/rices?action=updateMyRice', {
                         method: 'POST',
-                        headers: { 
+                        headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${token}`
                         },
@@ -732,9 +736,9 @@
         document.getElementById('delete-confirm').addEventListener('click', async () => {
             if (!deleteId) return;
             try {
-                const res = await fetch('/api/deleteMyRice', {
+                const res = await fetch('/api/rices?action=deleteMyRice', {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },

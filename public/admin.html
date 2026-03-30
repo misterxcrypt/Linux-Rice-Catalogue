@@ -474,7 +474,7 @@
                             src: image.url,
                             alt: 'Rice thumbnail',
                             className: 'w-24 h-14 object-cover rounded-md border border-white/10 hover:border-[var(--accent-color)] transition',
-                            width: 96
+                            variant: 'thumbnail'
                         }).toHTML()}
                     `).join('')}
                     ${(rice.images || []).length > 3 ? `
@@ -568,12 +568,12 @@
                 <div class="flex gap-2 mt-2 images-container">
                     ${(rice.images || []).map((url, index) => `
                         <div class="relative">
-                            ${new OptimizedImage({
-                                src: url,
-                                alt: 'Rice image',
-                                className: 'w-20 h-12 object-cover rounded-md',
-                                width: 80
-                            }).toHTML()}
+                        ${new OptimizedImage({
+                            src: url,
+                            alt: 'Rice image',
+                            className: 'w-20 h-12 object-cover rounded-md',
+                            variant: 'thumbnail'
+                        }).toHTML()}
                             <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${url}">×</button>
                         </div>
                     `).join('')}
@@ -779,7 +779,7 @@
                                         src: image.url,
                                         alt: 'Rice image',
                                         className: 'w-20 h-12 object-cover rounded-md',
-                                        width: 80
+                                        variant: 'thumbnail'
                                     }).toHTML()}
                                     <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>
                                 </div>
@@ -865,7 +865,7 @@
                             src: image.url,
                             alt: 'Rice image',
                             className: 'w-20 h-12 object-cover rounded-md',
-                            width: 80
+                            variant: 'thumbnail'
                         }).toHTML()}
                         ${image.fileId ? `<button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>` : ''}
                     </div>

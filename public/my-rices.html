@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="OptimizedImage.js"></script>
     <style>
         :root {
             --bg-color: #0A0A0F;
@@ -533,7 +534,12 @@
                 html += `
                     <div class="rice-card group relative rounded-2xl overflow-hidden cursor-pointer bg-[#111116] border border-[var(--border-color)]">
                         <div class="card-image w-full h-full">
-                            <img src="${imageUrl}" alt="${author}'s rice" loading="lazy" class="w-full h-full object-cover">
+                            ${new OptimizedImage({
+                                src: imageUrl,
+                                alt: `${author}'s rice`,
+                                className: 'w-full h-full object-cover',
+                                width: 400
+                            }).toHTML()}
                         </div>
                         <div class="rice-overlay absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300">
                             <div class="flex justify-between items-start">

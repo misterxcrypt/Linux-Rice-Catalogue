@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="OptimizedImage.js"></script>
     <style>
         :root {
             --bg-color: #0A0A0F;
@@ -469,7 +470,12 @@
                 ${(rice.images || []).length > 0 ? `
                 <div class="flex gap-2 mt-3 overflow-hidden">
                     ${(rice.images || []).slice(0, 3).map(image => `
-                        <img src="${image.url}" class="w-24 h-14 object-cover rounded-md border border-white/10 hover:border-[var(--accent-color)] transition" />
+                        ${new OptimizedImage({
+                            src: image.url,
+                            alt: 'Rice thumbnail',
+                            className: 'w-24 h-14 object-cover rounded-md border border-white/10 hover:border-[var(--accent-color)] transition',
+                            width: 96
+                        }).toHTML()}
                     `).join('')}
                     ${(rice.images || []).length > 3 ? `
                         <div class="w-24 h-14 rounded-md border border-white/10 bg-white/5 flex items-center justify-center text-xs text-gray-400">
@@ -562,7 +568,12 @@
                 <div class="flex gap-2 mt-2 images-container">
                     ${(rice.images || []).map((url, index) => `
                         <div class="relative">
-                            <img src="${url}" class="w-20 h-12 object-cover rounded-md" />
+                            ${new OptimizedImage({
+                                src: url,
+                                alt: 'Rice image',
+                                className: 'w-20 h-12 object-cover rounded-md',
+                                width: 80
+                            }).toHTML()}
                             <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${url}">×</button>
                         </div>
                     `).join('')}
@@ -764,7 +775,12 @@
                             const container = div.querySelector('.images-container');
                             container.innerHTML = currentImages.map((image, index) => `
                                 <div class="relative">
-                                    <img src="${image.url}" class="w-20 h-12 object-cover rounded-md" />
+                                    ${new OptimizedImage({
+                                        src: image.url,
+                                        alt: 'Rice image',
+                                        className: 'w-20 h-12 object-cover rounded-md',
+                                        width: 80
+                                    }).toHTML()}
                                     <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>
                                 </div>
                             `).join('');
@@ -845,7 +861,12 @@
                 const container = div.querySelector('.images-container');
                 container.innerHTML = images.map((image, index) => `
                     <div class="relative">
-                        <img src="${image.url}" class="w-20 h-12 object-cover rounded-md" />
+                        ${new OptimizedImage({
+                            src: image.url,
+                            alt: 'Rice image',
+                            className: 'w-20 h-12 object-cover rounded-md',
+                            width: 80
+                        }).toHTML()}
                         ${image.fileId ? `<button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>` : ''}
                     </div>
                 `).join('');

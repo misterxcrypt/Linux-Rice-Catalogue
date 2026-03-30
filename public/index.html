@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/colorthief@2.3.2/dist/color-thief.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+    <script src="OptimizedImage.js"></script>
     
     <style>
         :root {
@@ -1097,9 +1098,15 @@
                 card.className = `rice-card group relative rounded-2xl overflow-hidden cursor-pointer flex bg-[#111116] border border-[var(--border-color)]`;
                 card.dataset.index = originalIndex;
                 /* Commented the rection section */
+                const optimizedImg = new OptimizedImage({
+                    src: `https://ik.imagekit.io/y1n9qg16a/rices/${images[0] || ''}`,
+                    alt: `${user}'s ${wm} rice`,
+                    className: 'w-full h-full object-cover',
+                    width: 400
+                }).toHTML();
                 card.innerHTML = `
                     <div class="card-image w-full h-full">
-                        <img src="https://ik.imagekit.io/y1n9qg16a/rices/${images[0] || ''}" alt="${user}'s ${wm} rice" loading="lazy" class="w-full h-full object-cover">
+                        ${optimizedImg}
                     </div>
                     <div class="rice-overlay absolute inset-0 bg-gradient-to-t ${overlayColor} p-4 flex flex-col justify-end opacity-0 transition-opacity duration-300">
                         <h3 class="text-xl font-bold ${textColor}">${user}</h3>

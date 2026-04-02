@@ -111,21 +111,121 @@ async function scrapeReddit(req, res) {
   }
 
   try {
+    // Extract post ID from Reddit URL
+    const postIdMatch = url.match(/\/comments\/([a-z0-9]+)/i);
+    if (!postIdMatch) {
+      return res.status(400).json({ error: 'Invalid Reddit URL format' });
+    }
+
+    const postId = postIdMatch[1];
+    const apiUrl = `https://www.reddit.com/comments/${postId}.json`;
+
+    // Fetch post data from Reddit API
+    const response = await fetch(apiUrl, {
+      headers: {
+        'User-Agent': 'rice-gallery-scraper/1.0'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Reddit API returned ${response.status}`);
+    }
+
+    const data = await response.json();
+    const post = data[0]?.data?.children[0]?.data;
+
+    if (!post) {
+      throw new Error('Post not found or inaccessible');
+    }
+
+    // Extract information from post
+    const title = post.title || '';
+    const author = post.author || '';
+    const selftext = post.selftext || '';
+    const fullText = `${title} ${selftext}`.toLowerCase();
+
+    // Load keywords for matching
+    const db = await getDb();
+    const keywordsDocs = await db.collection('keywords').find({}).toArray();
+    const keywords = {};
+    keywordsDocs.forEach(doc => {
+      keywords[doc._id] = doc.data;
+    });
+
+    // Extract information using keyword matching
+    const theme = matchKeywords(fullText, keywords.theme || []) ||
+                  matchKeywords(title.toLowerCase(), keywords.theme || []);
+    const distro = matchKeywords(fullText, keywords.distro || []) ||
+                   matchKeywords(title.toLowerCase(), keywords.distro || []);
+
+    // Determine WM/DE type and name
+    let wmdeType = null;
+    let wmdeName = null;
+
+    // Check for DE keywords first
+    const deMatch = matchKeywords(fullText, keywords.de || []);
+    if (deMatch) {
+      wmdeType = 'DE';
+      wmdeName = deMatch;
+    } else {
+      // Check for WM keywords
+      const wmMatch = matchKeywords(fullText, keywords.wm || []);
+      if (wmMatch) {
+        wmdeType = 'WM';
+        wmdeName = wmMatch;
+      }
+    }
+
+    // Extract GitHub link
+    const githubMatch = fullText.match(/https?:\/\/(?:www\.)?github\.com\/[^\s)>\]]+/);
+    const dotfiles = githubMatch ? githubMatch[0] : null;
+
+    // Extract screenshots
+    const screenshots = [];
+    if (post.url && (post.url.endsWith('.png') || post.url.endsWith('.jpg') || post.url.endsWith('.jpeg'))) {
+      screenshots.push(post.url);
+    }
+
+    // Check gallery data
+    if (post.gallery_data && post.media_metadata) {
+      const items = post.gallery_data.items;
+      const media = post.media_metadata;
+      items.forEach(item => {
+        const mediaId = item.media_id;
+        if (media[mediaId] && media[mediaId].s) {
+          screenshots.push(media[mediaId].s.u.replace(/&amp;/g, '&'));
+        }
+      });
+    }
+
     const scrapedData = {
-      title: 'Sample Rice Title',
-      author: 'Sample Author',
-      theme: 'Sample Theme',
-      wm: 'Sample WM',
-      distro: 'Sample Distro',
-      dotfiles: 'https://github.com/sample',
-      reddit_post: url
+      author: author,
+      theme: theme,
+      distro: distro,
+      environment: wmdeType && wmdeName ? { type: wmdeType, name: wmdeName } : null,
+      dotfiles: dotfiles,
+      reddit_post: url,
+      screenshots: screenshots,
+      title: title
     };
 
     return res.status(200).json(scrapedData);
   } catch (err) {
     console.error('Scrape error:', err);
-    return res.status(500).json({ error: 'Failed to scrape' });
+    return res.status(500).json({ error: 'Failed to scrape Reddit post: ' + err.message });
   }
+}
+
+// Helper function to match keywords
+function matchKeywords(text, keywords) {
+  if (!keywords || !Array.isArray(keywords)) return null;
+  const normalizedText = text.toLowerCase().replace(/-/g, ' ').replace(/_/g, ' ');
+  for (const keyword of keywords) {
+    if (normalizedText.includes(keyword.toLowerCase())) {
+      return keyword;
+    }
+  }
+  return null;
 }
 
 async function updateKeywords(req, res) {

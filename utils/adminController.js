@@ -177,15 +177,16 @@ async function updateStatus(req, res) {
     return res.status(401).json({ error: 'Invalid token' });
   }
 
-  const { _id, status } = req.body || {};
-  if (!_id || !status) {
+  const { _id, id, status } = req.body || {};
+  const riceId = _id || id;
+  if (!riceId || !status) {
     return res.status(400).json({ error: 'Missing _id or status' });
   }
 
   try {
     const db = await getDb();
     await db.collection('rice').updateOne(
-      { _id: new ObjectId(_id) },
+      { _id: new ObjectId(riceId) },
       { $set: { status, updatedAt: new Date() } }
     );
     return res.status(200).json({ success: true });

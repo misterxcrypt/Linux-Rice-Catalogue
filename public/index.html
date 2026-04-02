@@ -42,6 +42,10 @@
         @property --accent-color { syntax: '<color>'; initial-value: #5D5FEF; inherits: true; }
         @property --accent-glow { syntax: '<color>'; initial-value: rgba(93, 95, 239, 0.4); inherits: true; }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -138,6 +142,82 @@
         input::placeholder {
             color: var(--placeholder-color);
         }
+
+        /* Ko-fi button font consistency */
+        #kofi-button button {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 14px !important;
+        }
+        .footer-container {
+    padding: 16px 20px;
+    border-radius: 16px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-about {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px; /* reduced horizontal spacing */
+}
+
+.footer-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    border: 2px solid var(--accent-color);
+    flex-shrink: 0;
+}
+
+.footer-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.footer-text {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted-text);
+    line-height: 1.5;
+    margin-top: 4px;
+}
+
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-btn {
+    padding: 6px 12px;
+    border-radius: 10px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s ease;
+}
+
+.footer-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
     </style>
 </head>
 <body class="min-h-screen text-gray-400">
@@ -155,41 +235,40 @@
                     <input id="search-input" type="text" placeholder="🔍 Search rices (author, WM, distro, theme)" class="w-full p-2 rounded-md glass-panel font-mono text-sm" />
                  </div>
                   <div class="flex items-center gap-2">
+                     <a id="about-btn" href="#footer" title="About" class="control-btn p-2 glass-panel rounded-lg hover:bg-white/10"><span class="material-icons-outlined">info</span></a>
                      <button id="leaderboard-btn" title="Leaderboard" class="control-btn p-2 glass-panel rounded-lg hover:bg-white/10"><span class="material-icons-outlined">leaderboard</span></button>
                      <div class="view-toggle flex items-center gap-1 glass-panel p-1 rounded-lg">
                         <button title="Masonry View" data-view="masonry" class="control-btn p-2 rounded-md active"><span class="material-icons-outlined">grid_view</span></button>
                         <button title="Grid View" data-view="bento" class="control-btn p-2 rounded-md"><span class="material-icons-outlined">view_module</span></button>
                         <button title="Feed View" data-view="feed" class="control-btn p-2 rounded-md"><span class="material-icons-outlined">view_agenda</span></button>
                     </div>
-                    <button id="theme-toggle-btn" class="p-2.5 ml-2 glass-panel rounded-lg hover:bg-white/10" title="Toggle Dark/Light Mode">
-                        <span class="material-icons-outlined">dark_mode</span>
-                    </button>
-                    <button id="login-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10">Login</button>
+
+                    <button id="login-btn" class="p-2.5 ml-2 glass-panel rounded-lg font-semibold hover:bg-white/10" style="color: var(--text-color);">Login</button>
                     <div class="relative" id="user-menu-container" style="display:none">
-                        <button id="profile-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10 flex items-center gap-1">
+                        <button id="profile-btn" class="p-2.5 ml-2 glass-panel rounded-lg font-semibold hover:bg-white/10 flex items-center gap-1" style="color: var(--text-color);">
                             <span class="material-icons-outlined">account_circle</span>
                         </button>
                         <div id="user-dropdown" class="absolute right-0 top-full mt-2 w-48 glass-panel rounded-xl overflow-hidden hidden z-50">
-                            <a id="my-rices-dropdown-btn" href="/my-rices.html" class="flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                            <a id="my-rices-dropdown-btn" href="/my-rices.html" class="flex items-center gap-2 px-4 py-3 hover:bg-white/10" style="color: var(--text-color);">
                                 <span class="material-icons-outlined">folder</span>
                                 My Rices
                             </a>
-                            <button id="user-logout-btn" class="w-full flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                            <button id="user-logout-btn" class="w-full flex items-center gap-2 px-4 py-3 hover:bg-white/10" style="color: var(--text-color);">
                                 <span class="material-icons-outlined">logout</span>
                                 Logout
                             </button>
                         </div>
                     </div>
                     <div class="relative" id="admin-menu-container" style="display:none">
-                        <button id="admin-profile-btn" class="p-2.5 ml-2 glass-panel rounded-lg text-white font-semibold hover:bg-white/10 flex items-center gap-1">
+                        <button id="admin-profile-btn" class="p-2.5 ml-2 glass-panel rounded-lg font-semibold hover:bg-white/10 flex items-center gap-1" style="color: var(--text-color);">
                             <span class="material-icons-outlined">admin_panel_settings</span>
                         </button>
                         <div id="admin-dropdown" class="absolute right-0 top-full mt-2 w-48 glass-panel rounded-xl overflow-hidden hidden z-50">
-                            <a id="admin-panel-dropdown-btn" href="/admin.html" class="flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                            <a id="admin-panel-dropdown-btn" href="/admin.html" class="flex items-center gap-2 px-4 py-3 hover:bg-white/10" style="color: var(--text-color);">
                                 <span class="material-icons-outlined">dashboard</span>
                                 Admin Panel
                             </a>
-                            <button id="admin-logout-btn" class="w-full flex items-center gap-2 px-4 py-3 text-white hover:bg-white/10">
+                            <button id="admin-logout-btn" class="w-full flex items-center gap-2 px-4 py-3 hover:bg-white/10" style="color: var(--text-color);">
                                 <span class="material-icons-outlined">logout</span>
                                 Logout
                             </button>
@@ -210,6 +289,12 @@
                         <button data-filter-type="theme" class="control-btn px-4 py-1.5 text-sm rounded-md">Theme</button>
                     </div>
             </div>
+
+            <!-- Active Filters -->
+            <div id="active-filters" class="flex flex-wrap gap-2 justify-center mb-4 hidden">
+                <!-- Active filter tags injected here -->
+            </div>
+
             <div id="filter-pills-container" class="flex flex-wrap gap-2 justify-center">
                 <!-- Filter pills injected here -->
             </div>
@@ -221,6 +306,29 @@
         </div>
 
         <div id="rice-gallery" class="grid-masonry"></div>
+
+        <!-- Pagination -->
+        <div id="pagination-controls" class="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 p-4 glass-panel rounded-xl">
+            <div class="flex items-center gap-2">
+                <span class="font-mono text-sm" style="color: var(--muted-text)">Per page:</span>
+                <select id="page-size-select" class="p-2 rounded-md glass-panel font-mono text-sm">
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="pagination-prev" class="p-2 rounded-md glass-panel hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed">
+                    <span class="material-icons-outlined">chevron_left</span>
+                </button>
+                <div class="font-mono text-sm px-3">
+                    <span id="pagination-current">1</span> / <span id="pagination-total">1</span>
+                </div>
+                <button id="pagination-next" class="p-2 rounded-md glass-panel hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed">
+                    <span class="material-icons-outlined">chevron_right</span>
+                </button>
+            </div>
+        </div>
         </div>
     </div>
 
@@ -228,13 +336,13 @@
     <div id="lightbox" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60 lightbox">
 
     <button id="lightbox-prev-rice"
-        class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/80 p-4 rounded-full z-40 text-3xl shadow-lg transition-transform hover:scale-110">
-        <span class="material-icons-outlined text-4xl">chevron_left</span>
+        class="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/80 w-14 h-14 rounded-full z-40 shadow-lg transition-transform hover:scale-110 flex items-center justify-center">
+        <span class="material-icons-outlined text-3xl">chevron_left</span>
     </button>
 
     <button id="lightbox-next-rice"
-        class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/80 p-4 rounded-full z-40 text-3xl shadow-lg transition-transform hover:scale-110">
-        <span class="material-icons-outlined text-4xl">chevron_right</span>
+        class="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-black/60 hover:bg-black/80 w-14 h-14 rounded-full z-40 shadow-lg transition-transform hover:scale-110 flex items-center justify-center">
+        <span class="material-icons-outlined text-3xl">chevron_right</span>
     </button>
 
     <div class="w-full max-w-6xl h-[90vh] flex flex-col md:flex-row glass-panel rounded-2xl overflow-hidden lightbox-content relative">
@@ -242,10 +350,10 @@
         <!-- Lightbox Image Viewer -->
         <div class="relative w-full md:w-2/3 lg:w-3/4 bg-black/40 flex items-center justify-center">
         <img id="lightbox-image" src="" class="max-w-full max-h-full object-contain">
-        <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/40 rounded-full hover:bg-black/60">
+        <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 rounded-full hover:bg-black/60 flex items-center justify-center">
             <span class="material-icons-outlined">arrow_back</span>
         </button>
-        <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/40 rounded-full hover:bg-black/60">
+        <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 rounded-full hover:bg-black/60 flex items-center justify-center">
             <span class="material-icons-outlined">arrow_forward</span>
         </button>
         <div id="lightbox-counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 glass-panel px-3 py-1 rounded-full text-sm font-mono"></div>
@@ -272,7 +380,7 @@
         </div>
 
         <!-- Close Button -->
-        <button id="lightbox-close" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80 z-40">
+        <button id="lightbox-close" class="absolute top-3 right-3 w-10 h-10 bg-black/50 rounded-full hover:bg-black/80 z-40 flex items-center justify-center">
         <span class="material-icons-outlined">close</span>
         </button>
     </div>
@@ -281,7 +389,7 @@
     <div id="submission-modal" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60">
         <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
             <form id="submission-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
-                <h2 class="text-2xl font-bold text-white">Submit Your Rice</h2>
+                <h2 class="text-2xl font-bold" style="color: var(--text-color);">Submit Your Rice</h2>
                 <div>
                 <label class="font-mono text-sm">Reddit Post</label>
                 <div class="flex items-center gap-2 mt-1">
@@ -347,7 +455,7 @@
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
             </form>
             <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col">
-                <p id="login-note" class="font-mono flex items-center p-2 mb-2 w-full" style="font-size: 0.75rem; color: #A0A0A0; border: 2px solid #5D5FEF; background-color: rgba(0,0,0,0.5); border-radius: 0.75rem; padding-left: 0.5rem;"><span class="material-icons-outlined" style="font-size: 0.75rem; color: #5D5FEF; margin-right: 1rem;">warning</span>If you log in and submit a rice, your name will show under the rice. Otherwise it will show "by admin".</p>
+                <p id="login-note" class="font-mono flex items-center p-2 mb-2 w-full" style="font-size: 0.75rem; color: #A0A0A0; border: 2px solid #5D5FEF; background-color: rgba(0,0,0,0.5); border-radius: 0.75rem; padding-left: 0.5rem;">                    <span class="material-icons-outlined" style="font-size: 0.75rem; color: var(--accent-color); margin-right: 1rem;">warning</span>If you log in and submit a rice, your name will show under the rice. Otherwise it will show "by admin".</p>
                 <div class="flex flex-col items-center justify-center flex-grow">
                     <p class="font-mono text-gray-400 mb-4 text-center">Live Preview</p>
                     <div class="rice-card group relative rounded-xl w-full max-w-xs overflow-hidden"><img src="https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png"><div class="absolute inset-0 bg-gradient-to-t from-black/80 p-4 flex flex-col justify-end"><h3 id="preview-author" class="text-xl font-bold">Your Rice</h3><p id="preview-by" class="text-xs font-mono text-white/70">by admin</p><p id="preview-details" class="font-mono text-sm text-white/70">Arch + Hyprland + Theme</p></div></div>
@@ -372,10 +480,68 @@
         <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
     </div>
 
+    <!-- Floating Theme Toggle Button -->
+    <button id="theme-toggle-btn" class="fixed bottom-20 right-4 z-40 w-12 h-12 glass-panel rounded-full hover:bg-white/10 transition-all hover:scale-110 shadow-lg flex items-center justify-center" title="Toggle Dark/Light Mode">
+        <span class="material-icons-outlined">dark_mode</span>
+    </button>
+
+    <!-- Footer -->
+  <footer id="footer" class="mt-8 px-4 py-6 glass-panel">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+
+        <!-- About Me Section -->
+        <div class="flex items-start gap-8 max-w-lg">
+            <img
+                src="https://avatars.githubusercontent.com/u/75439097?v=4"
+                alt="Avatar"
+                class="w-24 h-24 rounded-full border-2 flex-shrink-0"
+                style="border-color: var(--accent-color);"
+            >
+
+            <div>
+                <h3 class="text-base font-bold" style="color: var(--text-color)">
+                    About Me
+                </h3>
+                <p class="text-xs font-mono leading-relaxed mt-1" style="color: var(--muted-text)">
+                    I am a Cybersecurity professional and a passionate builder. I work on products that provide real value to people. I like to build systems that help people with no-cost.
+                </p>
+            </div>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 flex-shrink-0">
+
+            <!-- Ko-fi -->
+            <div id="kofi-button">
+                <script src="https://ko-fi.com/widgets/widget_2.js"></script>
+                <script>
+                    kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'mrxcrypt');
+                    kofiwidget2.draw();
+                </script>
+            </div>
+
+            <!-- GitHub -->
+            <a 
+                href="https://github.com/misterxcrypt/Linux-Rice-Catalogue" 
+                target="_blank"
+                class="px-3 py-2 rounded-lg font-medium glass-panel hover:bg-white/10 transition flex items-center gap-2"
+                style="color: var(--text-color);"
+            >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" class="flex-shrink-0">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                GitHub
+            </a>
+
+        </div>
+
+    </div>
+</footer>
+
     <!-- Logout Confirmation Modal -->
     <div id="logout-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
         <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Logout</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Logout</h2>
             <p class="text-gray-400 mb-6 font-mono text-center">Are you sure you want to logout?</p>
             <div class="flex gap-3">
                 <button id="logout-confirm" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Logout</button>
@@ -387,7 +553,7 @@
     <!-- Admin Login Failed Modal -->
     <div id="admin-login-failed-modal" class="fixed inset-0 z-60 hidden items-center justify-center bg-black/60">
         <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Login Failed</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Login Failed</h2>
             <p class="text-gray-400 mb-6 font-mono text-center">Invalid admin password. Please try again.</p>
             <div class="flex gap-3">
                 <button id="admin-login-failed-ok" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">OK</button>
@@ -398,7 +564,7 @@
     <!-- Rice Update Success Modal -->
     <div id="rice-update-success-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
         <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Success</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Success</h2>
             <p class="text-gray-400 mb-6 font-mono text-center">Rice updated successfully.</p>
             <div class="flex gap-3">
                 <button id="rice-update-success-ok" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">OK</button>
@@ -409,7 +575,7 @@
     <!-- Rice Update Failed Modal -->
     <div id="rice-update-failed-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
         <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Error</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Error</h2>
             <p class="text-gray-400 mb-6 font-mono text-center">Failed to update rice.</p>
             <div class="flex gap-3">
                 <button id="rice-update-failed-ok" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">OK</button>
@@ -420,7 +586,7 @@
     <!-- Leaderboard Modal -->
     <div id="leaderboard-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
         <div class="glass-panel rounded-2xl p-8 w-full max-w-md mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Leaderboard</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Leaderboard</h2>
             <div id="leaderboard-list" class="space-y-2 max-h-96 overflow-y-auto">
                 <!-- Leaderboard items will be populated here -->
             </div>
@@ -434,7 +600,7 @@
     <div id="edit-rice-modal" class="fixed inset-0 z-50 hidden place-items-center p-4 bg-black/60">
         <div class="submission-modal-content glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl flex flex-col md:flex-row overflow-hidden">
             <form id="edit-rice-form" class="w-full md:w-1/2 p-6 space-y-4 overflow-y-auto">
-                <h2 class="text-2xl font-bold text-white">Edit Rice</h2>
+                <h2 class="text-2xl font-bold" style="color: var(--text-color);">Edit Rice</h2>
                 <input type="hidden" id="edit-rice-id" />
                 <div>
                 <label class="font-mono text-sm">Reddit Post</label>
@@ -491,7 +657,7 @@
     <!-- Delete Rice Confirmation Modal -->
     <div id="delete-rice-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
         <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
-            <h2 class="text-2xl font-bold mb-4 text-white text-center">Delete Rice</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Delete Rice</h2>
             <p class="text-gray-400 mb-6 font-mono text-center">Are you sure you want to delete this rice? This action cannot be undone.</p>
             <div class="flex gap-3">
                 <button id="delete-rice-confirm" class="flex-1 p-3 rounded-lg font-bold text-white" style="background-color: var(--accent-color);">Delete</button>
@@ -505,12 +671,12 @@
     <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
       <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
         <div class="flex gap-4 mb-4 border-b border-white/20">
-          <button id="user-auth-tab" class="pb-2 text-white border-b-2 border-[var(--accent-color)] font-semibold">User</button>
-          <button id="admin-auth-tab" class="pb-2 text-gray-400 hover:text-white">Admin</button>
+          <button id="user-auth-tab" class="pb-2 border-b-2 border-[var(--accent-color)] font-semibold" style="color: var(--text-color);">User</button>
+          <button id="admin-auth-tab" class="pb-2 hover:opacity-80" style="color: var(--muted-text);">Admin</button>
         </div>
         <!-- User Login/Register Form -->
         <div id="user-auth-form" class="w-full">
-          <h2 class="text-2xl font-bold mb-4 text-white text-center">Welcome</h2>
+          <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Welcome</h2>
           <form id="user-login-form" class="w-full flex flex-col gap-3">
             <input type="text" id="user-email" placeholder="Email" required class="w-full p-3 rounded-lg glass-panel text-white" />
             <input type="password" id="user-password" placeholder="Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
@@ -527,13 +693,13 @@
         </div>
         <!-- Admin Login Form -->
         <div id="admin-auth-form" class="w-full hidden">
-          <h2 class="text-2xl font-bold mb-4 text-white text-center">Admin Login</h2>
+          <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Admin Login</h2>
           <form id="login-form" class="w-full flex flex-col gap-4">
             <input type="password" id="admin-password" placeholder="Admin Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
             <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Login</button>
           </form>
         </div>
-        <button id="login-close-btn" class="mt-4 text-gray-400 hover:text-white">Cancel</button>
+        <button id="login-close-btn" class="mt-4 hover:opacity-80" style="color: var(--muted-text);">Cancel</button>
       </div>
     </div>
 
@@ -910,7 +1076,7 @@
 
     <script>
         let ricesData = [];
-        const RICES_PER_PAGE = 12;
+        let RICES_PER_PAGE = 20;
         let currentPage = 1;
         let isLoading = false;
 
@@ -937,9 +1103,10 @@
             const el = {
                 gallery: document.getElementById('rice-gallery'),
                 filterPillsContainer: document.getElementById('filter-pills-container'),
+                activeFilters: document.getElementById('active-filters'),
                 filterTypeToggle: document.getElementById('filter-type-toggle'),
                 lightbox: document.getElementById('lightbox'),
-                lightboxContent: document.getElementById('lightbox').querySelector('.lightbox-content'),
+                lightboxContent: document.querySelector('.lightbox-content'),
                 colorThief: new ColorThief(),
                 submissionModal: document.getElementById('submission-modal'),
                 spaceTravelOverlay: document.getElementById('space-travel-overlay'),
@@ -957,8 +1124,8 @@
             
             let state = {
                 viewMode: 'masonry',
-                activeFilterType: 'wm', // 'wm' or 'distro'
-                activeFilterValue: 'All',
+                currentFilterType: 'wm', // 'wm', 'de', 'distro', 'theme' - for UI display
+                activeFilters: {}, // { wm: 'i3', de: 'GNOME', theme: 'Dracula', distro: 'Arch' }
                 currentLightboxRice: null,
                 currentImageIndex: 0,
             };
@@ -971,13 +1138,16 @@
                 const query = document.getElementById('search-input')?.value.toLowerCase() || "";
                 let dataToRender = ricesData;
 
-                if (state.activeFilterValue !== 'All') {
-                    if (state.activeFilterType === 'wm') {
-                        dataToRender = dataToRender.filter(r => r.environment?.type === 'WM' && r.environment?.name === state.activeFilterValue);
-                    } else if (state.activeFilterType === 'de') {
-                        dataToRender = dataToRender.filter(r => r.environment?.type === 'DE' && r.environment?.name === state.activeFilterValue);
-                    } else {
-                        dataToRender = dataToRender.filter(r => r[state.activeFilterType] === state.activeFilterValue);
+                // Apply all active filters
+                for (const [filterType, filterValue] of Object.entries(state.activeFilters)) {
+                    if (filterValue && filterValue !== 'All') {
+                        if (filterType === 'wm') {
+                            dataToRender = dataToRender.filter(r => r.environment?.type === 'WM' && r.environment?.name === filterValue);
+                        } else if (filterType === 'de') {
+                            dataToRender = dataToRender.filter(r => r.environment?.type === 'DE' && r.environment?.name === filterValue);
+                        } else {
+                            dataToRender = dataToRender.filter(r => r[filterType] === filterValue);
+                        }
                     }
                 }
 
@@ -997,22 +1167,24 @@
             };
 
             const render = () => {
+                renderActiveFilters();
                 renderFilters();
-                renderGallery(false); // Start fresh, not append
+                renderGallery(true); // Start fresh
             };
 
-            const renderGallery = (append = false) => {
+            const renderGallery = (resetPage = false) => {
                 const dataToRender = getFilteredRices();
                 const totalPages = Math.ceil(dataToRender.length / RICES_PER_PAGE);
 
-                if (!append) {
+                if (resetPage) {
                     currentPage = 1;
-                    el.gallery.innerHTML = '';
                 }
 
-                // Don't load more if already at end
-                if (currentPage > totalPages) return;
+                // Ensure currentPage is within bounds
+                if (currentPage > totalPages) currentPage = totalPages || 1;
+                if (currentPage < 1) currentPage = 1;
 
+                el.gallery.innerHTML = ''; // Always clear before rendering new page
                 el.gallery.className = `grid-${state.viewMode}`;
 
                 const start = (currentPage - 1) * RICES_PER_PAGE;
@@ -1025,22 +1197,65 @@
                 });
 
                 document.getElementById('rice-count').textContent = `Showing ${dataToRender.length} rices`;
+                document.getElementById('pagination-current').textContent = currentPage;
+                document.getElementById('pagination-total').textContent = totalPages || 1;
 
-                // Reset observer and set up for next page
-                if (observer) observer.disconnect();
-                observer = new IntersectionObserver(handleIntersection, { rootMargin: '100px' });
-                const lastCard = el.gallery.lastElementChild;
-                if (lastCard && currentPage < totalPages) {
-                    observer.observe(lastCard);
-                }
+                // Update pagination buttons
+                document.getElementById('pagination-prev').disabled = currentPage <= 1;
+                document.getElementById('pagination-next').disabled = currentPage >= totalPages;
             };
 
             document.getElementById('search-input').addEventListener('input', () => {
-                renderGallery(false); // Reset to first page on search
+                renderGallery(true); // Reset to first page on search
+            });
+
+            // Pagination controls
+            document.getElementById('page-size-select').addEventListener('change', (e) => {
+                RICES_PER_PAGE = parseInt(e.target.value);
+                renderGallery(false);
+            });
+            document.getElementById('pagination-prev').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderGallery(false);
+                }
+            });
+            document.getElementById('pagination-next').addEventListener('click', () => {
+                const dataToRender = getFilteredRices();
+                const totalPages = Math.ceil(dataToRender.length / RICES_PER_PAGE);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderGallery(false);
+                }
             });
             
+            const renderActiveFilters = () => {
+                const activeEntries = Object.entries(state.activeFilters).filter(([_, value]) => value);
+                if (activeEntries.length > 0) {
+                    el.activeFilters.classList.remove('hidden');
+                    el.activeFilters.innerHTML = '<div class="font-mono text-sm" style="color: var(--muted-text)">Active Filters:</div>' +
+                        activeEntries.map(([type, value]) =>
+                            `<button class="px-3 py-1 rounded-lg text-sm bg-[var(--accent-color)] text-white flex items-center gap-1" data-remove-filter="${type}">
+                                ${type.toUpperCase()}: ${value}
+                                <span class="material-icons-outlined text-xs">close</span>
+                            </button>`
+                        ).join('');
+
+                    el.activeFilters.querySelectorAll('button').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const type = btn.dataset.removeFilter;
+                            delete state.activeFilters[type];
+                            render();
+                        });
+                    });
+                } else {
+                    el.activeFilters.classList.add('hidden');
+                    el.activeFilters.innerHTML = '';
+                }
+            };
+
             const renderFilters = () => {
-                const filterKey = state.activeFilterType;
+                const filterKey = state.currentFilterType;
                 let uniqueValues;
                 if (filterKey === 'wm') {
                     uniqueValues = ['All', ...new Set(
@@ -1066,12 +1281,19 @@
                 }
 
                 el.filterPillsContainer.innerHTML = uniqueValues.map(value =>
-                    `<button data-filter-value="${value}" class="control-btn px-3 py-1.5 rounded-lg text-sm ${value === state.activeFilterValue ? 'active' : ''}">${value}</button>`
+                    `<button data-filter-value="${value}" class="control-btn px-3 py-1.5 rounded-lg text-sm ${state.activeFilters[filterKey] === value ? 'active' : ''}">${value}</button>`
                 ).join('');
 
                 el.filterPillsContainer.querySelectorAll('button').forEach(btn => {
                     btn.addEventListener('click', () => {
-                        state.activeFilterValue = btn.dataset.filterValue;
+                        const value = btn.dataset.filterValue;
+                        if (value === 'All') {
+                            delete state.activeFilters[filterKey];
+                        } else if (state.activeFilters[filterKey] === value) {
+                            delete state.activeFilters[filterKey];
+                        } else {
+                            state.activeFilters[filterKey] = value;
+                        }
                         render();
                     });
                 });
@@ -1172,8 +1394,7 @@
                 if (btn && !btn.classList.contains('active')) {
                     el.filterTypeToggle.querySelector('.active').classList.remove('active');
                     btn.classList.add('active');
-                    state.activeFilterType = btn.dataset.filterType;
-                    state.activeFilterValue = 'All'; // Reset filter value when type changes
+                    state.currentFilterType = btn.dataset.filterType;
                     render();
                 }
             });
@@ -2073,9 +2294,14 @@
             // Apply light/dark mode
             applyThemeMode(isLight);
 
-            themeToggleBtn.addEventListener('click', () => {
+            themeToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const savedScroll = window.scrollY;
                 const isLight = document.documentElement.classList.contains('light-mode');
                 applyThemeMode(!isLight);
+                // Restore scroll position after theme change
+                setTimeout(() => window.scrollTo(0, savedScroll), 100);
             });
 
             // INITIALIZE

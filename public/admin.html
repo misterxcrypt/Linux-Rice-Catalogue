@@ -60,6 +60,16 @@
         #mood-switcher-panel { transform: translateX(100%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; min-width: 180px; }
         #mood-switcher-panel.open { transform: translateX(0); opacity: 1; }
         #mood-switcher-btn { transition: background-color 1s ease; }
+
+        input::placeholder {
+            color: var(--placeholder-color);
+        }
+
+        /* Ko-fi button font consistency */
+        #kofi-button button {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 14px !important;
+        }
     </style>
 </head>
 <body class="min-h-screen text-gray-300">
@@ -71,9 +81,6 @@
             </div>
           
             <div class="flex items-center gap-3">
-              <button id="theme-toggle-btn" class="glass-panel p-2 rounded-lg hover:bg-white/10" title="Toggle Dark/Light Mode">
-                <span class="material-icons-outlined">dark_mode</span>
-              </button>
               <a href="/" class="glass-panel px-4 py-2 rounded-lg font-semibold hover:bg-white/10" style="color: var(--text-color)">
                 Back to Gallery
               </a>
@@ -469,14 +476,24 @@
                 </div>
                 ${(rice.images || []).length > 0 ? `
                 <div class="flex gap-2 mt-3 overflow-hidden">
-                    ${(rice.images || []).slice(0, 3).map(image => `
-                        ${new OptimizedImage({
-                            src: image.url,
+                    ${(rice.images || []).slice(0, 3).map(image => {
+                        // Handle array format ["filename.jpg", "fileId"] or object {url: "..."}
+                        let filename = '';
+                        if (Array.isArray(image)) {
+                            filename = image[0];
+                        } else if (image && typeof image === 'object') {
+                            filename = image.url;
+                        } else if (typeof image === 'string') {
+                            filename = image;
+                        }
+                        const imgUrl = filename ? `https://ik.imagekit.io/y1n9qg16a/rices/${filename}` : '';
+                        return imgUrl ? new OptimizedImage({
+                            src: imgUrl,
                             alt: 'Rice thumbnail',
                             className: 'w-24 h-14 object-cover rounded-md border border-white/10 hover:border-[var(--accent-color)] transition',
                             variant: 'thumbnail'
-                        }).toHTML()}
-                    `).join('')}
+                        }).toHTML() : '';
+                    }).join('')}
                     ${(rice.images || []).length > 3 ? `
                         <div class="w-24 h-14 rounded-md border border-white/10 bg-white/5 flex items-center justify-center text-xs text-gray-400">
                             +${(rice.images || []).length - 3}
@@ -773,17 +790,30 @@
                             }
 
                             const container = div.querySelector('.images-container');
-                            container.innerHTML = currentImages.map((image, index) => `
+                            container.innerHTML = currentImages.map((image, index) => {
+                                let filename = '';
+                                let fileId = '';
+                                if (Array.isArray(image)) {
+                                    filename = image[0];
+                                    fileId = image[1] || '';
+                                } else if (image && typeof image === 'object') {
+                                    filename = image.url;
+                                    fileId = image.fileId || '';
+                                } else if (typeof image === 'string') {
+                                    filename = image;
+                                }
+                                const imgUrl = filename ? `https://ik.imagekit.io/y1n9qg16a/rices/${filename}` : '';
+                                return imgUrl ? `
                                 <div class="relative">
                                     ${new OptimizedImage({
-                                        src: image.url,
+                                        src: imgUrl,
                                         alt: 'Rice image',
                                         className: 'w-20 h-12 object-cover rounded-md',
                                         variant: 'thumbnail'
                                     }).toHTML()}
-                                    <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>
-                                </div>
-                            `).join('');
+                                    <button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${fileId}">×</button>
+                                </div>` : '';
+                            }).join('');
 
                             // Re-attach delete handlers
                             div.querySelectorAll('.delete-image-btn').forEach(btn => {
@@ -859,17 +889,30 @@
             // Image deletion handlers
             function updateImagesContainer(images) {
                 const container = div.querySelector('.images-container');
-                container.innerHTML = images.map((image, index) => `
+                container.innerHTML = images.map((image, index) => {
+                    let filename = '';
+                    let fileId = '';
+                    if (Array.isArray(image)) {
+                        filename = image[0];
+                        fileId = image[1] || '';
+                    } else if (image && typeof image === 'object') {
+                        filename = image.url;
+                        fileId = image.fileId || '';
+                    } else if (typeof image === 'string') {
+                        filename = image;
+                    }
+                    const imgUrl = filename ? `https://ik.imagekit.io/y1n9qg16a/rices/${filename}` : '';
+                    return imgUrl ? `
                     <div class="relative">
                         ${new OptimizedImage({
-                            src: image.url,
+                            src: imgUrl,
                             alt: 'Rice image',
                             className: 'w-20 h-12 object-cover rounded-md',
                             variant: 'thumbnail'
                         }).toHTML()}
-                        ${image.fileId ? `<button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${image.fileId}">×</button>` : ''}
-                    </div>
-                `).join('');
+                        ${fileId ? `<button class="delete-image-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${fileId}">×</button>` : ''}
+                    </div>` : '';
+                }).join('');
                 // Re-attach delete handlers
                 div.querySelectorAll('.delete-image-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
@@ -1373,11 +1416,22 @@
             // Apply light/dark mode
             applyThemeMode(isLight);
 
-            themeToggleBtn.addEventListener('click', () => {
+            themeToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const savedScroll = window.scrollY;
                 const isLight = document.documentElement.classList.contains('light-mode');
                 applyThemeMode(!isLight);
+                // Restore scroll position after theme change
+                setTimeout(() => window.scrollTo(0, savedScroll), 100);
             });
         })();
     </script>
+
+    <!-- Floating Theme Toggle Button -->
+    <button id="theme-toggle-btn" class="fixed bottom-20 right-4 z-40 w-12 h-12 glass-panel rounded-full hover:bg-white/10 transition-all hover:scale-110 shadow-lg flex items-center justify-center" title="Toggle Dark/Light Mode">
+        <span class="material-icons-outlined">dark_mode</span>
+    </button>
+
 </body>
 </html> 

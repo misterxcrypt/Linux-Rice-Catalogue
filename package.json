@@ -9,6 +9,7 @@
     "build": "echo 'No build step required'"
   },
   "dependencies": {
+    "@getbrevo/brevo": "^2.2.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.7.0",
     "dotenv": "^17.2.3",

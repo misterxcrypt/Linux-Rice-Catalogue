@@ -1,5 +1,5 @@
 // /api/admin.js
-const { login, register, adminLogin, getPendingRices, updateStatus, deleteRice } = require('../utils/adminController');
+const { login, register, adminLogin, getPendingRices, updateStatus, deleteRice, getUserRequests, updateRequestStatus, deleteRequest, sendResponse, verifyAdmin } = require('../utils/adminController');
 
 module.exports = async (req, res) => {
   // CORS and method checks (standard for all APIs)
@@ -26,6 +26,16 @@ module.exports = async (req, res) => {
       return await updateStatus(req, res);
     } else if (req.method === 'POST' && action === 'deleteRice') {
       return await deleteRice(req, res);
+    } else if (req.method === 'GET' && action === 'getUserRequests') {
+      return await getUserRequests(req, res);
+    } else if (req.method === 'POST' && action === 'updateRequestStatus') {
+      return await updateRequestStatus(req, res);
+    } else if (req.method === 'POST' && action === 'deleteRequest') {
+      return await deleteRequest(req, res);
+    } else if (req.method === 'POST' && action === 'sendResponse') {
+      return await sendResponse(req, res);
+    } else if (req.method === 'GET' && action === 'verifyAdmin') {
+      return await verifyAdmin(req, res);
     } else {
       return res.status(404).json({ error: 'Action not found' });
     }

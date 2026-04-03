@@ -1,5 +1,5 @@
 // /api/system.js
-const { getKeywordsData, getLeaderboard, getStats, scrapeReddit, updateKeywords } = require('../utils/systemController');
+const { getKeywordsData, getLeaderboard, getStats, scrapeReddit, updateKeywords, submitBugReport } = require('../utils/systemController');
 
 module.exports = async (req, res) => {
   // CORS and method checks (standard for all APIs)
@@ -24,6 +24,8 @@ module.exports = async (req, res) => {
       return await getStats(req, res);
     } else if (req.method === 'POST' && action === 'scrapeReddit') {
       return await scrapeReddit(req, res);
+    } else if (req.method === 'POST' && action === 'submitBugReport') {
+      return await submitBugReport(req, res);
     } else {
       return res.status(404).json({ error: 'Action not found' });
     }

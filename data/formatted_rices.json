@@ -20,7 +20,8 @@
     "source_key": "github:0xtux/nixos-config",
     "images": [
       "62d42a30892f4a3ba66149471b920db7.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "alljavi",
@@ -40,7 +41,8 @@
       "8b452d960c7f4ba793658ea29e82fd6c.png",
       "6f98445374054283a17118b2b3113b99.png",
       "71f2409eff59464a9528e0c8b6170d08.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AlphaTechnolog",
@@ -56,7 +58,8 @@
     "source_key": "github:alphatechnolog/dotfiles/tree/awesomewm",
     "images": [
       "09b31dc1c8f94dc4b35c76dc31d9178e.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Amitabha37377",
@@ -76,7 +79,8 @@
       "6d46103c619c4d9eaf348088f0d0c1a3.png",
       "4def377155e34d08989fb3a0dc355ed9.png",
       "8f5f7f4cef0148b2b43401a5a2f39d78.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "chadcat7",
@@ -92,7 +96,8 @@
     "source_key": "github:chadcat7/crystal",
     "images": [
       "aff0a1b6a34241b0a7fe709456a9bc8f.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "CmrCrabs",
@@ -108,7 +113,8 @@
     "source_key": "github:cmrcrabs/dotfiles",
     "images": [
       "4f3581a3b20a42e1adf7f35bd99bc0c8.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "d-solis",
@@ -124,7 +130,8 @@
     "source_key": "github:d-solis/dotfiles/tree/awesome",
     "images": [
       "dda6bbf1081b4912b61bc718dcb33318.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "elenapan",
@@ -140,7 +147,8 @@
     "source_key": "github:elenapan/dotfiles",
     "images": [
       "5397b8637fd94f4eaa00fb261f0f6d0b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "frapdotbm",
@@ -156,7 +164,8 @@
     "source_key": "github:frapdotbmp/dotfiles",
     "images": [
       "0707cf383afa41a380b559f5da3b9146.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "gabrielfrimodig",
@@ -172,7 +181,8 @@
     "source_key": "github:gabrielfrimodig/dotfiles",
     "images": [
       "4203714729a4472abac545e181c11438.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "HoNamDuong",
@@ -188,7 +198,8 @@
     "source_key": "github:honamduong/.dotfiles",
     "images": [
       "db82e1a5c2524505b9a71dc908f60b79.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "madhur",
@@ -208,7 +219,8 @@
       "731951e860214dcfb3ea8cb837b137fc.png",
       "c9f6af3f5d9e4c45a8a41b99088e31c7.png",
       "1963d85852344dec9e6d805b06d6e2f2.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Manas140",
@@ -224,7 +236,8 @@
     "source_key": "github:manas140/dotfiles",
     "images": [
       "a5d3028496394a17bce94ebddb6264ce.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "MeledoJames",
@@ -240,7 +253,8 @@
     "source_key": "github:meledojames/awesome-setup",
     "images": [
       "793709f4dab544a696d01659ab5e6efc.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "pablonoya",
@@ -256,7 +270,8 @@
     "source_key": "github:pablonoya/awesomewm-configuration",
     "images": [
       "4b4a1d990c0642be997969719b82cc63.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "PassiveLemon",
@@ -274,7 +289,8 @@
     "images": [
       "6a56912cb8f84aeeab7f7ec3ff655e5d.png",
       "7940c169c71742a6ac411dbd72da19c6.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "rifsxd",
@@ -290,7 +306,8 @@
     "source_key": "github:rifsxd/oh-my-awesomewm-dots",
     "images": [
       "6b918deebcf84be29a919bd16c598731.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "rklyz",
@@ -304,7 +321,8 @@
       "name": "AwesomeWM"
     },
     "source_key": "github:rklyz/myrice",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "rxyhn",
@@ -320,7 +338,8 @@
     "source_key": "github:rxyhn/yoru",
     "images": [
       "d44bcb12f5da48f58cafab8d996536a4.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "saimoomedits",
@@ -336,7 +355,8 @@
     "source_key": "github:saimoomedits/dotfiles",
     "images": [
       "3116e4cc58094aeb8a9804b67ee5242f.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Savecoders",
@@ -352,7 +372,8 @@
     "source_key": "github:savecoders/dotfiles",
     "images": [
       "ce14dc21d04a4dd69dcb542d78e71b55.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Spaxly",
@@ -368,7 +389,8 @@
     "source_key": "github:spaxly/espresso",
     "images": [
       "3e1b624f7b0c43ea8c3c04b816d5344b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Stardust-kyun",
@@ -382,7 +404,8 @@
       "name": "AwesomeWM"
     },
     "source_key": "github:stardust-kyun/dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "TorchedSammy",
@@ -397,7 +420,8 @@
       "name": "AwesomeWM"
     },
     "source_key": "github:torchedsammy/dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "vulekhanh",
@@ -413,7 +437,8 @@
     "source_key": "github:vulekhanh/dotfiles",
     "images": [
       "b7c307d9636c4afda109d1ba3fc8332d.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "adilhyz",
@@ -429,7 +454,8 @@
     "source_key": "github:adilhyz/dotfiles-v1",
     "images": [
       "14dd2deb8cfa46ff8346e253a4765085.gif"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AlphaTechnolog",
@@ -445,7 +471,8 @@
     "source_key": "github:alphatechnolog/dotfiles/tree/bspwm",
     "images": [
       "70ac209dd77c4cb89d05fb87db26f47a.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Erennedirlo",
@@ -461,7 +488,8 @@
     "source_key": "github:erennedirlo/gruvbox-dotfiles",
     "images": [
       "882e86e9480d48b587005f8e66e57874.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "gh0stzk",
@@ -498,7 +526,8 @@
       "099b9c00b64342ef8ada91fca6a66ada.png",
       "e7b9888cade44692956d3c8c619626e4.png",
       "cc8d3de0ed664acdb2cd65751a7334a1.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Gwynsav",
@@ -514,7 +543,8 @@
     "source_key": "github:gwynsav/messydots",
     "images": [
       "f0e34a02aaa142ac9a1f7b6be8a75c44.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "hlissner",
@@ -530,7 +560,8 @@
     "source_key": "github:hlissner/dotfiles",
     "images": [
       "8a4ee8a6338f4758980652d25f3fa003.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "JakeGinesin",
@@ -546,7 +577,8 @@
       "name": "bspwm"
     },
     "source_key": "github:jakeginesin/dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "justleoo",
@@ -560,7 +592,8 @@
       "name": "bspwm"
     },
     "source_key": "github:justleoo/dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "kabinspace",
@@ -576,7 +609,8 @@
     "source_key": "github:kabinspace/dotfiles",
     "images": [
       "bc3ece5a6aa9406a856594dbfd85cdf0.jpg"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Narmis-E",
@@ -592,7 +626,8 @@
     "source_key": "github:narmis-e/bspwm-catppuccin",
     "images": [
       "3302a2a9fb7c43e3b1c9a05aa8fd12b2.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "onlyvip",
@@ -610,7 +645,8 @@
     "images": [
       "154e88fdb0be49ca8e7dbccdf1e5f288.png",
       "584c93d5044d48218347756afdf228b0.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "probe2k",
@@ -626,7 +662,8 @@
     "source_key": "github:probe2k/bspwm_rice",
     "images": [
       "b82381b5e0e747b5ac6df8b64ba854bf.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "rklyz",
@@ -642,7 +679,8 @@
     "source_key": "github:rklyz/.files",
     "images": [
       "67f629695ceb4be087c6b49296945006.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Sophed",
@@ -660,7 +698,8 @@
     "images": [
       "543284da59a6439ea99cad25153784fe.png",
       "5f6d2e21c6874d1b98bb2c2a7de50d5a.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "sudoharun",
@@ -680,7 +719,8 @@
       "7ed93a4818fe46e5ac0c220db0228c60.png",
       "5fa0d534d18f4ea59e8b903f4b22b78a.png",
       "708d683b55f6467fadaaa0915ac51d19.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "valb-mig",
@@ -696,7 +736,8 @@
     "source_key": "github:valb-mig/.dotfiles",
     "images": [
       "97d8d1e87d0445b99fbee7a955bcfe93.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "XADE",
@@ -712,7 +753,8 @@
     "source_key": "github:imxade/dotbin",
     "images": [
       "155ed90a9eb64a36a455b854de33752b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Weirdchupacabra",
@@ -728,7 +770,8 @@
     "source_key": "github:weirdchupacabra/void-dotfiles",
     "images": [
       "989b2fb878ee418ebc10ab9056481a66.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "zoddDev",
@@ -762,7 +805,8 @@
       "421bc38dc0224e8180d26683ebf4aada.png",
       "d40a41afd45943d9a4fe3933a4e6234a.png",
       "7c4562ef9709422ca4faf686f12a339b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "SpreadiesInSpace",
@@ -778,7 +822,8 @@
     "source_key": "github:spreadiesinspace/cinnamon-dotfiles/tree/main",
     "images": [
       "8a7852d50464409393fb40b28943643f.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AlphaTechnolog",
@@ -794,7 +839,8 @@
     "source_key": "github:alphatechnolog/dotfiles/tree/dkwm",
     "images": [
       "411840c2364a402e99bb4701ec648041.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AlphaTechnolog",
@@ -810,7 +856,8 @@
     "source_key": "github:alphatechnolog/dotfiles/tree/dwm",
     "images": [
       "1293ad0bdbbb4b12807fa8122c06f864.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "juacq97",
@@ -826,7 +873,8 @@
     "source_key": "github:juacq97/dotfiles",
     "images": [
       "e908b44373b44bb1b1653c6e4bff3b65.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "nxb1t",
@@ -842,7 +890,8 @@
     "source_key": "github:nxb1t/dwm-dots",
     "images": [
       "7d0d72d3c9424b2ebaef89231195ef86.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "raihanadf",
@@ -858,7 +907,8 @@
     "source_key": "github:raihanadf/dotfiles",
     "images": [
       "cbff12b9c61f42ada2739ad345796b90.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "seeingangelz",
@@ -874,7 +924,8 @@
     "source_key": "github:seeingangelz/dotfiles",
     "images": [
       "008a487ff79e450b97b13d1823973e51.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "1amSimp1e",
@@ -894,7 +945,8 @@
       "780c4d0fb49143d2bf28809dffe8291a.png",
       "e2f361f53dca4e2980ddc11632fbd1e6.png",
       "e368b89ab11f4106a6f32910847c5877.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AviVarma",
@@ -910,7 +962,8 @@
     "source_key": "github:avivarma/dotfiles",
     "images": [
       "9ee8c365f0594db98c40a7e7f0e1477f.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Comiclyy",
@@ -926,7 +979,8 @@
     "source_key": "github:comiclyy/dotfiles/tree/dotfiles-gnome",
     "images": [
       "75ec90f04a944195b0d25511e11b32cc.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "GabrielTenma",
@@ -944,7 +998,8 @@
     "images": [
       "8040cf54dbb841a19fe68ff409a874a5.png",
       "abcf4f041789476a82247b4086ee8ad0.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "NeuronSooup",
@@ -958,7 +1013,8 @@
       "name": "Gnome"
     },
     "source_key": "github:neuronsooup/gnome-topbar-le-dots",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "slashedzer0",
@@ -974,7 +1030,8 @@
       "name": "Gnome"
     },
     "source_key": "github:slashedzer0/nobara-dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "nuxshed",
@@ -990,7 +1047,8 @@
     "source_key": "github:nuxshed/dotfiles",
     "images": [
       "eaa3fab09ab04e3ab575f3e9d57e520b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "scourii",
@@ -1010,7 +1068,8 @@
       "bc1b50a5d3494bbdb17795ebdf982586.png",
       "dce9de6238a34173a5764735606153bd.png",
       "c7c90a73635c4dc29271e496eaae3c3e.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "ad1822",
@@ -1034,7 +1093,8 @@
       "d9091f9f02d749ac80d091d416e1ff39.png",
       "9bcbb1cba6ee484cb96942cd34bf2f27.png",
       "202022b3f78a4c9abb1fc0e97ee46960.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "1amSimp1e",
@@ -1052,7 +1112,8 @@
     "images": [
       "dce7941d320d40e896ee4e99cfe77768.png",
       "f2f14073199d4a849d3a191f4941d580.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AdiKsOnDev",
@@ -1074,7 +1135,8 @@
       "db798cc987a34355a3bcf36293fcc1b8.png",
       "00ea2f5b760d484fbe3826493533201f.png",
       "1092d858a9094bd99720e9f471c22190.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "cafreo",
@@ -1090,7 +1152,8 @@
     "source_key": "github:cafreo/hyprland-intergalactic",
     "images": [
       "6fec389d33bd4e5f9d5703225b3679b2.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "command-z-z",
@@ -1106,7 +1169,8 @@
     "source_key": "github:command-z-z/arch-dotfiles",
     "images": [
       "8e805a2ca67244b78d826f36ce882b2a.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "conrad-mo",
@@ -1122,7 +1186,8 @@
     "source_key": "github:conrad-mo/hyprland-dot",
     "images": [
       "8c4cef76761348519f9712cf53fa0d77.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "dankdezpair",
@@ -1140,7 +1205,8 @@
     "images": [
       "ec87765b07fe4976a36025602b3f4caf.png",
       "aa93b843de6b414aaafde1e1a8f7ce14.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "debuggyo",
@@ -1152,7 +1218,8 @@
       "name": "Hyprland"
     },
     "source_key": "github:debuggyo/dots",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "dragoshr1234",
@@ -1168,7 +1235,8 @@
     "source_key": "github:dragoshr1234/hyprland-rotaru",
     "images": [
       "6dea8afb4ad94b8b8dac6737eb8a75d0.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "end-4",
@@ -1188,7 +1256,8 @@
       "d9c03022cbac4dae856b1863345246ef.png",
       "615cbfdbc37b42648552297fdce41f9d.png",
       "b4557a46393a450392695bb63597855c.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "HeinzDev",
@@ -1206,7 +1275,8 @@
     "images": [
       "736a22bf7cf44b3c80bad5d5d77438be.png",
       "10607e758f5b4e4881aa6e4b6264c01c.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "justinlime",
@@ -1226,7 +1296,8 @@
       "ded4a60f942e40b39638fb8767fcc0b6.png",
       "86ed266fd894420c9a9df68d5ec56e88.png",
       "93ad3eb12c7342bd98a21211d8b9f5f7.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Knightfall01",
@@ -1254,7 +1325,8 @@
       "c75f927cac0341478ddc073782db04df.png",
       "f3562a8d8bb4452a82a90ecfc129a122.png",
       "ca5d3ab4ec7246fa92b5290f58e084b2.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "MathisP75",
@@ -1270,7 +1342,8 @@
     "source_key": "github:mathisp75/summer-day-and-night",
     "images": [
       "c27c4d8891b24c41bff1937eb30c9263.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "MaxMur",
@@ -1288,7 +1361,8 @@
     "images": [
       "d56b18e7847940deaff2f238798f7e5f.png",
       "cea66ec5159846979f78815a4bc95324.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "maxtaran2010",
@@ -1304,7 +1378,8 @@
     "source_key": "github:maxtaran2010/hyprland-rice",
     "images": [
       "529fb51ba5a94c98ad48982411d7eebd.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Narmis-E",
@@ -1324,7 +1399,8 @@
       "479bc9f3d34c41699cf48fda8c3be2b7.png",
       "e6093a8927e04eeda4739187974c7a51.png",
       "b260131b3fa646538d4e617dc2326bc1.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "ozwaldorf",
@@ -1340,7 +1416,8 @@
     "source_key": "github:ozwaldorf/dotfiles",
     "images": [
       "091d2350a09346b080116473bb9c1f01.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "prasanthrangan",
@@ -1370,7 +1447,8 @@
       "b636b351a40c4492b30e03c991a0d8f2.png",
       "6f7c4b25c20646d0bb769495cfd129dd.png",
       "d58e3cea112a485f99cbbf06945398e3.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "qxb3",
@@ -1410,7 +1488,8 @@
       "c5089ab55dc44b4180ac77de6c4e778d.png",
       "dd2da61f3ebf4498a025f5913c95a4df.png",
       "e18a026ed2864c8f86c7ed969bb06c1a.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "shub39",
@@ -1432,7 +1511,8 @@
       "01578b7e9c6a4ab08c0424cd1efca4a0.png",
       "e169a3ac79db4a10b83e1428deea9b4a.png",
       "af9b3652f3ba4c628ddc1c802a8a2553.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Spagett1",
@@ -1448,7 +1528,8 @@
     "source_key": "github:spagett1/dotfiles",
     "images": [
       "85b59197b826426e99dce4d68757751c.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Stetsed",
@@ -1464,7 +1545,8 @@
     "source_key": "github:stetsed/.dotfiles",
     "images": [
       "c64e3b431f7a4b049a85d8676f3de562.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Yorubae",
@@ -1480,7 +1562,8 @@
     "source_key": "github:yorubae/wayland-dotfiles",
     "images": [
       "179cb0921a9742f7b4c5b55cdda09521.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Lonewolf4713",
@@ -1497,7 +1580,8 @@
       "name": "Hyprland"
     },
     "source_key": "github:lonewolf4713/aeronix-dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "Lonewolf4713",
@@ -1514,7 +1598,8 @@
       "name": "Hyprland"
     },
     "source_key": "github:lonewolf4713/seraphic.dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "Lonewolf4713",
@@ -1530,7 +1615,8 @@
       "name": "Hyprland"
     },
     "source_key": "github:lonewolf4713/blue-monday.dots",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "Lonewolf4713",
@@ -1546,7 +1632,8 @@
       "name": "Hyprland"
     },
     "source_key": "github:lonewolf4713/auspicious-dots",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "b1337xyz",
@@ -1562,7 +1649,8 @@
     "source_key": "github:b1337xyz/config/tree/xp",
     "images": [
       "41f7edf224fd445795480cb38fb1cfa8.jpg"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "BIBJAW",
@@ -1578,7 +1666,8 @@
     "source_key": "github:bibjaw/final_rice",
     "images": [
       "8d565d0ef38c470f9ffeb547f24029ae.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "bibjaw99",
@@ -1596,7 +1685,8 @@
       "name": "i3wm"
     },
     "source_key": "github:bibjaw99/workstation",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "Blxckmage",
@@ -1610,7 +1700,8 @@
       "name": "i3wm"
     },
     "source_key": "github:blxckmage/dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "bryant-the-coder",
@@ -1626,7 +1717,8 @@
     "source_key": "github:bryant-the-coder/dotfiles",
     "images": [
       "d2d39f7608b9419897bbec6c6119122f.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "fathulfahmy",
@@ -1642,7 +1734,8 @@
     "source_key": "github:fathulfahmy/dotfiles-linux",
     "images": [
       "e08bae7786bb46029f4010fb4e6ef710.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "sommaa",
@@ -1658,7 +1751,8 @@
     "source_key": "github:sommaa/mantis",
     "images": [
       "cf653c0c60a34c7f92a9ce6fbd9a3774.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "SunoBB",
@@ -1674,7 +1768,8 @@
     "source_key": "github:sunobb/dot",
     "images": [
       "b4fca3aca2a64f5f8877b7c4e86c97ad.jpg"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "TKK13909",
@@ -1690,7 +1785,8 @@
     "source_key": "github:tkk13909/dotfiles",
     "images": [
       "f5d8ef7c02784011a393ebea4f7c05e1.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Vallen217",
@@ -1710,7 +1806,8 @@
       "c8e44017d1b04a5a89b1419db118a8c2.png",
       "8770b92bd9c642c3964c2d32af716328.png",
       "d5cdce005af8470a82f349560113e66e.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "zemmsoares",
@@ -1726,7 +1823,8 @@
     "source_key": "github:zemmsoares/.dotfiles",
     "images": [
       "623c1f604d044f2bb95eca82cc097ac1.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "ComplexPlatform",
@@ -1752,7 +1850,8 @@
       "90f971ce0f414b19bf35b817516e17d3.png",
       "a30078bd5dd747b49031176e54626649.png",
       "22acf745b676468d97cc9724e3b753be.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "almqv",
@@ -1768,7 +1867,8 @@
     "source_key": "github:almqv/dotfiles",
     "images": [
       "2710709fb7224015aa47bad7894c76b9.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "TheWisker",
@@ -1784,7 +1884,8 @@
     "source_key": "github:thewisker/shikai",
     "images": [
       "b9f7f1adcc854fcb955401203a8dda60.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "AlphaTechnolog",
@@ -1800,7 +1901,8 @@
     "source_key": "github:alphatechnolog/dotfiles/tree/openbox",
     "images": [
       "b27f833cf62e4339bf40ade6ae62879b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Narmis-E",
@@ -1816,7 +1918,8 @@
     "source_key": "github:narmis-e/openbox-everforest",
     "images": [
       "cdad52202e194e24959ed6349c58732e.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "owl4ce",
@@ -1832,7 +1935,8 @@
     "source_key": "github:owl4ce/dotfiles/tree/ng",
     "images": [
       "d988d8125e7e4a89993fe94030a4e2c4.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Barbaross93",
@@ -1850,7 +1954,8 @@
     "images": [
       "11556f8e9e774babbde7b63be88441d2.png",
       "9289adc174be41f2ab7755bf0c7121da.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Darkkal44",
@@ -1866,7 +1971,8 @@
     "source_key": "github:darkkal44/cozytile",
     "images": [
       "e197c441d1a446948f919a4139ace515.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Fluffy-Bean",
@@ -1882,7 +1988,8 @@
     "source_key": "github:fluffy-bean/dots",
     "images": [
       "2c83275c19e147e0a82763bd1b35fb4f.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "gibranlp",
@@ -1902,7 +2009,8 @@
       "966b136f13784b919d6abc685d3df10a.png",
       "4bfb3cf521724adf90b8435d79bad93e.png",
       "97e98c8e179b4290a347b9f685bdd745.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Hamza12700",
@@ -1916,7 +2024,8 @@
       "name": "Qtile"
     },
     "source_key": "github:hamza12700/dotfiles",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "shayanaqvi",
@@ -1932,7 +2041,8 @@
     "source_key": "github:shayanaqvi/dotfilets",
     "images": [
       "adb16002a9d04bc3a268f3982e78b951.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "theCode-Breaker",
@@ -1950,7 +2060,8 @@
     "images": [
       "526784c0f19443678eb6c04570d697f3.png",
       "8d374179a3874582a309b72737a22b94.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "eoli3n",
@@ -1966,7 +2077,8 @@
     "source_key": "github:eoli3n/dotfiles",
     "images": [
       "8993fc4a5d414aa48bc23669c266cf47.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "hifinerd",
@@ -1982,7 +2094,8 @@
     "source_key": "github:hifinerd/lugia-sway-dots",
     "images": [
       "7d09ae9a51bb46e8b41836c1c8bf0a6b.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "RicArch97",
@@ -1998,7 +2111,8 @@
     "source_key": "github:ricarch97/nixos-config",
     "images": [
       "357330a53d0042e3bec64a26ed0669ee.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "viperML",
@@ -2014,7 +2128,8 @@
     "source_key": "github:viperml/dotfiles",
     "images": [
       "f5b6497752f843b8a1aeff56fc8adb6a.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Lonewolf4713",
@@ -2030,7 +2145,8 @@
       "name": "Sway"
     },
     "source_key": "github:lonewolf4713/new-wave",
-    "images": []
+    "images": [],
+    "date": "04-04-2026"
   },
   {
     "author": "fathulfahmy",
@@ -2046,7 +2162,8 @@
     "source_key": "github:fathulfahmy/dotfiles-linux",
     "images": [
       "93be1a318039431bbbe828d9e116290a.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "Icy-Thought",
@@ -2064,7 +2181,8 @@
     "images": [
       "39fecacaa10940c0ab5cfc23394bfcc3.png",
       "493651875cdb4feab9296570db89eb4d.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "command-z-z",
@@ -2082,7 +2200,8 @@
     "images": [
       "e7ff46437eab4610aa7760652217ebc1.png",
       "6655f55a3dbe4e0995996bb08651e4f8.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "FelixKratz",
@@ -2098,7 +2217,8 @@
     "source_key": "github:felixkratz/dotfiles",
     "images": [
       "1a7d57584ec24c969ab51a66ef796f77.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "tcmmichaelb139",
@@ -2116,7 +2236,8 @@
     "images": [
       "58bcbf079322401399a12b15f7e1ac39.png",
       "7a300447ea194909aa50235e629295a8.png"
-    ]
+    ],
+    "date": "04-04-2026"
   },
   {
     "author": "ZhongXiLu",
@@ -2134,6 +2255,7 @@
     "images": [
       "00a3c340317440529d562c13985215f7.png",
       "7d21a6145c954e058e431c90ce1ba8d0.png"
-    ]
+    ],
+    "date": "04-04-2026"
   }
 ]

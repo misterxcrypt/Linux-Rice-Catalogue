@@ -1,6 +1,7 @@
 // utils/adminController.js
 const { getDb } = require('./db');
 const { authenticateUser, generateToken, createUser } = require('./auth');
+const { sendVerificationEmail } = require('./emailService');
 const { SignJWT, jwtVerify } = require('jose');
 const { ObjectId } = require('mongodb');
 
@@ -25,14 +26,28 @@ async function login(req, res) {
   }
 
   try {
-    const user = await authenticateUser(email, password);
-    if (!user) {
+    const result = await authenticateUser(email, password);
+    if (!result) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    // Check if account is blocked
+    if (result.blocked) {
+      return res.status(403).json({
+        error: 'Account blocked',
+        reason: result.reason,
+        message: 'Please verify your email to activate your account. Check your inbox or request a new verification email.'
+      });
+    }
+
+    const user = result.user;
     const token = await generateToken(user);
 
-    return res.status(200).json({ token, user: { _id: user._id, username: user.username, email: user.email } });
+    return res.status(200).json({
+      token,
+      user: { _id: user._id, username: user.username, email: user.email },
+      emailVerified: result.emailVerified
+    });
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ error: 'Login failed' });
@@ -70,7 +85,19 @@ async function register(req, res) {
     const user = await createUser(username, email, password);
     const token = await generateToken(user);
 
-    return res.status(201).json({ token, user: { _id: user._id, username: user.username, email: user.email } });
+    // Send verification email
+    await sendVerificationEmail(user.email, user.username, user.verificationToken);
+
+    return res.status(201).json({
+      token,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        emailVerified: user.emailVerified
+      },
+      message: 'Registration successful. Please check your email to verify your account.'
+    });
   } catch (err) {
     console.error('Register error:', err);
     return res.status(500).json({ error: 'Registration failed' });
@@ -269,4 +296,301 @@ async function deleteRice(req, res) {
   }
 }
 
-module.exports = { login, register, adminLogin, getPendingRices, updateStatus, deleteRice };
+async function getUserRequests(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Admin auth check
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const { payload: decoded } = await jwtVerify(token, JWT_SECRET);
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({ error: 'Admin access required' });
+    }
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+
+  try {
+    const db = await getDb();
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const skip = (page - 1) * limit;
+    const search = req.query.search;
+    const status = req.query.status;
+    const type = req.query.type;
+
+    // Build filter query
+    let filter = {};
+    if (status) filter.status = status;
+    if (type) filter.type = type;
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } }
+      ];
+    }
+
+    const requests = await db.collection('bug_reports')
+      .aggregate([
+        { $match: filter },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'user'
+          }
+        },
+        { $unwind: { path: '$user', preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            type: 1,
+            title: 1,
+            description: 1,
+            email: 1,
+            status: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            responseSent: 1,
+            responseDate: 1,
+            username: '$user.username'
+          }
+        },
+        { $sort: { createdAt: -1 } },
+        { $skip: skip },
+        { $limit: limit }
+      ])
+      .toArray();
+
+    const total = await db.collection('bug_reports').countDocuments(filter);
+
+    return res.status(200).json({
+      requests,
+      pagination: {
+        page,
+        limit,
+        total,
+        pages: Math.ceil(total / limit)
+      }
+    });
+  } catch (err) {
+    console.error('getUserRequests error:', err);
+    return res.status(500).json({ error: 'Failed to fetch user requests' });
+  }
+}
+
+async function updateRequestStatus(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Admin auth check
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const { payload: decoded } = await jwtVerify(token, JWT_SECRET);
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({ error: 'Admin access required' });
+    }
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+
+  const { id, status } = req.body || {};
+  if (!id || !status) {
+    return res.status(400).json({ error: 'Missing id or status' });
+  }
+
+  try {
+    const db = await getDb();
+    await db.collection('bug_reports').updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { status, updatedAt: new Date() } }
+    );
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error('updateRequestStatus error:', err);
+    return res.status(500).json({ error: 'Failed to update request status' });
+  }
+}
+
+async function deleteRequest(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Admin auth check
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const { payload: decoded } = await jwtVerify(token, JWT_SECRET);
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({ error: 'Admin access required' });
+    }
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+
+  const { id } = req.body || {};
+  if (!id) {
+    return res.status(400).json({ error: 'Missing id' });
+  }
+
+  try {
+    const db = await getDb();
+    await db.collection('bug_reports').deleteOne({ _id: new ObjectId(id) });
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error('deleteRequest error:', err);
+    return res.status(500).json({ error: 'Failed to delete request' });
+  }
+}
+
+async function verifyAdmin(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'No token provided' });
+  }
+
+  try {
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    if (payload.role === 'admin') {
+      return res.status(200).json({ valid: true });
+    } else {
+      return res.status(403).json({ error: 'Not an admin' });
+    }
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+}
+
+async function sendResponse(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Admin auth check
+  const authHeader = req.headers['authorization'];
+  const token = authHeader?.replace('Bearer ', '');
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const { payload: decoded } = await jwtVerify(token, JWT_SECRET);
+    if (decoded.role !== 'admin') {
+      return res.status(403).json({ error: 'Admin access required' });
+    }
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+
+  const { requestId, to, subject, body } = req.body || {};
+  if (!requestId || !to || !subject || !body) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  try {
+    const db = await getDb();
+
+    // Send email if Brevo API key is configured
+    if (process.env.BREVO_API_KEY) {
+      const brevo = require('@getbrevo/brevo');
+      const apiInstance = new brevo.TransactionalEmailsApi();
+      apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
+
+      const sendSmtpEmail = new brevo.SendSmtpEmail();
+      sendSmtpEmail.sender = { email: process.env.FROM_EMAIL || 'your-email@gmail.com' };
+      sendSmtpEmail.to = [{ email: to }];
+      sendSmtpEmail.subject = subject;
+      sendSmtpEmail.textContent = body;
+
+      await apiInstance.sendTransacEmail(sendSmtpEmail);
+
+      console.log('📧 Email sent successfully to:', to);
+    } else {
+      console.warn('⚠️ Brevo API key not configured. Email not sent, but response recorded.');
+    }
+
+    // Update the request status
+    await db.collection('bug_reports').updateOne(
+      { _id: new ObjectId(requestId) },
+      {
+        $set: {
+          status: 'responded',
+          responseSent: true,
+          responseDate: new Date(),
+          updatedAt: new Date()
+        }
+      }
+    );
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error('sendResponse error:', err);
+    return res.status(500).json({ error: 'Failed to send response' });
+  }
+}
+
+module.exports = { login, register, adminLogin, getPendingRices, updateStatus, deleteRice, getUserRequests, updateRequestStatus, deleteRequest, sendResponse, verifyAdmin };

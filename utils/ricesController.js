@@ -331,6 +331,7 @@ async function submitRice(req, res) {
         distro: getField('distro'),
         dotfiles: getField('dotfiles'),
         reddit_post: getField('reddit_post'),
+        description: getField('description'),
         environment: {
           type: getField('type'),
           name: getField('wmName'),
@@ -339,7 +340,9 @@ async function submitRice(req, res) {
         status: 'pending',
         screenshots: [],
         images: [],             // Set later
+        wallpapers: [],         // Set later
         ownerId: ownerId,       // User ID if authenticated
+        date: new Date().toLocaleDateString('en-GB').replace(/\//g, '-'),
         createdAt: new Date(),
         updatedAt: new Date()
       };
@@ -363,6 +366,23 @@ async function submitRice(req, res) {
 
       rice.screenshots = [...screenshotsFromUrls];
       rice.images = imagekitImages;
+
+      const uploadedWallpapers = Array.isArray(files.wallpapers)
+        ? files.wallpapers
+        : files.wallpapers
+        ? [files.wallpapers]
+        : [];
+
+      let wallpaperImages = [];
+
+      if (uploadedWallpapers.length > 0) {
+        console.log('📤 Processing uploaded wallpapers:', uploadedWallpapers.length);
+        const results = await uploadToImageKit(uploadedWallpapers, rice.source_key || Math.random().toString(36).substring(2, 8));
+        wallpaperImages.push(...results.map(r => [r.filename, r.fileId]));
+        console.log('✅ Processed uploaded wallpapers, results:', results.length);
+      }
+
+      rice.wallpapers = wallpaperImages;
 
       const db = await getDb();
       const collection = db.collection('rice');
@@ -397,7 +417,7 @@ async function updateRice(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  const { _id, author, theme, environment, distro, dotfiles, reddit_post } = req.body || {};
+  const { _id, author, theme, environment, distro, dotfiles, reddit_post, description } = req.body || {};
   if (!_id) {
     return res.status(400).json({ error: 'Missing rice _id' });
   }
@@ -417,6 +437,7 @@ async function updateRice(req, res) {
     if (distro !== undefined) updateFields.distro = distro;
     if (dotfiles !== undefined) updateFields.dotfiles = dotfiles;
     if (reddit_post !== undefined) updateFields.reddit_post = reddit_post;
+    if (description !== undefined) updateFields.description = description;
 
     await db.collection('rice').updateOne(
       { _id: new ObjectId(_id) },
@@ -472,10 +493,12 @@ async function updateMyRice(req, res) {
             distro: getField('distro'),
             dotfiles: getField('dotfiles'),
             reddit_post: getField('reddit_post'),
+            description: getField('description'),
             type: getField('type'),
             wmName: getField('wmName')
           };
           uploadedFiles = Array.isArray(files.images) ? files.images : files.images ? [files.images] : [];
+          const uploadedWallpapers = Array.isArray(files.wallpapers) ? files.wallpapers : files.wallpapers ? [files.wallpapers] : [];
           resolve();
         });
       });
@@ -504,6 +527,7 @@ async function updateMyRice(req, res) {
     if (updateData.distro !== undefined) updateFields.distro = updateData.distro;
     if (updateData.dotfiles !== undefined) updateFields.dotfiles = updateData.dotfiles;
     if (updateData.reddit_post !== undefined) updateFields.reddit_post = updateData.reddit_post;
+    if (updateData.description !== undefined) updateFields.description = updateData.description;
 
     if (updateData.type && updateData.wmName) {
       updateFields.environment = { type: updateData.type, name: updateData.wmName };
@@ -530,6 +554,30 @@ async function updateMyRice(req, res) {
       }
       if (results.length > 0) {
         updateFields.images = results.map(r => [r.filename, r.fileId]);
+      }
+    }
+
+    // Handle new wallpapers if uploaded
+    if (uploadedWallpapers.length > 0) {
+      const results = [];
+      for (const file of uploadedWallpapers) {
+        const uuid = crypto.randomUUID().replace(/-/g, '').substring(0, 32);
+        const tempPath = path.join('/tmp', `${uuid}_temp.jpg`);
+        await fs.copy(file.filepath, tempPath);
+        const compressedPath = await compressTo500KB(tempPath);
+        const uploadResponse = await imagekit.upload({
+          file: fs.readFileSync(compressedPath),
+          fileName: `${uuid}.jpg`,
+          folder: '/rices/',
+          useUniqueFileName: false,
+          overwriteFile: true
+        });
+        if (uploadResponse.url) {
+          results.push({ filename: `${uuid}.jpg`, fileId: uploadResponse.fileId });
+        }
+      }
+      if (results.length > 0) {
+        updateFields.wallpapers = results.map(r => [r.filename, r.fileId]);
       }
     }
 

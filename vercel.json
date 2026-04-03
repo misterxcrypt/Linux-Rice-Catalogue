@@ -3,5 +3,17 @@
     "api/**/*.js": {
       "maxDuration": 90
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/api/verify-email", "destination": "/api/verify-email.js" },
+    { "source": "/api/forgot-password", "destination": "/api/forgot-password.js" },
+    { "source": "/api/cleanup-unverified", "destination": "/api/cleanup-unverified.js" },
+    { "source": "/api/resend-verification", "destination": "/api/resend-verification.js" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cleanup-unverified",
+      "schedule": "0 0 * * *"
+    }
+  ]
 }

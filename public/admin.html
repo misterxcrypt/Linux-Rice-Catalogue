@@ -97,6 +97,7 @@
             <button id="tab-submissions" class="tab-btn px-6 py-2 rounded-lg font-semibold active">Submissions</button>
             <button id="tab-stats" class="tab-btn px-6 py-2 rounded-lg font-semibold">Stats</button>
             <button id="tab-keywords" class="tab-btn px-6 py-2 rounded-lg font-semibold">Keywords</button>
+            <button id="tab-user-requests" class="tab-btn px-6 py-2 rounded-lg font-semibold">User Requests</button>
         </div>
         <!-- Submissions Section -->
         <section id="submissions-section" class="glass-panel rounded-xl p-6">
@@ -138,18 +139,71 @@
                 <!-- Keywords content will be loaded here -->
             </div>
         </section>
+
+        <!-- User Requests Section -->
+        <section id="user-requests-section" class="glass-panel rounded-xl p-6 hidden">
+            <h2 class="text-2xl font-bold mb-4">User Requests</h2>
+            <div class="mb-4 flex flex-col sm:flex-row gap-4">
+                <input type="text" id="request-search" placeholder="Search requests by title, description, or email..." class="flex-1 px-3 py-2 rounded-md glass-panel text-sm" aria-label="Search user requests">
+                <select id="status-filter" class="px-3 py-2 rounded-md glass-panel text-sm" aria-label="Filter by status">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="resolved">Resolved</option>
+                </select>
+                <select id="type-filter" class="px-3 py-2 rounded-md glass-panel text-sm" aria-label="Filter by type">
+                    <option value="">All Types</option>
+                    <option value="bug">Bug</option>
+                    <option value="feature">Feature</option>
+                </select>
+            </div>
+            <div id="user-requests-content">
+                <!-- User requests table will be loaded here -->
+            </div>
+        </section>
     </div>
+
+    <!-- Floating Theme Toggle Button -->
+    <button id="theme-toggle-btn" class="fixed bottom-20 right-4 z-40 w-12 h-12 glass-panel rounded-full hover:bg-white/10 transition-all hover:scale-110 shadow-lg flex items-center justify-center" title="Toggle Dark/Light Mode">
+        <span class="material-icons-outlined">dark_mode</span>
+    </button>
 
     <!-- Delete Confirmation Dialog -->
     <div id="delete-dialog" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
       <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
-        <h2 class="text-2xl font-bold mb-4 text-white">Delete Image</h2>
-        <p class="text-gray-300 mb-6 text-center">Are you sure you want to delete this image? This action cannot be undone.</p>
+        <h2 class="text-2xl font-bold mb-4" style="color: var(--text-color);">Delete Report</h2>
+        <p class="text-gray-400 mb-6 text-center">Are you sure you want to delete this bug report? This action cannot be undone.</p>
         <div class="flex gap-4">
           <button id="delete-confirm" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Delete</button>
-          <button id="delete-cancel" class="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Cancel</button>
+          <button id="delete-cancel" class="px-6 py-2 glass-panel rounded-lg hover:bg-white/10" style="color: var(--text-color);">Cancel</button>
         </div>
       </div>
+    </div>
+
+    <!-- Respond to User Request Modal -->
+    <div id="respond-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60">
+        <div class="glass-panel w-full max-w-2xl max-h-[90vh] rounded-2xl p-6 overflow-y-auto" style="box-shadow: 0 0 50px var(--accent-glow);">
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-color);">Respond to User Request</h2>
+            <form id="respond-form" class="space-y-4">
+                <input type="hidden" id="respond-request-id" />
+                <div>
+                    <label class="font-mono text-sm">To:</label>
+                    <input type="email" id="respond-to-email" readonly class="w-full mt-1 p-2 rounded-md glass-panel bg-gray-700">
+                </div>
+                <div>
+                    <label class="font-mono text-sm">Subject:</label>
+                    <input type="text" id="respond-subject" required class="w-full mt-1 p-2 rounded-md glass-panel" placeholder="Response subject">
+                </div>
+                <div>
+                    <label class="font-mono text-sm">Message:</label>
+                    <textarea id="respond-body" required class="w-full mt-1 p-2 rounded-md glass-panel h-40 resize-none" placeholder="Your response message"></textarea>
+                </div>
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Send Response</button>
+                    <button type="button" id="respond-cancel" class="px-6 p-3 rounded-lg font-bold bg-gray-600 text-white">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Mood Switcher -->
@@ -260,37 +314,339 @@
             const tabSubmissions = document.getElementById('tab-submissions');
             const tabStats = document.getElementById('tab-stats');
             const tabKeywords = document.getElementById('tab-keywords');
+            const tabUserRequests = document.getElementById('tab-user-requests');
             const submissionsSection = document.getElementById('submissions-section');
             const statsSection = document.getElementById('stats-section');
             const keywordsSection = document.getElementById('keywords-section');
+            const userRequestsSection = document.getElementById('user-requests-section');
             tabSubmissions.addEventListener('click', () => {
                 tabSubmissions.classList.add('active');
                 tabStats.classList.remove('active');
                 tabKeywords.classList.remove('active');
+                tabUserRequests.classList.remove('active');
                 submissionsSection.classList.remove('hidden');
                 statsSection.classList.add('hidden');
                 keywordsSection.classList.add('hidden');
+                userRequestsSection.classList.add('hidden');
             });
             tabStats.addEventListener('click', () => {
                 tabStats.classList.add('active');
                 tabSubmissions.classList.remove('active');
                 tabKeywords.classList.remove('active');
+                tabUserRequests.classList.remove('active');
                 statsSection.classList.remove('hidden');
                 submissionsSection.classList.add('hidden');
                 keywordsSection.classList.add('hidden');
+                userRequestsSection.classList.add('hidden');
                 fetchStats();
             });
             tabKeywords.addEventListener('click', () => {
                 tabKeywords.classList.add('active');
                 tabSubmissions.classList.remove('active');
                 tabStats.classList.remove('active');
+                tabUserRequests.classList.remove('active');
                 keywordsSection.classList.remove('hidden');
                 submissionsSection.classList.add('hidden');
                 statsSection.classList.add('hidden');
+                userRequestsSection.classList.add('hidden');
                 fetchKeywords();
             });
+            tabUserRequests.addEventListener('click', () => {
+                tabUserRequests.classList.add('active');
+                tabSubmissions.classList.remove('active');
+                tabStats.classList.remove('active');
+                tabKeywords.classList.remove('active');
+                userRequestsSection.classList.remove('hidden');
+                submissionsSection.classList.add('hidden');
+                statsSection.classList.add('hidden');
+                keywordsSection.classList.add('hidden');
+                fetchUserRequests();
+            });
 
-            // --- Admin API Integration ---
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg font-semibold shadow-lg transform transition-all duration-300 translate-x-full`;
+            toast.style.cssText = `
+                background-color: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#6B7280'};
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            `;
+            toast.textContent = message;
+
+            document.body.appendChild(toast);
+
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full');
+            }, 100);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        let currentPage = 1;
+
+        async function fetchUserRequests(page = 1) {
+            const search = document.getElementById('request-search').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            const typeFilter = document.getElementById('type-filter').value;
+
+            let queryParams = `page=${page}&limit=20`;
+            if (search) queryParams += `&search=${encodeURIComponent(search)}`;
+            if (statusFilter) queryParams += `&status=${statusFilter}`;
+            if (typeFilter) queryParams += `&type=${typeFilter}`;
+
+            try {
+                const res = await fetch(`/api/admin?action=getUserRequests&${queryParams}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    currentPage = page;
+                    renderUserRequestsTable(data.requests, data.pagination);
+                } else {
+                    showToast('Failed to fetch user requests', 'error');
+                    console.error('Failed to fetch user requests');
+                }
+            } catch (e) {
+                console.error('Error fetching user requests:', e);
+                showToast('Network error while fetching user requests', 'error');
+            }
+        }
+
+        // Add search and filter event listeners
+        document.getElementById('request-search').addEventListener('input', () => fetchUserRequests(1));
+        document.getElementById('status-filter').addEventListener('change', () => fetchUserRequests(1));
+        document.getElementById('type-filter').addEventListener('change', () => fetchUserRequests(1));
+
+        function renderUserRequestsTable(requests, pagination) {
+            const content = document.getElementById('user-requests-content');
+            if (requests.length === 0) {
+                content.innerHTML = '<div class="text-gray-400">No user requests found</div>';
+                return;
+            }
+
+            const paginationHtml = pagination.pages > 1 ? `
+                <div class="flex justify-between items-center mt-4 px-2">
+                    <div class="text-sm text-gray-400">
+                        Showing ${((pagination.page - 1) * pagination.limit) + 1}-${Math.min(pagination.page * pagination.limit, pagination.total)} of ${pagination.total} requests
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="fetchUserRequests(${pagination.page - 1})"
+                                ${pagination.page <= 1 ? 'disabled' : ''}
+                                class="px-3 py-1 text-sm rounded glass-panel hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Previous
+                        </button>
+                        <span class="px-3 py-1 text-sm">
+                            Page ${pagination.page} of ${pagination.pages}
+                        </span>
+                        <button onclick="fetchUserRequests(${pagination.page + 1})"
+                                ${pagination.page >= pagination.pages ? 'disabled' : ''}
+                                class="px-3 py-1 text-sm rounded glass-panel hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            ` : '';
+
+            const tableHtml = `
+                <div class="overflow-x-auto" role="region" aria-label="User requests table" tabindex="0">
+                    <table class="w-full text-sm min-w-full" role="table" aria-label="User requests">
+                        <thead>
+                            <tr class="border-b border-gray-600" role="row">
+                                <th class="text-left py-2 px-2 hidden md:table-cell" role="columnheader" scope="col">Type</th>
+                                <th class="text-left py-2 px-2" role="columnheader" scope="col">Title</th>
+                                <th class="text-left py-2 px-2 hidden lg:table-cell" role="columnheader" scope="col">Description</th>
+                                <th class="text-left py-2 px-2 hidden sm:table-cell" role="columnheader" scope="col">Submitted by</th>
+                                <th class="text-left py-2 px-2" role="columnheader" scope="col">Status</th>
+                                <th class="text-left py-2 px-2 hidden xl:table-cell" role="columnheader" scope="col">Date</th>
+                                <th class="text-left py-2 px-2" role="columnheader" scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${requests.map(request => {
+                                const displayName = request.username || (request.email || 'Anonymous');
+                                const hasEmail = request.email;
+                                return `
+                                <tr class="border-b border-gray-700">
+                                    <td class="py-2 px-2 hidden md:table-cell">${request.type === 'bug' ? '🐛' : '✨'}</td>
+                                    <td class="py-2 px-2 font-semibold">
+                                        <div class="flex flex-col">
+                                            <span>${request.title}</span>
+                                            <span class="text-xs text-gray-400 md:hidden">${request.type === 'bug' ? 'Bug' : 'Feature'}</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-2 px-2 max-w-xs truncate hidden lg:table-cell" title="${request.description}">${request.description}</td>
+                                    <td class="py-2 px-2 hidden sm:table-cell">${displayName}</td>
+                                    <td class="py-2 px-2">
+                                        <span class="px-2 py-1 rounded text-xs ${
+                                            request.status === 'resolved' ? 'bg-green-600' :
+                                            request.status === 'in_progress' ? 'bg-yellow-600' : 'bg-gray-600'
+                                        }">
+                                            ${request.status}
+                                        </span>
+                                    </td>
+                                    <td class="py-2 px-2 text-xs hidden xl:table-cell">${new Date(request.createdAt).toLocaleDateString()}</td>
+                                    <td class="py-2 px-2">
+                                        <div class="flex flex-col sm:flex-row gap-1">
+                                            ${request.status === 'resolved'
+                                                ? `<button onclick="updateRequestStatus('${request._id}', 'pending', event)" class="px-2 py-1 bg-orange-600 text-white rounded text-xs hover:bg-orange-700" aria-label="Mark request as unresolved">Unresolve</button>`
+                                                : `<button onclick="updateRequestStatus('${request._id}', 'resolved', event)" class="px-2 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700" aria-label="Mark request as resolved">Resolve</button>`
+                                            }
+                                            ${hasEmail ? `<button onclick="showRespondModal('${request._id}', '${request.email}')" class="px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700" aria-label="Send response to user">Respond</button>` : ''}
+                                            <button onclick="deleteRequest('${request._id}', event)" class="px-2 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700" aria-label="Delete this request">Delete</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                ${paginationHtml}
+            `;
+            content.innerHTML = tableHtml;
+        }
+
+        // Global functions for table actions
+        window.updateRequestStatus = async (id, status, event) => {
+            const button = event?.target;
+            const originalText = button?.textContent;
+            if (button) {
+                button.disabled = true;
+                button.textContent = 'Updating...';
+            }
+
+            try {
+                const res = await fetch('/api/admin?action=updateRequestStatus', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ id, status })
+                });
+                if (res.ok) {
+                    showToast('Request status updated successfully', 'success');
+                    fetchUserRequests();
+                } else {
+                    const error = await res.json();
+                    showToast('Failed to update status: ' + (error.error || 'Unknown error'), 'error');
+                }
+            } catch (e) {
+                console.error('Error updating status:', e);
+                showToast('Network error while updating status', 'error');
+            } finally {
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }
+            }
+        };
+
+        window.deleteRequest = async (id, event) => {
+            if (confirm('Are you sure you want to delete this request? This action cannot be undone.')) {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.disabled = true;
+                button.textContent = 'Deleting...';
+
+                try {
+                    const res = await fetch('/api/admin?action=deleteRequest', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ id })
+                    });
+                    if (res.ok) {
+                        showToast('Request deleted successfully', 'success');
+                        fetchUserRequests();
+                    } else {
+                        const error = await res.json();
+                        showToast('Failed to delete request: ' + (error.error || 'Unknown error'), 'error');
+                    }
+                } catch (e) {
+                    console.error('Error deleting request:', e);
+                    showToast('Network error while deleting request', 'error');
+                } finally {
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }
+            }
+        };
+
+        window.showRespondModal = (requestId, email) => {
+            document.getElementById('respond-request-id').value = requestId;
+            document.getElementById('respond-to-email').value = email;
+            document.getElementById('respond-modal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Respond modal functionality
+        document.getElementById('respond-cancel').addEventListener('click', () => {
+            document.getElementById('respond-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+
+        document.getElementById('respond-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'respond-modal') {
+                document.getElementById('respond-modal').classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.getElementById('respond-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const requestId = document.getElementById('respond-request-id').value;
+            const to = document.getElementById('respond-to-email').value;
+            const subject = document.getElementById('respond-subject').value;
+            const body = document.getElementById('respond-body').value;
+
+            try {
+                const res = await fetch('/api/admin?action=sendResponse', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ requestId, to, subject, body })
+                });
+
+                if (res.ok) {
+                    showToast('Response sent successfully!', 'success');
+                    document.getElementById('respond-modal').classList.add('hidden');
+                    document.body.style.overflow = '';
+                    document.getElementById('respond-form').reset();
+                    // Update status to in_progress
+                    await updateRequestStatus(requestId, 'in_progress');
+                } else {
+                    const error = await res.json();
+                    showToast('Failed to send response: ' + (error.error || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                console.error('Error sending response:', error);
+                showToast('Network error while sending response', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+
+        // --- Admin API Integration ---
             if (!token) {
                 alert('Not authorized. Please login.');
                 window.location.href = '/';
@@ -581,6 +937,26 @@
                 <input type="url" value="${rice.dotfiles || ''}" class="dotfiles-input w-full p-2 rounded bg-gray-700 text-white" />
             </div>
             <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Description</label>
+                <textarea class="description-input w-full p-2 rounded bg-gray-700 text-white h-24 resize-none">${rice.description || ''}</textarea>
+            </div>
+            <div class="mb-2">
+                <label class="block text-sm font-medium text-gray-300">Wallpapers</label>
+                <div class="flex gap-2 mt-2 wallpapers-container">
+                    ${(rice.wallpapers || []).map((wp, index) => `
+                        <div class="relative">
+                        ${new OptimizedImage({
+                            src: wp[0] ? `https://ik.imagekit.io/y1n9qg16a/rices/${wp[0]}` : '',
+                            alt: 'Wallpaper',
+                            className: 'w-20 h-12 object-cover rounded-md',
+                            variant: 'thumbnail'
+                        }).toHTML()}
+                            <button class="delete-wallpaper-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-fileid="${wp[1]}">×</button>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="mb-2">
                 <label class="block text-sm font-medium text-gray-300">Images</label>
                 <div class="flex gap-2 mt-2 images-container">
                     ${(rice.images || []).map((url, index) => `
@@ -627,6 +1003,7 @@
         }
         function attachEditHandlers(div, rice) {
             let currentImages = [...(rice.images || [])];
+            let currentWallpapers = [...(rice.wallpapers || [])];
             const saveBtn = div.querySelector('.save-btn');
             const cancelBtn = div.querySelector('.cancel-btn');
             const populateBtn = div.querySelector('.populate-btn');
@@ -864,6 +1241,7 @@
 
                 const dotfiles = div.querySelector('.dotfiles-input').value;
                 const reddit = div.querySelector('.reddit-input').value;
+                const description = div.querySelector('.description-input').value;
 
                 const data = {
                     author,
@@ -872,10 +1250,12 @@
                     distro,
                     dotfiles,
                     reddit_post: reddit,
+                    description,
                     images: currentImages.map(image => {
                         const filename = image.url.split('/').pop();
                         return [filename, image.fileId || ''];
-                    })
+                    }),
+                    wallpapers: currentWallpapers
                 };
                 updateRiceDetails(rice._id, data).then(() => {
                     // Refresh the entire list with updated data from DB
@@ -923,6 +1303,36 @@
                     });
                 });
             }
+
+            function updateWallpapersContainer(wallpapers) {
+                const container = div.querySelector('.wallpapers-container');
+                container.innerHTML = wallpapers.map((wp, index) => {
+                    const filename = Array.isArray(wp) ? wp[0] : wp;
+                    const fileId = Array.isArray(wp) ? wp[1] : '';
+                    const imgUrl = filename ? `https://ik.imagekit.io/y1n9qg16a/rices/${filename}` : '';
+                    return imgUrl ? `
+                    <div class="relative">
+                        ${new OptimizedImage({
+                            src: imgUrl,
+                            alt: 'Wallpaper',
+                            className: 'w-20 h-12 object-cover rounded-md',
+                            variant: 'thumbnail'
+                        }).toHTML()}
+                        ${fileId ? `<button class="delete-wallpaper-btn absolute top-0 right-0 bg-red-600 text-white rounded-full w-4 h-4 text-xs" data-index="${index}" data-url="${fileId}">×</button>` : ''}
+                    </div>` : '';
+                }).join('');
+                // Re-attach delete handlers
+                div.querySelectorAll('.delete-wallpaper-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const index = parseInt(btn.dataset.index);
+                        const url = btn.dataset.url;
+                        pendingDelete = { index, url, currentWallpapers, updateWallpapersContainer };
+                        deleteDialog.classList.replace('hidden', 'flex');
+                    });
+                });
+            }
+
+            updateWallpapersContainer(currentWallpapers);
             updateImagesContainer(currentImages); // initial attach
         }
         function renderPendingRices(rices) {
@@ -1318,11 +1728,16 @@
 
         deleteConfirm.addEventListener('click', async () => {
             if (pendingDelete) {
-                const { index, url, currentImages, updateImagesContainer } = pendingDelete;
+                const { index, url, currentImages, currentWallpapers, updateImagesContainer, updateWallpapersContainer } = pendingDelete;
                 try {
                     await deleteImage(url);
-                    currentImages.splice(index, 1);
-                    updateImagesContainer(currentImages);
+                    if (currentImages) {
+                        currentImages.splice(index, 1);
+                        updateImagesContainer(currentImages);
+                    } else if (currentWallpapers) {
+                        currentWallpapers.splice(index, 1);
+                        updateWallpapersContainer(currentWallpapers);
+                    }
                 } catch (error) {
                     // error already alerted
                 }
@@ -1336,9 +1751,12 @@
             deleteDialog.classList.replace('flex', 'hidden');
         });
 
-        // --- Theme Toggle Logic ---
-        (function() {
+            // --- Theme Toggle Logic ---
             const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            if (!themeToggleBtn) {
+                console.warn('Theme toggle button not found');
+                // Continue without theme toggle functionality
+            }
             const themeIcon = themeToggleBtn.querySelector('span');
 
             // Mood switcher themes (matching index.html)
@@ -1348,6 +1766,10 @@
 
             const moodSwitcherBtn = document.getElementById('mood-switcher-btn');
             const moodSwitcherPanel = document.getElementById('mood-switcher-panel');
+
+            if (!moodSwitcherBtn || !moodSwitcherPanel) {
+                console.warn('Mood switcher elements not found');
+            }
 
             function applyTheme(theme) {
                 document.documentElement.style.setProperty('--accent-color', theme.color);
@@ -1368,7 +1790,7 @@
                 });
             }
 
-            function initMoodSwitcher() {
+            const initMoodSwitcher = () => {
                 updateMoodSwitcherPanel();
                 const savedTheme = localStorage.getItem('rice-gallery-theme');
                 if (savedTheme && moodThemes.find(t => t.name === savedTheme)) {
@@ -1376,22 +1798,27 @@
                 } else {
                     applyTheme(moodThemes[0]);
                 }
-                moodSwitcherBtn.addEventListener('click', () => moodSwitcherPanel.classList.toggle('open'));
-            }
+                if (moodSwitcherBtn) {
+                    moodSwitcherBtn.addEventListener('click', () => moodSwitcherPanel.classList.toggle('open'));
+                }
+            };
+
+            // Initialize mood switcher immediately
+            initMoodSwitcher();
 
             function applyThemeMode(isLight) {
                 if (isLight) {
                     document.documentElement.classList.add('light-mode');
                     document.body.className = 'min-h-screen text-gray-800';
-                    themeIcon.textContent = 'light_mode';
+                    if (themeIcon) themeIcon.textContent = 'light_mode';
                     localStorage.setItem('theme-mode', 'light');
                 } else {
                     document.documentElement.classList.remove('light-mode');
-                    document.body.className = 'min-h-screen text-gray-300';
-                    themeIcon.textContent = 'dark_mode';
+                    document.body.className = 'min-h-screen text-gray-400';
+                    if (themeIcon) themeIcon.textContent = 'dark_mode';
                     localStorage.setItem('theme-mode', 'dark');
                 }
-                // Update mood switcher themes based on mode
+                // Update moodThemes based on mode
                 moodThemes = isLight ? lightThemes : darkThemes;
                 updateMoodSwitcherPanel();
                 // Apply saved theme preference if it exists and is valid
@@ -1401,17 +1828,15 @@
                 } else {
                     applyTheme(moodThemes[0]);
                 }
+                setTimeout(() => render(), 1000); // Delay render to match transition
             }
 
-            // Load saved light/dark mode - default to light (matching index.html behavior)
+            // Load saved light/dark mode - default to light mode
             const savedThemeMode = localStorage.getItem('theme-mode');
             const isLight = savedThemeMode !== 'dark';
 
             // Set moodThemes based on saved light/dark mode BEFORE initializing
             moodThemes = isLight ? lightThemes : darkThemes;
-
-            // Initialize mood switcher (uses the correct moodThemes array)
-            initMoodSwitcher();
 
             // Apply light/dark mode
             applyThemeMode(isLight);
@@ -1425,13 +1850,7 @@
                 // Restore scroll position after theme change
                 setTimeout(() => window.scrollTo(0, savedScroll), 100);
             });
-        })();
     </script>
-
-    <!-- Floating Theme Toggle Button -->
-    <button id="theme-toggle-btn" class="fixed bottom-20 right-4 z-40 w-12 h-12 glass-panel rounded-full hover:bg-white/10 transition-all hover:scale-110 shadow-lg flex items-center justify-center" title="Toggle Dark/Light Mode">
-        <span class="material-icons-outlined">dark_mode</span>
-    </button>
 
 </body>
 </html> 

@@ -92,6 +92,49 @@ async function getKeywordsData(req, res) {
   }
 }
 
+async function submitBugReport(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const { type, title, description, email, userId } = req.body || {};
+  if (!type || !title || !description) {
+    return res.status(400).json({ error: 'Type, title, and description are required' });
+  }
+
+  try {
+    const db = await getDb();
+    const bugReport = {
+      type,
+      title,
+      description,
+      email: email || null,
+      userId: userId || null,
+      status: 'pending',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const result = await db.collection('bug_reports').insertOne(bugReport);
+
+    return res.status(200).json({
+      success: true,
+      insertedId: result.insertedId
+    });
+  } catch (err) {
+    console.error('Bug report submission error:', err);
+    return res.status(500).json({ error: 'Failed to submit bug report' });
+  }
+}
+
 async function scrapeReddit(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -264,4 +307,4 @@ async function updateKeywords(req, res) {
   return res.status(200).json({ success: true });
 }
 
-module.exports = { getKeywordsData, getLeaderboard, getStats, scrapeReddit, updateKeywords };
+module.exports = { getKeywordsData, getLeaderboard, getStats, scrapeReddit, updateKeywords, submitBugReport };

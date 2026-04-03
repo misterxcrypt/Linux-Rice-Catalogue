@@ -95,8 +95,13 @@
         .control-btn.active { background-color: var(--accent-color); color: white; font-weight: 600; }
         .control-btn.active:hover { background-color: var(--accent-color); }
         .lightbox-content, .submission-modal-content, .mood-switcher-panel { border: 1px solid var(--accent-color); box-shadow: 0 10px 50px var(--accent-glow); animation: slideUp 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
-        
+
         @keyframes slideUp { from { transform: translateY(30px) scale(0.98); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+        #wallpaper-slides { transition: transform 0.3s ease; }
+        #wallpaper-slides > div { position: relative; }
+        #wallpaper-panel { max-width: 1024px; }
+        .wallpaper-img { display: block; }
 
         #space-travel-overlay { background: radial-gradient(ellipse at 50% 50%, #1a2a6c, #0a0a0f); }
         .star { position: absolute; background-color: white; border-radius: 50%; animation: moveStar 10s linear infinite; }
@@ -278,6 +283,29 @@
              </div>
         </header>
 
+        <!-- Verify Email Banner -->
+        <div id="verify-email-banner" class="hidden mb-6 p-4 rounded-xl border" style="background: rgba(93, 95, 239, 0.15); border-color: var(--accent-color); box-shadow: 0 0 30px rgba(93, 95, 239, 0.2);">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="material-icons-outlined" style="color: var(--accent-color); font-size: 1.5rem;">mail_outline</span>
+                    <div>
+                        <p class="font-semibold" style="color: var(--text-color);">Verify your email</p>
+                        <p class="text-sm" style="color: var(--muted-text);">Please check your inbox to verify your account. Unverified accounts are deleted after 72 hours.</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="resend-verify-btn" class="px-4 py-2 rounded-lg font-semibold text-sm" style="background-color: var(--accent-color); color: white;">Resend Email</button>
+                    <button id="dismiss-verify-banner" class="p-2 rounded-lg hover:bg-white/10" style="color: var(--muted-text);">
+                        <span class="material-icons-outlined">close</span>
+                    </button>
+                </div>
+            </div>
+            <div id="resend-message" class="hidden mt-3 text-sm" style="color: var(--muted-text);">
+                <span class="material-icons-outlined" style="vertical-align: middle; font-size: 1rem;">check_circle</span>
+                Verification email sent! Please check your inbox.
+            </div>
+        </div>
+
         <!-- Filter Controls -->
         <div id="filter-controls" class="mb-8 p-4 glass-panel rounded-xl">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
@@ -452,6 +480,13 @@
                 </div>
 
                 <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <div><label class="font-mono text-sm">Description</label><textarea name="description" placeholder="You can add your configuration details here" class="w-full mt-1 p-2 rounded-md glass-panel h-24 resize-none"></textarea></div>
+                <div class="space-y-2" id="wallpaper-upload-section">
+                <label class="block text-sm font-medium text-gray-300">Upload Wallpapers</label>
+                <input type="file" id="wallpaper-input" accept='image/*' multiple class="hidden" />
+                <button type="button" id="wallpaper-upload-btn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white">📤 Select Wallpapers</button>
+                <div id="wallpaper-preview" class="flex flex-wrap gap-3 mt-3"></div>
+                </div>
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Launch into Orbit</button>
             </form>
             <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col">
@@ -475,6 +510,53 @@
             <p class="font-mono text-lg text-white/70">Your rice has entered the galaxy.<br>Awaiting admin approval before it shines in the archive.</p>
         </div>
     </div>
+
+    <!-- Registration Success Modal -->
+    <div id="registration-success-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-md mx-4" style="box-shadow: 0 0 50px var(--accent-glow);">
+            <div class="text-center mb-6">
+                <span class="material-icons-outlined" style="color: #4ade80; font-size: 4rem; margin-bottom: 1rem;">check_circle</span>
+                <h2 class="text-2xl font-bold mb-2" style="color: var(--text-color);">Registration Successful!</h2>
+            </div>
+            <div class="bg-white/5 rounded-xl p-4 mb-6">
+                <div class="flex items-start gap-3">
+                    <span class="material-icons-outlined" style="color: var(--accent-color); font-size: 1.5rem;">mail_outline</span>
+                    <div>
+                        <h3 class="font-semibold mb-1" style="color: var(--text-color);">Check your email!</h3>
+                        <p class="text-sm" style="color: var(--muted-text);">We've sent a verification link to your inbox. Click the link to activate your account.</p>
+                        <p class="text-xs mt-2" style="color: var(--muted-text);">Don't see the email? Check your spam folder or click "Resend Email" below.</p>
+                    </div>
+                </div>
+            </div>
+            <button id="resend-email-btn" class="w-full p-3 mb-3 rounded-lg font-semibold" style="background: rgba(93, 95, 239, 0.2); color: var(--accent-color); border: 1px solid var(--accent-color);">Resend Verification Email</button>
+            <button id="registration-success-close" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Got it, go to Gallery</button>
+            <div id="resend-status" class="hidden mt-3 text-center text-sm"></div>
+        </div>
+    </div>
+
+    <!-- Password Reset Success Modal -->
+    <div id="password-reset-success-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow);">
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Password Reset Successful</h2>
+            <p class="text-gray-400 mb-6 text-center">Please login with your new password.</p>
+            <button id="password-reset-success-close" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Login Now</button>
+        </div>
+    </div>
+
+    <!-- Wallpaper Modal -->
+    <div id="wallpaper-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/60">
+        <div id="wallpaper-panel" class="glass-panel rounded-2xl p-6 relative transition-all duration-300" style="box-shadow: 0 0 50px var(--accent-glow);">
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-color);">Wallpapers</h2>
+            <div id="wallpaper-gallery" class="relative">
+                <div id="wallpaper-slides" class="flex overflow-hidden"></div>
+            </div>
+            <button id="wallpaper-prev" class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white z-10"><span class="material-icons-outlined">chevron_left</span></button>
+            <button id="wallpaper-next" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center text-white z-10"><span class="material-icons-outlined">chevron_right</span></button>
+            <div id="wallpaper-counter" class="absolute bottom-2 left-1/2 -translate-x-1/2 glass-panel px-3 py-1 rounded-full text-sm font-mono"></div>
+            <button id="wallpaper-modal-close" class="absolute top-3 right-3 p-2 bg-black/50 rounded-full hover:bg-black/80"><span class="material-icons-outlined">close</span></button>
+        </div>
+    </div>
+
     <div id="mood-switcher-container" class="fixed bottom-4 right-4 z-40">
         <div id="mood-switcher-panel" class="absolute bottom-0 right-16 grid grid-cols-4 gap-3 p-2 rounded-2xl glass-panel place-items-center"></div>
         <button id="mood-switcher-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-xl transition-all hover:scale-110" style="background:var(--accent-color)">🎨</button>
@@ -520,9 +602,15 @@
                 </script>
             </div>
 
+            <!-- Raise a Bug -->
+            <button id="raise-bug-btn" class="px-3 py-2 rounded-lg font-medium glass-panel hover:bg-white/10 transition flex items-center gap-2" style="color: var(--text-color);">
+                <span class="material-icons-outlined text-sm">bug_report</span>
+                Raise a Bug
+            </button>
+
             <!-- GitHub -->
-            <a 
-                href="https://github.com/misterxcrypt/Linux-Rice-Catalogue" 
+            <a
+                href="https://github.com/misterxcrypt/Linux-Rice-Catalogue"
                 target="_blank"
                 class="px-3 py-2 rounded-lg font-medium glass-panel hover:bg-white/10 transition flex items-center gap-2"
                 style="color: var(--text-color);"
@@ -644,6 +732,13 @@
                 <div id="edit-screenshot-preview" class="flex flex-wrap gap-3 mt-3"></div>
                 </div>
                 <div><label class="font-mono text-sm">Dotfiles URL</label><input type="url" id="edit-dotfiles-url" placeholder="https://github.com/..." class="w-full mt-1 p-2 rounded-md glass-panel"></div>
+                <div><label class="font-mono text-sm">Description</label><textarea id="edit-description" placeholder="You can add your configuration details here" class="w-full mt-1 p-2 rounded-md glass-panel h-24 resize-none"></textarea></div>
+                <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-300">Upload Wallpapers</label>
+                <input type="file" id="edit-wallpaper-input" accept='image/*' multiple class="hidden" />
+                <button type="button" id="edit-wallpaper-upload-btn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 text-white">📤 Select Wallpapers</button>
+                <div id="edit-wallpaper-preview" class="flex flex-wrap gap-3 mt-3"></div>
+                </div>
                 <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Save Changes</button>
             </form>
             <div class="w-full md:w-1/2 p-6 bg-black/20 flex flex-col items-center justify-center">
@@ -656,7 +751,7 @@
 
     <!-- Delete Rice Confirmation Modal -->
     <div id="delete-rice-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
-        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 0 50px var(--accent-glow); animation: slideUp 0.3s ease;">
+        <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-4" style="box-shadow: 0 10px 50px var(--accent-glow); animation: slideUp 0.3s ease;">
             <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Delete Rice</h2>
             <p class="text-gray-400 mb-6 font-mono text-center">Are you sure you want to delete this rice? This action cannot be undone.</p>
             <div class="flex gap-3">
@@ -666,6 +761,82 @@
         </div>
     </div>
 
+    <!-- Bug Report Modal -->
+    <div id="bug-report-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60">
+        <div class="glass-panel w-full max-w-2xl max-h-[90vh] rounded-2xl p-6 overflow-y-auto">
+            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-color);">Report Bug / Request Feature</h2>
+            <form id="bug-report-form" class="space-y-4">
+                <div>
+                    <label class="font-mono text-sm">Type</label>
+                    <select id="bug-type" class="w-full mt-1 p-2 rounded-md glass-panel" required>
+                        <option value="bug">Bug Report</option>
+                        <option value="feature">Feature Request</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-mono text-sm">Title*</label>
+                    <input type="text" id="bug-title" required class="w-full mt-1 p-2 rounded-md glass-panel" placeholder="Brief title">
+                </div>
+                <div>
+                    <label class="font-mono text-sm">Description*</label>
+                    <textarea id="bug-description" required class="w-full mt-1 p-2 rounded-md glass-panel h-32 resize-none" placeholder="Detailed description"></textarea>
+                </div>
+                <div id="email-field">
+                    <label class="font-mono text-sm">Email*</label>
+                    <input type="email" id="bug-email" required class="w-full mt-1 p-2 rounded-md glass-panel" placeholder="your.email@example.com">
+                </div>
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Submit Report</button>
+                    <button type="button" id="bug-report-cancel" class="px-6 p-3 rounded-lg font-bold bg-gray-600 text-white">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+        </div>
+    </div>
+
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
+      <div class="glass-panel rounded-2xl p-8 w-full max-w-sm mx-auto flex flex-col items-center" style="box-shadow: 0 0 50px var(--accent-glow);">
+        <h2 class="text-2xl font-bold mb-4 text-center" style="color: var(--text-color);">Reset Password</h2>
+        <p class="text-gray-400 text-sm mb-4 text-center">Enter your email and we'll send you a verification code.</p>
+
+        <!-- Step 1: Request code -->
+        <div id="forgot-step-1" class="w-full">
+          <form id="forgot-password-form" class="w-full flex flex-col gap-3">
+            <input type="email" id="forgot-email" placeholder="Your email" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Send Code</button>
+          </form>
+          <button id="forgot-back-btn" class="w-full mt-2 p-3 rounded-lg font-semibold" style="color: var(--muted-text);">Back to Login</button>
+          <div id="forgot-error" class="text-red-400 text-sm mt-2 hidden"></div>
+          <div id="forgot-success" class="text-green-400 text-sm mt-2 hidden"></div>
+        </div>
+
+        <!-- Step 2: Verify code -->
+        <div id="forgot-step-2" class="w-full hidden">
+          <form id="verify-code-form" class="w-full flex flex-col gap-3">
+            <input type="text" id="reset-code" placeholder="Enter 6-digit code" required maxlength="6" pattern="[0-9]{6}" class="w-full p-3 rounded-lg glass-panel text-white text-center tracking-widest" />
+            <input type="hidden" id="reset-token" />
+            <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Verify Code</button>
+          </form>
+          <div id="verify-error" class="text-red-400 text-sm mt-2 hidden"></div>
+        </div>
+
+        <!-- Step 3: New password -->
+        <div id="forgot-step-3" class="w-full hidden">
+          <form id="new-password-form" class="w-full flex flex-col gap-3">
+            <input type="password" id="new-password" placeholder="New password (min 6 chars)" required minlength="6" class="w-full p-3 rounded-lg glass-panel text-white" />
+            <input type="password" id="confirm-password" placeholder="Confirm new password" required class="w-full p-3 rounded-lg glass-panel text-white" />
+            <input type="hidden" id="reset-user-id" />
+            <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Reset Password</button>
+          </form>
+          <div id="newpwd-error" class="text-red-400 text-sm mt-2 hidden"></div>
+        </div>
+
+        <button id="forgot-close-btn" class="mt-4" style="color: var(--muted-text);">Cancel</button>
+      </div>
+    </div>
 
     <!-- Add Login Modal -->
     <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60">
@@ -681,6 +852,9 @@
             <input type="text" id="user-email" placeholder="Email" required class="w-full p-3 rounded-lg glass-panel text-white" />
             <input type="password" id="user-password" placeholder="Password" required class="w-full p-3 rounded-lg glass-panel text-white" />
             <button type="submit" class="w-full p-3 font-bold rounded-lg text-white" style="background-color: var(--accent-color);">Sign In</button>
+            <div class="text-center">
+              <a href="#" id="forgot-password-link" style="color: var(--accent-color); font-size: 0.875rem;">Forgot Password?</a>
+            </div>
           </form>
           <div class="text-center mt-3 text-gray-400 text-sm">or</div>
           <form id="user-register-form" class="w-full flex flex-col gap-3 mt-3">
@@ -935,21 +1109,72 @@
         previewContainer.appendChild(imgBox);
     }
 
-    function refreshPreview() {
-        previewContainer.innerHTML = '';
-        window.selectedFiles.forEach((entry, i) => {
-            const src = entry.url || (entry.file ? URL.createObjectURL(entry.file) : '');
-            addPreviewImage(src, i);
-        });
-        // Update live preview
-        if (window.selectedFiles.length > 0) {
-            const firstEntry = window.selectedFiles[0];
-            const src = firstEntry.url || (firstEntry.file ? URL.createObjectURL(firstEntry.file) : '');
-            document.querySelector('#submission-modal .rice-card img').src = src;
-        } else {
-            document.querySelector('#submission-modal .rice-card img').src = 'https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png';
-        }
+function refreshPreview() {
+    previewContainer.innerHTML = '';
+    window.selectedFiles.forEach((entry, i) => {
+        const src = entry.url || (entry.file ? URL.createObjectURL(entry.file) : '');
+        addPreviewImage(src, i);
+    });
+    // Update live preview
+    if (window.selectedFiles.length > 0) {
+        const firstEntry = window.selectedFiles[0];
+        const src = firstEntry.url || (firstEntry.file ? URL.createObjectURL(firstEntry.file) : '');
+        document.querySelector('#submission-modal .rice-card img').src = src;
+    } else {
+        document.querySelector('#submission-modal .rice-card img').src = 'https://raw.githubusercontent.com/prasanthrangan/hyprdots/main/Source/assets/theme_mocha_1.png';
     }
+}
+
+window.selectedWallpapers = [];
+const wallpaperInput = document.getElementById('wallpaper-input');
+const wallpaperUploadBtn = document.getElementById('wallpaper-upload-btn');
+const wallpaperPreview = document.getElementById('wallpaper-preview');
+
+wallpaperUploadBtn.addEventListener('click', () => {
+    wallpaperInput.click();
+});
+
+wallpaperInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+        if (!file.type.startsWith('image/')) return;
+
+        window.selectedWallpapers.push({ file });
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            addWallpaperPreview(reader.result, window.selectedWallpapers.length - 1);
+        };
+        reader.readAsDataURL(file);
+    });
+
+    wallpaperInput.value = '';
+});
+
+function addWallpaperPreview(src, index) {
+    const imgBox = document.createElement('div');
+    imgBox.className = "relative";
+
+    imgBox.innerHTML = `
+        <img src="${src}" class="w-24 h-24 object-cover rounded" />
+        <button type="button" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs remove-btn">&times;</button>
+    `;
+
+    imgBox.querySelector('.remove-btn').addEventListener('click', () => {
+        window.selectedWallpapers.splice(index, 1);
+        refreshWallpaperPreview();
+    });
+
+    wallpaperPreview.appendChild(imgBox);
+}
+
+function refreshWallpaperPreview() {
+    wallpaperPreview.innerHTML = '';
+    window.selectedWallpapers.forEach((entry, i) => {
+        const src = entry.url || (entry.file ? URL.createObjectURL(entry.file) : '');
+        addWallpaperPreview(src, i);
+    });
+}
 
     let keywords = {};
 
@@ -1335,6 +1560,7 @@
                         <p class="text-xs ${textColor70} font-mono">by ${rice.ownerId && rice.ownerId._id ? rice.ownerId.username || 'unknown' : 'admin'}</p>
                         <div class="flex justify-between items-center text-sm ${textColor70}">
                             <p class="font-mono truncate">${distro} + ${wm}</p>
+                            <p class="font-mono text-xs">${rice.date || 'Unknown'}</p>
                         </div>
                     </div>
                 `;
@@ -1415,7 +1641,10 @@
                     url: rice.dotfiles || '',
                     reddit_post: rice.reddit_post || '',
                     images,
+                    wallpapers: rice.wallpapers || [],
                     ownerId: rice.ownerId || null,
+                    date: rice.date || '',
+                    description: rice.description || '',
                 };
                 state.currentImageIndex = 0;
                 const imgEl = el.lightbox.querySelector('#lightbox-image');
@@ -1478,35 +1707,61 @@
                 updateLightboxContent();
             };
             const updateLightboxContent = () => {
+                console.log('updateLightboxContent called');
                 const rice = state.currentLightboxRice;
+                console.log('updateLightboxContent for rice _id:', rice._id, 'wallpapers:', rice.wallpapers);
                 const setContent = (id, text) => el.lightbox.querySelector(id).textContent = text;
                 setContent('#lightbox-user', rice.user);
                 const ownerText = rice.ownerId && rice.ownerId._id ? `by ${rice.ownerId.username || 'unknown'}` : 'by admin';
                 setContent('#lightbox-owner', ownerText);
                 setContent('#lightbox-wm-distro-theme', `${rice.wm || 'Unknown'} / ${rice.distro || 'Unknown'} / ${rice.theme || 'Unknown'}`);
-                el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div>`;
-                const dotfilesHTML = rice.url
-                    ? `<h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Dotfiles</h3>
-                        <div class="grid grid-cols-1 gap-2">
-                        <a href="${rice.url}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
-                        </div>`
-                    : `<h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Dotfiles</h3>
-                        <p class="text-sm italic" style="color: var(--muted-text)">No dotfiles found.</p>`;
-                const redditHTML = rice.reddit_post
-                    ? `<div class="mt-6"><h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Reddit Post</h3>
-                        <div class="grid grid-cols-1 gap-2">
-                        <a href="${rice.reddit_post}" target="_blank" class="flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View</a>
-                        </div></div>`
-                    : `<div class="mt-6"><h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Reddit Post</h3>
-                        <p class="text-sm italic" style="color: var(--muted-text)">No reddit post found.</p></div>`;
-                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = dotfilesHTML + redditHTML;
+                el.lightbox.querySelector('#lightbox-metadata').innerHTML = `<div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5 text-center" style="color:var(--modal-accent)">desktop_windows</span>${rice.wm || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">dns</span>${rice.distro || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">palette</span>${rice.theme || 'Unknown'}</div><div class="flex items-center gap-3"><span class="material-icons-outlined text-lg w-5" style="color:var(--modal-accent)">calendar_today</span>${rice.date || 'Unknown'}</div>`;
+                const dotfilesLink = rice.url ? `<a href="${rice.url}" target="_blank" class="flex-1 flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)"><span class="material-icons-outlined text-base">code</span>dotfiles</a>` : '';
+                const redditLink = rice.reddit_post ? `<a href="${rice.reddit_post}" target="_blank" class="flex-1 flex items-center justify-center gap-2 p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)"><span class="material-icons-outlined text-base">forum</span>reddit post</a>` : '';
+                const linksHTML = `<div class="flex gap-3 w-full">${dotfilesLink}${redditLink}</div>`;
+                const descriptionHTML = rice.description ? `<div class="mt-6"><h3 class="font-mono text-sm uppercase mb-2" style="color: var(--muted-text)">Description</h3><p class="text-sm" style="color: var(--muted-text)">${rice.description}</p></div>` : '';
+                const hasWallpapers = rice.wallpapers && Array.isArray(rice.wallpapers) && rice.wallpapers.length > 0;
+                const wallpaperButtonHTML = hasWallpapers ? `<div class="mt-6"><button id="view-wallpaper-btn" class="w-full p-2 rounded-lg text-sm font-semibold" style="background:var(--modal-accent); color: var(--modal-text)">View Wallpapers</button></div>` : '';
+                el.lightbox.querySelector('#lightbox-dotfiles').innerHTML = linksHTML + descriptionHTML + wallpaperButtonHTML;
+                console.log('Adding event listener for view-wallpaper-btn, hasWallpapers:', hasWallpapers);
+                if (hasWallpapers) {
+                    const button = el.lightbox.querySelector('#view-wallpaper-btn');
+                    if (button) {
+                        button.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            console.log('Button clicked, opening wallpaper modal');
+                            showWallpaperModal(rice.wallpapers);
+                        });
+                    }
+                }
                 
-                // Show admin buttons if logged in as admin
+                // Show admin buttons only if verified as admin
                 const adminToken = localStorage.getItem('adminToken');
                 const adminActions = document.getElementById('lightbox-admin-actions');
+                console.log('lightbox admin check - adminToken:', adminToken, 'adminActions found:', !!adminActions);
                 if (adminToken) {
-                    adminActions.classList.remove('hidden');
+                    console.log('fetching verifyAdmin');
+                    // Verify admin status with backend
+                    fetch('/api/admin?action=verifyAdmin', {
+                        headers: { 'Authorization': `Bearer ${adminToken}` }
+                    }).then(res => {
+                        console.log('verifyAdmin res.ok:', res.ok);
+                        if (res.ok) {
+                            console.log('showing admin actions');
+                            adminActions.classList.remove('hidden');
+                        } else {
+                            console.log('hiding admin actions - invalid token');
+                            // Invalid token, remove it
+                            localStorage.removeItem('adminToken');
+                            adminActions.classList.add('hidden');
+                        }
+                    }).catch((err) => {
+                        console.log('error verifying admin:', err, 'hiding');
+                        localStorage.removeItem('adminToken');
+                        adminActions.classList.add('hidden');
+                    });
                 } else {
+                    console.log('no adminToken, hiding admin actions');
                     adminActions.classList.add('hidden');
                 }
                 const reactions = [
@@ -1514,6 +1769,125 @@
                     { key: 'fire', emoji: '🔥' },
                     { key: 'down', emoji: '⬇️' }
                 ];
+
+                function showWallpaperModal(wallpapers) {
+                    console.log('showWallpaperModal called with', wallpapers);
+                    const gallery = document.getElementById('wallpaper-modal');
+                    const panel = document.getElementById('wallpaper-panel');
+                    if (!gallery || !panel) {
+                        console.error('wallpaper-modal or panel not found');
+                        return;
+                    }
+                    const slidesDiv = gallery.querySelector('#wallpaper-slides');
+                    const prevBtn = gallery.querySelector('#wallpaper-prev');
+                    const nextBtn = gallery.querySelector('#wallpaper-next');
+                    const counterEl = gallery.querySelector('#wallpaper-counter');
+
+                    // Filter valid wallpapers
+                    const validWallpapers = wallpapers.filter(wp => {
+                        const filename = Array.isArray(wp) ? wp[0] : wp;
+                        return filename && filename.trim() !== '';
+                    });
+
+                    if (validWallpapers.length === 0) {
+                        console.error('No valid wallpapers');
+                        return;
+                    }
+
+                    // State
+                    let currentIndex = 0;
+                    const totalSlides = validWallpapers.length;
+
+                    // Build slides with hidden images for preloading
+                    slidesDiv.innerHTML = validWallpapers.map((wp, idx) => {
+                        const filename = Array.isArray(wp) ? wp[0] : wp;
+                        const imgUrl = `https://ik.imagekit.io/y1n9qg16a/rices/${filename}`;
+                        return `<div class="min-w-full flex-shrink-0 relative group" data-idx="${idx}">
+                            <img src="${imgUrl}" class="w-full h-auto object-contain rounded wallpaper-img" data-idx="${idx}" alt="Wallpaper ${idx + 1}" />
+                            <a href="${imgUrl}" download="${filename}" target="_blank" class="absolute bottom-4 right-4 bg-black/70 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/90 download-wallpaper-btn">
+                                <span class="material-icons-outlined text-lg">download</span>
+                            </a>
+                        </div>`;
+                    }).join('');
+
+                    const resizeModal = (imgEl) => {
+                        if (!imgEl || !imgEl.naturalWidth) return;
+                        const aspectRatio = imgEl.naturalWidth / imgEl.naturalHeight;
+                        const maxWidth = window.innerWidth * 0.8;
+                        const maxHeight = window.innerHeight * 0.75;
+                        const maxPanelWidth = 1024; // max-w-4xl
+
+                        let displayWidth = Math.min(imgEl.naturalWidth, maxWidth, maxPanelWidth);
+                        let displayHeight = displayWidth / aspectRatio;
+
+                        if (displayHeight > maxHeight) {
+                            displayHeight = maxHeight;
+                            displayWidth = displayHeight * aspectRatio;
+                        }
+
+                        // Ensure minimum size
+                        displayWidth = Math.max(displayWidth, 320);
+
+                        panel.style.width = `${displayWidth + 48}px`; // +48 for padding
+                    };
+
+                    const updateSlide = () => {
+                        slidesDiv.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        counterEl.textContent = `${currentIndex + 1} / ${totalSlides}`;
+                        // Hide arrows if only one slide
+                        prevBtn.style.display = totalSlides > 1 ? 'flex' : 'none';
+                        nextBtn.style.display = totalSlides > 1 ? 'flex' : 'none';
+
+                        // Resize modal based on current image
+                        const currentImg = slidesDiv.querySelector(`.wallpaper-img[data-idx="${currentIndex}"]`);
+                        if (currentImg && currentImg.complete) {
+                            resizeModal(currentImg);
+                        } else if (currentImg) {
+                            currentImg.onload = () => resizeModal(currentImg);
+                        }
+                    };
+
+                    prevBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                        updateSlide();
+                    };
+
+                    nextBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        currentIndex = (currentIndex + 1) % totalSlides;
+                        updateSlide();
+                    };
+
+                    // Handle download button click to force download dialog
+                    const handleDownload = (e, imgUrl, filename) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Fetch the image as blob and create object URL to trigger download dialog
+                        fetch(imgUrl, { mode: 'cors' })
+                            .then(res => res.blob())
+                            .then(blob => {
+                                const url = URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.download = filename;
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                                URL.revokeObjectURL(url);
+                            })
+                            .catch(err => {
+                                console.error('Download failed:', err);
+                                // Fallback: open in new tab
+                                window.open(imgUrl, '_blank');
+                            });
+                    };
+
+                    updateSlide();
+                    gallery.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    console.log('Wallpaper modal opened');
+                }
                 /* Get current reaction from localStorage */
                 const userReactionKey = `reaction_${rice._id}`;
                 const currentUserReaction = localStorage.getItem(userReactionKey);
@@ -1570,6 +1944,7 @@
                 document.getElementById('edit-author-input').value = rice.user || '';
                 document.getElementById('edit-dotfiles-url').value = rice.url || '';
                 document.getElementById('edit-reddit-post-input').value = rice.reddit_post || '';
+                document.getElementById('edit-description').value = rice.description || '';
                 
                 document.getElementById('edit-theme-select').value = rice.theme || '';
                 document.getElementById('edit-distro-select').value = rice.distro || '';
@@ -1692,6 +2067,109 @@
             // ATTACH LISTENERS
             document.querySelector('.view-toggle').addEventListener('click', handleViewToggle);
             el.lightbox.querySelector('#lightbox-close').addEventListener('click', hideLightbox);
+
+            // Wallpaper modal handlers
+            document.getElementById('wallpaper-modal-close').addEventListener('click', () => {
+                document.getElementById('wallpaper-modal').classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+
+            document.getElementById('wallpaper-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'wallpaper-modal') {
+                    document.getElementById('wallpaper-modal').classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Handle download button clicks with event delegation
+            document.getElementById('wallpaper-gallery').addEventListener('click', (e) => {
+                const downloadBtn = e.target.closest('.download-wallpaper-btn');
+                if (downloadBtn) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const slide = downloadBtn.closest('[data-idx]');
+                    const idx = slide?.dataset.idx;
+                    const slidesDiv = document.getElementById('wallpaper-slides');
+                    const currentSlide = slidesDiv.querySelector(`[data-idx="${idx}"]`);
+                    if (currentSlide) {
+                        const img = currentSlide.querySelector('img');
+                        const imgUrl = img.src;
+                        const filename = downloadBtn.getAttribute('download');
+                        // Fetch and download
+                        fetch(imgUrl, { mode: 'cors' })
+                            .then(res => res.blob())
+                            .then(blob => {
+                                const url = URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.download = filename;
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                                URL.revokeObjectURL(url);
+                            })
+                            .catch(err => {
+                                console.error('Download failed:', err);
+                                window.open(imgUrl, '_blank');
+                            });
+                    }
+                }
+            });
+
+            // Registration success modal - Resend verification email
+            document.getElementById('resend-email-btn').addEventListener('click', async () => {
+                const email = document.getElementById('register-email').value;
+                const statusEl = document.getElementById('resend-status');
+                statusEl.classList.remove('hidden');
+                statusEl.textContent = 'Sending...';
+                statusEl.style.color = 'var(--muted-text)';
+
+                try {
+                    const res = await fetch('/api/resend-verification', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                    });
+                    const data = await res.json();
+
+                    if (res.ok) {
+                        statusEl.textContent = 'Verification email sent! Please check your inbox.';
+                        statusEl.style.color = '#4ade80';
+                    } else {
+                        statusEl.textContent = data.error || 'Failed to resend email';
+                        statusEl.style.color = '#f87171';
+                    }
+                } catch (err) {
+                    statusEl.textContent = 'Failed to send email';
+                    statusEl.style.color = '#f87171';
+                }
+            });
+
+            // Registration success modal
+            document.getElementById('registration-success-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'registration-success-modal') {
+                    document.getElementById('registration-success-modal').classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            });
+            document.getElementById('registration-success-close').addEventListener('click', () => {
+                document.getElementById('registration-success-modal').classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+
+            // Password reset success modal
+            document.getElementById('password-reset-success-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'password-reset-success-modal') {
+                    document.getElementById('password-reset-success-modal').classList.add('hidden');
+                    document.body.style.overflow = '';
+                    showLoginModal();
+                }
+            });
+            document.getElementById('password-reset-success-close').addEventListener('click', () => {
+                document.getElementById('password-reset-success-modal').classList.add('hidden');
+                document.body.style.overflow = '';
+                showLoginModal();
+            });
             el.lightbox.addEventListener('click', (e) => {
                 if (!el.lightboxContent.contains(e.target)) {
                     hideLightbox();
@@ -1701,14 +2179,44 @@
             el.lightbox.querySelector('#lightbox-next').addEventListener('click', () => changeLightboxImage(1));
             
             // Lightbox admin actions
-            document.getElementById('lightbox-edit-btn').addEventListener('click', () => {
+            document.getElementById('lightbox-edit-btn').addEventListener('click', async () => {
+                const adminToken = localStorage.getItem('adminToken');
+                if (!adminToken) return;
+                // Verify admin status
+                try {
+                    const res = await fetch('/api/admin?action=verifyAdmin', {
+                        headers: { 'Authorization': `Bearer ${adminToken}` }
+                    });
+                    if (!res.ok) {
+                        localStorage.removeItem('adminToken');
+                        return;
+                    }
+                } catch {
+                    localStorage.removeItem('adminToken');
+                    return;
+                }
                 const rice = state.currentLightboxRice;
                 if (rice && rice._id) {
                     showEditModal(rice);
                 }
             });
-            
+
             document.getElementById('lightbox-delete-btn').addEventListener('click', async () => {
+                const adminToken = localStorage.getItem('adminToken');
+                if (!adminToken) return;
+                // Verify admin status
+                try {
+                    const res = await fetch('/api/admin?action=verifyAdmin', {
+                        headers: { 'Authorization': `Bearer ${adminToken}` }
+                    });
+                    if (!res.ok) {
+                        localStorage.removeItem('adminToken');
+                        return;
+                    }
+                } catch {
+                    localStorage.removeItem('adminToken');
+                    return;
+                }
                 const rice = state.currentLightboxRice;
                 if (!rice || !rice._id) return;
                 document.getElementById('delete-rice-modal').classList.replace('hidden', 'flex');
@@ -1774,14 +2282,15 @@
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${adminToken}`
                         },
-                        body: JSON.stringify({ 
+                        body: JSON.stringify({
                             _id: riceId,
                             author,
                             theme,
                             environment: { type: wmType, name: wmName },
                             distro,
                             dotfiles,
-                            reddit_post: reddit
+                            reddit_post: reddit,
+                            description: document.getElementById('edit-description').value
                         })
                     });
                     if (res.ok) {
@@ -1853,16 +2362,25 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email, password })
                     });
-            if (res.ok) {
-              const { token, user } = await res.json();
-              localStorage.setItem('userToken', token);
-              localStorage.setItem('userData', JSON.stringify(user));
-              showUserButtons(user.username);
-              hideLoginModal();
-            } else {
-              const error = await res.json();
-              alert(error.error || 'Registration failed');
-            }
+                    if (res.ok) {
+                        const { token, user, emailVerified } = await res.json();
+                        localStorage.setItem('userToken', token);
+                        localStorage.setItem('userData', JSON.stringify(user));
+                        localStorage.setItem('emailVerified', emailVerified);
+                        showUserButtons(user.username);
+                        hideLoginModal();
+                        // Show verify banner if not verified
+                        if (!emailVerified) {
+                            document.getElementById('verify-email-banner').classList.remove('hidden');
+                        }
+                    } else {
+                        const error = await res.json();
+                        if (error.reason === 'email_not_verified') {
+                            alert('Account blocked: Email not verified within 48 hours. Please register again with a different email.');
+                        } else {
+                            alert(error.error || 'Login failed');
+                        }
+                    }
                 } catch (err) {
                     errorEl.textContent = 'Login failed';
                     errorEl.classList.remove('hidden');
@@ -1884,11 +2402,15 @@
                         body: JSON.stringify({ username, email, password })
                     });
                     if (res.ok) {
-                        const { token, user } = await res.json();
+                        const { token, user, message } = await res.json();
                         localStorage.setItem('userToken', token);
                         localStorage.setItem('userData', JSON.stringify(user));
+                        localStorage.setItem('emailVerified', false);
                         hideLoginModal();
                         showUserButtons(user.username);
+                        // Show enhanced registration success modal
+                        document.getElementById('registration-success-modal').classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
                     } else {
                         const data = await res.json();
                         errorEl.textContent = data.error || 'Registration failed';
@@ -1965,12 +2487,52 @@
               document.getElementById('user-dropdown').classList.toggle('hidden');
               document.getElementById('admin-dropdown').classList.add('hidden');
             });
-            
+
             // Admin dropdown toggle
             document.getElementById('admin-profile-btn').addEventListener('click', (e) => {
               e.stopPropagation();
               document.getElementById('admin-dropdown').classList.toggle('hidden');
               document.getElementById('user-dropdown').classList.add('hidden');
+            });
+
+            // Verify email banner handlers
+            document.getElementById('dismiss-verify-banner').addEventListener('click', () => {
+              document.getElementById('verify-email-banner').classList.add('hidden');
+            });
+
+            document.getElementById('resend-verify-btn').addEventListener('click', async () => {
+              const userData = localStorage.getItem('userData');
+              if (!userData) return;
+
+              const user = JSON.parse(userData);
+              const btn = document.getElementById('resend-verify-btn');
+              const msg = document.getElementById('resend-message');
+
+              btn.disabled = true;
+              btn.textContent = 'Sending...';
+
+              try {
+                const res = await fetch('/api/resend-verification', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email: user.email })
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                  msg.classList.remove('hidden');
+                  setTimeout(() => msg.classList.add('hidden'), 5000);
+                } else if (res.status === 403) {
+                  alert('Account blocked: Please register again with a different email.');
+                } else {
+                  alert(data.error || 'Failed to resend email');
+                }
+              } catch (err) {
+                alert('Failed to send email');
+              } finally {
+                btn.disabled = false;
+                btn.textContent = 'Resend Email';
+              }
             });
             
             // Close dropdown when clicking outside
@@ -1989,11 +2551,13 @@
               const adminToken = localStorage.getItem('adminToken');
               const userToken = localStorage.getItem('userToken');
               const userData = localStorage.getItem('userData');
-              
+
               if (userToken && userData) {
                   try {
                       const user = JSON.parse(userData);
                       showUserButtons(user.username);
+                      // Show verify email banner if not verified
+                      checkEmailVerification(user);
                   } catch (e) {
                       showLoginBtn();
                   }
@@ -2003,6 +2567,156 @@
                 showLoginBtn();
               }
             }
+
+            function checkEmailVerification(user) {
+              const banner = document.getElementById('verify-email-banner');
+              if (!user.emailVerified) {
+                banner.classList.remove('hidden');
+              } else {
+                banner.classList.add('hidden');
+              }
+            }
+            // Forgot Password Modal handlers
+            function showForgotPasswordModal() {
+              document.getElementById('forgot-password-modal').classList.remove('hidden');
+              document.getElementById('forgot-password-modal').classList.add('flex');
+              document.getElementById('login-modal').classList.add('hidden');
+            }
+            function hideForgotPasswordModal() {
+              document.getElementById('forgot-password-modal').classList.add('hidden');
+              document.getElementById('forgot-password-modal').classList.remove('flex');
+            }
+            function resetForgotPasswordSteps() {
+              document.getElementById('forgot-step-1').classList.remove('hidden');
+              document.getElementById('forgot-step-2').classList.add('hidden');
+              document.getElementById('forgot-step-3').classList.add('hidden');
+              document.getElementById('forgot-email').value = '';
+              document.getElementById('reset-code').value = '';
+              document.getElementById('new-password').value = '';
+              document.getElementById('confirm-password').value = '';
+              document.getElementById('forgot-error').classList.add('hidden');
+              document.getElementById('forgot-success').classList.add('hidden');
+              document.getElementById('verify-error').classList.add('hidden');
+              document.getElementById('newpwd-error').classList.add('hidden');
+            }
+
+            // Step 1: Request password reset code
+            document.getElementById('forgot-password-form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const email = document.getElementById('forgot-email').value;
+              const errorEl = document.getElementById('forgot-error');
+              const successEl = document.getElementById('forgot-success');
+              errorEl.classList.add('hidden');
+              successEl.classList.add('hidden');
+
+              try {
+                const res = await fetch('/api/forgot-password?action=request', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                  document.getElementById('reset-token').value = data.resetToken || '';
+                  document.getElementById('forgot-step-1').classList.add('hidden');
+                  document.getElementById('forgot-step-2').classList.remove('hidden');
+                  successEl.textContent = 'Code sent! Check your email.';
+                  successEl.classList.remove('hidden');
+                } else {
+                  errorEl.textContent = data.error || 'Failed to send code';
+                  errorEl.classList.remove('hidden');
+                }
+              } catch (err) {
+                errorEl.textContent = 'Request failed';
+                errorEl.classList.remove('hidden');
+              }
+            });
+
+            // Step 2: Verify reset code
+            document.getElementById('verify-code-form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const resetCode = document.getElementById('reset-code').value;
+              const resetToken = document.getElementById('reset-token').value;
+              const errorEl = document.getElementById('verify-error');
+              errorEl.classList.add('hidden');
+
+              try {
+                const res = await fetch('/api/forgot-password?action=verify', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ resetCode, resetToken })
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                  document.getElementById('reset-user-id').value = data.userId;
+                  document.getElementById('forgot-step-2').classList.add('hidden');
+                  document.getElementById('forgot-step-3').classList.remove('hidden');
+                } else {
+                  errorEl.textContent = data.error || 'Invalid code';
+                  errorEl.classList.remove('hidden');
+                }
+              } catch (err) {
+                errorEl.textContent = 'Verification failed';
+                errorEl.classList.remove('hidden');
+              }
+            });
+
+            // Step 3: Reset password
+            document.getElementById('new-password-form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const newPassword = document.getElementById('new-password').value;
+              const confirmPassword = document.getElementById('confirm-password').value;
+              const userId = document.getElementById('reset-user-id').value;
+              const errorEl = document.getElementById('newpwd-error');
+              errorEl.classList.add('hidden');
+
+              if (newPassword !== confirmPassword) {
+                errorEl.textContent = 'Passwords do not match';
+                errorEl.classList.remove('hidden');
+                return;
+              }
+
+              try {
+                const res = await fetch('/api/forgot-password?action=reset', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ userId, newPassword })
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                  document.getElementById('password-reset-success-modal').classList.remove('hidden');
+                  document.body.style.overflow = 'hidden';
+                  hideForgotPasswordModal();
+                  resetForgotPasswordSteps();
+                } else {
+                  errorEl.textContent = data.error || 'Failed to reset password';
+                  errorEl.classList.remove('hidden');
+                }
+              } catch (err) {
+                errorEl.textContent = 'Reset failed';
+                errorEl.classList.remove('hidden');
+              }
+            });
+
+            document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+              e.preventDefault();
+              showForgotPasswordModal();
+            });
+
+            document.getElementById('forgot-back-btn').addEventListener('click', () => {
+              hideForgotPasswordModal();
+              showLoginModal();
+            });
+
+            document.getElementById('forgot-close-btn').addEventListener('click', () => {
+              hideForgotPasswordModal();
+              showLoginModal();
+              resetForgotPasswordSteps();
+            });
+
             document.getElementById('login-btn').addEventListener('click', showLoginModal);
             document.getElementById('login-close-btn').addEventListener('click', hideLoginModal);
             document.getElementById('login-form').addEventListener('submit', handleAdminLogin);
@@ -2364,6 +3078,7 @@
             .filter(url => url !== ""); */
         const images = window.selectedFiles || [];
         const dotfiles = form.querySelector('input[placeholder^="https://github.com"]').value;
+        const description = form.querySelector('textarea[name="description"]').value;
 
         /* const riceData = {
         author,
@@ -2384,6 +3099,7 @@
         formData.append('distro', distro);
         formData.append('dotfiles', dotfiles);
         formData.append('reddit_post', reddit_post);
+        formData.append('description', description);
         formData.append('type', type);
         formData.append('wmName', wmName);
 
@@ -2394,6 +3110,13 @@
                 formData.append('screenshots', img.file);  // key for files
             } else if (img.url) {
                 formData.append('urls', img.url);  // key for URLs (repeating)
+            }
+        });
+
+        const wallpapers = window.selectedWallpapers || [];
+        wallpapers.forEach(wp => {
+            if (wp.file) {
+                formData.append('wallpapers', wp.file);
             }
         });
         /* } else if (images.every(img => img.url)) {
@@ -2455,6 +3178,124 @@
         } catch (err) {
         console.error('❌ Submission error:', err);
         alert('❌ Submission failed. Check console for details.');
+        }
+    });
+
+    // Bug Report Modal
+    document.getElementById('raise-bug-btn').addEventListener('click', () => {
+        const emailField = document.getElementById('email-field');
+        const emailInput = document.getElementById('bug-email');
+
+        // Check if user is logged in
+        const userToken = localStorage.getItem('userToken');
+        const userData = localStorage.getItem('userData');
+
+        if (userToken && userData) {
+            // User is logged in, populate email and hide field
+            const user = JSON.parse(userData);
+            emailInput.value = user.email;
+            emailField.style.display = 'none';
+            emailInput.required = false;
+        } else {
+            // User not logged in, show email field
+            emailInput.value = '';
+            emailField.style.display = 'block';
+            emailInput.required = true;
+        }
+
+        document.getElementById('bug-report-modal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('bug-report-cancel').addEventListener('click', () => {
+        document.getElementById('bug-report-modal').classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+
+    // Click outside to close bug report modal
+    document.getElementById('bug-report-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'bug-report-modal') {
+            document.getElementById('bug-report-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Toast notification function
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg font-semibold shadow-lg transform transition-all duration-300 translate-x-full`;
+        toast.style.cssText = `
+            background-color: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#6B7280'};
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        `;
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        // Trigger animation
+        setTimeout(() => {
+            toast.classList.remove('translate-x-full');
+        }, 100);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.add('translate-x-full');
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 300);
+        }, 3000);
+    }
+
+    // Bug report form submission
+    document.getElementById('bug-report-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const type = document.getElementById('bug-type').value;
+        const title = document.getElementById('bug-title').value;
+        const description = document.getElementById('bug-description').value;
+
+        // Get email and userId from user data if logged in, otherwise from form
+        let email = '';
+        let userId = null;
+        const userToken = localStorage.getItem('userToken');
+        const userData = localStorage.getItem('userData');
+        if (userToken && userData) {
+            const user = JSON.parse(userData);
+            email = user.email;
+            userId = user._id;
+        } else {
+            email = document.getElementById('bug-email').value;
+        }
+
+        try {
+            const res = await fetch('/api/system?action=submitBugReport', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type, title, description, email, userId })
+            });
+
+            if (res.ok) {
+                showToast('Bug report/feature request submitted successfully!', 'success');
+                document.getElementById('bug-report-modal').classList.add('hidden');
+                document.body.style.overflow = '';
+                // Reset form
+                document.getElementById('bug-report-form').reset();
+            } else {
+                const error = await res.json();
+                showToast('Failed to submit: ' + (error.error || 'Unknown error'), 'error');
+            }
+        } catch (error) {
+            console.error('Error submitting bug report:', error);
+            showToast('Network error while submitting bug report', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
     });
     </script>

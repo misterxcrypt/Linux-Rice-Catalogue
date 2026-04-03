@@ -890,7 +890,7 @@
 
         try {
             // Server-side scraping - all logic moved to API
-            const res = await fetch('/api/system?action=scrapeReddit', {
+            const res = await fetch('/api/admin?action=scrapeReddit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ url: redditUrl })
@@ -1181,7 +1181,7 @@ function refreshWallpaperPreview() {
 
     async function loadKeywords() {
         try {
-            const res = await fetch('/api/system?action=keywords');
+            const res = await fetch('/api/admin?action=keywords');
             if (res.ok) {
                 keywords = await res.json();
                 /* console.log('Keywords loaded:', keywords); */
@@ -1592,7 +1592,7 @@ function refreshWallpaperPreview() {
 
             const showLeaderboardModal = async () => {
                 try {
-                    const res = await fetch('/api/system?action=getLeaderboard');
+                    const res = await fetch('/api/admin?action=getLeaderboard');
                     const data = await res.json();
                     const listEl = document.getElementById('leaderboard-list');
                     listEl.innerHTML = '';
@@ -2126,7 +2126,7 @@ function refreshWallpaperPreview() {
                 statusEl.style.color = 'var(--muted-text)';
 
                 try {
-                    const res = await fetch('/api/resend-verification', {
+                    const res = await fetch('/api/auth?action=resend-verification', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email })
@@ -2505,7 +2505,7 @@ function refreshWallpaperPreview() {
                 const userToken = localStorage.getItem('userToken');
                 if (!userToken) return;
                 try {
-                    const res = await fetch('/api/getUser', {
+                    const res = await fetch('/api/auth?action=getUser', {
                         headers: { 'Authorization': `Bearer ${userToken}` }
                     });
                     if (res.ok) {
@@ -2537,7 +2537,7 @@ function refreshWallpaperPreview() {
               btn.textContent = 'Sending...';
 
               try {
-                const res = await fetch('/api/resend-verification', {
+                const res = await fetch('/api/auth?action=resend-verification', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ email: user.email })
@@ -2635,7 +2635,7 @@ function refreshWallpaperPreview() {
               successEl.classList.add('hidden');
 
               try {
-                const res = await fetch('/api/forgot-password?action=request', {
+                const res = await fetch('/api/auth?action=forgot-password', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ email })
@@ -2667,7 +2667,7 @@ function refreshWallpaperPreview() {
               errorEl.classList.add('hidden');
 
               try {
-                const res = await fetch('/api/forgot-password?action=verify', {
+                const res = await fetch('/api/auth?action=verify-reset', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ resetCode, resetToken })
@@ -2704,7 +2704,7 @@ function refreshWallpaperPreview() {
               }
 
               try {
-                const res = await fetch('/api/forgot-password?action=reset', {
+                const res = await fetch('/api/auth?action=reset-password', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ userId, newPassword })
@@ -3299,7 +3299,7 @@ function refreshWallpaperPreview() {
         }
 
         try {
-            const res = await fetch('/api/system?action=submitBugReport', {
+            const res = await fetch('/api/admin?action=submitBugReport', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ type, title, description, email, userId })

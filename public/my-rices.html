@@ -439,7 +439,7 @@
         }
 
         try {
-            const res = await fetch('/api/rices?action=getMyRices', {
+            const res = await fetch('/api/my-rices?action=getMyRices', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -555,7 +555,7 @@
         if (!token) return;
 
         try {
-            const res = await fetch('/api/rices?action=deleteMyRice', {
+            const res = await fetch('/api/my-rices?action=deleteMyRice', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -758,7 +758,7 @@
         };
 
         try {
-            const res = await fetch('/api/rices?action=updateMyRice', {
+            const res = await fetch('/api/my-rices?action=updateMyRice', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

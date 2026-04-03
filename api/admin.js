@@ -1,5 +1,6 @@
 // /api/admin.js
 const { login, register, adminLogin, getPendingRices, updateStatus, deleteRice, getUserRequests, updateRequestStatus, deleteRequest, sendResponse, verifyAdmin } = require('../utils/adminController');
+const { getKeywordsData, getLeaderboard, getStats, scrapeReddit, updateKeywords, submitBugReport } = require('../utils/systemController');
 
 module.exports = async (req, res) => {
   // CORS and method checks (standard for all APIs)
@@ -36,6 +37,18 @@ module.exports = async (req, res) => {
       return await sendResponse(req, res);
     } else if (req.method === 'GET' && action === 'verifyAdmin') {
       return await verifyAdmin(req, res);
+    } else if (req.method === 'GET' && action === 'keywords') {
+      return await getKeywordsData(req, res);
+    } else if (req.method === 'POST' && action === 'keywords') {
+      return await updateKeywords(req, res);
+    } else if (req.method === 'GET' && action === 'getLeaderboard') {
+      return await getLeaderboard(req, res);
+    } else if (req.method === 'GET' && action === 'stats') {
+      return await getStats(req, res);
+    } else if (req.method === 'POST' && action === 'scrapeReddit') {
+      return await scrapeReddit(req, res);
+    } else if (req.method === 'POST' && action === 'submitBugReport') {
+      return await submitBugReport(req, res);
     } else {
       return res.status(404).json({ error: 'Action not found' });
     }

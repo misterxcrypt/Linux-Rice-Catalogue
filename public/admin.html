@@ -220,7 +220,7 @@
 
         async function loadKeywords() {
             try {
-                const res = await fetch('/api/system?action=keywords');
+                const res = await fetch('/api/admin?action=keywords');
                 if (res.ok) {
                     keywordsCache = await res.json();
                 }
@@ -656,7 +656,7 @@
         // Fetch stats from backend
         async function fetchStats() {
             try {
-                const res = await fetch('/api/system?action=stats', {
+                const res = await fetch('/api/admin?action=stats', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (res.status === 401) {
@@ -771,7 +771,7 @@
             // Update fetchStats to store latestStats
             fetchStats = (async function() {
                 try {
-                    const res = await fetch('/api/system?action=stats', {
+                    const res = await fetch('/api/admin?action=stats', {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                     if (res.status === 401) {
@@ -1090,7 +1090,7 @@
                 populateBtn.disabled = true;
                 populateBtn.textContent = 'Fetching...';
 
-                fetch('/api/system?action=scrapeReddit', {
+                fetch('/api/admin?action=scrapeReddit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ url: redditUrl })
@@ -1354,7 +1354,7 @@
 
         // Keywords management
         async function fetchKeywords() {
-            const res = await fetch('/api/system?action=keywords', {
+            const res = await fetch('/api/admin?action=keywords', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.status === 401) {
@@ -1454,7 +1454,7 @@
                             return;
                         }
                         try {
-                            const res = await fetch('/api/system?action=keywords', {
+                            const res = await fetch('/api/admin?action=keywords', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -1490,7 +1490,7 @@
                             return;
                         }
                         try {
-                            const res = await fetch('/api/system?action=keywords', {
+                            const res = await fetch('/api/admin?action=keywords', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -1583,7 +1583,7 @@
                         return;
                     }
                     try {
-                        const res = await fetch('/api/system?action=keywords', {
+                        const res = await fetch('/api/admin?action=keywords', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -1615,7 +1615,7 @@
                         return;
                     }
                     try {
-                        const res = await fetch('/api/system?action=keywords', {
+                        const res = await fetch('/api/admin?action=keywords', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

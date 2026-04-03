@@ -295,6 +295,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <button id="resend-verify-btn" class="px-4 py-2 rounded-lg font-semibold text-sm" style="background-color: var(--accent-color); color: white;">Resend Email</button>
+                    <button id="check-verify-btn" class="px-4 py-2 rounded-lg font-semibold text-sm glass-panel hover:bg-white/10">Check Status</button>
                     <button id="dismiss-verify-banner" class="p-2 rounded-lg hover:bg-white/10" style="color: var(--muted-text);">
                         <span class="material-icons-outlined">close</span>
                     </button>
@@ -2498,6 +2499,30 @@ function refreshWallpaperPreview() {
             // Verify email banner handlers
             document.getElementById('dismiss-verify-banner').addEventListener('click', () => {
               document.getElementById('verify-email-banner').classList.add('hidden');
+            });
+
+            document.getElementById('check-verify-btn').addEventListener('click', async () => {
+                const userToken = localStorage.getItem('userToken');
+                if (!userToken) return;
+                try {
+                    const res = await fetch('/api/getUser', {
+                        headers: { 'Authorization': `Bearer ${userToken}` }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        localStorage.setItem('userData', JSON.stringify(data.user));
+                        if (data.user.emailVerified) {
+                            document.getElementById('verify-email-banner').classList.add('hidden');
+                            showUserButtons(data.user.username);
+                        } else {
+                            alert('Email not yet verified. Please check your inbox.');
+                        }
+                    } else {
+                        alert('Failed to check verification status.');
+                    }
+                } catch (err) {
+                    alert('Error checking verification status.');
+                }
             });
 
             document.getElementById('resend-verify-btn').addEventListener('click', async () => {
